@@ -1,0 +1,50 @@
+<div class="sidebar">
+    <div class="logo">
+        <a class="simple-text">
+            Aqua RO
+        </a>
+    </div>
+    <div class="logo logo-mini">
+        <a class="simple-text">
+            Ro
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician" class="active">
+                <a routerLink="/dashboard/">
+                    <i class="material-icons">person
+                    </i>
+                    <p>Profile</p>
+                </a>
+            </li>
+            <li *ngIf="isSuperAdmin || isAdmin">
+                <a routerLink="/dashboard/chart">
+                    <i class="material-icons">dashboard</i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li *ngIf="isSuperAdmin || isAdmin">
+                <a routerLink="/dashboard/users">
+                    <i class="material-icons">people</i>
+                    <p>Users</p>
+                </a>
+            </li>
+
+            <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">
+                <a routerLink="/dashboard/leads">
+                    <i class="material-icons">person_add</i>
+                    <p>Leads</p>
+                </a>
+            </li>
+            <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">
+                <a routerLink="/dashboard/complaints">
+                    <i class="material-icons">help</i>
+                    <p>Complaints</p>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+</div>

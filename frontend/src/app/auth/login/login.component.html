@@ -1,0 +1,47 @@
+<div class="wrapper wrapper-full-page" style="background-color: #41eeee;">
+    <!-- <div class="full-page login-page" data-color="blue"> -->
+    <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+    <div class="content">
+        <div class="container">
+            <div class="row" style="margin-top: 200px;">
+                <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                    <form [formGroup]="formValue" (ngSubmit)="login()">
+                        <div class="card card-login card-hidden" style="border-radius: 20px;padding-top:30px;padding-bottom: 40px;">
+                            <div class="card-header text-center">
+                                <h4 class="card-title">Login</h4>
+                                <span style="color: red;" *ngIf="chukl">Invalid email or password</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                            <i class="material-icons">face</i>
+                                        </span>
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Email</label>
+                                        <input type="email" class="form-control" formControlName="email">
+                                        <span class="text-danger" *ngIf="formValue.controls['email'].dirty && formValue.hasError('required', 'email')">*email is required</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                            <i class="material-icons">lock_outline</i>
+                                        </span>
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Password</label>
+                                        <input type="password" class="form-control" formControlName="password">
+                                        <span class="text-danger" *ngIf="formValue.controls['password'].dirty && formValue.hasError('required', 'password')">*Password is required</span>
+                                    </div>
+                                </div>
+                                <div class="footer text-center">
+                                    <button routerLink="/dashboard" class="btn btn-primary btn-round" type="submit">Login</button>
+                                    <!-- routerLink="/dashboard/" -->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->

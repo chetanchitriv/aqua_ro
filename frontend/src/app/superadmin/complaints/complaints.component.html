@@ -1,0 +1,485 @@
+<div class="d-flex">
+    <button type="button" (click)="showSearchForm()" class="btn btn-success">Add Complaints <i class="bi bi-briefcase-fill"></i></button>
+    <button type="button" (click)="showTable()" class="btn btn-success">show Complaint List <i class="bi bi-briefcase-fill"></i></button>
+
+
+    <div class="col-md-12">
+        <div *ngIf="!showsearchform && showComplaintTable && !showComplaintForm && !showComplaintUpdateForm" class="card-form card">
+            <div class="card-content">
+                <h4 class="card-title">Complaints</h4>
+                <div class="content">
+                    <!-- <div class="toolbar">
+                  
+                    </div>
+                    <div class="material-datatables">
+                        <div id="datatables_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="dataTables_length" id="datatables_length"><label class="form-group">Show <select name="datatables_length" aria-controls="datatables" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="-1">All</option></select> entries</label></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div id="datatables_filter" class="dataTables_filter"><label class="form-group"><input type="search" class="form-control input-sm" placeholder="Search records" aria-controls="datatables"></label></div>
+                                </div>
+                            </div> -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+
+                                <thead>
+
+                                    <tr role="row">
+                                        <th style="width: 87px;">Id</th>
+
+
+                                        <th style="width: 87px;">Name</th>
+                                        <th style="width: 87px;">Mobile no.</th>
+
+
+                                        <th style="width: 87px;">Assign to</th>
+                                        <th style="width: 87px;">Complaint Details</th>
+                                        <th style="width: 87px;">Compaint Date</th>
+
+
+                                        <th style="width: 87px;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of complaintsAll; let i = index ">
+                                        <td>{{i+1}}</td>
+
+                                        <td>{{data.name}}</td>
+                                        <td>{{data.mobileNo}}</td>
+
+                                        <td>{{data.assignTo}}</td>
+
+
+
+
+                                        <td>{{data.complaintInfo}}</td>
+
+                                        <td>{{data.complaintDate}}</td>
+
+                                        <td class="text-right">
+                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
+                                            <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons" >edit</i></a>
+                                            <a (click)="deleteComplaints(data)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                                <!-- <tfoot>
+                                    <tr>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+
+                                        <th class="text-right" rowspan="1" colspan="1"></th>
+                                    </tr>
+                                </tfoot> -->
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!-- <div class="row">
+                        <div class="col-sm-5">
+                            <div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">Showing 1 to 1 of 1 entries</div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_full_numbers" id="datatables_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button first disabled" id="datatables_first"><a href="#" aria-controls="datatables" data-dt-idx="0" tabindex="0">First</a></li>
+                                    <li class="paginate_button previous disabled" id="datatables_previous"><a href="#" aria-controls="datatables" data-dt-idx="1" tabindex="0">Previous</a></li>
+                                    <li class="paginate_button active"><a href="#" aria-controls="datatables" data-dt-idx="2" tabindex="0">1</a></li>
+                                    <li class="paginate_button next disabled" id="datatables_next"><a href="#" aria-controls="datatables" data-dt-idx="3" tabindex="0">Next</a></li>
+                                    <li class="paginate_button last disabled" id="datatables_last"><a href="#" aria-controls="datatables" data-dt-idx="4" tabindex="0">Last</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
+
+        <div *ngIf="showsearchform && !showComplaintTable && !showComplaintForm && !showComplaintUpdateForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+            <form [formGroup]="searchLead" (ngSubmit)="search()">
+
+
+
+                <!-- <div class="card-header card-header-text">
+                        <h4 class="card-title">Search .</h4>
+                    </div> -->
+                <div class="card-content">
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Mobile</label>
+                                <input type="text" class="form-control" formControlName="mobile">
+                                <span class="help-block">Enter Mobile No and search for a lead</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-success">Search <i class="bi bi-briefcase-fill"></i></button>
+                    </div>
+
+
+
+                </div>
+            </form>
+        </div>
+        <div *ngIf="!showsearchform && !showComplaintTable && showComplaintForm && !showComplaintUpdateForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+            <form class="form-horizontal" [formGroup]="complaintForm">
+                <div class="card-header card-header-text">
+
+                    <h4 class="card-title">Add Complaint</h4>
+                    <!-- <h4 *ngIf="showUpdateButton" class="card-title">Update Complaint</h4> -->
+                </div>
+
+                <div class="card-content">
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Name</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="text" placeholder="Enter name" formControlName="name" class="form-control" [readonly]="true" value>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Mobile No</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="number" placeholder="Enter mobile number" formControlName="mobileNo" class="form-control" [readonly]="true" value>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Email Id</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="email" placeholder="Enter email id" formControlName="emailId" class="form-control" [readonly]="true" value>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Assign to</label>
+                        <div class="col-sm-4">
+
+
+                            <div class="form-group open" style="margin-left: 20px;">
+                                <div class="select" aria-expanded="true">
+                                    <select class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                        
+                                            <option value="">Select your option --</option>
+                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
+                                            
+                                        </select>
+
+                                </div>
+                                <span class="material-input"></span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Address</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="text-area" placeholder="Enter address" formControlName="address" class="form-control" [readonly]="true">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header card-header-text">
+                        <h4 class="card-title">Follow-up</h4>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Follow-up</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty col-md-4">
+                                <input type="text" formControlName="followUpmode" class="form-control">
+                            </div>
+
+                            <div class="form-group label-floating is-empty col-md-4">
+                                <label class="control-label"></label>
+                                <input type="date" formControlName="followUpdate" class="form-control">
+
+                            </div>
+                            <div class="form-group label-floating is-empty col-md-4">
+                                <label class="control-label"></label>
+                                <input type="text" formControlName="followUptime" class="form-control">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Comment</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="text-area" formControlName="comment" placeholder="Add comment" class="form-control" [readonly]="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Next follow-up</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty col-md-6">
+                                <label class="control-label">date :</label><br>
+                                <input type="date" formControlName="nextFollowupdate" class="form-control" [readonly]="true" placeholder="">
+                            </div>
+                            <div class="form-group label-floating is-empty col-md-6">
+                                <label class="control-label">time :</label><br>
+                                <input type="time" formControlName="nextFollowuptime" class="form-control" [readonly]="true" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header card-header-text">
+                        <h4 class="card-title">Complaint</h4>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Complaint Details</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty col-md-12">
+                                <input type="text-area" formControlName="complaintInfo" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Complaint Date</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty col-md-4">
+                                <input type="text-area" formControlName="complaintDate" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center" style="margin-left: 100px;">
+                        <button type="submit" [disabled]="!complaintForm.valid" (click)="postComplaintsDetails()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
+                        <!-- <button *ngIf="showUpdateButton" type="submit" [disabled]="!complaintForm.valid" (click)="updateComplaintsDetails()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button> -->
+
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="!showsearchform && !showComplaintTable && !showComplaintForm && showComplaintUpdateForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+            <form class="form-horizontal" [formGroup]="complaintUpdateForm">
+                <div class="card-header card-header-text">
+
+                    <!-- <h4 class="card-title">Add Complaint</h4> -->
+                    <h4 class="card-title">Update Complaint</h4>
+                </div>
+
+                <div class="card-content">
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Name</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="text" placeholder="Enter name" formControlName="name" class="form-control" [readonly]="true" value>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Mobile No</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="number" placeholder="Enter mobile number" formControlName="mobileNo" class="form-control" [readonly]="true" value>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Email Id</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="email" placeholder="Enter email id" formControlName="emailId" class="form-control" [readonly]="true" value>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Assign to</label>
+                        <div class="col-sm-4">
+
+
+                            <div class="form-group open" style="margin-left: 20px;">
+                                <div class="select" aria-expanded="true">
+                                    <select class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                        
+                                            <option value="">Select your option --</option>
+                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
+                                        </select>
+
+
+                                </div>
+                                <span class="material-input"></span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Address</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="text-area" placeholder="Enter address" formControlName="address" class="form-control" [readonly]="true">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header card-header-text">
+                        <h4 class="card-title">Follow-up</h4>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Follow-up</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty col-md-4">
+                                <input type="text" formControlName="followUpmode" class="form-control">
+                            </div>
+
+                            <div class="form-group label-floating is-empty col-md-4">
+                                <label class="control-label"></label>
+                                <input type="date" formControlName="followUpdate" class="form-control">
+
+                            </div>
+                            <div class="form-group label-floating is-empty col-md-4">
+                                <label class="control-label"></label>
+                                <input type="text" formControlName="followUptime" class="form-control">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Comment</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="text-area" formControlName="comment" placeholder="Add comment" class="form-control" [readonly]="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Next follow-up</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty col-md-6">
+                                <label class="control-label">date :</label><br>
+                                <input type="date" formControlName="nextFollowupdate" class="form-control" [readonly]="true" placeholder="">
+                            </div>
+                            <div class="form-group label-floating is-empty col-md-6">
+                                <label class="control-label">time :</label><br>
+                                <input type="time" formControlName="nextFollowuptime" class="form-control" [readonly]="true" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header card-header-text">
+                        <h4 class="card-title">Complaint</h4>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Complaint Details</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty col-md-12">
+                                <input type="text-area" formControlName="complaintInfo" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Complaint Date</label>
+                        <div class="col-sm-10">
+                            <div class="form-group label-floating is-empty col-md-4">
+                                <input type="text-area" formControlName="complaintDate" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center" style="margin-left: 100px;">
+                        <!-- <button *ngIf="showAddButton" type="submit" [disabled]="!complaintForm.valid" (click)="postComplaintsDetails()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button> -->
+                        <button type="submit" (click)="updateComplaintsDetails()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
+
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">User Details</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row m-l-5">
+                    <div class="col-sm-3 p-4">
+
+                        <p><strong>Name</strong></p>
+                        <p><strong>Mobile no.</strong></p>
+                        <p><strong>Email Id</strong></p>
+                        <p><strong>Assign to</strong></p>
+                        <p><strong>Address</strong></p>
+                        <p><strong>Follow-up mode</strong></p>
+                        <p><strong>Follow-up date</strong></p>
+                        <p><strong>Follow-up time</strong></p>
+                        <p><strong>Comment</strong></p>
+                        <p><strong>Next Follow-up Date</strong></p>
+                        <p><strong>complaintDetails</strong></p>
+                        <p><strong>Next Follow-up time</strong></p>
+                    </div>
+                    <div>
+
+                        <p>{{complaintDetails.name}}</p>
+                        <p>{{complaintDetails.mobileNo}}</p>
+                        <p>{{complaintDetails.emailId}}</p>
+                        <p>{{complaintDetails.assignTo}}</p>
+                        <p>{{complaintDetails.address}}</p>
+                        <p>{{complaintDetails.followUpmode}}</p>
+                        <p>{{complaintDetails.followUpdate}}</p>
+                        <p>{{complaintDetails.followUptime}}</p>
+                        <p>{{complaintDetails.comment}}</p>
+                        <p>{{complaintDetails.nextFollowupdate}}</p>
+                        <p>{{complaintDetails.complaintInfo}}</p>
+                        <p>{{complaintDetails.complaintDate}}</p>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>

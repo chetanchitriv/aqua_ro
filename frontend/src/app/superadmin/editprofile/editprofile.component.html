@@ -1,0 +1,90 @@
+<div class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+
+    <form [formGroup]="UpdateProfile" class="form-horizontal">
+
+        <div class="card-header card-header-text">
+
+            <span><h4 class="card-title">Update Profile</h4></span>
+        </div>
+
+        <div class="card-content">
+            <div class="row">
+                <label class="col-sm-2 label-on-left">User name</label>&nbsp;
+                <div class="col-sm-8">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label"></label>
+                        <input type="text" placeholder="Enter user name" formControlName="userName" class="form-control" value>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 label-on-left">Mobile no.</label>&nbsp;
+                <div class="col-sm-8">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label"></label>
+                        <input type="number" placeholder="Enter mobile number" formControlName="mobile" class="form-control" value>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 label-on-left">Email ID</label>&nbsp;
+                <div class="col-sm-8">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label"></label>
+                        <input type="email" placeholder="Enter email id" formControlName="email" class="form-control">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 label-on-left">Password</label>&nbsp;
+                <div class="col-sm-8">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label"></label>
+                        <input type="password" placeholder="Enter password" formControlName="password" class="form-control">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-sm-2 label-on-left">Working hours</label>&nbsp;
+                <div class="col-sm-8">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label"></label>
+                        <input type="number" placeholder="Enter working hours" formControlName="workingHours" class="form-control">
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <label class="col-sm-2 label-on-left">Role</label>
+                <div class="col-sm-8">
+
+
+                    <div class="form-group open" style="margin-left: 20px;">
+                        <div class="select" aria-expanded="true">
+
+                            <select placeholder="Enter Role" formControlName="role" class="form-control">
+                                <option value=""> Select Role --</option>
+                            </select>
+
+
+                        </div>
+                        <span class="material-input"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+
+            <button type="button" class="btn btn-success">Update <i class="bi bi-briefcase-fill"></i></button>
+        </div>
+
+    </form>
+</div>

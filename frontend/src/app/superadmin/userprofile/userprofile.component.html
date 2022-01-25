@@ -1,0 +1,69 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card" id="profile-main">
+
+                    <div class="card-content">
+
+
+                        <h3>Welcome {{userProfile.userName}}!
+
+                            <a *ngIf="currentRole=='Superadmin'" routerLink="/dashboard/editprofile" class="btn btn-simple btn-warning btn-icon edit" style="float:right"><i  title="edit" class="material-icons">edit</i></a>
+                        </h3>
+
+                        <div role="tabpanel">
+
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row m-l-5">
+                                    <div class="col-sm-3 p-4">
+                                        <p><strong>User name</strong></p>
+                                        <p><strong>Mobile no.</strong></p>
+                                        <p><strong>Email ID</strong></p>
+
+                                        <p><strong>Working hours</strong></p>
+                                        <p><strong>Role</strong></p>
+                                    </div>
+                                    <div>
+                                        
+                                        <p>{{userProfile.userName}}</p>
+                                        <p>{{userProfile.mobile}}</p>
+                                        <p>{{userProfile.email}}</p>
+                                        <p>{{userProfile.workingHours}}</p>
+
+                                        <p>{{userProfile.role}}</p>
+                                       
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a>
+                            <img class="img" src="../../assets/img/faces/avatar.png" />
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <h6 class="category text-gray">{{userProfile.role}}</h6>
+                        <h4 class="card-title">{{userProfile.userName}}</h4>
+
+                        <a class="btn btn-rose btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
