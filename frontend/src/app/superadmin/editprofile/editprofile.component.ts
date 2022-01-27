@@ -37,6 +37,16 @@ export class EditprofileComponent implements OnInit {
       console.log(res);
       this.userProfile=res
     })
+    this.UpdateProfile = this.fb.group({
+      userName : ["",Validators.required],
+      mobile : ["",Validators.required],
+      email : ["",Validators.required],
+      password : ["",Validators.required],
+     
+      workingHours: ["",Validators.required],
+      role: ["",Validators.required],
+  })
+  
   }
 }
 
