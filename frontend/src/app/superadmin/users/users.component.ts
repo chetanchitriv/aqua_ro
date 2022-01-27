@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   usersAll: any=[];
   
 
-  roles=["Admin","Technician","Telecaller"]
+  roles=["Admin","Technician","Telecaller","Vendor"]
   updateId: any;
   userDetails: any={};
   serverErrorMessages: any;
@@ -73,11 +73,15 @@ export class UsersComponent implements OnInit {
 
   }
   getAllUser(){
+    var role=localStorage.getItem('role')
     this.api.getUsers().subscribe(res=>{
-      this.usersAll = res;
-      console.log(res);
-      
-
+      if(role=='Admin'){
+      this.usersAll = res.filter((ele:any) => ele.role != 'Admin');
+      // console.log(res);
+    }
+    else{
+      this.usersAll = res
+    }
       })
    
   }
