@@ -9,11 +9,13 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class EditprofileComponent implements OnInit {
   UpdateProfile:any= FormGroup;
-  userProfile: any;
+  userProfile: any={};
  
   constructor(private fb:FormBuilder,private userService:UserService) { }
 
   ngOnInit(): void {
+
+  
     this.getUserProfile()
     this.UpdateProfile = this.fb.group({
       userName : [this.userProfile.userName,Validators.required],
@@ -23,6 +25,8 @@ export class EditprofileComponent implements OnInit {
      
       workingHours: [this.userProfile.workingHours,Validators.required],
       role: [this.userProfile.role,Validators.required],
+
+    
   })
 
   }
