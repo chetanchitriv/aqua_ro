@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // if(this.authservice.isLoggedIn()){
-    // this.router.navigate(['/dashboard']);
-    // }
+    if(this.authservice.isLoggedIn()){
+    this.router.navigate(['/dashboard']);
+    }
     this.formValue = this.formbuilder.group({
       email: ['', Validators.required,Validators.email],
       password: ['', Validators.required],
@@ -40,20 +40,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // this.users.forEach((element: any) => {
-    //   if (element.email == this.formValue.controls.email.value && element.password == this.formValue.controls.password.value) {
-    //     this.activeuser = element
-    //     localStorage.setItem("role",this.activeuser.role)
-    //   }
-     
-    // });
-    // if(this.activeuser.role=="superadmin"){
-    //   alert("login success")
-    //   this.router.navigate(['/dashboard/'])
-    // }else{
-    //   alert("user not exit")
-    // }
-
       this.authservice.Login(this.formValue.value).subscribe(
          (res:any) => {
            console.log(res);
