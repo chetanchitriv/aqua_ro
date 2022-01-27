@@ -9,22 +9,13 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class EditprofileComponent implements OnInit {
   UpdateProfile:any= FormGroup;
-  userProfile: any;
+  userProfile: any={};
  
   constructor(private fb:FormBuilder,private userService:UserService) { }
 
   ngOnInit(): void {
     this.getUserProfile()
-    this.UpdateProfile = this.fb.group({
-      userName : [this.userProfile.userName,Validators.required],
-      mobile : [this.userProfile.mobile,Validators.required],
-      email : [this.userProfile.email,Validators.required],
-      password : [this.userProfile.password,Validators.required],
-     
-      workingHours: [this.userProfile.workingHours,Validators.required],
-      role: [this.userProfile.role,Validators.required],
-  })
-
+   
   }
 
   getUserProfile(){
@@ -33,6 +24,16 @@ export class EditprofileComponent implements OnInit {
       console.log(res);
       this.userProfile=res
     })
+    this.UpdateProfile = this.fb.group({
+      userName : ["",Validators.required],
+      mobile : ["",Validators.required],
+      email : ["",Validators.required],
+      password : ["",Validators.required],
+     
+      workingHours: ["",Validators.required],
+      role: ["",Validators.required],
+  })
+  
   }
 }
 
