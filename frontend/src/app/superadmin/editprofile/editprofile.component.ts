@@ -14,8 +14,21 @@ export class EditprofileComponent implements OnInit {
   constructor(private fb:FormBuilder,private userService:UserService) { }
 
   ngOnInit(): void {
+
+  
     this.getUserProfile()
-   
+    this.UpdateProfile = this.fb.group({
+      userName : [this.userProfile.userName,Validators.required],
+      mobile : [this.userProfile.mobile,Validators.required],
+      email : [this.userProfile.email,Validators.required],
+      password : [this.userProfile.password,Validators.required],
+     
+      workingHours: [this.userProfile.workingHours,Validators.required],
+      role: [this.userProfile.role,Validators.required],
+
+    
+  })
+
   }
 
   getUserProfile(){
