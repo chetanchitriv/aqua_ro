@@ -1,6 +1,6 @@
-<div class="card"  style="width: 80%; margin: 10px 0 0px 144px;">
+<div class="card" style="width: 80%; margin: 10px 0 0px 144px;">
 
-    <form *ngIf="userProfile !== null" [formGroup]="UpdateProfile"  class="form-horizontal">
+    <form [formGroup]="UpdateProfile" (ngSubmit)="update()" class="form-horizontal">
 
         <div class="card-header card-header-text">
 
@@ -13,7 +13,7 @@
                 <div class="col-sm-8">
                     <div class="form-group label-floating is-empty">
                         <label class="control-label"></label>
-                        <input type="text" formControlName="userName"  class="form-control">
+                        <input type="text" formControlName="userName" class="form-control">
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="col-sm-8">
                     <div class="form-group label-floating is-empty">
                         <label class="control-label"></label>
-                        <input type="number" formControlName="mobile" class="form-control" >
+                        <input type="number" formControlName="mobile" class="form-control">
 
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="col-sm-8">
                     <div class="form-group label-floating is-empty">
                         <label class="control-label"></label>
-                        <input type="email" formControlName="email" class="form-control" >
+                        <input type="email" formControlName="email" class="form-control">
 
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="col-sm-8">
                     <div class="form-group label-floating is-empty">
                         <label class="control-label"></label>
-                        <input type="password" formControlName="password" class="form-control" >
+                        <input type="password" formControlName="password" class="form-control">
 
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                 <div class="col-sm-8">
                     <div class="form-group label-floating is-empty">
                         <label class="control-label"></label>
-                        <input type="number" formControlName="workingHours" class="form-control" >
+                        <input type="number" formControlName="workingHours" class="form-control">
 
                     </div>
                 </div>

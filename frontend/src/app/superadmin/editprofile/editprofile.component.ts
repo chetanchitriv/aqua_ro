@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -9,34 +10,12 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class EditprofileComponent implements OnInit {
   UpdateProfile:any= FormGroup;
-  userProfile: any={};
+  // userProfile: any={};
+  currentUserId: any;
  
-  constructor(private fb:FormBuilder,private userService:UserService) { }
+  constructor(private fb:FormBuilder,private userService:UserService,private router:Router) { }
 
   ngOnInit(): void {
-
-  
-    this.getUserProfile()
-    this.UpdateProfile = this.fb.group({
-      userName : [this.userProfile.userName,Validators.required],
-      mobile : [this.userProfile.mobile,Validators.required],
-      email : [this.userProfile.email,Validators.required],
-      password : [this.userProfile.password,Validators.required],
-     
-      workingHours: [this.userProfile.workingHours,Validators.required],
-      role: [this.userProfile.role,Validators.required],
-
-    
-  })
-
-  }
-
-  getUserProfile(){
-    var currentUserId= localStorage.getItem("userId")
-    this.userService.getUsersbyid(currentUserId).subscribe((res:any)=>{
-      console.log(res);
-      this.userProfile=res
-    })
     this.UpdateProfile = this.fb.group({
       userName : ["",Validators.required],
       mobile : ["",Validators.required],
@@ -46,7 +25,34 @@ export class EditprofileComponent implements OnInit {
       workingHours: ["",Validators.required],
       role: ["",Validators.required],
   })
-  
+    this.getUserProfile()
+    
+    
+  }
+
+  getUserProfile(){
+     this.currentUserId=  localStorage.getItem("userId")
+    this.userService.getUsersbyid(this.currentUserId).subscribe((res:any)=>{
+      var userProfile=res
+      console.log(userProfile);
+      this.UpdateProfile.patchValue(userProfile)
+      console.log(this.UpdateProfile.value);
+    })
+  }
+
+  update(){
+    this.userService.updateUsers(this.UpdateProfile.value,this.currentUserId).subscribe(res=>{
+      if(res){    
+        alert("Profile Updated Successfully");
+        this.logout()
+      }
+    })
+  }
+  logout(){
+    localStorage.removeItem('username')
+    localStorage.removeItem('role')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
-

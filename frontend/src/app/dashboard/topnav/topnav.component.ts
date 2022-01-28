@@ -11,14 +11,16 @@ import { AuthserviceService } from 'src/app/shared/authservice.service';
 export class TopnavComponent implements OnInit {
   username: any
 
-  constructor(private authservice: AuthserviceService, private router:Router) { }
+  constructor(private authservice: AuthserviceService, private router:Router) { 
+    this.username=localStorage.getItem('username')
+  }
 
   ngOnInit(): void {
-    this.username=localStorage.getItem('username')
   }
   logout(){
     localStorage.removeItem('username')
     localStorage.removeItem('role')
+    localStorage.removeItem('userId')
     this.authservice.deleteToken();
     this.router.navigate(['/login']);
   }

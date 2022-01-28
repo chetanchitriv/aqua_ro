@@ -7,7 +7,7 @@
                     <div class="card-content">
 
 
-                        <h3>Welcome {{userProfile.userName}}!
+                        <h3>Welcome {{userProfile?.userName}}!
 
                             <a *ngIf="currentRole=='Superadmin'" routerLink="/dashboard/editprofile" class="btn btn-simple btn-warning btn-icon edit" style="float:right"><i  title="edit" class="material-icons">edit</i></a>
                         </h3>
@@ -31,14 +31,14 @@
                                         <p><strong>Role</strong></p>
                                     </div>
                                     <div>
-                                        
-                                        <p>{{userProfile.userName}}</p>
-                                        <p>{{userProfile.mobile}}</p>
-                                        <p>{{userProfile.email}}</p>
-                                        <p>{{userProfile.workingHours}}</p>
 
-                                        <p>{{userProfile.role}}</p>
-                                       
+                                        <p>{{userProfile?.userName}}</p>
+                                        <p>{{userProfile?.mobile}}</p>
+                                        <p>{{userProfile?.email}}</p>
+                                        <p>{{userProfile?.workingHours}}</p>
+
+                                        <p>{{userProfile?.role}}</p>
+
                                     </div>
                                 </div>
 
@@ -60,8 +60,8 @@
                         </a>
                     </div>
                     <div class="card-content">
-                        <h6 class="category text-gray">{{userProfile.role}}</h6>
-                        <h4 class="card-title">{{userProfile.userName}}</h4>
+                        <h6 class="category text-gray">{{userProfile?.role}}</h6>
+                        <h4 class="card-title">{{userProfile?.userName}}</h4>
 
                         <a class="btn btn-rose btn-round">Follow</a>
                     </div>
