@@ -28,6 +28,7 @@ const complaint_create= async(req,res)=>{
     const complaint=new Complaint({
         name : req.body.name,
         mobileNo : req.body.mobileNo,
+        AltmobileNo:req.body.AltmobileNo,
         emailId : req.body.emailId,
         assignTo : req.body.assignTo,
         address : req.body.address,
@@ -38,7 +39,8 @@ const complaint_create= async(req,res)=>{
         nextFollowupdate : req.body.nextFollowupdate,
         nextFollowuptime : req.body.nextFollowuptime,
         complaintInfo: req.body.complaintInfo,
-        complaintDate:req.body.complaintDate
+        complaintDate:req.body.complaintDate,
+        createdBy: req.body.createdBy,
     });
     // const body = req.body;
     // const user = new User(body);
@@ -57,6 +59,7 @@ const complaint_update=async(req,res)=>{
         const complaint={
             name : req.body.name,
             mobileNo : req.body.mobileNo,
+            AltmobileNo:req.body.AltmobileNo,
             emailId : req.body.emailId,
             assignTo : req.body.assignTo,
             address : req.body.address,
@@ -67,7 +70,8 @@ const complaint_update=async(req,res)=>{
             nextFollowupdate : req.body.nextFollowupdate,
             nextFollowuptime : req.body.nextFollowuptime,
             complaintInfo: req.body.complaintInfo,
-            complaintDate:req.body.complaintDate
+            complaintDate:req.body.complaintDate,
+            createdBy: req.body.createdBy,
         };
 
         const updatedComplaint = await Complaint.findByIdAndUpdate(

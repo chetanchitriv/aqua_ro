@@ -1,1 +1,208 @@
-<p>stock works!</p>
+<div class="d-flex">
+    <div>
+        <button type="button" (click)="showForm()" class="btn btn-success">Add Stock <i
+                class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showTable()" class="btn btn-success">showList <i
+                class="bi bi-briefcase-fill"></i></button>
+    </div>
+
+    <div class="col-md-12">
+        <div *ngIf="!showUserForm && showUserTable" class="card">
+            <div class="card-content">
+                <h4 class="card-title">Stock</h4>
+                <div class="content">
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.no.</th>
+
+
+                                        <th>Spare name</th>
+
+                                        <th>Quantity</th>
+                                        <th>Purchase Amount</th>
+
+
+                                        <th>Selling Price</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of usersAll; let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{data.spare_name}}</td>
+                                        <td>{{data.qnt}}</td>
+                                        <td>{{data.purchaseAmount}}</td>
+
+                                        <td>{{data.sellingPrice}}</td>
+                                        <td>{{data.date}}</td>
+                                        <td>
+                                            <!-- <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i
+                                                    title="read" data-toggle="modal" data-target="#myModal"
+                                                    class="material-icons">assignment </i></a> -->
+                                            <a (click)="onEdit(data)"
+                                                class="btn btn-simple btn-warning btn-icon edit"><i title="edit"
+                                                    class="material-icons">edit</i></a>
+                                            <a (click)="deleteUsers(data)"
+                                                class="btn btn-simple btn-danger btn-icon remove"><i title="delete"
+                                                    class="material-icons">close</i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
+        <div *ngIf="showUserForm && !showUserTable" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+
+            <form class="form-horizontal" [formGroup]="formStock">
+
+                <div class="card-header card-header-text">
+                    <span *ngIf="showAddButton">
+                        <h4 class="card-title">Add Stock</h4>
+                    </span>
+                    <span *ngIf="showUpdateButton">
+                        <h4 class="card-title">Update Stock</h4>
+                    </span>
+                </div>
+
+                <div class="card-content">
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Spare name</label>&nbsp;
+                        <div class="col-sm-8">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="text" placeholder="Enter Spare name" formControlName="spare_name"
+                                    class="form-control" value>
+                                <span class="text-info"
+                                    *ngIf="formStock.touched && (!formStock.value.spare_name || formStock.value.spare_name.length == 0)"
+                                    class="validation">*Spare name is required</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Quantity</label>
+                        <div class="col-sm-8">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="text" placeholder="Enter Quantity" formControlName="qnt"
+                                    class="form-control" value>
+                                <span class="text-info"
+                                    *ngIf="formStock.touched && (!formStock.value.qnt || formStock.value.qnt.length == 0)"
+                                    class="validation">*Quantity is required</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Purchase Amount</label>&nbsp;
+                        <div class="col-sm-8">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="text" placeholder="Enter Purchase Amount " formControlName="purchaseAmount"
+                                    class="form-control">
+                                <span class="text-info"
+                                    *ngIf="formStock.touched && (!formStock.value.purchaseAmount || formStock.value.purchaseAmount.length == 0)"
+                                    class="validation">*purchase Amount is required</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Selling Price</label>&nbsp;
+                        <div class="col-sm-8">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="number" placeholder="Enter Selling Price" formControlName="sellingPrice"
+                                    class="form-control">
+                                <span class="text-info"
+                                    *ngIf="formStock.touched && (!formStock.value.sellingPrice || formStock.value.sellingPrice.length == 0)"
+                                    class="validation">*Selling Price is required</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 label-on-left">Date</label>&nbsp;
+                        <div class="col-sm-8">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <input type="date" formControlName="date" class="form-control">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="text-center">
+                    <button *ngIf="showAddButton" type="button" [disabled]="!formStock.valid"
+                        (click)="postStockDetails()" class="btn btn-success">Submit <i
+                            class="bi bi-briefcase-fill"></i></button>
+                    <button *ngIf="showUpdateButton" type="button" [disabled]="!formStock.valid"
+                        (click)="updateUsersDetails()" class="btn btn-success">Update <i
+                            class="bi bi-briefcase-fill"></i></button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">User Details</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row m-l-5">
+                    <div class="col-sm-3 p-4">
+
+                        <p><strong>Spare name</strong></p>
+                        <p><strong>Quantity</strong></p>
+                        <p><strong>Purchase Ammount</strong></p>
+
+                        <p><strong>Selling Price</strong></p>
+                        <p><strong>Date</strong></p>
+                        <p><strong>Role</strong></p>
+                    </div>
+                    <div>
+
+                        <p>{{userDetails.spare_name }}</p>
+                        <p>{{userDetails.qnt }}</p>
+                        <p>{{userDetails.purchaseAmount }}</p>
+
+                        <p>{{userDetails.sellingPrice }}</p>
+                        <p>{{userDetails.date }}</p>
+                        <p>{{userDetails.role}}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
