@@ -20,6 +20,7 @@ import { AuthserviceService } from './shared/authservice.service';
 import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/role.guard';
 import { EditprofileComponent } from './superadmin/editprofile/editprofile.component';
+import { StockComponent } from './superadmin/stock/stock.component';
 
 
 
@@ -36,6 +37,7 @@ import { EditprofileComponent } from './superadmin/editprofile/editprofile.compo
      ComplaintsComponent,
      UserprofileComponent,
      EditprofileComponent,
+     StockComponent,
      
 
    

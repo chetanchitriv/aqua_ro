@@ -1,5 +1,15 @@
 {
-  "Users": [],
+  "Users": [
+    {
+      "userName": "Nisha",
+      "mobile": 888788554,
+      "email": "n@gmail.com",
+      "password": "1234",
+      "workingHours": 11,
+      "role": "Admin",
+      "id": 1
+    }
+  ],
   "leads": [
     {
       "name": "Nitya",
