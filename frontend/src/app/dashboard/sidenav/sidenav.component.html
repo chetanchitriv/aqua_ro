@@ -44,6 +44,14 @@
                 </a>
             </li>
 
+            <li *ngIf="isSuperAdmin || isAdmin ">
+                <a routerLink="/dashboard/stock">
+                    <i class="material-icons">local_grocery_store
+                    </i>
+                    <p>Stock</p>
+                </a>
+            </li>
+
         </ul>
 
     </div>

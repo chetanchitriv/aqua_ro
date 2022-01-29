@@ -32,6 +32,7 @@
 
                                         <th style="width: 87px;">Name</th>
                                         <th style="width: 87px;">Mobile no.</th>
+                                        <th style="width: 87px;">Alternate no.</th>
 
                                         <th style="width: 87px;">Email ID</th>
                                         <th style="width: 87px;">Assign to</th>
@@ -50,6 +51,7 @@
 
                                         <td>{{data.name}}</td>
                                         <td>{{data.mobileNo}}</td>
+                                        <td>{{data.AltmobileNo}}</td>
                                         <td>{{data.emailId}}</td>
                                         <td>{{data.assignTo}}</td>
                                         <td>{{data.followUpdate}}</td>
@@ -127,16 +129,29 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Mobile No</label>
-                        <div class="col-sm-10">
-                            <div class="form-group label-floating is-empty">
-                                <label class="control-label"></label>
-                                <input type="number" placeholder="Enter mobile number" formControlName="mobileNo" class="form-control" value>
-                                <span class="text-info" *ngIf="formValue.touched && (!formValue.value.mobileNo || formValue.value.mobileNo.length == 0)" class="validation">*Mobile number is required</span>
-                            </div>
+
+
+
+                        <label class="col-sm-2 label-on-left">Mobile No.</label>
+
+                        <div class="form-group label-floating is-empty col-md-4">
+                            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" placeholder="Enter 10 digit mobile number" formControlName="mobileNo" class="form-control">
+                            <span class="text-info" *ngIf="formValue.touched && (!formValue.value.mobileNo || formValue.value.mobileNo.length == 0)" class="validation">*Mobile number is required</span>
                         </div>
+
+                        <label class="col-sm-2 label-on-left">Alternate No.</label>
+                        <div class="form-group label-floating is-empty col-md-4">
+
+                            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" placeholder="Enter 10 digit alternate mobile no." formControlName="AltmobileNo" class="form-control">
+
+                        </div>
+
+
                     </div>
+
+
                     <div class="row">
                         <label class="col-sm-2 label-on-left">Email Id</label>
                         <div class="col-sm-10">
@@ -238,55 +253,58 @@
                     </div>
                 </div>
 
+
+
             </form>
         </div>
     </div>
-</div>
 
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">User Details</h4>
-            </div>
-            <div class="modal-body">
-
-                <div class="row m-l-5">
-                    <div class="col-sm-3 p-4">
-                        <p><strong>ID</strong></p>
-                        <p><strong>Name</strong></p>
-                        <p><strong>Mobile no.</strong></p>
-                        <p><strong>Email ID</strong></p>
-                        <p><strong>Assign to</strong></p>
-                        <p><strong>Address</strong></p>
-                        <p><strong>Follow-up mode</strong></p>
-                        <p><strong>Follow-up date</strong></p>
-                        <p><strong>Follow-up time</strong></p>
-                        <p><strong>Comment</strong></p>
-                        <p><strong>Next Follow-up Date</strong></p>
-                        <p><strong>Next Follow-up time</strong></p>
-                    </div>
-                    <div>
-                        <p>{{leadDetails.id}}</p>
-                        <p>{{leadDetails.name}}</p>
-                        <p>{{leadDetails.mobileNo}}</p>
-                        <p>{{leadDetails.emailId}}</p>
-                        <p>{{leadDetails.assignTo}}</p>
-                        <p>{{leadDetails.address}}</p>
-                        <p>{{leadDetails.followUpmode}}</p>
-                        <p>{{leadDetails.followUpdate}}</p>
-                        <p>{{leadDetails.followUptime}}</p>
-                        <p>{{leadDetails.comment}}</p>
-                        <p>{{leadDetails.nextFollowupdate}}</p>
-                        <p>{{leadDetails.nextFollowuptime}}</p>
-                    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">User Details</h4>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <div class="modal-body">
 
+                    <div class="row m-l-5">
+                        <div class="col-sm-3 p-4">
+
+                            <p><strong>Name</strong></p>
+                            <p><strong>Mobile no.</strong></p>
+                            <p><strong>Alternate no.</strong></p>
+                            <p><strong>Email ID</strong></p>
+                            <p><strong>Assign to</strong></p>
+                            <p><strong>Address</strong></p>
+                            <p><strong>Follow-up mode</strong></p>
+                            <p><strong>Follow-up date</strong></p>
+                            <p><strong>Follow-up time</strong></p>
+                            <p><strong>Comment</strong></p>
+                            <p><strong>Next Follow-up Date</strong></p>
+                            <p><strong>Next Follow-up time</strong></p>
+                        </div>
+                        <div>
+
+                            <p>{{leadDetails.name}}</p>
+                            <p>{{leadDetails.mobileNo}}</p>
+                            <p>{{leadDetails.AltmobileNo}}</p>
+                            <p>{{leadDetails.emailId}}</p>
+                            <p>{{leadDetails.assignTo}}</p>
+                            <p>{{leadDetails.address}}</p>
+                            <p>{{leadDetails.followUpmode}}</p>
+                            <p>{{leadDetails.followUpdate}}</p>
+                            <p>{{leadDetails.followUptime}}</p>
+                            <p>{{leadDetails.comment}}</p>
+                            <p>{{leadDetails.nextFollowupdate}}</p>
+                            <p>{{leadDetails.nextFollowuptime}}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
