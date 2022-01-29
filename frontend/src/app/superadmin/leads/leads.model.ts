@@ -3,6 +3,7 @@ export class LeadsModel{
    
     name : string = '';
     mobileNo : string = '';
+    AltmobileNo : string = '';
     emailId : string = '';
     assignTo : string = '';
     address : string = '';
