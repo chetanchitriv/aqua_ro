@@ -6,6 +6,7 @@ const verifyToken =require('../config/verifyToken')
 router.post('/', stockController.postStock,verifyToken.verifyToken);
 // router.post('/', stockController.postStock);
 router.get('/:id', stockController.getStock,verifyToken.verifyToken);
+router.get('/', stockController.getallStock,verifyToken.verifyToken);
 // router.get('/:id', stockController.getStock);
 router.put('/:id', stockController.putStock,verifyToken.verifyToken);
 // router.put('/:id', stockController.putStock);
