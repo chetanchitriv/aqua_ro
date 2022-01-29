@@ -35,6 +35,8 @@ export class LeadsComponent implements OnInit {
   leadDetails: any={};
   usersAll: any=[];
   assigntoList: any=[];
+  rol:any
+  username:any
   
   
 
@@ -43,7 +45,8 @@ export class LeadsComponent implements OnInit {
   dtOptions:DataTables.Settings={}
     
   ngOnInit(): void {
-
+this.rol=localStorage.getItem('role')
+this.username=localStorage.getItem('username')
     this.initiatedtOption()
     this.getAllUser()
     this.getAllLeads();
@@ -98,7 +101,14 @@ export class LeadsComponent implements OnInit {
   }
   getAllLeads(){
     this.leadService.getLeads().subscribe((res: any)=>{
-    this.leadsAll = res;
+      if(this.rol == 'Superadmin' || this.rol == 'Admin'){
+        this.leadsAll = res;
+      }else {
+         this.leadsAll=res.filter((a:any)=>{
+            return a.username == this.username
+         })
+      }
+   
     console.log(this.leadsAll);
     
     })
@@ -129,6 +139,7 @@ export class LeadsComponent implements OnInit {
       comment : [''],
       nextFollowupdate : [''],
       nextFollowuptime : [''],
+      createdBy:[this.username,Validators.required]
     })
     this.showLeadForm=true
     this.showLeadTable=false

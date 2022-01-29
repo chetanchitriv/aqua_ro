@@ -19,6 +19,7 @@ export class LeadService {
   postLeads(data : any){
     return this.http.post<any>(this.nodeUrl+"leads", data)
   }
+  
   getLeads(){
     return this.http.get<any>(this.nodeUrl+"leads")
   }

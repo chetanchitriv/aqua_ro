@@ -38,6 +38,7 @@ export class ComplaintsComponent implements OnInit {
   complaintDetails: any={};
   usersAll: any=[];
   assigntoList: any=[];
+  username:any
 
 
   constructor(private formbuilder:FormBuilder, private leadService:LeadService, private api:ComplaintService, private userService: UserService) { }
@@ -45,6 +46,7 @@ export class ComplaintsComponent implements OnInit {
 
   ngOnInit(): void {
   
+    this.username=localStorage.getItem('username')
     this.initiatedtOption()
     this.getAllUser()
     this.getAllLeads()
@@ -64,7 +66,8 @@ export class ComplaintsComponent implements OnInit {
       nextFollowupdate : ['',Validators.required],
       nextFollowuptime : ['',Validators.required],
       complaintInfo:['',Validators.required],
-      complaintDate:[this.today,Validators.required]
+      complaintDate:[this.today,Validators.required],
+      createdBy:[this.username,Validators.required]
     })
  
     
