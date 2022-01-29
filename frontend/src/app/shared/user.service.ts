@@ -15,19 +15,19 @@ export class UserService {
   constructor(private http : HttpClient) { }
 
   postUsers(data : any){
-    return this.http.post<any>(this.nodeUrl+"users", data)
+    return this.http.post<any>(this.dbUrl+"users", data)
   }
   getUsers(){
-    return this.http.get<any>(this.nodeUrl+"users")
+    return this.http.get<any>(this.dbUrl+"users")
   }
   updateUsers(data : any,id: number){
-    return this.http.put<any>(this.nodeUrl+`users/`+`${id}`,data)
+    return this.http.put<any>(this.dbUrl+`users/`+`${id}`,data)
   }
   deleteUsers(id : number){
-    return this.http.delete<any>(this.nodeUrl+`users/`+`${id}`)
+    return this.http.delete<any>(this.dbUrl+`users/`+`${id}`)
     }
 
   getUsersbyid(id : any){
-    return this.http.get<any>(this.nodeUrl+`users/`+`${id}`)
+    return this.http.get<any>(this.dbUrl+`users/`+`${id}`)
     }
 }

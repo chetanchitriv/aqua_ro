@@ -54,7 +54,8 @@ export class LeadsComponent implements OnInit {
   this.formValue = this.formbuilder.group({
    
     name : ['',Validators.required],
-    mobileNo : ['',Validators.required],
+    mobileNo : ['', Validators.required],
+    AltmobileNo : [''],
     emailId : ['',Validators.required],
     assignTo : ['',Validators.required],
     address : ['',Validators.required],
@@ -66,7 +67,7 @@ export class LeadsComponent implements OnInit {
     nextFollowuptime : [''],
   })
 }
-  
+
   initiatedtOption(){
    
     this.dtOptions = {
@@ -120,6 +121,7 @@ export class LeadsComponent implements OnInit {
    
       name : ['',Validators.required],
       mobileNo : ['',Validators.required],
+      AltmobileNo : [''],
       emailId : ['',Validators.required],
       assignTo : ['',Validators.required],
       address : ['',Validators.required],

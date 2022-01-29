@@ -88,7 +88,7 @@
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
-                                <input type="number" placeholder="Enter mobile number" formControlName="mobile" class="form-control" value>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" placeholder="Enter mobile number" formControlName="mobile" class="form-control" value>
                                 <span class="text-info" *ngIf="formValue.touched && (!formValue.value.mobile || formValue.value.mobile.length == 0)" class="validation">*Mobile number is required</span>
                             </div>
                         </div>
