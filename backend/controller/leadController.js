@@ -28,6 +28,7 @@ const lead_create= async(req,res)=>{
     const lead=new Lead({
         name : req.body.name,
         mobileNo : req.body.mobileNo,
+        AltmobileNo:req.body.AltmobileNo,
         emailId : req.body.emailId,
         assignTo : req.body.assignTo,
         address : req.body.address,
@@ -37,6 +38,7 @@ const lead_create= async(req,res)=>{
         comment : req.body.comment,
         nextFollowupdate : req.body.nextFollowupdate,
         nextFollowuptime : req.body.nextFollowuptime,
+        createdBy: req.body.createdBy,
     });
     // const body = req.body;
     // const user = new User(body);
@@ -55,6 +57,7 @@ const lead_update=async(req,res)=>{
         const lead={
             name : req.body.name,
             mobileNo : req.body.mobileNo,
+            AltmobileNo:req.body.AltmobileNo,
             emailId : req.body.emailId,
             assignTo : req.body.assignTo,
             address : req.body.address,
@@ -64,6 +67,7 @@ const lead_update=async(req,res)=>{
             comment : req.body.comment,
             nextFollowupdate : req.body.nextFollowupdate,
             nextFollowuptime : req.body.nextFollowuptime,
+            createdBy: req.body.createdBy,
         };
 
    

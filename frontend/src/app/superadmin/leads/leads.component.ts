@@ -34,16 +34,15 @@ export class LeadsComponent implements OnInit {
   times: any
   leadDetails: any={};
   usersAll: any=[];
-  assigntoList: any=[];
-  
-  
-
+  assigntoList: string[]=[];
+  currentUser:any;
+  currentRole: any;
 
   constructor(private formbuilder: FormBuilder, private leadService: LeadService, private userService: UserService) {}
   dtOptions:DataTables.Settings={}
     
   ngOnInit(): void {
-
+    this.currentRole=localStorage.getItem('role')    
     this.initiatedtOption()
     this.getAllUser()
     this.getAllLeads();
@@ -51,8 +50,6 @@ export class LeadsComponent implements OnInit {
 
     this.today = this.date.toISOString().slice(0, 10);
     this.times =  this.date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
-    console.log(this.today)
-
   
   this.formValue = this.formbuilder.group({
    
@@ -98,9 +95,7 @@ export class LeadsComponent implements OnInit {
   }
   getAllLeads(){
     this.leadService.getLeads().subscribe((res: any)=>{
-    this.leadsAll = res;
-    console.log(this.leadsAll);
-    
+    this.leadsAll = res;    
     })
   }
 
@@ -108,14 +103,19 @@ export class LeadsComponent implements OnInit {
     this.userService.getUsers().subscribe(res=>{
       this.usersAll = res;
       this.usersAll.forEach((element:any) => {
-        this.assigntoList.push(element.userName)
+        if(element.role =='Telecaller' || element.role =='Technician'){
+          var assign=element.userName
+          this.assigntoList.push(assign)
+        }
       });
-      })
-   
+      // this.formValue.patchValue({assignTo:this.currentUser});
+      })   
   }
 
+  getcurrentUser(){
+    return localStorage.getItem('username')
+  }
   showForm(){
-    console.log(this.times);
     this.formValue = this.formbuilder.group({
    
       name : ['',Validators.required],

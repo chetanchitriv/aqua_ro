@@ -155,14 +155,10 @@
                                 <div class="form-group open" style="margin-left: 20px;">
                                     <div class="select" aria-expanded="true">
                                         <select class="form-control" placeholder="Select an option" formControlName="assignTo">
-                                           
-                                                <option value="">Select your option --</option>
-                                                <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
-                                              
+                                                <option *ngIf="currentRole=='Admin'||currentRole=='Superadmin' ">select--</option>
+                                                <option >{{getcurrentUser()}}</option>
+                                                <option [ngClass]="(getcurrentUser()==assign)?'hide':'show'" [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
                                             </select>
-
-
-
 
                                         <span class="text-info" *ngIf="formValue.touched && (!formValue.value.assignTo || formValue.value.assignTo.length == 0)" class="validation">*Assign feild is required</span>
                                     </div>
