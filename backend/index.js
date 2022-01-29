@@ -8,8 +8,8 @@ const bodyparser = require("body-parser")
 dotenv.config()
 
 mongoose.connect(
-    // process.env.MONGO_URI,
-    "mongodb://127.0.0.1/aquvarro",
+    process.env.MONGO_URI,
+    // "mongodb://127.0.0.1/aquvarro",
     {useUnifiedTopology:true,useNewUrlParser:true},
     ()=>{
         console.log("mongo Db connected");
