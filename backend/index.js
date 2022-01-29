@@ -8,7 +8,8 @@ const bodyparser = require("body-parser")
 dotenv.config()
 
 mongoose.connect(
-    process.env.MONGO_URI,
+    // process.env.MONGO_URI,
+    "mongodb://127.0.0.1/aquvarro",
     {useUnifiedTopology:true,useNewUrlParser:true},
     ()=>{
         console.log("mongo Db connected");
@@ -28,21 +29,30 @@ var corsOptions = {
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    res.header("Access-Control-Allow-Headers", "*")
     if (req.method === 'OPTIONS') {
         res.header("Access-Control-Allow-Methods", "*")
     }
     next()
 })
+app.get("/", (req, res)=>{
+    res.send("server is live at 4000")
+})
+
+
 
 const userRouts=require("./routes/user")
 const authRoute=require("./routes/auth")
+const stock=require("./routes/stockRouter")
 const leadRoute=require("./routes/lead")
+const invoiceRoute=require("./routes/invoice_pdfRouter")
 const complaintRoute=require("./routes/complaint")
 
 app.use("/api/users",userRouts)
+app.use("/api/invoice",invoiceRoute)
 app.use("/api/login",authRoute)
 app.use('/api/leads',leadRoute)
+app.use('/api/stock',stock)
 app.use('/api/complaints',complaintRoute)
 
 app.listen(4000,()=>{
