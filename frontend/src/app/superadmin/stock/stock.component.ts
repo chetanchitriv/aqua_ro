@@ -30,6 +30,7 @@ export class StockComponent implements OnInit {
   date = new Date()
   today: any
   times: any
+  stockData: any;
   constructor(private formbuilder: FormBuilder, private api: StockService, private router:Router) { }
 
   ngOnInit(): void {
@@ -69,7 +70,8 @@ export class StockComponent implements OnInit {
  
   getAllStock() {
     this.api.getStock().subscribe(res => {
-      this.formStock = res;
+      this.stockData = res;
+      
     })
   }
 
@@ -106,10 +108,10 @@ export class StockComponent implements OnInit {
   })
 }
 
-
 deleteUsers(data:any){
   this.api.deleteStock(data._id)
   .subscribe(res=>{
+
     alert("Records Deleted Successfully!")
     this.initiatedtOption()
   this.getAllStock()
