@@ -44,6 +44,7 @@ app.get("/", (req, res)=>{
 const userRouts=require("./routes/user")
 const authRoute=require("./routes/auth")
 const stock=require("./routes/stockRouter")
+const stockTech=require("./routes/stockTechRouter")
 const leadRoute=require("./routes/lead")
 const invoiceRoute=require("./routes/invoice_pdfRouter")
 const complaintRoute=require("./routes/complaint")
@@ -53,6 +54,7 @@ app.use("/api/invoice",invoiceRoute)
 app.use("/api/login",authRoute)
 app.use('/api/leads',leadRoute)
 app.use('/api/stock',stock)
+app.use('/api/stocktech',stockTech)
 app.use('/api/complaints',complaintRoute)
 
 app.listen(4000,()=>{
