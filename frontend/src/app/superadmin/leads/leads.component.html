@@ -38,7 +38,7 @@
                                         <th style="width: 87px;">Assign to</th>
 
                                         <th style="width: 87px;">Follow-up Date</th>
-                                        <th style="width: 87px;">Comment</th>
+                                        <th style="width: 87px;">Created By</th>
                                         <th style="width: 87px;">Next Follow-up Date</th>
 
 
@@ -55,7 +55,7 @@
                                         <td>{{data.emailId}}</td>
                                         <td>{{data.assignTo}}</td>
                                         <td>{{data.followUpdate}}</td>
-                                        <td>{{data.comment}}</td>
+                                        <td>{{data.createdBy}}</td>
                                         <td>{{data.nextFollowupdate}}</td>
 
                                         <td class="text-right">
@@ -162,7 +162,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row " *ngIf="isSuperAdmin || isAdmin || isTelecaller">
                             <label class="col-sm-2 label-on-left">Assign to</label>
                             <div class="col-sm-4">
 
@@ -170,7 +170,7 @@
                                 <div class="form-group open" style="margin-left: 20px;">
                                     <div class="select" aria-expanded="true">
                                         <select class="form-control" placeholder="Select an option" formControlName="assignTo">
-                                                <option *ngIf="currentRole=='Admin'||currentRole=='Superadmin' ">select--</option>
+                                               
                                                 <option >{{getcurrentUser()}}</option>
                                                 <option [ngClass]="(getcurrentUser()==assign)?'hide':'show'" [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
                                             </select>
@@ -242,8 +242,8 @@
 
 
                         <div class="text-center" style="margin-left: 100px;">
-                            <button *ngIf="showAddButton" type="button" [disabled]="!formValue.valid" (click)="postLeadsDetails()" (click)="showTable()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
-                            <button *ngIf="showUpdateButton" type="button" [disabled]="!formValue.valid" (click)="updateLeadsDetails()" (click)="showTable()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
+                            <button *ngIf="showAddButton" type="button" (click)="postLeadsDetails()" (click)="showTable()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
+                            <button *ngIf="showUpdateButton" type="button" (click)="updateLeadsDetails()" (click)="showTable()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
 
                         </div>
                     </div>

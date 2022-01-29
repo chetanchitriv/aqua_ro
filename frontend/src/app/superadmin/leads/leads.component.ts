@@ -13,7 +13,11 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class LeadsComponent implements OnInit {
  
- 
+  isSuperAdmin :boolean = false
+  isAdmin :boolean = false
+  isTelecaller :boolean = false
+  isTechnician :boolean = false
+
   showLeadForm: boolean=false;
   showLeadTable: boolean=false;
   showAddButton: boolean=false;
@@ -43,8 +47,35 @@ export class LeadsComponent implements OnInit {
   dtOptions:DataTables.Settings={}
     
   ngOnInit(): void {
-    this.currentRole=localStorage.getItem('currentRolee')    
-    this.currentUser=localStorage.getItem('currentUser')
+    this.currentRole=localStorage.getItem('role')    
+    this.currentUser=localStorage.getItem('username')
+   
+    if (this.currentRole=='Superadmin'){
+      this.isSuperAdmin = true
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = false
+    
+    }
+    if (this.currentRole=='Admin'){
+      this.isSuperAdmin = false
+      this.isAdmin =true
+      this.isTelecaller=  false
+      this.isTechnician = false
+    }
+    if (this.currentRole=='Technician'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = true
+    }
+    if (this.currentRole=='Telecaller'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  true
+      this.isTechnician = false
+    }
+
     this.initiatedtOption()
     this.getAllUser()
     this.getAllLeads();
@@ -67,6 +98,7 @@ export class LeadsComponent implements OnInit {
     comment : [''],
     nextFollowupdate : [''],
     nextFollowuptime : [''],
+    createdBy:[this.currentUser,Validators.required]
   })
 }
 
@@ -102,7 +134,7 @@ export class LeadsComponent implements OnInit {
         this.leadsAll = res;
       }else {
          this.leadsAll=res.filter((a:any)=>{
-            return a.currentUser == this.currentUser
+            return a.createdBy == this.currentUser
          })
       }
    
@@ -152,7 +184,9 @@ export class LeadsComponent implements OnInit {
   }
 
   postLeadsDetails(){
+    
   this.leadService.postLeads(this.formValue.value).subscribe((res: any)=>{
+
     alert("Lead Added Successfully!");
     this.formValue.reset();
     this.initiatedtOption()

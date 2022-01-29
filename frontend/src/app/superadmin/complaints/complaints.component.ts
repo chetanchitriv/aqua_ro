@@ -127,7 +127,8 @@ export class ComplaintsComponent implements OnInit {
         nextFollowupdate : [this.leadData.nextFollowupdate,Validators.required],
         nextFollowuptime : [this.leadData.nextFollowuptime,Validators.required],
         complaintInfo:['',Validators.required],
-        complaintDate:[this.today,Validators.required]
+        complaintDate:[this.today,Validators.required],
+        createdBy:[this.username,Validators.required]
       })
     }
   
