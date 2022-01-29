@@ -3,6 +3,7 @@ const mongoose=require("mongoose")
 const complaintSchema=new mongoose.Schema({
     name : String,
     mobileNo : Number,
+    AltmobileNo:Number,
     emailId : String,
     assignTo : String,
     address : String,
@@ -13,7 +14,8 @@ const complaintSchema=new mongoose.Schema({
     nextFollowupdate : String,
     nextFollowuptime : String,
     complaintInfo: String,
-    complaintDate:String
+    complaintDate:String,
+    createdBy:String
 });
 
 module.exports=mongoose.model("Complaint",complaintSchema)

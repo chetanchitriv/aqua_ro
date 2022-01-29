@@ -33,7 +33,7 @@
 
                                         <th style="width: 87px;">Name</th>
                                         <th style="width: 87px;">Mobile no.</th>
-
+                                        <th style="width: 87px;">Alternate no.</th>
 
                                         <th style="width: 87px;">Assign to</th>
                                         <th style="width: 87px;">Complaint Details</th>
@@ -49,7 +49,7 @@
 
                                         <td>{{data.name}}</td>
                                         <td>{{data.mobileNo}}</td>
-
+                                        <td>{{data.AltmobileNo}}</td>
                                         <td>{{data.assignTo}}</td>
 
 
@@ -128,7 +128,7 @@
                     <div class="row">
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
-                                <label class="control-label">Mobile</label>
+                                <label class="control-label">Enter mobile no. or alternate mobile no.</label>
                                 <input type="text" class="form-control" formControlName="mobile">
                                 <span class="help-block">Enter Mobile No and search for a lead</span>
                             </div>
@@ -164,13 +164,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Mobile No</label>
-                        <div class="col-sm-10">
-                            <div class="form-group label-floating is-empty">
-                                <label class="control-label"></label>
-                                <input type="number" placeholder="Enter mobile number" formControlName="mobileNo" class="form-control" [readonly]="true" value>
 
-                            </div>
+                        <label class="col-sm-2 label-on-left">Mobile No.</label>
+
+                        <div class="form-group label-floating is-empty col-md-4">
+                            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" placeholder="Enter mobile number" formControlName="mobileNo" class="form-control" [readonly]="true" value>
+                            <span class="text-info" *ngIf="complaintForm.touched && (!complaintForm.value.mobileNo || complaintForm.value.mobileNo.length == 0)" class="validation">*Mobile number is required</span>
+                        </div>
+                        <label class="col-sm-2 label-on-left">Alternate No.</label>
+                        <div class="form-group label-floating is-empty col-md-4">
+
+                            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" placeholder="Alternate mobile no." formControlName="AltmobileNo" class="form-control" [readonly]="true"
+                                value>
+
                         </div>
                     </div>
                     <div class="row">
@@ -307,13 +313,26 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Mobile No</label>
+                        <!-- <label class="col-sm-2 label-on-left">Mobile No</label>
                         <div class="col-sm-10">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
                                 <input type="number" placeholder="Enter mobile number" formControlName="mobileNo" class="form-control" [readonly]="true" value>
 
                             </div>
+                        </div> -->
+
+                        <label class="col-sm-2 label-on-left">Mobile No.</label>
+
+                        <div class="form-group label-floating is-empty col-md-4">
+                            <input type="number" placeholder="Enter mobile number" formControlName="mobileNo" class="form-control" [readonly]="true" value>
+                            <span class="text-info" *ngIf="complaintForm.touched && (!complaintForm.value.mobileNo || complaintForm.value.mobileNo.length == 0)" class="validation">*Mobile number is required</span>
+                        </div>
+                        <label class="col-sm-2 label-on-left">Alternate No.</label>
+                        <div class="form-group label-floating is-empty col-md-4">
+
+                            <input type="number" placeholder="Alternate mobile no." formControlName="AltmobileNo" class="form-control" [readonly]="true" value>
+
                         </div>
                     </div>
                     <div class="row">
@@ -448,6 +467,7 @@
 
                         <p><strong>Name</strong></p>
                         <p><strong>Mobile no.</strong></p>
+                        <p><strong>Alternate no.</strong></p>
                         <p><strong>Email Id</strong></p>
                         <p><strong>Assign to</strong></p>
                         <p><strong>Address</strong></p>
@@ -463,6 +483,7 @@
 
                         <p>{{complaintDetails.name}}</p>
                         <p>{{complaintDetails.mobileNo}}</p>
+                        <p>{{complaintDetails.AltmobileNo}}</p>
                         <p>{{complaintDetails.emailId}}</p>
                         <p>{{complaintDetails.assignTo}}</p>
                         <p>{{complaintDetails.address}}</p>

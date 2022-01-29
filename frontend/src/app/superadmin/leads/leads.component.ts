@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LeadService } from 'src/app/shared/lead.service';
 import { formatDate } from '@angular/common';
 
@@ -26,7 +26,7 @@ export class LeadsComponent implements OnInit {
   leadsAll: any=[];
  
 
-  roles=["Admin","Technician","Telecaller"]
+  currentRolees=["Admin","Technician","Telecaller"]
   updateId: any;
 
   date = new Date()
@@ -35,18 +35,16 @@ export class LeadsComponent implements OnInit {
   leadDetails: any={};
   usersAll: any=[];
   assigntoList: any=[];
-  rol:any
-  username:any
-  
-  
 
+  currentUser:any;
+  currentRole: any;
 
   constructor(private formbuilder: FormBuilder, private leadService: LeadService, private userService: UserService) {}
   dtOptions:DataTables.Settings={}
     
   ngOnInit(): void {
-this.rol=localStorage.getItem('role')
-this.username=localStorage.getItem('username')
+    this.currentRole=localStorage.getItem('currentRolee')    
+    this.currentUser=localStorage.getItem('currentUser')
     this.initiatedtOption()
     this.getAllUser()
     this.getAllLeads();
@@ -54,13 +52,12 @@ this.username=localStorage.getItem('username')
 
     this.today = this.date.toISOString().slice(0, 10);
     this.times =  this.date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
-    console.log(this.today)
-
   
   this.formValue = this.formbuilder.group({
    
     name : ['',Validators.required],
-    mobileNo : ['',Validators.required],
+    mobileNo : ['', Validators.required],
+    AltmobileNo : [''],
     emailId : ['',Validators.required],
     assignTo : ['',Validators.required],
     address : ['',Validators.required],
@@ -72,7 +69,7 @@ this.username=localStorage.getItem('username')
     nextFollowuptime : [''],
   })
 }
-  
+
   initiatedtOption(){
    
     this.dtOptions = {
@@ -101,16 +98,15 @@ this.username=localStorage.getItem('username')
   }
   getAllLeads(){
     this.leadService.getLeads().subscribe((res: any)=>{
-      if(this.rol == 'Superadmin' || this.rol == 'Admin'){
+      if(this.currentRole == 'Superadmin' || this.currentRole == 'Admin'){
         this.leadsAll = res;
       }else {
          this.leadsAll=res.filter((a:any)=>{
-            return a.username == this.username
+            return a.currentUser == this.currentUser
          })
       }
    
-    console.log(this.leadsAll);
-    
+  
     })
   }
 
@@ -118,18 +114,24 @@ this.username=localStorage.getItem('username')
     this.userService.getUsers().subscribe(res=>{
       this.usersAll = res;
       this.usersAll.forEach((element:any) => {
-        this.assigntoList.push(element.userName)
+        if(element.currentRolee =='Telecaller' || element.currentRolee =='Technician'){
+          var assign=element.currentUser
+          this.assigntoList.push(assign)
+        }
       });
-      })
-   
+      // this.formValue.patchValue({assignTo:this.currentUser});
+      })   
   }
 
+  getcurrentUser(){
+    return localStorage.getItem('currentUser')
+  }
   showForm(){
-    console.log(this.times);
     this.formValue = this.formbuilder.group({
    
       name : ['',Validators.required],
       mobileNo : ['',Validators.required],
+      AltmobileNo : [''],
       emailId : ['',Validators.required],
       assignTo : ['',Validators.required],
       address : ['',Validators.required],
@@ -139,7 +141,7 @@ this.username=localStorage.getItem('username')
       comment : [''],
       nextFollowupdate : [''],
       nextFollowuptime : [''],
-      createdBy:[this.username,Validators.required]
+      createdBy:[this.currentUser,Validators.required]
     })
     this.showLeadForm=true
     this.showLeadTable=false

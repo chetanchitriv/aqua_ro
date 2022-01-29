@@ -56,6 +56,7 @@ export class ComplaintsComponent implements OnInit {
     this.complaintUpdateForm = this.formbuilder.group({
       name : ['',Validators.required],
       mobileNo : ['',Validators.required],
+      AltmobileNo : [''],
       emailId : ['',Validators.required],
       assignTo : ['',Validators.required],
       address : ['',Validators.required],
@@ -100,7 +101,7 @@ export class ComplaintsComponent implements OnInit {
     this.today = this.date.toISOString().slice(0, 10);
     this.times =  this.date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
     this.allLeads.forEach((element:any )=> {
-      if(element.mobileNo==this.searchLead.controls.mobile.value){
+      if(element.mobileNo==this.searchLead.controls.mobile.value || element.AltmobileNo==this.searchLead.controls.mobile.value){
         this.leadData=element
         leadExist=true
       }
@@ -114,6 +115,8 @@ export class ComplaintsComponent implements OnInit {
       this.complaintForm = this.formbuilder.group({
         name : [this.leadData.name,Validators.required],
         mobileNo : [this.leadData.mobileNo,Validators.required],
+        AltmobileNo : [this.leadData.AltmobileNo,Validators.required],
+       
         emailId : [this.leadData.emailId,Validators.required],
         assignTo : [this.leadData.assignTo,Validators.required],
         address : [this.leadData.address,Validators.required],
