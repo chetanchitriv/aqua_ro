@@ -58,10 +58,12 @@ const user_create= async(req,res)=>{
 const user_update=async(req,res)=>{
     try{
         console.log(req.params.id);
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword  = await bcrypt.hash(req.body.password, salt);    
         const user={
             userName:req.body.userName,
             email:req.body.email,
-            password:req.body.password,
+            password:hashedPassword,
             mobile:req.body.mobile,
             workingHours:req.body.workingHours,
             role:req.body.role

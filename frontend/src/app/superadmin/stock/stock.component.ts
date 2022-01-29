@@ -89,7 +89,7 @@ export class StockComponent implements OnInit {
 
   postStockDetails(){
   this.api.postStock(this.formStock.value).subscribe(res=>{
-    alert("User Added Successfully!");
+    alert("Stock Added Successfully!");
     this.formStock.reset();
     this.initiatedtOption()
   this.getAllStock()
