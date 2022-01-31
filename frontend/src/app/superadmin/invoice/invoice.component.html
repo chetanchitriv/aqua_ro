@@ -1,0 +1,34 @@
+<div class="d-flex">
+    <button type="button" (click)="showSearchForm()" class="btn btn-success"> Generate Invoice<i class="bi bi-briefcase-fill"></i></button>
+    <button type="button" (click)="showTable()" class="btn btn-success">show List <i class="bi bi-briefcase-fill"></i></button>
+
+    <div *ngIf="showsearchform && !showInvoiceTable && !showInvoiceForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+        <form [formGroup]="searchLead" (ngSubmit)="search()">
+
+
+
+            <!-- <div class="card-header card-header-text">
+                    <h4 class="card-title">Search .</h4>
+                </div> -->
+            <div class="card-content">
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">Enter mobile no. or alternate mobile no.</label>
+                            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" class="form-control" formControlName="mobile">
+                            <span class="help-block">Enter Mobile No and search for a lead</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-success">Search <i class="bi bi-briefcase-fill"></i></button>
+                </div>
+
+
+
+            </div>
+        </form>
+    </div>
+</div>

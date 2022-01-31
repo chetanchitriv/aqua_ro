@@ -19,7 +19,10 @@ export class LeadsComponent implements OnInit {
   showAddButton: boolean=false;
   showUpdateButton: boolean=false;
  
-
+  isSuperAdmin :boolean = false
+  isAdmin :boolean = false
+  isTelecaller :boolean = false
+  isTechnician :boolean = false
 
   leadsModelObj : LeadsModel = new LeadsModel();
   formValue:any= FormGroup;
@@ -43,6 +46,34 @@ export class LeadsComponent implements OnInit {
   dtOptions:DataTables.Settings={}
     
   ngOnInit(): void {
+
+    var Role= localStorage.getItem("role")
+if (Role=='Superadmin'){
+  this.isSuperAdmin = true
+  this.isAdmin =false
+  this.isTelecaller=  false
+  this.isTechnician = false
+
+}
+if (Role=='Admin'){
+  this.isSuperAdmin = false
+  this.isAdmin =true
+  this.isTelecaller=  false
+  this.isTechnician = false
+}
+if (Role=='Technician'){
+  this.isSuperAdmin = false
+  this.isAdmin =false
+  this.isTelecaller=  false
+  this.isTechnician = true
+}
+if (Role=='Telecaller'){
+  this.isSuperAdmin = false
+  this.isAdmin =false
+  this.isTelecaller=  true
+  this.isTechnician = false
+}
+
 
     this.initiatedtOption()
     this.getAllUser()
@@ -190,6 +221,8 @@ updateLeadsDetails(){
   }
 
 }
+
+
 
 
 

@@ -1,0 +1,138 @@
+<div class="d-flex">
+    <div>
+        <button type="button" (click)="showStockForm()" class="btn btn-success">Add Stock <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showStockForm()" class="btn btn-success">showList <i class="bi bi-briefcase-fill"></i></button>
+    </div>
+
+    <!-- <div class="col-md-12">
+        <div *ngIf="!showUserForm && showUserTable" class="card">
+            <div class="card-content">
+                <h4 class="card-title">Users</h4>
+                <div class="content">
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+
+
+                                        <th>User name</th>
+
+                                        <th>Mobile no.</th>
+                                        <th>Email ID</th>
+
+
+                                        <th>Working hours</th>
+
+                                        <th>Role</th>
+
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of usersAll; let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{data.userName}}</td>
+                                        <td>{{data.mobile}}</td>
+                                        <td>{{data.email}}</td>
+
+
+                                        <td>{{data.workingHours}}</td>
+                                        <td>{{data.role}}</td>
+                                        <td>
+                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
+                                            <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i  title="edit" class="material-icons">edit</i></a>
+                                            <a (click)="deleteUsers(data)" class="btn btn-simple btn-danger btn-icon remove"><i  title="delete" class="material-icons">close</i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <!-- end content-->
+</div>
+<!--  end card  -->
+<!-- </div> -->
+
+<div *ngIf="showstockForm && !showstockTable" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+    <form class="form-horizontal" [formGroup]="formStockAllot">
+        <div class="card-header card-header-text">
+            <!-- <span *ngIf="showAddButton"><h4 class="card-title">Add Leads</h4></span>
+            <span *ngIf="showUpdateButton"><h4 class="card-title">Update Leads</h4></span> -->
+        </div>
+
+        <div class="card-content">
+
+
+            <div class="row">
+                <label class="col-sm-2 label-on-left">Spare allotment</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group label-floating is-empty">
+                                <select placeholder="Enter Role" formControlName="role" class="form-control">
+                                    
+                                    <option value=""> Select stock name --</option>
+                                 
+                                    <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    <input type="number" placeholder="Enter quntity" formControlName="userName" class="form-control" value>
+
+
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-md-4">
+                            <div class="form-group label-floating is-empty">
+                                <select placeholder="Enter Role" formControlName="role" class="form-control">
+                                    <option value=""> Select quntity --</option>
+                                    <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
+                            <!-- </select>
+                            </div>
+                        </div> -->
+                            <div class="col-md-5">
+                                <div class="form-group label-floating is-empty">
+                                    <select placeholder="Enter Role" formControlName="role" class="form-control">
+                                    <option value="1"> Select technician name --</option>
+                                    <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="text-center" style="margin-left: 100px;">
+            <button type="button" [disabled]="!formStockAllot.valid" (click)="showStockTable()" class="btn btn-success">Allot<i class="bi bi-briefcase-fill"></i></button>
+            <!-- <button *ngIf="showUpdateButton" type="button" [disabled]="!formValue.valid" (click)="updateLeadsDetails()" (click)="showTable()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button> -->
+
+        </div>
+
+
+
+    </form>
+</div>

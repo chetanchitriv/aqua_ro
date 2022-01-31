@@ -11,6 +11,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/role.guard';
 import { EditprofileComponent } from './superadmin/editprofile/editprofile.component';
 import { StockComponent } from './superadmin/stock/stock.component';
+import { InvoiceComponent } from './superadmin/invoice/invoice.component';
+import { StockallotmentComponent } from './superadmin/stockallotment/stockallotment.component';
 
 const routes: Routes = [
   {
@@ -18,34 +20,36 @@ const routes: Routes = [
     path:"login"
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  // {
-  //   component:HomeComponent,
-  //   path:"dashboard",  canActivate:[AuthGuard],
-  //   children: [
-  //     { path: '', component: UserprofileComponent },
-  //     { path: 'chart', canActivate:[RoleGuard], component: ChartboartComponent },
-  //     { path: 'users', canActivate:[RoleGuard], component: UsersComponent, },
-  //     { path: 'leads', component: LeadsComponent },
-  //     { path: 'complaints', component: ComplaintsComponent },
-  //     { path: 'editprofile', component:EditprofileComponent},
-  //     { path: 'stock', component:StockComponent}
-
-  //   ]
-  // }
   {
     component:HomeComponent,
-    path:"dashboard", 
+    path:"dashboard",  canActivate:[AuthGuard],
     children: [
-      { path: 'chart',  component: ChartboartComponent },
-      { path: 'users', component: UsersComponent, },
+      { path: '', component: UserprofileComponent },
+      { path: 'chart', canActivate:[RoleGuard], component: ChartboartComponent },
+      { path: 'users', canActivate:[RoleGuard], component: UsersComponent, },
       { path: 'leads', component: LeadsComponent },
       { path: 'complaints', component: ComplaintsComponent },
-      { path: '', component: UserprofileComponent },
       { path: 'editprofile', component:EditprofileComponent},
-      { path: 'stock', component:StockComponent}
-      
+      { path: 'stock', component:StockComponent},
+      { path: 'invoice', component:InvoiceComponent},
+      { path: 'stockallotment', component:StockallotmentComponent}
+
     ]
   }
+  // {
+  //   component:HomeComponent,
+  //   path:"dashboard", 
+  //   children: [
+  //     { path: 'chart',  component: ChartboartComponent },
+  //     { path: 'users', component: UsersComponent, },
+  //     { path: 'leads', component: LeadsComponent },
+  //     { path: 'complaints', component: ComplaintsComponent },
+  //     { path: '', component: UserprofileComponent },
+  //     { path: 'editprofile', component:EditprofileComponent},
+  //     { path: 'stock', component:StockComponent}
+      
+  //   ]
+  // }
 ];
 
 @NgModule({
