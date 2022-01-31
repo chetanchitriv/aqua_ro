@@ -31,6 +31,7 @@
                         <li *ngFor=" let item of leadsAll ,let i = index ">
                             <a>{{i + 1}}) Follow-up date of <strong>{{item.name}}</strong> is today </a>
                         </li>
+                        <li *ngIf="leadsAll == 0"></li>
 
                     </ul>
                 </li>
