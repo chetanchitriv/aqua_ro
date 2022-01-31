@@ -179,7 +179,8 @@ export class LeadsComponent implements OnInit {
       comment : [''],
       nextFollowupdate : [''],
       nextFollowuptime : [''],
-      createdBy:[this.currentUser,Validators.required]
+      createdBy:[this.currentUser,Validators.required],
+      status:[]
     })
     this.showLeadForm=true
     this.showLeadTable=false

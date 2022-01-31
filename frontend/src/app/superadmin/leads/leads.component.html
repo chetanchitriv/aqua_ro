@@ -40,7 +40,6 @@
                                         <th style="width: 87px;">Follow-up Date</th>
                                         <th style="width: 87px;">Created By</th>
                                         <th style="width: 87px;">Next Follow-up Date</th>
-                                        <th style="width: 87px;">Next Follow-up Date</th>
                                         <th style="width: 87px;">Status</th>
                                         <th style="width: 87px;">Actions</th>
                                     </tr>
@@ -263,9 +262,9 @@
                             <div class="col-sm-10">
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label"></label>
-                                    <select  class="form-control">
+                                    <select  class="form-control" formControlName="status">
                                         
-                                        <option *ngFor="let data of status" value={{data}}>
+                                        <option *ngFor="let data of status" [ngValue]="data">
                                             {{data}}
                                         </option>
                                      </select>
