@@ -23,9 +23,9 @@ export class StockComponent implements OnInit {
  
  stockModelObj : stockModel=new stockModel();
   formStock:any= FormGroup;
-  usersAll: any=[];
+  stockAll: any=[];
   updateId: any;
-  userDetails: any={};
+  stockDetails: any={};
   serverErrorMessages: any;
   date = new Date()
   today: any
@@ -66,11 +66,16 @@ export class StockComponent implements OnInit {
     this.showAddButton = false;
   
   }
- 
+  view(data:any){
+    this.api.getStockbyid(data._id)
+    .subscribe(res=>{
+      this.stockDetails=res
+    })
+  }
  
   getAllStock() {
     this.api.getStock().subscribe(res => {
-      this.stockData = res;
+      this.stockAll = res;
       
     })
   }

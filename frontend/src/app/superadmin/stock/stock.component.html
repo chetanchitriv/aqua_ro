@@ -34,7 +34,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let data of usersAll; let i = index">
+                                    <tr *ngFor="let data of stockAll; let i = index">
                                         <td>{{i+1}}</td>
                                         <td>{{data.spare_name}}</td>
                                         <td>{{data.qnt}}</td>
@@ -43,9 +43,9 @@
                                         <td>{{data.sellingPrice}}</td>
                                         <td>{{data.date}}</td>
                                         <td>
-                                            <!-- <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i
+                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i
                                                     title="read" data-toggle="modal" data-target="#myModal"
-                                                    class="material-icons">assignment </i></a> -->
+                                                    class="material-icons">assignment </i></a>
                                             <a (click)="onEdit(data)"
                                                 class="btn btn-simple btn-warning btn-icon edit"><i title="edit"
                                                     class="material-icons">edit</i></a>
@@ -189,13 +189,13 @@
                     </div>
                     <div>
 
-                        <p>{{userDetails.spare_name }}</p>
-                        <p>{{userDetails.qnt }}</p>
-                        <p>{{userDetails.purchaseAmount }}</p>
+                        <p>{{stockDetails.spare_name }}</p>
+                        <p>{{stockDetails.qnt }}</p>
+                        <p>{{stockDetails.purchaseAmount }}</p>
 
-                        <p>{{userDetails.sellingPrice }}</p>
-                        <p>{{userDetails.date }}</p>
-                        <p>{{userDetails.role}}</p>
+                        <p>{{stockDetails.sellingPrice }}</p>
+                        <p>{{stockDetails.date }}</p>
+                        <p>{{stockDetails.role}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
