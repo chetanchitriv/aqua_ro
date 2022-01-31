@@ -11,6 +11,7 @@ export class StockService {
 
   dbUrl=environment.apiUrl
   nodeUrl=environment.nodeapiUrl
+  getUsers: any;
   
 
   constructor(private http : HttpClient) { }

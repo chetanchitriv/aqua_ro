@@ -64,7 +64,7 @@
 <!-- </div> -->
 
 <div *ngIf="showstockForm && !showstockTable" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
-    <form class="form-horizontal" [formGroup]="formStockAllot">
+    <form class="form-horizontal">
         <div class="card-header card-header-text">
             <!-- <span *ngIf="showAddButton"><h4 class="card-title">Add Leads</h4></span>
             <span *ngIf="showUpdateButton"><h4 class="card-title">Update Leads</h4></span> -->
@@ -79,9 +79,9 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group label-floating is-empty">
-                                <select placeholder="Enter Role" formControlName="role" class="form-control">
-                                    
-                                    <option value=""> Select stock name --</option>
+                                <select placeholder="Enter Role" class="form-control">
+                                    <option value=""> Select spare name --</option>
+                                    <option *ngFor="let data of stockAll">{{data.spare_name}}</option>
                                  
                                     <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
                                 </select>
@@ -93,7 +93,7 @@
                             <div class="col-md-3">
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label"></label>
-                                    <input type="number" placeholder="Enter quntity" formControlName="userName" class="form-control" value>
+                                    <input type="number" placeholder="Enter quntity" class="form-control" value>
 
 
                                 </div>
@@ -109,10 +109,10 @@
                         </div> -->
                             <div class="col-md-5">
                                 <div class="form-group label-floating is-empty">
-                                    <select placeholder="Enter Role" formControlName="role" class="form-control">
-                                    <option value="1"> Select technician name --</option>
-                                    <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
-                                </select>
+                                    <select placeholder="Enter Role" class="form-control">
+                                        <option value=""> Select technician name --</option>
+                                        <option *ngFor="let data of usersAll">{{data.userName}}</option>
+                                             </select>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
 
 
         <div class="text-center" style="margin-left: 100px;">
-            <button type="button" [disabled]="!formStockAllot.valid" (click)="showStockTable()" class="btn btn-success">Allot<i class="bi bi-briefcase-fill"></i></button>
+            <button type="button" (click)="showStockTable()" class="btn btn-success">Allot<i class="bi bi-briefcase-fill"></i></button>
             <!-- <button *ngIf="showUpdateButton" type="button" [disabled]="!formValue.valid" (click)="updateLeadsDetails()" (click)="showTable()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button> -->
 
         </div>
