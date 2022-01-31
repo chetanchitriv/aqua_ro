@@ -13,7 +13,8 @@ const leadSchema=new mongoose.Schema({
     comment : String,
     nextFollowupdate : String,
     nextFollowuptime : String,
-    createdBy:String
+    createdBy:String,
+    status: String
 });
 
 module.exports=mongoose.model("Lead",leadSchema)
