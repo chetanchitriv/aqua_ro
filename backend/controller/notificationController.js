@@ -3,25 +3,25 @@ var date = new Date()
 var todayDate = date.toISOString().slice(0, 10)
 
 //adding stock into the database
-exports.getAllNotification = async(req, res)=>{
+exports.getAllNotification = async(req, res) => {
     try {
-        // const followupLead = await Lead.find({nextFollowupdate:`${todayDate}`})
-        // const followupLead = await Lead.find({nextFollowupdate:{ $eq: todayDate }})
-       
-        const followupLead = await Lead.find({nextFollowupdate:{ $eq: "2022-01-18" }}) //for check menually
+        const followupLead = await Lead.find({ nextFollowupdate: `${todayDate}` })
+            // const followupLead = await Lead.find({nextFollowupdate:{ $eq: todayDate }})
+
+        // const followupLead = await Lead.find({nextFollowupdate:{ $eq: "2022-01-18" }}) //for check menually
         console.log(followupLead);
         console.log(`${todayDate}`);
-        if(followupLead!=[]){
-            res.status(201).json({lead:followupLead})
+        if (followupLead != []) {
+            res.status(201).json({ lead: followupLead })
             console.log("today's Lead has been sent");
-            
-        // }else if(followupLead==[]){
-        }else{
-            res.json({Message:"Sorry No Lead found for today"})
+
+            // }else if(followupLead==[]){
+        } else {
+            res.json({ Message: "Sorry No Lead found for today" })
             console.log("No Leads for today")
-        }  
+        }
     } catch (error) {
-        res.status(400).json({error:error})
+        res.status(400).json({ error: error })
         console.log(error);
     }
 }
@@ -34,11 +34,11 @@ exports.getAllNotification = async(req, res)=>{
 //         const data = await stockTech.findById(req.params.id)
 //         res.status(200).send(data)
 //         console.log("data sent");
-        
+
 //     } catch (error) {
 //         res.status(400).json({error:error})
 //         console.log(error);
-        
+
 //     }
 // }
 
@@ -48,11 +48,11 @@ exports.getAllNotification = async(req, res)=>{
 //         const update = await stockTech.findByIdAndUpdate(req.params.id, req.body)
 //         res.status(200).json({message: "updated successfully"})
 //         console.log("stock Updated");
-        
+
 //     } catch (error) {
 //         res.status(400).json({error:error})
 //         console.log(error);
-        
+
 //     }
 // }
 
@@ -62,10 +62,10 @@ exports.getAllNotification = async(req, res)=>{
 //         const deleteStockTech = await stockTech.findByIdAndDelete(req.params.id)
 //         res.status(200).json({message: "Deleted successfully"})
 //         console.log("stock Deleted");
-        
+
 //     } catch (error) {
 //         res.status(400).json({error:error})
 //         console.log(error);
-        
+
 //     }
 // }
