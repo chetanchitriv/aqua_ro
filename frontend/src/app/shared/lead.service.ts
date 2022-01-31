@@ -38,5 +38,8 @@ export class LeadService {
     
     return this.http.get<any>(this.nodeUrl+`leads/`+`${id}`)
     }
+  getnotification(){
+    return this.http.get<any>(this.nodeUrl+`notification`)
+  }  
 
 }

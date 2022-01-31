@@ -29,9 +29,7 @@ export class TopnavComponent implements OnInit {
    
 
     this.role=localStorage.getItem('role')
-    if(this.role == 'Superadmin'){
-      this.note=true
-    }
+ 
     this.today = this.date.toISOString().slice(0, 10);
     console.log("sahil",this.today );
     this. getAllLeads()
@@ -65,25 +63,30 @@ export class TopnavComponent implements OnInit {
 
 notify(){
 
-  this.exam=['']
-    console.log("i am here");
-this.leadsAll.forEach((a:any) => {
-  if(a.nextFollowupdate == this.today){
+//   this.exam=['']
+//     console.log("i am here");
+//       this.leadsAll.forEach((a:any) => {
+//   if(a.nextFollowupdate == this.today){
 
-    this.exam.push(a)
-    this.len= this.exam.length - 1
-    console.log(this.exam);
+//     this.exam.push(a)
+//     this.len= this.exam.length - 1
+//     console.log(this.exam);
    
     
-  }
+//   }
   
-});
+// });
   
- this.leadsAll=this.notification.filter((a:any)=>{
-   if(a.nextFollowupdate == this.today){
-return a 
-   }
+//  this.leadsAll=this.notification.filter((a:any)=>{
+//    if(a.nextFollowupdate == this.today){
+// return a 
+//    }
 
- })
+//  })
+this.leadService.getnotification().subscribe((res:any)=>{
+  console.log(res,"notification");
+  
+})
+
 }
 }
