@@ -1,42 +1,29 @@
-const stock = require('../model/stockSchema')
+const stockTech = require('../model/stockTechSchema')
 
 
 //adding stock into the database
-exports.postStock = (req, res)=>{
+exports.postStockTech = (req, res)=>{
     try {
         console.log(req.body);
-        var store = new stock(req.body).save()
-        res.status(201).json({message:"stock has been added"})
-        console.log("Stock added");
+        var store = new stockTech(req.body).save()
+        res.status(201).json({message:"stock has been Alloted"})
+        console.log(`Stock alloted to ${req.body.techname}`);
         
     } catch (error) {
         res.status(400).json({error:error})
         console.log(error);
+        
     }
-
 }
 
 //sending stock to the client
-exports.getStock = async (req, res)=>{
+exports.getStockTech = async (req, res)=>{
     try {
-        
         console.log(req.params.id);
-        const data = await stock.findById(req.params.id)
+        const data = await stockTech.findById(req.params.id)
         res.status(200).send(data)
         console.log("data sent");
-    } catch (error) {
-        res.status(400).json({error:error})
-        console.log(error);
         
-    }
-}
-
-exports.getallStock = async (req, res)=>{
-    try {
-       
-        const data = await stock.find()
-        res.status(200).send(data)
-        console.log("data sent");
     } catch (error) {
         res.status(400).json({error:error})
         console.log(error);
@@ -45,9 +32,9 @@ exports.getallStock = async (req, res)=>{
 }
 
 //update stock
-exports.putStock = async(req, res)=>{
+exports.putStockTech = async(req, res)=>{
     try {
-        const update = await stock.findByIdAndUpdate(req.params.id, req.body)
+        const update = await stockTech.findByIdAndUpdate(req.params.id, req.body)
         res.status(200).json({message: "updated successfully"})
         console.log("stock Updated");
         
@@ -59,9 +46,9 @@ exports.putStock = async(req, res)=>{
 }
 
 //deleteing stocks
-exports.deleteStock = async(req, res)=>{
+exports.deleteStockTech = async(req, res)=>{
     try {
-        const deleteStock = await stock.findByIdAndDelete(req.params.id)
+        const deleteStockTech = await stockTech.findByIdAndDelete(req.params.id)
         res.status(200).json({message: "Deleted successfully"})
         console.log("stock Deleted");
         
