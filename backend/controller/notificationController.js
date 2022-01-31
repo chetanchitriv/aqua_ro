@@ -5,13 +5,13 @@ var todayDate = date.toISOString().slice(0, 10)
 //adding stock into the database
 exports.getAllNotification = async(req, res)=>{
     try {
-        // const followupLead = await Lead.find({nextFollowupdate:`${todayDate}`})
+        const followupLead = await Lead.find({nextFollowupdate:`${todayDate}`})
         // const followupLead = await Lead.find({nextFollowupdate:{ $eq: todayDate }})
        
-        const followupLead = await Lead.find({nextFollowupdate:{ $eq: "2022-01-18" }}) //for check menually
+        // const followupLead = await Lead.find({nextFollowupdate:{ $eq: "2022-01-18" }}) //for check menually
         console.log(followupLead);
         console.log(`${todayDate}`);
-        if(followupLead!=[]){
+        if(followupLead!=null){
             res.status(201).json({lead:followupLead})
             console.log("today's Lead has been sent");
             
