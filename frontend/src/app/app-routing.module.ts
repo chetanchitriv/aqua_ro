@@ -30,9 +30,13 @@ const routes: Routes = [
       { path: 'leads', component: LeadsComponent },
       { path: 'complaints', component: ComplaintsComponent },
       { path: 'editprofile', component:EditprofileComponent},
+
       { path: 'stock', component:StockComponent},
       { path: 'invoice', component:InvoiceComponent},
-      { path: 'stockallotment', component:StockallotmentComponent}
+      { path: 'stockallotment', component:StockallotmentComponent},
+
+      { path: 'stock', component:StockComponent}
+
 
     ]
   }

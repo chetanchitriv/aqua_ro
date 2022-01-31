@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LeadService } from 'src/app/shared/lead.service';
 import { formatDate } from '@angular/common';
 
@@ -13,23 +13,23 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class LeadsComponent implements OnInit {
  
- 
+  isSuperAdmin :boolean = false
+  isAdmin :boolean = false
+  isTelecaller :boolean = false
+  isTechnician :boolean = false
+
   showLeadForm: boolean=false;
   showLeadTable: boolean=false;
   showAddButton: boolean=false;
   showUpdateButton: boolean=false;
  
-  isSuperAdmin :boolean = false
-  isAdmin :boolean = false
-  isTelecaller :boolean = false
-  isTechnician :boolean = false
 
   leadsModelObj : LeadsModel = new LeadsModel();
   formValue:any= FormGroup;
   leadsAll: any=[];
  
 
-  roles=["Admin","Technician","Telecaller"]
+  currentRolees=["Admin","Technician","Telecaller"]
   updateId: any;
 
   date = new Date()
@@ -38,14 +38,42 @@ export class LeadsComponent implements OnInit {
   leadDetails: any={};
   usersAll: any=[];
   assigntoList: any=[];
-  
-  
 
+  currentUser:any;
+  currentRole: any;
 
   constructor(private formbuilder: FormBuilder, private leadService: LeadService, private userService: UserService) {}
   dtOptions:DataTables.Settings={}
     
   ngOnInit(): void {
+    this.currentRole=localStorage.getItem('role')    
+    this.currentUser=localStorage.getItem('username')
+   
+    if (this.currentRole=='Superadmin'){
+      this.isSuperAdmin = true
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = false
+    
+    }
+    if (this.currentRole=='Admin'){
+      this.isSuperAdmin = false
+      this.isAdmin =true
+      this.isTelecaller=  false
+      this.isTechnician = false
+    }
+    if (this.currentRole=='Technician'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = true
+    }
+    if (this.currentRole=='Telecaller'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  true
+      this.isTechnician = false
+    }
 
     var Role= localStorage.getItem("role")
 if (Role=='Superadmin'){
@@ -82,8 +110,6 @@ if (Role=='Telecaller'){
 
     this.today = this.date.toISOString().slice(0, 10);
     this.times =  this.date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
-    console.log(this.today)
-
   
   this.formValue = this.formbuilder.group({
    
@@ -99,6 +125,7 @@ if (Role=='Telecaller'){
     comment : [''],
     nextFollowupdate : [''],
     nextFollowuptime : [''],
+    createdBy:[this.currentUser,Validators.required]
   })
 }
 
@@ -130,9 +157,15 @@ if (Role=='Telecaller'){
   }
   getAllLeads(){
     this.leadService.getLeads().subscribe((res: any)=>{
-    this.leadsAll = res;
-    console.log(this.leadsAll);
-    
+      if(this.currentRole == 'Superadmin' || this.currentRole == 'Admin'){
+        this.leadsAll = res;
+      }else {
+         this.leadsAll=res.filter((a:any)=>{
+            return a.createdBy == this.currentUser
+         })
+      }
+   
+  
     })
   }
 
@@ -140,14 +173,19 @@ if (Role=='Telecaller'){
     this.userService.getUsers().subscribe(res=>{
       this.usersAll = res;
       this.usersAll.forEach((element:any) => {
-        this.assigntoList.push(element.userName)
+        if(element.currentRolee =='Telecaller' || element.currentRolee =='Technician'){
+          var assign=element.currentUser
+          this.assigntoList.push(assign)
+        }
       });
-      })
-   
+      // this.formValue.patchValue({assignTo:this.currentUser});
+      })   
   }
 
+  getcurrentUser(){
+    return localStorage.getItem('currentUser')
+  }
   showForm(){
-    console.log(this.times);
     this.formValue = this.formbuilder.group({
    
       name : ['',Validators.required],
@@ -162,6 +200,7 @@ if (Role=='Telecaller'){
       comment : [''],
       nextFollowupdate : [''],
       nextFollowuptime : [''],
+      createdBy:[this.currentUser,Validators.required]
     })
     this.showLeadForm=true
     this.showLeadTable=false
@@ -172,7 +211,9 @@ if (Role=='Telecaller'){
   }
 
   postLeadsDetails(){
+    
   this.leadService.postLeads(this.formValue.value).subscribe((res: any)=>{
+
     alert("Lead Added Successfully!");
     this.formValue.reset();
     this.initiatedtOption()
