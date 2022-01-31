@@ -39,6 +39,7 @@ const lead_create= async(req,res)=>{
         nextFollowupdate : req.body.nextFollowupdate,
         nextFollowuptime : req.body.nextFollowuptime,
         createdBy: req.body.createdBy,
+        status: req.body.status,
     });
     // const body = req.body;
     // const user = new User(body);
@@ -68,6 +69,7 @@ const lead_update=async(req,res)=>{
             nextFollowupdate : req.body.nextFollowupdate,
             nextFollowuptime : req.body.nextFollowuptime,
             createdBy: req.body.createdBy,
+            status: req.body.status,
         };
 
    
