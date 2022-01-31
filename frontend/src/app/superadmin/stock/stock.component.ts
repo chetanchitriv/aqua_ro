@@ -23,13 +23,14 @@ export class StockComponent implements OnInit {
  
  stockModelObj : stockModel=new stockModel();
   formStock:any= FormGroup;
-  usersAll: any=[];
+  stockAll: any=[];
   updateId: any;
-  userDetails: any={};
+  stockDetails: any={};
   serverErrorMessages: any;
   date = new Date()
   today: any
   times: any
+  stockData: any;
   constructor(private formbuilder: FormBuilder, private api: StockService, private router:Router) { }
 
   ngOnInit(): void {
@@ -65,11 +66,17 @@ export class StockComponent implements OnInit {
     this.showAddButton = false;
   
   }
- 
+  view(data:any){
+    this.api.getStockbyid(data._id)
+    .subscribe(res=>{
+      this.stockDetails=res
+    })
+  }
  
   getAllStock() {
     this.api.getStock().subscribe(res => {
-      this.formStock = res;
+      this.stockAll = res;
+      
     })
   }
 
@@ -106,10 +113,10 @@ export class StockComponent implements OnInit {
   })
 }
 
-
 deleteUsers(data:any){
   this.api.deleteStock(data._id)
   .subscribe(res=>{
+
     alert("Records Deleted Successfully!")
     this.initiatedtOption()
   this.getAllStock()

@@ -164,7 +164,7 @@
 
                         <div class="row " *ngIf="isSuperAdmin || isAdmin || isTelecaller">
                             <label class="col-sm-2 label-on-left">Assign to</label>
-                            <div class="col-sm-4">
+                            <!-- <div class="col-sm-4">
 
 
                                 <div class="form-group open" style="margin-left: 20px;">
@@ -173,6 +173,24 @@
                                                
                                                 <option >{{getcurrentUser()}}</option>
                                                 <option [ngClass]="(getcurrentUser()==assign)?'hide':'show'" [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
+                                            </select>
+
+                                        <span class="text-info" *ngIf="formValue.touched && (!formValue.value.assignTo || formValue.value.assignTo.length == 0)" class="validation">*Assign feild is required</span>
+                                    </div>
+                                    <span class="material-input"></span></div>
+                            </div> -->
+
+
+                            <div class="col-sm-4">
+
+
+                                <div class="form-group open" style="margin-left: 20px;">
+                                    <div class="select" aria-expanded="true">
+                                        <select class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                            <option *ngIf=" isAdmin" >{{currentUser}}</option>
+                                            <option *ngIf="isSuperAdmin " ><p>Select </p></option>
+                                                <option *ngIf="isTelecaller" >{{currentTelecaller}}</option>
+                                                <option  *ngFor="let assign of assigntoList">{{assign.userName}}</option>   
                                             </select>
 
                                         <span class="text-info" *ngIf="formValue.touched && (!formValue.value.assignTo || formValue.value.assignTo.length == 0)" class="validation">*Assign feild is required</span>

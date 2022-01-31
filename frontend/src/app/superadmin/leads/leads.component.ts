@@ -39,9 +39,9 @@ export class LeadsComponent implements OnInit {
   leadDetails: any={};
   usersAll: any=[];
   assigntoList: any=[];
-
   currentUser:any;
   currentRole: any;
+  currentTelecaller:any
 
   constructor(private formbuilder: FormBuilder, private leadService: LeadService, private userService: UserService) {}
   dtOptions:DataTables.Settings={}
@@ -79,6 +79,7 @@ export class LeadsComponent implements OnInit {
     this.initiatedtOption()
     this.getAllUser()
     this.getAllLeads();
+    this.assignto()
    
 
     this.today = this.date.toISOString().slice(0, 10);
@@ -145,12 +146,15 @@ export class LeadsComponent implements OnInit {
   getAllUser(){
     this.userService.getUsers().subscribe(res=>{
       this.usersAll = res;
-      this.usersAll.forEach((element:any) => {
-        if(element.currentRolee =='Telecaller' || element.currentRolee =='Technician'){
-          var assign=element.currentUser
-          this.assigntoList.push(assign)
-        }
-      });
+      console.log(res);
+      
+      // this.usersAll.forEach((element:any) => {
+      //   if(element.currentRolee =='Telecaller' || element.currentRolee =='Technician'){
+      //     var assign=element.currentUser
+      //     this.assigntoList.push(assign)
+      //   }
+      // });
+      
       // this.formValue.patchValue({assignTo:this.currentUser});
       })   
   }
@@ -232,6 +236,31 @@ updateLeadsDetails(){
   this.getAllLeads()
   this.showTable()
 })
+  }
+
+ assignto(){
+    if(this.currentRole == 'Telecaller'){
+      
+    this.currentTelecaller = this.currentUser
+    this.userService.getUsers().subscribe(res=>{
+    this.assigntoList=res.filter((a:any)=>{
+  return a.role == 'Technician'
+       })
+     })
+
+    }else if(this.currentRole == 'Superadmin' ){
+
+      this.userService.getUsers().subscribe(res=>{
+        this.assigntoList=res
+      })
+    }else if( this.currentRole == 'Admin'){
+
+      this.userService.getUsers().subscribe(res=>{
+        this.assigntoList=res.filter((a:any)=>{
+          return a.role != this.currentRole
+        })
+      })
+    }
   }
 
 }

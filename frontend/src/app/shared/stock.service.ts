@@ -30,5 +30,8 @@ export class StockService {
     
   }
  
+  getStockbyid(id : any){
+    return this.http.get<any>(this.nodeUrl+`stock/`+`${id}`)
+    }
 
 }
