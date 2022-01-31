@@ -30,6 +30,20 @@ exports.getStockTech = async (req, res)=>{
         
     }
 }
+//sending stock to the client
+exports.getallStockTech = async (req, res)=>{
+    try {
+        
+        const data = await stockTech.find()
+        res.status(200).send(data)
+        console.log("data sent");
+        
+    } catch (error) {
+        res.status(400).json({error:error})
+        console.log(error);
+        
+    }
+}
 
 //update stock
 exports.putStockTech = async(req, res)=>{
