@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 
 import { LeadsModel } from './leads.model';
 import { UserService } from 'src/app/shared/user.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-leads',
@@ -28,7 +29,7 @@ export class LeadsComponent implements OnInit {
   leadsModelObj : LeadsModel = new LeadsModel();
   formValue:any= FormGroup;
   leadsAll: any=[];
- 
+ status=[ "New Lead","Follow Up","Ongoing","Denied","Complete"];
 
   currentRolees=["Admin","Technician","Telecaller"]
   updateId: any;
@@ -99,6 +100,7 @@ export class LeadsComponent implements OnInit {
     comment : [''],
     nextFollowupdate : [''],
     nextFollowuptime : [''],
+    status:[],
     createdBy:[this.currentUser,Validators.required]
   })
 }
