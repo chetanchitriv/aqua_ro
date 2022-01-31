@@ -6,11 +6,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class StockallotService {
-  getStockall: any;
+ 
   
 
   dbUrl=environment.apiUrl
   nodeUrl=environment.nodeapiUrl
+ 
 
   constructor(private http : HttpClient) { }
 
