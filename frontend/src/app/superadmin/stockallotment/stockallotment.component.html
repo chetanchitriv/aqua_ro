@@ -87,7 +87,7 @@
                                 <div class="form-group label-floating is-empty">
                                     <select placeholder="Enter Role" formControlName="spare_name" class="form-control">
                                     <option value=""> Select spare name --</option>
-                                    <option *ngFor="let data of stockAll">{{data.spare_name}}</option>
+                                    <option [ngValue]="data.spare_name" *ngFor="let data of stockAll">{{data.spare_name}}</option>
                                  
                                     <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
                                 </select>
@@ -110,7 +110,7 @@
                                     <div class="form-group label-floating is-empty">
                                         <select placeholder="Enter Role" formControlName="techname" class="form-control">
                                         <option value=""> Select technician name --</option>
-                                        <option *ngFor="let data of usersAll">{{data.userName}}</option>
+                                        <option [ngValue]="data.userName" *ngFor="let data of usersAll">{{data.userName}}</option>
                                              </select>
                                     </div>
                                 </div>
