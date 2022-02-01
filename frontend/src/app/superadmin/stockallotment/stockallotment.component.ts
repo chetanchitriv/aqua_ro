@@ -14,6 +14,8 @@ export class StockallotmentComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   showstockForm: boolean= false;
   showstockTable: boolean=false;
+  showAddButton: boolean=false;
+  showUpdateButton: boolean=false;
 
   formStockAllot: any=FormGroup;
   stockAll: any=[]
@@ -24,6 +26,9 @@ export class StockallotmentComponent implements OnInit {
   times: any
   stockData: any;
   stockallotAll: any=[];
+  updateId: any;
+  stockallotDetails: any={};
+ 
  
 
   constructor(private formbuilder: FormBuilder, private api: StockService, private userservice:UserService, private stockallotservice:StockallotService, router:Router) { }
@@ -62,6 +67,13 @@ postStockallotDetails(){
   this.getAllStockallot()
   this.showStockTable()
   })
+
+}
+view(data:any){
+  this.stockallotservice.getStockallotbyid(data._id)
+  .subscribe(res=>{
+    this.stockallotDetails=res
+  })
 }
 
   getAllStock(){
@@ -80,6 +92,45 @@ postStockallotDetails(){
      console.log(res, "ni");
      
       })
+
+    
+    }
+      deleteStockallot(data:any){
+        this.stockallotservice.deleteStockallot(data._id)
+        .subscribe(res=>{
+      
+          alert("Records Deleted Successfully!")
+          this.initiatedtOption()
+          this.getAllStockallot()
+        this.showStockTable()
+          
+        })
+      }
+      
+      onEdit(data:any){
+        this.showstockTable=false
+          this.showstockForm=true
+          this.showUpdateButton = true;
+          this.showAddButton = false;
+          this.updateId=data._id
+      
+        this.formStockAllot.patchValue(data)
+      }
+    
+      
+      updateStockallotDetails(){
+        console.log(this.updateId);
+        
+        this.stockallotservice.updateStockallot(this.formStockAllot.value,this.updateId)
+      .subscribe((res: any)=>{
+        console.log(res);
+        
+        alert("Record Updated Successfully!")
+        this.formStockAllot.reset();
+        this.initiatedtOption()
+        this.getAllStockallot()
+        this.showStockTable()
+      })
     }
       initiatedtOption(){
         this.dtOptions = {
@@ -95,12 +146,22 @@ postStockallotDetails(){
   showStockForm(){
     this.showstockForm=true;
     this.showstockTable=false;
+    this.showAddButton = true;
+    this.showUpdateButton = false;
+   
 
   }
   showStockTable(){
     this.showstockForm=false;
     this.showstockTable=true;
+    this.showAddButton = false;
+    this.showUpdateButton=false;
 
   }
+  showFormupdate(){
+    this.showstockForm=true
+    this.showUpdateButton = true;
+    this.showAddButton = false;
+    this.showstockTable=false;
 }
-
+}

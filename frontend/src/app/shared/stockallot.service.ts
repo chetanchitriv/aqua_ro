@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
 })
 export class StockallotService {
  
-  
 
   dbUrl=environment.apiUrl
   nodeUrl=environment.nodeapiUrl
@@ -23,5 +22,15 @@ export class StockallotService {
     return this.http.get<any>(this.nodeUrl+"stocktech")
   
   }
-
+  updateStockallot(data : any,id: number){
+    return this.http.put<any>(this.nodeUrl+`stocktech/`+`${id}`,data)
+   
+  }
+  deleteStockallot(id : number){
+    return this.http.delete<any>(this.nodeUrl+`stocktech/`+`${id}`)
+    
+}
+getStockallotbyid(id : any){
+  return this.http.get<any>(this.nodeUrl+`stocktech/`+`${id}`)
+  }
 }

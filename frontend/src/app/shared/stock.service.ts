@@ -12,6 +12,7 @@ export class StockService {
   dbUrl=environment.apiUrl
   nodeUrl=environment.nodeapiUrl
   getUsers: any;
+  updateStockallot: any;
   
 
   constructor(private http : HttpClient) { }
@@ -30,7 +31,7 @@ export class StockService {
     return this.http.delete<any>(this.nodeUrl+`stock/`+`${id}`)
     
   }
- 
+
   getStockbyid(id : any){
     return this.http.get<any>(this.nodeUrl+`stock/`+`${id}`)
     }
