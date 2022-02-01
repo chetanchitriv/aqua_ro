@@ -263,7 +263,7 @@
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label"></label>
                                     <select  class="form-control" formControlName="status">
-                                        
+                    
                                         <option *ngFor="let data of status" [ngValue]="data">
                                             {{data}}
                                         </option>
@@ -271,14 +271,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <label>Select Vender</label>
-                        <select name="name" class="form-control">
-                       <option>--select--</option>
-                       <option *ngFor="let data of allVender">
-                           {{data.name}}
-                       </option>
-                    </select> -->
-
+                      
                         <div class="text-center" style="margin-left: 100px;">
                             <button *ngIf="showAddButton" type="button" (click)="postLeadsDetails()" (click)="showTable()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
                             <button *ngIf="showUpdateButton" type="button" (click)="updateLeadsDetails()" (click)="showTable()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
@@ -320,6 +313,8 @@
                             <p><strong>Comment</strong></p>
                             <p><strong>Next Follow-up Date</strong></p>
                             <p><strong>Next Follow-up time</strong></p>
+                            <p><strong>Status</strong></p>
+
                         </div>
                         <div>
 
@@ -335,6 +330,8 @@
                             <p>{{leadDetails.comment}}</p>
                             <p>{{leadDetails.nextFollowupdate}}</p>
                             <p>{{leadDetails.nextFollowuptime}}</p>
+                            <p>{{leadDetails.status}}</p>
+
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -30,6 +30,7 @@ export class LeadsComponent implements OnInit {
   formValue:any= FormGroup;
   leadsAll: any=[];
  status=[ "New Lead","Follow Up","Ongoing","Denied","Complete"];
+ 
 
   currentRolees=["Admin","Technician","Telecaller"]
   updateId: any;
@@ -180,7 +181,7 @@ export class LeadsComponent implements OnInit {
       nextFollowupdate : [''],
       nextFollowuptime : [''],
       createdBy:[this.currentUser,Validators.required],
-      status:[]
+      status:['New Lead'],
     })
     this.showLeadForm=true
     this.showLeadTable=false
