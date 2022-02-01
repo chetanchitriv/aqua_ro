@@ -17,8 +17,8 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li *ngIf="note" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" (click)=" notify()">
+                <li class="dropdown" style="cursor: pointer;">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
                         <i class="material-icons">notifications</i>
                         <span class="notification">{{len}}</span>
                         <p class="hidden-lg hidden-md">
@@ -31,21 +31,21 @@
                         <li *ngFor=" let item of leadsAll ,let i = index ">
                             <a>{{i + 1}}) Follow-up date of <strong>{{item.name}}</strong> is today </a>
                         </li>
-                        <li *ngIf="leadsAll == 0"></li>
-
+                        <li *ngIf="len == 0"><img src="../../../assets/img/notification.png" style="width: 100px;height: 100px;margin-left: 60px;" alt="" srcset=""></li>
+                        <li *ngIf="len == 0"><a>Opps.. No Follow-Up for Today</a></li>
                     </ul>
                 </li>
-                <li>
+                <li style="cursor: pointer;">
                     <h5>Welcome {{username}}</h5>
                 </li>
 
-                <li>
+                <li style="cursor: pointer;">
                     <h5>
                         <i class="material-icons">person</i>
                     </h5>
 
                 </li>
-                <li>
+                <li style="cursor: pointer;">
                     <!-- <a  class="dropdown-toggle" data-toggle="dropdown" style="font-size:15px;">
                         Logout -->
                     <a (click)="logout()" class="waves-effect waves-dark btn" style="background-color: rgb(44, 131, 218);"><i class="material-icons left">exit_to_app</i>Logout</a>

@@ -129,7 +129,7 @@
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label">Enter mobile no. or alternate mobile no.</label>
-                                <input type="text" class="form-control" formControlName="mobile">
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" class="form-control" formControlName="mobile">
                                 <span class="help-block">Enter Mobile No and search for a lead</span>
                             </div>
                         </div>

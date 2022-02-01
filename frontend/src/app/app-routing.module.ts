@@ -11,6 +11,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/role.guard';
 import { EditprofileComponent } from './superadmin/editprofile/editprofile.component';
 import { StockComponent } from './superadmin/stock/stock.component';
+import { InvoiceComponent } from './superadmin/invoice/invoice.component';
+import { StockallotmentComponent } from './superadmin/stockallotment/stockallotment.component';
 
 const routes: Routes = [
   {
@@ -28,7 +30,13 @@ const routes: Routes = [
       { path: 'leads', component: LeadsComponent },
       { path: 'complaints', component: ComplaintsComponent },
       { path: 'editprofile', component:EditprofileComponent},
+
+      { path: 'stock', component:StockComponent},
+      { path: 'invoice', component:InvoiceComponent},
+      { path: 'stockallotment', component:StockallotmentComponent},
+
       { path: 'stock', component:StockComponent}
+
 
     ]
   }

@@ -4,6 +4,7 @@ const stockTechController=require('../controller/stockTechController')
 const verifyToken =require('../config/verifyToken')
 stockTechController
 router.post('/', stockTechController.postStockTech,verifyToken.verifyToken);
+router.get('/', stockTechController.getallStockTech,verifyToken.verifyToken);
 // router.post('/', stockTechController.postStockTech);
 router.get('/:id', stockTechController.getStockTech,verifyToken.verifyToken);
 // router.get('/:id', stockTechController.getStockTech);

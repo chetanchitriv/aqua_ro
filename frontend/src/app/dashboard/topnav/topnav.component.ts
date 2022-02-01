@@ -26,15 +26,13 @@ export class TopnavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+   this.notify()
 
     this.role=localStorage.getItem('role')
-    if(this.role == 'Superadmin'){
-      this.note=true
-    }
+ 
     this.today = this.date.toISOString().slice(0, 10);
     console.log("sahil",this.today );
-    this. getAllLeads()
+    // this. getAllLeads()
     
   }
 
@@ -46,44 +44,44 @@ export class TopnavComponent implements OnInit {
     this.authservice.deleteToken();
     this.router.navigate(['/login']);
   }
-  getAllLeads(){
-    this.leadService.getLeads().subscribe((res: any)=>{
+  // getAllLeads(){
+  //   this.leadService.getLeads().subscribe((res: any)=>{
     
-    this.leadsAll = res;
-    this.notification=res
+  //   this.leadsAll = res;
+  //   this.notification=res
     
-    // console.log(this.leadsAll);
-    console.log(this.notification,"note");
+  //   // console.log(this.leadsAll);
+  //   console.log(this.notification,"note");
     
-    // this.leadsAll.filter((a:any)=>{
-    //   return a.nextFollowupdate == Date()
-    // })
+  //   // this.leadsAll.filter((a:any)=>{
+  //   //   return a.nextFollowupdate == Date()
+  //   // })
     
-    })
-  }
+  //   })
+  // }
 
 
 notify(){
 
-  this.exam=['']
-    console.log("i am here");
-this.leadsAll.forEach((a:any) => {
-  if(a.nextFollowupdate == this.today){
 
-    this.exam.push(a)
-    this.len= this.exam.length - 1
-    console.log(this.exam);
-   
+this.leadService.getnotification().subscribe((res:any)=>{
+console.log(res.lead,"notification");
+
+  if( this.role == 'Superadmin' || this.role == 'Admin'){
+    this.leadsAll=res.lead
+  this.len=res.lead.length
+  }else{
+    console.log("i am not sa");
     
+    this.leadsAll=res.lead.filter((a:any)=>{
+          return a.createdBy == this.username
+    })
+this.len=this.leadsAll.length
   }
   
-});
+ 
   
- this.leadsAll=this.notification.filter((a:any)=>{
-   if(a.nextFollowupdate == this.today){
-return a 
-   }
+})
 
- })
 }
 }

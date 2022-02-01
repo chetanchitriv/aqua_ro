@@ -21,6 +21,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/role.guard';
 import { EditprofileComponent } from './superadmin/editprofile/editprofile.component';
 import { StockComponent } from './superadmin/stock/stock.component';
+import { InvoiceComponent } from './superadmin/invoice/invoice.component';
+import { StockallotmentComponent } from './superadmin/stockallotment/stockallotment.component';
+
 
 
 
@@ -38,6 +41,9 @@ import { StockComponent } from './superadmin/stock/stock.component';
      UserprofileComponent,
      EditprofileComponent,
      StockComponent,
+     InvoiceComponent,
+     StockallotmentComponent,
+    
      
 
    
