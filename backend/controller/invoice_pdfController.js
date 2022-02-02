@@ -52,6 +52,20 @@ res.status(200).json({message: "Deleted successfully"})
 console.log("PDF Deleted");
 }
 
+exports.createInvoice = (req,res)=>{
+    const data =req.data
+    const base64 = easyinvoice.createInvoice(data, function (result) {
+        //The response will contain a base64 encoded PDF file
+        console.log('PDF base64 string: ', result.pdf);
+        return result.pdf
+    });
+    res.send(base64)
+}
+// easyinvoice.createInvoice(data, function (result) {
+//     //The response will contain a base64 encoded PDF file
+//     console.log('PDF base64 string: ', result.pdf);
+// });
+
 // exports.easyinvoice.createInvoice=async(req,result)=>{
     
 //     const data = {
