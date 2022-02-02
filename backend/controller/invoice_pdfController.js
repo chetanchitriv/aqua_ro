@@ -53,86 +53,71 @@ console.log("PDF Deleted");
 }
 
 exports.createInvoice = (req,res)=>{
-    const data =req.data
-    const base64 = easyinvoice.createInvoice(data, function (result) {
-        //The response will contain a base64 encoded PDF file
-        console.log('PDF base64 string: ', result.pdf);
-        return result.pdf
-    });
-    res.send(base64)
-}
-// easyinvoice.createInvoice(data, function (result) {
-//     //The response will contain a base64 encoded PDF file
-//     console.log('PDF base64 string: ', result.pdf);
-// });
-
-// exports.easyinvoice.createInvoice=async(req,result)=>{
-    
-//     const data = {
-//         "images": {
-//             // The logo on top of your invoice
-//             "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png",
-//             // The invoice background
-//             // "background": "https://public.easyinvoice.cloud/img/watermark-draft.jpg"
-//         },
-//         // Your own data
-//         "sender": {
-//             "company": "AquaBlue Water Solutions",
-//             "address": "Shop No F-47 Jayanti Nagri 5 Manish Nagar",
-//             "zip": "440034",
-//             "city": "nagpur",
-//             "country": "India",
-//             "state": "Maharashtra",
-//             //"custom2": "custom value 2",
-//             //"custom3": "custom value 3"
-//         },
-//         // Your recipient
-//         "client": {
-//             "name": req.body.name,
-//             "address": req.body.address,
-//             "service_type":req.body.serviceType
-//             // "zip": ,
-//             // "city": "Clientcity",
-//             // "country": "Clientcountry"
-//             // "custom1": "custom value 1",
-//             // "custom2": "custom value 2",
-//             // "custom3": "custom value 3"
-//         },
-//         "information": {
-//             "Invoice Number": Math.floor(Math.random() * 10000),
-//             "Date": req.body.date,
-//             'Due Date': req.body.duedate
-//         },
-//         // The products you would like to see on your invoice
-//         // Total values are being calculated automatically
-//         "products": [
-//            req.body.itemList
-//         ],
-//         // The message you would like to display on the bottom of your invoice
-//         "bottom-notice": "Kindly pay your invoice within 15 days.",
-//         // Settings to customize your invoice
-//         "settings": {
-//             "currency": "USD", 
+    const data ={
+                "images": {
+                    // The logo on top of your invoice
+                    "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png",
+                    // The invoice background
+                    // "background": "https://public.easyinvoice.cloud/img/watermark-draft.jpg"
+                },
+                // Your own data
+                "sender": {
+                    "company": "AquaBlue Water Solutions",
+                    "address": "Shop No F-47 Jayanti Nagri 5 Manish Nagar",
+                    "zip": "440034",
+                    "city": "nagpur",
+                    "country": "India",
+                    "state": "Maharashtra",
+                    //"custom2": "custom value 2",
+                    //"custom3": "custom value 3"
+                },
+                // Your recipient
+                "client": {
+                    "name": req.body.name,
+                    "address": req.body.address,
+                    "service_type":req.body.serviceType
+                    // "zip": ,
+                    // "city": "Clientcity",
+                    // "country": "Clientcountry"
+                    // "custom1": "custom value 1",
+                    // "custom2": "custom value 2",
+                    // "custom3": "custom value 3"
+                },
+                "information": {
+                    "Invoice Number": Math.floor(Math.random() * 10000),
+                    "Date": req.body.date,
+                    'Due Date': req.body.duedate
+                },
+                // The products you would like to see on your invoice
+                // Total values are being calculated automatically
+                "products": [
+                   req.body.itemList
+                ],
+                // The message you would like to display on the bottom of your invoice
+                "bottom-notice": "Kindly pay your invoice within 15 days.",
+                // Settings to customize your invoice
+                "settings": {
+                    "currency": "USD", 
+                    
+                },
+                // Translate your invoice to your preferred language
+                "translate": {
+                    // "invoice": "FACTUUR",  // Default to 'INVOICE'
+                    // "number": "Nummer", // Defaults to 'Number'
+                    // "date": "Datum", // Default to 'Date'
+                    // "due-date": "Verloopdatum", // Defaults to 'Due Date'
+                    // "subtotal": "Subtotaal", // Defaults to 'Subtotal'
+                    // "products": "Producten", // Defaults to 'Products'
+                    // "quantity": "Aantal", // Default to 'Quantity'
+                    // "price": "Prijs", // Defaults to 'Price'
+                    // "product-total": "Totaal", // Defaults to 'Total'
+                    // "total": "Totaal" // Defaults to 'Total'
+                },
+            };
             
-//         },
-//         // Translate your invoice to your preferred language
-//         "translate": {
-//             // "invoice": "FACTUUR",  // Default to 'INVOICE'
-//             // "number": "Nummer", // Defaults to 'Number'
-//             // "date": "Datum", // Default to 'Date'
-//             // "due-date": "Verloopdatum", // Defaults to 'Due Date'
-//             // "subtotal": "Subtotaal", // Defaults to 'Subtotal'
-//             // "products": "Producten", // Defaults to 'Products'
-//             // "quantity": "Aantal", // Default to 'Quantity'
-//             // "price": "Prijs", // Defaults to 'Price'
-//             // "product-total": "Totaal", // Defaults to 'Total'
-//             // "total": "Totaal" // Defaults to 'Total'
-//         },
-//     };
-    
-// //Create your invoice! Easy!
-// easyinvoice.createInvoice(data, function (result) {
-//     //The response will contain a base64 encoded PDF file
-//     console.log('PDF base64 string: ', result.pdf);
-// });
-// }
+            easyinvoice.createInvoice(data, function (result) {
+                //The response will contain a base64 encoded PDF file
+                console.log('PDF base64 string: ', result.pdf);
+            });
+}
+
