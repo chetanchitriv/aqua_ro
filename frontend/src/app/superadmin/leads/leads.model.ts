@@ -15,4 +15,5 @@ export class LeadsModel{
     nextFollowupdate :  string = '';
 
   nextFollowuptime: string= '';
+  status:string='';
 }
