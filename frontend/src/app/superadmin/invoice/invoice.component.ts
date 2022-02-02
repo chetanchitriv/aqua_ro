@@ -22,6 +22,7 @@ export class InvoiceComponent implements OnInit {
   showinvoiceUpdateForm:boolean=false
 
   date = new Date()
+
   today:any
   times:any
 
@@ -67,6 +68,8 @@ export class InvoiceComponent implements OnInit {
       // assignTo : ['',Validators.required],
       address : ['',Validators.required],
       serviceType : ['',Validators.required],
+      date : [this.today,Validators.required],
+      dueDate : ['',Validators.required],
 
       items: this.formbuilder.array([ this.createItem() ])
       
@@ -149,6 +152,9 @@ export class InvoiceComponent implements OnInit {
         emailId : [this.leadData.emailId,Validators.required],
         // assignTo : [this.leadData.assignTo,Validators.required],
         address : [this.leadData.address,Validators.required],
+        date : [this.today,Validators.required],
+        dueDate : ['',Validators.required],
+  
         serviceType:['',Validators.required],
         itemList: this.formbuilder.array([ this.createItem() ])
       })
@@ -217,20 +223,68 @@ getAllInvoice() {
 generateInvoice(){
 console.log(this.invoiceForm.value);
 
+ var str=
+ {
+   "data" :
+   {
+      "images": {
+        // The logo on top of your invoice
+        "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png",
+        // The invoice background
+        "background": "https://public.easyinvoice.cloud/img/watermark-draft.jpg"
+    },
+    // Your own data
+    "sender": {
+      "company": "AquaBlue Water Solutions",
+      "address": "Shop No F-47 Jayanti Nagri 5 Manish Nagar",
+      "zip": "440034",
+      "city": "nagpur",
+      "country": "India",
+      "state": "Maharashtra",
+     
+    },
 
-    // this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
-    //   console.log(res);
-    //   this.showinvoicesearchForm=false
-    //   this.showinvoiceTable=true
-    //   this.showinvoiceForm=false
-    //   this.showinvoiceUpdateForm=false
-    //   alert("Complaint Added Successfully!");
+    "client": {
+        "Name": this.invoiceForm.controls.name.value,
+        "address":  this.invoiceForm.controls.address.value,
+   
+    },
+    "information": {
+      "Invoice Number": Math.floor(Math.random() * 10000),
+      "Date": this.invoiceForm.controls.date.value, 
+      'Due Date':  this.invoiceForm.controls.dueDate.value,
+    },
+   
+    "products": [
+      this.invoiceForm.controls.itemList.value
+    ],
+  
+    "bottom-notice": "Kindly pay your invoice within 15 days.",
+   
+    "settings": {
+        "currency": "USD", 
+    },
+   
+    "translate": {
       
-    //   this.getAllInvoice();
-    // },
-    //   (  err: any)=>{
-    //   alert("Something Went Wrong!")
-    // })
+    },
+}
+};
+console.log(str);
+
+    this.invoiceService.postInvoice(str).subscribe((res: any)=>{
+      console.log(res);
+      this.showinvoicesearchForm=false
+      this.showinvoiceTable=true
+      this.showinvoiceForm=false
+      this.showinvoiceUpdateForm=false
+      alert("Complaint Added Successfully!");
+      
+      this.getAllInvoice();
+    },
+      (  err: any)=>{
+      alert("Something Went Wrong!")
+    })
 }
 
 // deleteComplaints(data:any){

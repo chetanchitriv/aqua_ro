@@ -51,22 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
 
-                    <label class="col-sm-2 label-on-left">Mobile No.</label>
-
-                    <div class="form-group label-floating is-empty col-md-4">
-                        <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" placeholder="Enter mobile number" formControlName="mobileNo" class="form-control" [readonly]="true" value>
-                        <span class="text-info" *ngIf="invoiceForm.touched && (!invoiceForm.value.mobileNo || invoiceForm.value.mobileNo.length == 0)" class="validation">*Mobile number is required</span>
-                    </div>
-                    <label class="col-sm-2 label-on-left">Alternate No.</label>
-                    <div class="form-group label-floating is-empty col-md-4">
-
-                        <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" placeholder="Alternate mobile no." formControlName="AltmobileNo" class="form-control" [readonly]="true"
-                            value>
-
-                    </div>
-                </div>
                 <div class="row">
                     <label class="col-sm-2 label-on-left">Email Id</label>
                     <div class="col-sm-10">
@@ -85,6 +70,30 @@
                         <div class="form-group label-floating is-empty">
                             <label class="control-label"></label>
                             <input type="text-area" placeholder="Enter address" formControlName="address" class="form-control" [readonly]="true">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2 label-on-left">Date</label>&nbsp;
+                    <div class="col-sm-8">
+
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label"></label>
+                            <input type="date" class="form-control" formControlName="date">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2 label-on-left">Due Date</label>&nbsp;
+                    <div class="col-sm-8">
+
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label"></label>
+                            <input type="date" class="form-control" formControlName="dueDate">
 
                         </div>
                     </div>
@@ -132,12 +141,12 @@
                                                             <select class="form-control" placeholder="Select an item name" formControlName="itemName">
                                 
                                                         <option value="">Select item name --</option>
-                                                        <option value="">option 1</option>   
+                                                        <option value="1">option 1</option>   
                                                         <option value="2">option 2</option>   
                                                         
                                                     </select>
                                                         </td>
-                                                        <td> <input type="text" placeholder="Description" class="form-control" formControlName="discription"></td>
+                                                        <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td>
                                                         <td> <input type="text" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
                                                         <td> <input type="text" placeholder="Rate" class="form-control" formControlName="rate"></td>
                                                         <td> <input type="text" placeholder="Amount" class="form-control" formControlName="amt"></td>
