@@ -221,121 +221,27 @@ getAllInvoice() {
   })
 }
 generateInvoice(){
-console.log(this.invoiceForm.value);
 
- var str=
- {
-   "data" :
-   {
-      "images": {
-        // The logo on top of your invoice
-        "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png",
-        // The invoice background
-        "background": "https://public.easyinvoice.cloud/img/watermark-draft.jpg"
-    },
-    // Your own data
-    "sender": {
-      "company": "AquaBlue Water Solutions",
-      "address": "Shop No F-47 Jayanti Nagri 5 Manish Nagar",
-      "zip": "440034",
-      "city": "nagpur",
-      "country": "India",
-      "state": "Maharashtra",
-     
-    },
-
-    "client": {
-        "Name": this.invoiceForm.controls.name.value,
-        "address":  this.invoiceForm.controls.address.value,
-   
-    },
-    "information": {
-      "Invoice Number": Math.floor(Math.random() * 10000),
-      "Date": this.invoiceForm.controls.date.value, 
-      'Due Date':  this.invoiceForm.controls.dueDate.value,
-    },
-   
-    "products": [
-      this.invoiceForm.controls.itemList.value
-    ],
-  
-    "bottom-notice": "Kindly pay your invoice within 15 days.",
-   
-    "settings": {
-        "currency": "USD", 
-    },
-   
-    "translate": {
-      
-    },
-}
-};
-console.log(str);
-
-    this.invoiceService.postInvoice(str).subscribe((res: any)=>{
+    this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
       console.log(res);
-      this.showinvoicesearchForm=false
-      this.showinvoiceTable=true
-      this.showinvoiceForm=false
-      this.showinvoiceUpdateForm=false
+      // this.showinvoicesearchForm=false
+      // this.showinvoiceTable=true
+      // this.showinvoiceForm=false
+      // this.showinvoiceUpdateForm=false
       alert("Complaint Added Successfully!");
-      
-      this.getAllInvoice();
+      this.downloadPdf(res.pdf,"invoice")
+      // this.getAllInvoice();
     },
       (  err: any)=>{
       alert("Something Went Wrong!")
     })
 }
 
-// deleteComplaints(data:any){
-//   this.api.deleteComplaints(data._id)
-//   .subscribe((res: any)=>{
-//     alert("Records Deleted Successfully!")
-//     this.initiatedtOption()
-//     this.getAllComplaints();
-//     this.showTable()
-   
-
-//   })
-// }
-
-// onEdit(data:any){   
-//   console.log(data);
-//   this.showComplaintUpdateForm=true
-//   this.showsearchform=false
-//   this.showComplaintForm=false
-//   this.showComplaintTable=false
-//   this.updateId= data._id
- 
-//   this.complaintUpdateForm.patchValue(data)
-// }
-
-// updateComplaintsDetails(){
- 
-
-//  this.api.updateComplaints(this.complaintUpdateForm.value,this.updateId)
-
-  
-// .subscribe((res: any)=>{
-//   alert("Record Updated Successfully!")
-//   this.showsearchform=false
-//   this.showComplaintTable=true
-//   this.showComplaintForm=false
-//   this.showComplaintUpdateForm=false
-//   this.initiatedtOption()
-//   this.getAllComplaints();
-//   this.showTable()
- 
-// })
-
-// }
-
-
-
-  // showFormupdate(){
-  //   this.showComplaintForm=true
-  //   this.showComplaintTable=false
-  //   this.showComplaintUpdateForm:boolean=false
-  //   this.showsearchform=false
-  // }
-  }
+downloadPdf(base64String:any, fileName:any) {
+  const source = `data:application/pdf;base64,${base64String}`;
+  const link = document.createElement("a");
+  link.href = source;
+  link.download = `${fileName}.pdf`
+  link.click();
+}
+}

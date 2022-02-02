@@ -26,7 +26,6 @@ import { StockallotmentComponent } from './superadmin/stockallotment/stockallotm
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +55,6 @@ import { StockallotmentComponent } from './superadmin/stockallotment/stockallotm
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
-    
   ],
   providers: [
     {
