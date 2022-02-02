@@ -33,7 +33,7 @@
     </div>
 
     <div *ngIf="!showinvoicesearchForm && !showinvoiceTable && showinvoiceForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
-        <form class="form-horizontal" [formGroup]="invoiceForm">
+        <form class="form-horizontal" [formGroup]="invoiceForm" (ngSubmit)="generateInvoice()">
             <div class="card-header card-header-text">
 
                 <h4 class="card-title">Invoice Form</h4>
@@ -164,7 +164,7 @@
                 <div class="text-center" style="margin-left: 100px;">
                     <button type="submit" class="btn btn-danger">Cancel<i class="bi bi-briefcase-fill"></i></button>
 
-                    <button type="submit" (click)="generateInvoice()" (click)="postInvoiceDetails()" class="btn btn-success">Generate invoice<i class="bi bi-briefcase-fill"></i></button>
+                    <button type="submit" class="btn btn-success">Generate invoice<i class="bi bi-briefcase-fill"></i></button>
 
 
 

@@ -14,10 +14,10 @@ export class InvoiceService {
   constructor(private http : HttpClient) { }
 
   postInvoice(data : any){
-    return this.http.post<any>(this.nodeUrl+"invoice", data)
+    // return this.http.post<any>(this.nodeUrl+"invoice", data)
   }
 
   getInvoice(){
-    return this.http.get<any>(this.nodeUrl+"invoice")
+    // return this.http.get<any>(this.nodeUrl+"invoice")
   }
 }

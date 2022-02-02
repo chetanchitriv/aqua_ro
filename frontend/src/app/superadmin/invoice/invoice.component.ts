@@ -203,10 +203,10 @@ getAllComplaints(){
       })
 }
 
-generateInvoice(){
+// generateInvoice(){
 
-console.log(this.invoiceForm.value);
-}
+// console.log(this.invoiceForm.value);
+// }
 
 getAllInvoice() {
   this.api.getInvoice().subscribe((res:any) => {
@@ -214,22 +214,23 @@ getAllInvoice() {
     
   })
 }
-  postInvoiceDetails(){
+generateInvoice(){
+console.log(this.invoiceForm.value);
 
 
-    this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
-      console.log(res);
-      this.showinvoicesearchForm=false
-      this.showinvoiceTable=true
-      this.showinvoiceForm=false
-      this.showinvoiceUpdateForm=false
-      alert("Complaint Added Successfully!");
+    // this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
+    //   console.log(res);
+    //   this.showinvoicesearchForm=false
+    //   this.showinvoiceTable=true
+    //   this.showinvoiceForm=false
+    //   this.showinvoiceUpdateForm=false
+    //   alert("Complaint Added Successfully!");
       
-      this.getAllInvoice();
-    },
-      (  err: any)=>{
-      alert("Something Went Wrong!")
-    })
+    //   this.getAllInvoice();
+    // },
+    //   (  err: any)=>{
+    //   alert("Something Went Wrong!")
+    // })
 }
 
 // deleteComplaints(data:any){
