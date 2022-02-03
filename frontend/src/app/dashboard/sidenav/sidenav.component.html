@@ -18,7 +18,7 @@
                     <p>Profile</p>
                 </a>
             </li>
-            <li *ngIf="isSuperAdmin || isAdmin">
+            <li *ngIf="isSuperAdmin">
                 <a routerLink="/dashboard/chart">
                     <i class="material-icons">dashboard</i>
                     <p>Dashboard</p>
@@ -46,12 +46,26 @@
 
             <li *ngIf="isSuperAdmin || isAdmin ">
                 <a routerLink="/dashboard/stock">
-                    <i class="material-icons">local_grocery_store
+                    <i class="material-icons">store
                     </i>
                     <p>Stock</p>
                 </a>
             </li>
 
+            <li *ngIf="isTechnician">
+                <a routerLink="/dashboard/invoice">
+                    <i class="material-icons">receipt
+                    </i>
+                    <p>Invoice</p>
+                </a>
+            </li>
+
+            <li *ngIf="isSuperAdmin || isAdmin">
+                <a routerLink="/dashboard/stockallotment">
+                    <i class="material-icons">local_grocery_store</i>
+                    <p>Stock Allotment</p>
+                </a>
+            </li>
         </ul>
 
     </div>

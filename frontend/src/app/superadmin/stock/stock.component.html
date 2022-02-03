@@ -46,11 +46,9 @@
                                             <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i
                                                     title="read" data-toggle="modal" data-target="#myModal"
                                                     class="material-icons">assignment </i></a>
-                                            <a (click)="onEdit(data)"
-                                                class="btn btn-simple btn-warning btn-icon edit"><i title="edit"
+                                            <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i title="edit"
                                                     class="material-icons">edit</i></a>
-                                            <a (click)="deleteUsers(data)"
-                                                class="btn btn-simple btn-danger btn-icon remove"><i title="delete"
+                                            <a (click)="deleteUsers(data)" class="btn btn-simple btn-danger btn-icon remove"><i title="delete"
                                                     class="material-icons">close</i></a>
                                         </td>
                                     </tr>
@@ -86,11 +84,8 @@
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
-                                <input type="text" placeholder="Enter Spare name" formControlName="spare_name"
-                                    class="form-control" value>
-                                <span class="text-info"
-                                    *ngIf="formStock.touched && (!formStock.value.spare_name || formStock.value.spare_name.length == 0)"
-                                    class="validation">*Spare name is required</span>
+                                <input type="text" placeholder="Enter Spare name" formControlName="spare_name" class="form-control" value>
+                                <span class="text-info" *ngIf="formStock.touched && (!formStock.value.spare_name || formStock.value.spare_name.length == 0)" class="validation">*Spare name is required</span>
 
                             </div>
                         </div>
@@ -100,11 +95,8 @@
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
-                                <input type="text" placeholder="Enter Quantity" formControlName="qnt"
-                                    class="form-control" value>
-                                <span class="text-info"
-                                    *ngIf="formStock.touched && (!formStock.value.qnt || formStock.value.qnt.length == 0)"
-                                    class="validation">*Quantity is required</span>
+                                <input type="text" placeholder="Enter Quantity" formControlName="qnt" class="form-control" value>
+                                <span class="text-info" *ngIf="formStock.touched && (!formStock.value.qnt || formStock.value.qnt.length == 0)" class="validation">*Quantity is required</span>
                             </div>
                         </div>
                     </div>
@@ -113,11 +105,8 @@
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
-                                <input type="text" placeholder="Enter Purchase Amount " formControlName="purchaseAmount"
-                                    class="form-control">
-                                <span class="text-info"
-                                    *ngIf="formStock.touched && (!formStock.value.purchaseAmount || formStock.value.purchaseAmount.length == 0)"
-                                    class="validation">*purchase Amount is required</span>
+                                <input type="text" placeholder="Enter Purchase Amount " formControlName="purchaseAmount" class="form-control">
+                                <span class="text-info" *ngIf="formStock.touched && (!formStock.value.purchaseAmount || formStock.value.purchaseAmount.length == 0)" class="validation">*purchase Amount is required</span>
                             </div>
                         </div>
                     </div>
@@ -128,11 +117,8 @@
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
-                                <input type="number" placeholder="Enter Selling Price" formControlName="sellingPrice"
-                                    class="form-control">
-                                <span class="text-info"
-                                    *ngIf="formStock.touched && (!formStock.value.sellingPrice || formStock.value.sellingPrice.length == 0)"
-                                    class="validation">*Selling Price is required</span>
+                                <input type="number" placeholder="Enter Selling Price" formControlName="sellingPrice" class="form-control">
+                                <span class="text-info" *ngIf="formStock.touched && (!formStock.value.sellingPrice || formStock.value.sellingPrice.length == 0)" class="validation">*Selling Price is required</span>
                             </div>
                         </div>
                     </div>
@@ -152,11 +138,9 @@
                 </div>
 
                 <div class="text-center">
-                    <button *ngIf="showAddButton" type="button" [disabled]="!formStock.valid"
-                        (click)="postStockDetails()" class="btn btn-success">Submit <i
+                    <button *ngIf="showAddButton" type="button" [disabled]="!formStock.valid" (click)="postStockDetails()" class="btn btn-success">Submit <i
                             class="bi bi-briefcase-fill"></i></button>
-                    <button *ngIf="showUpdateButton" type="button" [disabled]="!formStock.valid"
-                        (click)="updateUsersDetails()" class="btn btn-success">Update <i
+                    <button *ngIf="showUpdateButton" type="button" [disabled]="!formStock.valid" (click)="updateUsersDetails()" class="btn btn-success">Update <i
                             class="bi bi-briefcase-fill"></i></button>
                 </div>
 

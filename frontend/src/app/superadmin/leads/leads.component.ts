@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 
 import { LeadsModel } from './leads.model';
 import { UserService } from 'src/app/shared/user.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-leads',
@@ -24,10 +25,10 @@ export class LeadsComponent implements OnInit {
   showUpdateButton: boolean=false;
  
 
-
   leadsModelObj : LeadsModel = new LeadsModel();
   formValue:any= FormGroup;
   leadsAll: any=[];
+ status=[ "New Lead","Follow Up","Ongoing","Denied","Complete"];
  
 
   currentRolees=["Admin","Technician","Telecaller"]
@@ -76,6 +77,34 @@ export class LeadsComponent implements OnInit {
       this.isTechnician = false
     }
 
+    var Role= localStorage.getItem("role")
+if (Role=='Superadmin'){
+  this.isSuperAdmin = true
+  this.isAdmin =false
+  this.isTelecaller=  false
+  this.isTechnician = false
+
+}
+if (Role=='Admin'){
+  this.isSuperAdmin = false
+  this.isAdmin =true
+  this.isTelecaller=  false
+  this.isTechnician = false
+}
+if (Role=='Technician'){
+  this.isSuperAdmin = false
+  this.isAdmin =false
+  this.isTelecaller=  false
+  this.isTechnician = true
+}
+if (Role=='Telecaller'){
+  this.isSuperAdmin = false
+  this.isAdmin =false
+  this.isTelecaller=  true
+  this.isTechnician = false
+}
+
+
     this.initiatedtOption()
     this.getAllUser()
     this.getAllLeads();
@@ -99,6 +128,7 @@ export class LeadsComponent implements OnInit {
     comment : [''],
     nextFollowupdate : [''],
     nextFollowuptime : [''],
+    status:[],
     createdBy:[this.currentUser,Validators.required]
   })
 }
@@ -177,7 +207,8 @@ export class LeadsComponent implements OnInit {
       comment : [''],
       nextFollowupdate : [''],
       nextFollowuptime : [''],
-      createdBy:[this.currentUser,Validators.required]
+      createdBy:[this.currentUser,Validators.required],
+      status:['New Lead'],
     })
     this.showLeadForm=true
     this.showLeadTable=false
@@ -264,6 +295,8 @@ updateLeadsDetails(){
   }
 
 }
+
+
 
 
 

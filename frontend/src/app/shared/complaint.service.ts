@@ -11,6 +11,7 @@ export class ComplaintService {
 
   dbUrl=environment.apiUrl
   nodeUrl=environment.nodeapiUrl
+  getInvoice: any;
   
   constructor(private http : HttpClient) { }
 

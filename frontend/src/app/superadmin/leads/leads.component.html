@@ -40,8 +40,7 @@
                                         <th style="width: 87px;">Follow-up Date</th>
                                         <th style="width: 87px;">Created By</th>
                                         <th style="width: 87px;">Next Follow-up Date</th>
-
-
+                                        <th style="width: 87px;">Status</th>
                                         <th style="width: 87px;">Actions</th>
                                     </tr>
                                 </thead>
@@ -57,11 +56,12 @@
                                         <td>{{data.followUpdate}}</td>
                                         <td>{{data.createdBy}}</td>
                                         <td>{{data.nextFollowupdate}}</td>
+                                        <td>{{data.status}}</td>
 
                                         <td class="text-right">
                                             <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
                                             <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">edit</i></a>
-                                            <a (click)="deleteLeads(data)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
+                                            <a *ngIf="isSuperAdmin || isAdmin" (click)="deleteLeads(data)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
 
                                         </td>
                                     </tr>
@@ -257,13 +257,28 @@
                                 </div>
                             </div>
                         </div>
-
-
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Status</label>
+                            <div class="col-sm-10">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    <select  class="form-control" formControlName="status">
+                    
+                                        <option *ngFor="let data of status" [ngValue]="data">
+                                            {{data}}
+                                        </option>
+                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                      
                         <div class="text-center" style="margin-left: 100px;">
                             <button *ngIf="showAddButton" type="button" (click)="postLeadsDetails()" (click)="showTable()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
                             <button *ngIf="showUpdateButton" type="button" (click)="updateLeadsDetails()" (click)="showTable()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
 
                         </div>
+                       
+                        
                     </div>
                 </div>
 
@@ -298,6 +313,8 @@
                             <p><strong>Comment</strong></p>
                             <p><strong>Next Follow-up Date</strong></p>
                             <p><strong>Next Follow-up time</strong></p>
+                            <p><strong>Status</strong></p>
+
                         </div>
                         <div>
 
@@ -313,6 +330,8 @@
                             <p>{{leadDetails.comment}}</p>
                             <p>{{leadDetails.nextFollowupdate}}</p>
                             <p>{{leadDetails.nextFollowuptime}}</p>
+                            <p>{{leadDetails.status}}</p>
+
                         </div>
                     </div>
                     <div class="modal-footer">

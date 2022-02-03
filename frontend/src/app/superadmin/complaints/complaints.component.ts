@@ -139,8 +139,7 @@ export class ComplaintsComponent implements OnInit {
    
   }
 
-  
-  initiatedtOption(){
+ initiatedtOption(){
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,

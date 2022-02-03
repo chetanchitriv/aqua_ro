@@ -1,0 +1,197 @@
+<div class="d-flex">
+    <div>
+        <button type="button" (click)="showStockForm()" class="btn btn-success">Allot Stock <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showStockTable()" class="btn btn-success">showList <i class="bi bi-briefcase-fill"></i></button>
+    </div>
+
+    <div class="col-md-12">
+        <div *ngIf="!showstockForm && showstockTable" class="card">
+            <div class="card-content">
+                <h4 class="card-title">Users</h4>
+                <div class="content">
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+
+
+                                        <th>Spare Name</th>
+
+                                        <th>Quantity</th>
+                                        <th>Technician Name</th>
+
+
+                                        <th>Date</th>
+                                        <th>Action</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of stockallotAll; let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{data.spare_name}}</td>
+                                        <td>{{data.qnt}}</td>
+                                        <td>{{data.techname}}</td>
+
+
+                                        <td>{{data.date}}</td>
+
+                                        <td>
+                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
+                                            <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i  title="edit" class="material-icons">edit</i></a>
+                                            <a (click)="deleteStockallot(data)" class="btn btn-simple btn-danger btn-icon remove"><i  title="delete" class="material-icons">close</i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div *ngIf="showstockForm && !showstockTable" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+        <form class="form-horizontal" [formGroup]="formStockAllot">
+            <div class="card-header card-header-text">
+                <span *ngIf="showAddButton">
+                    <h4 class="card-title">Allot Stock</h4>
+                </span>
+                <span *ngIf="showUpdateButton">
+                    <h4 class="card-title">Update Stock Allot</h4>
+                </span>
+            </div>
+            <div class="card-header card-header-text">
+
+            </div>
+
+            <div class="card-content">
+
+
+                <div class="row">
+                    <label class="col-sm-2 label-on-left">Spare allotment</label>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group label-floating is-empty">
+                                    <select placeholder="Enter Role" formControlName="spare_name" class="form-control">
+                                    <option value=""> Select spare name --</option>
+                                    <option [ngValue]="data.spare_name" *ngFor="let data of stockAll">{{data.spare_name}}</option>
+                                 
+                                    <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label"></label>
+                                        <input type="number" placeholder="Enter quntity" formControlName="qnt" class="form-control" value>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-5">
+                                    <div class="form-group label-floating is-empty">
+                                        <select placeholder="Enter Role" formControlName="techname" class="form-control">
+                                        <option value=""> Select technician name --</option>
+                                        <option [ngValue]="data.userName" *ngFor="let data of usersAll">{{data.userName}}</option>
+                                             </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 label-on-left">Date</label>&nbsp;
+                                    <div class="col-sm-8">
+
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label"></label>
+                                            <input type="date" class="form-control" formControlName="date">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- <div class="text-center" style="margin-left: 100px;">
+                <button *ngIf="showAddButton" type="button" (click)="postStockallotDetails()" class="btn btn-success">Allot<i class="bi bi-briefcase-fill"></i></button>
+                <button *ngIf="showUpdateButton" type="button" (click)="updateStockallotDetails()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
+
+            </div> -->
+            <div class="text-center">
+                <button *ngIf="showAddButton" type="button" [disabled]="!formStockAllot.valid" (click)="postStockallotDetails()" class="btn btn-success">Submit <i
+                        class="bi bi-briefcase-fill"></i></button>
+                <button *ngIf="showUpdateButton" type="button" [disabled]="!formStockAllot.valid" (click)="updateStockallotDetails()" class="btn btn-success">Update <i
+                        class="bi bi-briefcase-fill"></i></button>
+            </div>
+
+
+
+        </form>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">User Details</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row m-l-5">
+                        <div class="col-sm-3 p-4">
+
+                            <p><strong>Spare name</strong></p>
+                            <p><strong>Quantity</strong></p>
+                            <p><strong>Technician Name</strong></p>
+
+
+                            <p><strong>Date</strong></p>
+
+                        </div>
+                        <div>
+
+                            <p>{{stockallotDetails.spare_name }}</p>
+                            <p>{{stockallotDetails.qnt }}</p>
+                            <p>{{stockallotDetails.techname }}</p>
+
+
+                            <p>{{stockallotDetails.date }}</p>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
