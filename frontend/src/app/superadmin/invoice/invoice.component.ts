@@ -237,7 +237,7 @@ generateInvoice(){
       // this.showinvoiceForm=false
       // this.showinvoiceUpdateForm=false
       alert("Complaint Added Successfully!");
-      this.downloadPdf(res.pdf,"invoice")
+      // this.downloadPdf(res.pdf,"invoice")
       // this.getAllInvoice();
     },
       (  err: any)=>{

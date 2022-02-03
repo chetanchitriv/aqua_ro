@@ -11,6 +11,6 @@ router.put('/:id', invoiceController.update_pdf, verifyToken.verifyToken);
 // router.delete('/:id', invoiceController.delete_pdf,verifyToken.verifyToken);
 router.delete('/:id', invoiceController.delete_pdf);
 
-router.post('/', invoiceController.createInvoic, verifyToken.verifyToken)
+router.post('/', invoiceController.createInvoice, verifyToken.verifyToken)
 
 module.exports = router
