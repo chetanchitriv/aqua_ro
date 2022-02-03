@@ -2,7 +2,7 @@
     <button type="button" (click)="showSearchForm()" class="btn btn-success"> Generate Invoice<i class="bi bi-briefcase-fill"></i></button>
     <button type="button" (click)="showTable()" class="btn btn-success">show List <i class="bi bi-briefcase-fill"></i></button>
 
-    <div *ngIf="showsearchform && !showInvoiceTable && !showInvoiceForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+    <div *ngIf="showinvoicesearchForm &&! showinvoiceForm && !showinvoiceUpdateForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
         <form [formGroup]="searchLead" (ngSubmit)="search()">
 
 
@@ -31,4 +31,251 @@
             </div>
         </form>
     </div>
-</div>
+
+    <div *ngIf="!showinvoicesearchForm && !showinvoiceTable && showinvoiceForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+        <form class="form-horizontal" [formGroup]="invoiceForm" (ngSubmit)="generateInvoice()">
+            <div class="card-header card-header-text">
+
+                <h4 class="card-title">Invoice Form</h4>
+                <!-- <h4 *ngIf="showUpdateButton" class="card-title">Update Complaint</h4> -->
+            </div>
+
+            <div class="card-content">
+                <div class="row">
+                    <label class="col-sm-2 label-on-left">Name</label>
+                    <div class="col-sm-10">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label"></label>
+                            <input type="text" placeholder="Enter name" formControlName="name" class="form-control" [readonly]="true" value>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2 label-on-left">Email Id</label>
+                    <div class="col-sm-10">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label"></label>
+                            <input type="email" placeholder="Enter email id" formControlName="emailId" class="form-control" [readonly]="true" value>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <label class="col-sm-2 label-on-left">Address</label>
+                    <div class="col-sm-10">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label"></label>
+                            <input type="text-area" placeholder="Enter address" formControlName="address" class="form-control" [readonly]="true">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2 label-on-left">Date</label>&nbsp;
+                    <div class="col-sm-8">
+
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label"></label>
+                            <input type="date" class="form-control" formControlName="date">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2 label-on-left">Due Date</label>&nbsp;
+                    <div class="col-sm-8">
+
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label"></label>
+                            <input type="date" class="form-control" formControlName="dueDate">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2 label-on-left">Service type</label>
+                    <div class="col-sm-4">
+
+
+                        <div class="form-group open" style="margin-left: 20px;">
+                            <div class="select" aria-expanded="true">
+                                <select class="form-control" placeholder="Select an option" formControlName="serviceType">
+                                
+                                    <!-- <option value="">Select your option --</option>
+                                    <option value="AMC">AMC</option>   
+                                    <option value="Service type">Service type</option>    -->
+                                    
+                                    <option value=""> Select Role --</option>
+                                    <option [ngValue]="serviceType" *ngFor="let serviceType of types">{{serviceType}}</option>    
+                                </select>
+
+                            </div>
+                            <span class="material-input"></span></div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+
+                                <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
+                                </i>
+                            </a>
+                                <form [formGroup]="invoiceForm">
+                                    <div formArrayName="itemList" *ngFor="let item of invoiceForm.get('itemList')['controls']; let i = index;">
+
+                                        <div [formGroupName]="i">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+
+                                                        <td>
+                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName">
+                                
+                                                        <option value="">Select item name --</option>
+                                                        <option value="1">option 1</option>   
+                                                        <option value="2">option 2</option>   
+                                                        
+                                                    </select>
+                                                        </td>
+                                                        <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td>
+                                                        <td> <input type="text" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
+                                                        <td> <input type="text" placeholder="Rate" class="form-control" formControlName="rate"></td>
+                                                        <td> <input type="text" placeholder="Amount" class="form-control" formControlName="amt"></td>
+                                                        <td (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
+                                                        </i>
+                                                        </td>
+                                                    </tr>
+
+                                                </thead>
+
+                                                {{ invoiceForm.controls.itemList.controls[i].controls.itemName.value }}
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="text-center" style="margin-left: 100px;">
+                    <button type="submit" class="btn btn-danger">Cancel<i class="bi bi-briefcase-fill"></i></button>
+
+                    <button type="submit" class="btn btn-success">Generate invoice<i class="bi bi-briefcase-fill"></i></button>
+
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-md-12">
+        <div *ngIf="!showinvoicesearchForm && showinvoiceTable && !showinvoiceForm && !showinvoiceUpdateForm" class="card-form card">
+            <div class="card-content">
+                <h4 class="card-title">Complaints</h4>
+                <div class="content">
+                    <!-- <div class="toolbar">
+                  
+                    </div>
+                    <div class="material-datatables">
+                        <div id="datatables_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="dataTables_length" id="datatables_length"><label class="form-group">Show <select name="datatables_length" aria-controls="datatables" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="-1">All</option></select> entries</label></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div id="datatables_filter" class="dataTables_filter"><label class="form-group"><input type="search" class="form-control input-sm" placeholder="Search records" aria-controls="datatables"></label></div>
+                                </div>
+                            </div> -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+
+                                <thead>
+
+                                    <tr role="row">
+                                        <th style="width: 87px;">Id</th>
+
+
+                                        <th style="width: 87px;">Name</th>
+                                        <th style="width: 87px;">Email Id</th>
+                                        <th style="width: 87px;">Date</th>
+
+                                        <th style="width: 87px;">Due Date</th>
+
+                                        <th style="width: 87px;">Service type</th>
+                                        <th style="width: 87px;">Item name</th>
+
+                                        <th style="width: 87px;">Description</th>
+                                        <th style="width: 87px;">Quantity</th>
+                                        <th style="width: 87px;">Rate</th>
+                                        <th style="width: 87px;">Amount</th>
+
+
+                                        <th style="width: 87px;">Download pdf</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+
+                                        <td>Nisha</td>
+                                        <td>n@gmail.com</td>
+                                        <td>03-02-2022</td>
+                                        <td>15-02-2022</td>
+                                        <td>AMC</td>
+                                        <td>RO</td>
+                                        <td>Two type</td>
+                                        <td>2</td>
+                                        <td>10</td>
+                                        <td>100</td>
+
+
+                                        <td class="text-right">
+                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" data-toggle="modal" data-target="#myModal" class="material-icons">picture_as_pdf
+                                            </i></a>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                                <!-- <tfoot>
+                                    <tr>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+                                        <th rowspan="1" colspan="1"></th>
+
+                                        <th class="text-right" rowspan="1" colspan="1"></th>
+                                    </tr>
+                                </tfoot> -->
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
