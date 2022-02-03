@@ -53,6 +53,7 @@ console.log("PDF Deleted");
 }
 
 exports.createInvoice = (req,res)=>{
+    console.log(req.body.itemList);
     const data ={
                 "images": {
                     // The logo on top of your invoice
