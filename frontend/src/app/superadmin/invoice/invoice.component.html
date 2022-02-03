@@ -212,11 +212,11 @@
 
 
                                         <th style="width: 87px;">Name</th>
-                                        <th style="width: 87px;">Mobile no.</th>
-                                        <th style="width: 87px;">Alternate no.</th>
+                                        <th style="width: 87px;">Email Id</th>
+                                        <th style="width: 87px;">Date</th>
 
-                                        <th style="width: 87px;">Email ID</th>
-                                        <th style="width: 87px;">Address</th>
+                                        <th style="width: 87px;">Due Date</th>
+
                                         <th style="width: 87px;">Service type</th>
                                         <th style="width: 87px;">Item name</th>
 
@@ -226,31 +226,30 @@
                                         <th style="width: 87px;">Amount</th>
 
 
-                                        <!-- <th style="width: 87px;">Actions</th> -->
+                                        <th style="width: 87px;">Download pdf</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let data of invoiceAll; let i = index ">
-                                        <td>{{i+1}}</td>
+                                    <tr>
+                                        <td>1</td>
 
-                                        <td>{{data.name}}</td>
-                                        <td>{{data.mobileNo}}</td>
-                                        <td>{{data.AltmobileNo}}</td>
-                                        <td>{{data.emailId}}</td>
-                                        <td>{{data.address}}</td>
-                                        <td>{{data.serviceType}}</td>
-                                        <td>{{data.itemName}}</td>
-                                        <td>{{data.discription}}</td>
-                                        <td>{{data.qnt}}</td>
-                                        <td>{{data.rate}}</td>
-                                        <td>{{data.amt}}</td>
+                                        <td>Nisha</td>
+                                        <td>n@gmail.com</td>
+                                        <td>03-02-2022</td>
+                                        <td>15-02-2022</td>
+                                        <td>AMC</td>
+                                        <td>RO</td>
+                                        <td>Two type</td>
+                                        <td>2</td>
+                                        <td>10</td>
+                                        <td>100</td>
 
-                                        <!-- <td class="text-right">
-                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
-                                            <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons" >edit</i></a>
-                                            <a (click)="deleteComplaints(data)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
 
-                                        </td> -->
+                                        <td class="text-right">
+                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" data-toggle="modal" data-target="#myModal" class="material-icons">picture_as_pdf
+                                            </i></a>
+
+                                        </td>
 
                                     </tr>
 
