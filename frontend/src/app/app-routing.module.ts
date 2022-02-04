@@ -13,6 +13,8 @@ import { EditprofileComponent } from './superadmin/editprofile/editprofile.compo
 import { StockComponent } from './superadmin/stock/stock.component';
 import { InvoiceComponent } from './superadmin/invoice/invoice.component';
 import { StockallotmentComponent } from './superadmin/stockallotment/stockallotment.component';
+import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads.component';
+import { SelectteamComponent } from './superadmin/selectteam/selectteam.component';
 
 const routes: Routes = [
   {
@@ -34,8 +36,10 @@ const routes: Routes = [
       { path: 'stock', component:StockComponent},
       { path: 'invoice', component:InvoiceComponent},
       { path: 'stockallotment', component:StockallotmentComponent},
+      { path:'assignedlead',component:AssignedleadsComponent},
+      { path: 'stock', component:StockComponent},
+      { path: 'selectteam', component:SelectteamComponent}
 
-      { path: 'stock', component:StockComponent}
 
 
     ]

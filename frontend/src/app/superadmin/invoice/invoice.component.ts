@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import { ComplaintService } from 'src/app/shared/complaint.service';
@@ -6,12 +6,26 @@ import { InvoiceService } from 'src/app/shared/invoice.service';
 import { LeadService } from 'src/app/shared/lead.service';
 import { UserService } from 'src/app/shared/user.service';
 
+declare var require: any;
+
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+const htmlToPdfmake = require("html-to-pdfmake");
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.css']
 })
 export class InvoiceComponent implements OnInit {
+
+
+  @ViewChild('pdfTable')
+  pdfTable!: ElementRef;
+
+
+
   dtOptions:DataTables.Settings={}
   searchLead: any=FormGroup;
   allLeads: any=[];
@@ -45,6 +59,8 @@ dueDate:any
   username:any
   itemList: any= FormArray;
   invoiceAll: any=[];
+  invoicePdf:any=[]
+  items:any=[]
 
 
 
@@ -68,8 +84,8 @@ console.log("dueDate", this.future);
    
     this.invoiceUpdateForm = this.formbuilder.group({
       name : ['',Validators.required],
-      mobileNo : ['',Validators.required],
-      AltmobileNo : [''],
+      // mobileNo : ['',Validators.required],
+      // AltmobileNo : [''],
       emailId : ['',Validators.required],
       // assignTo : ['',Validators.required],
       address : ['',Validators.required],
@@ -154,8 +170,8 @@ console.log("dueDate", this.future);
       this.showinvoiceUpdateForm=false
       this.invoiceForm = this.formbuilder.group({
         name : [this.leadData.name,Validators.required],
-        mobileNo : [this.leadData.mobileNo,Validators.required],
-        AltmobileNo : [this.leadData.AltmobileNo,Validators.required],
+        // mobileNo : [this.leadData.mobileNo,Validators.required],
+        // AltmobileNo : [this.leadData.AltmobileNo,Validators.required],
        
         emailId : [this.leadData.emailId,Validators.required],
         // assignTo : [this.leadData.assignTo,Validators.required],
@@ -229,15 +245,20 @@ getAllInvoice() {
   })
 }
 generateInvoice(){
-
+  
     this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
-      console.log(res);
+      console.log(res.data,"post res");
+      console.log(res.data.itemList);
+      
+this.invoicePdf=res.data
+this.items=res.data.itemList
+
       // this.showinvoicesearchForm=false
       // this.showinvoiceTable=true
       // this.showinvoiceForm=false
       // this.showinvoiceUpdateForm=false
       alert("Complaint Added Successfully!");
-      this.downloadPdf(res.pdf,"invoice")
+      // this.downloadPdf(res.pdf,"invoice")
       // this.getAllInvoice();
     },
       (  err: any)=>{
@@ -245,11 +266,18 @@ generateInvoice(){
     })
 }
 
-downloadPdf(base64String:any, fileName:any) {
-  const source = `data:application/pdf;base64,${base64String}`;
-  const link = document.createElement("a");
-  link.href = source;
-  link.download = `${fileName}.pdf`
-  link.click();
+// downloadPdf(base64String:any, fileName:any) {
+//   const source = `data:application/pdf;base64,${base64String}`;
+//   const link = document.createElement("a");
+//   link.href = source;
+//   link.download = `${fileName}.pdf`
+//   link.click();
+// }
+public downloadAsPDF() {
+  const pdfTable = this.pdfTable.nativeElement;
+  var html = htmlToPdfmake(pdfTable.innerHTML);
+  const documentDefinition = { content: html };
+  pdfMake.createPdf(documentDefinition).download(); 
+   
 }
 }

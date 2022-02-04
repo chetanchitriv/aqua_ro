@@ -31,6 +31,9 @@
                         <li *ngFor=" let item of leadsAll ,let i = index ">
                             <a>{{i + 1}}) Follow-up date of <strong>{{item.name}}</strong> is today </a>
                         </li>
+                        <li style="background-color: rgb(232, 231, 231);" *ngFor=" let assign of assignleads ,let i = index ">
+                            <a> New Lead assigne to you is <strong>{{assign.name}}</strong>  </a>
+                        </li>
                         <li *ngIf="len == 0"><img src="../../../assets/img/notification.png" style="width: 100px;height: 100px;margin-left: 60px;" alt="" srcset=""></li>
                         <li *ngIf="len == 0"><a>Opps.. No Follow-Up for Today</a></li>
                     </ul>
