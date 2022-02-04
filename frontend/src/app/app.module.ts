@@ -48,7 +48,7 @@ import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads
      AssignedleadsComponent,
     
      
-
+ 
    
   ],
   imports: [
