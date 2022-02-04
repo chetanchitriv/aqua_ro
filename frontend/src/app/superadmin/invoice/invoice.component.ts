@@ -6,7 +6,7 @@ import { InvoiceService } from 'src/app/shared/invoice.service';
 import { LeadService } from 'src/app/shared/lead.service';
 import { UserService } from 'src/app/shared/user.service';
 
-import jsPDF from 'jspdf';
+import {jsPDF} from 'jspdf'
 import html2canvas from 'html2canvas';
 
 @Component({
