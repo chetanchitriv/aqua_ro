@@ -2,9 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/user.service';
-import { Data, Router } from '@angular/router';
-import { UsersModel } from '../users.model';
-import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 import { stockModel } from './stock.model';
 import { StockService } from 'src/app/shared/stock.service';
 
@@ -20,7 +18,6 @@ export class StockComponent implements OnInit {
   showUserTable: boolean=false;
   showAddButton: boolean=false;
   showUpdateButton: boolean=false;
- 
  stockModelObj : stockModel=new stockModel();
   formStock:any= FormGroup;
   stockAll: any=[];
@@ -29,7 +26,7 @@ export class StockComponent implements OnInit {
   serverErrorMessages: any;
   date = new Date()
   today: any
-  times: any
+ 
   stockData: any;
   constructor(private formbuilder: FormBuilder, private api: StockService, private router:Router) { }
 
@@ -37,18 +34,16 @@ export class StockComponent implements OnInit {
     this.getAllStock()
     this.initiatedtOption()
     this.today = this.date.toISOString().slice(0, 10);
-    this.times =  this.date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
+   
     console.log(this.today)
-      this.formStock = this.formbuilder.group({
-        spare_name : ['',Validators.required],
-        qnt  : ['',Validators.required],
-        purchaseAmount  : ['',Validators.required],
-        sellingPrice  : ['',Validators.required],
-       
-        date:  [this.today,Validators.required],
-       
-    })
+      
   }
+ 
+  getbalance(){
+    this.formStock.value.balanceAmount=this.formStock.value.sellingPrice-this.formStock.value.purchaseAmount
+  return (this.formStock.value.balanceAmount)
+  }
+
   initiatedtOption(){
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -81,6 +76,15 @@ export class StockComponent implements OnInit {
   }
 
   showForm(){
+    this.formStock = this.formbuilder.group({
+      spare_name : ['',Validators.required],
+      qnt  : ['',Validators.required],
+      purchaseAmount  : ['',Validators.required],
+      sellingPrice  : ['',Validators.required],
+      balanceAmount : ['',Validators.required],
+      date:  [this.today,Validators.required],
+     
+  })
     this.showUserForm=true
     this.showUpdateButton = false;
     this.showAddButton = true;
