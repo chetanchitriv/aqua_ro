@@ -51,45 +51,15 @@ exports.delete_pdf = async(req, res) => {
     console.log("PDF Deleted");
 }
 
-exports.createInvoic = async(req, res) => {
-    console.log(req.body.itemList)
-
-    var data = {
-        "data": {
-
-            "images": {
-
-                "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png"
-            },
-            "sender": {
-                "company": "AquaBlue Water Solutions",
-                "address": "Shop No F-47 Jayanti Nagri 5 Manish Nagar",
-                "zip": "440034",
-                "city": "nagpur",
-                "country": "India",
-                "state": "Maharashtra"
-            },
-            "client": {
-                "name": req.body.name,
-                "address": req.body.address,
-                "service_type": req.body.serviceType
-            },
-            "information": {
-                "Invoice Number": Math.floor(Math.random() * 10000),
-                "Date": req.body.date,
-                'Due Date': req.body.dueDate,
-            },
-            "products": req.body.itemList,
-            "settings": {
-                "currency": "USD"
-            }
-        }
+exports.createInvoice = (req, res) => {
+    try {
+        var invoice = new invoice(req.body).save()
+        res.status(201).json({message:"invoice has been added"})
+        console.log("invoice added");
+        
+    } catch (error) {
+        res.status(400).json({error:error})
+        console.log(error);
     }
 
-    console.log(data);
-    console.log(req.body.itemList);
-    await easyinvoice.createInvoice(data, function(result) {
-        //The response will contain a base64 encoded PDF file
-        res.json({ pdf: result.pdf })
-    });
-}
+    }

@@ -6,7 +6,8 @@ const stockSchema=new mongoose.Schema({
     qnt : String,
     purchaseAmount : Number,
     sellingPrice : Number,
-    date: Date
+    balanceAmount:Number,
+    date: String
    
 });
 
