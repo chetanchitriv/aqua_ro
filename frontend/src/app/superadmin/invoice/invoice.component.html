@@ -280,95 +280,111 @@
             <!--  end card  -->
         </div>
     </div>
-    <div class="container">
-        <div>
-            <div class="main-panel" id="pdfTable" #pdfTable>
 
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3>Invoice</h3>
-                                    </div>
-                                    <div class="card-content card-padding">
-                                        <div class="m-b-20">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h4> Amazon Delivery <br>
+
+    <br><br>
+
+</div>
+<div id="htmlData">
+    <div class="container card " style="width: 80%; margin: 10px 0 0px 144px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="card-header">
+                                            <h3>Invoice</h3>
+                                        </div>
+                                        <div class="card-content card-padding">
+                                            <div class="m-b-20">
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h4> Amazon Delivery <br>
+                                                                <br>
+                                                            </h4>
+                                                            <address>
+                              1234 Silver Gate Avenue, Suite 430 <br>
+                              San Francisco, CA, 94118 <br>
+                              <abbr title="Mail">E-mail:</abbr>&nbsp;&nbsp;example@company.com <br>
+                              <abbr title="Phone">Phone:</abbr>&nbsp;&nbsp;(123) 456-7890 <br>
+                              <abbr title="Fax">Fax:</abbr>&nbsp;&nbsp;800-692-7753 <br>
+                              <br>
+                              </address>
+                                                        </div>
+                                                        <div class="col-md-6 text-right">
+                                                            <h4>Invoice Info</h4>
+                                                            <p> <a class="font-size-20" href="javascript:void(0)">E1234-567-89</a> <br>
+                                                                <span class="font-size-20">{{invoicePdf.name}}</span> </p>
+                                                            <p> <span class="font-size-20">{{invoicePdf.emailId}}</span> </p>
+                                                            <address>
+                              {{invoicePdf.address}}
+                             
+                              </address>
+                                                            <span>{{invoicePdf.date}}</span> <br>
+                                                            <span>{{invoicePdf.dueDate}}</span> <br>
+                                                            <span>{{invoicePdf.serviceType}}</span> <br>
                                                             <br>
-                                                        </h4>
-                                                        <address>
-                                  1234 Silver Gate Avenue, Suite 430 <br>
-                                  San Francisco, CA, 94118 <br>
-                                  <abbr title="Mail">E-mail:</abbr>&nbsp;&nbsp;example@company.com <br>
-                                  <abbr title="Phone">Phone:</abbr>&nbsp;&nbsp;(123) 456-7890 <br>
-                                  <abbr title="Fax">Fax:</abbr>&nbsp;&nbsp;800-692-7753 <br>
-                                  <br>
-                                  </address>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6 text-right">
-                                                        <h4>Invoice Info</h4>
-                                                        <p> <a class="font-size-20" href="javascript:void(0)">E1234-567-89</a> <br>
-                                                            <span class="font-size-20">{{invoicePdf.name}}</span> </p>
-                                                        <p> <span class="font-size-20">{{invoicePdf.emailId}}</span> </p>
-                                                        <address>
-                                  {{invoicePdf.address}}
-                                 
-                                  </address>
-                                                        <span>{{invoicePdf.date}}</span> <br>
-                                                        <span>{{invoicePdf.dueDate}}</span> <br>
-                                                        <span>{{invoicePdf.serviceType}}</span> <br>
-                                                        <br>
-                                                    </div>
-                                                </div>
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped text-right">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="text-center">#</th>
-                                                                <th class="text-center">Item Name</th>
-                                                                <th class="text-center">Description</th>
-                                                                <th class="text-center">Quantity</th>
-                                                                <th class="text-center">Rate</th>
-                                                                <th class="text-center">Amount</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr *ngFor="let item of items,let i = index  ">
-                                                                <td class="text-center">{{i+1}}</td>
-                                                                <td class="text-center">{{item.itemName}}</td>
-                                                                <td class="text-center">{{item.description}}</td>
-                                                                <td class="text-center">{{item.qnt}}</td>
-                                                                <td class="text-center">{{item.rate}}</td>
-                                                                <td class="text-center">{{item.amt}}</td>
-                                                            </tr>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped text-right">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="text-center">#</th>
+                                                                    <th class="text-center">Item Name</th>
+                                                                    <th class="text-center">Description</th>
+                                                                    <th class="text-center">Quantity</th>
+                                                                    <th class="text-center">Rate</th>
+                                                                    <th class="text-center">Amount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let item of items,let i = index  ">
+                                                                    <td class="text-center">{{i+1}}</td>
+                                                                    <td class="text-center">{{item.itemName}}</td>
+                                                                    <td class="text-center">{{item.description}}</td>
+                                                                    <td class="text-center">{{item.qnt}}</td>
+                                                                    <td class="text-center">{{item.rate}}</td>
+                                                                    <td class="text-center">{{item.amt}}</td>
+                                                                </tr>
 
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <br><br>
-                                                <div class="text-right clearfix">
-                                                    <div class="pull-right">
-                                                        <p> Sub - Total amount: <strong><span>$35,400.00</span></strong> </p>
-                                                        <p> VAT: <strong><span>$123.00</span></strong> </p>
-                                                        <p class="page-invoice-amount"> <strong>Grand Total: <span>$35,523.00</span></strong> </p>
-                                                        <br>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                </div>
-                                                <hr>
-                                                <p class="small hint-text">Services will be invoiced in accordance with the Service Description. You must pay all undisputed invoices in full within 30 days of the invoice date, unless otherwise specified under the Special Terms and
-                                                    Conditions. All payments must reference the invoice number. Unless otherwise specified, all invoices shall be paid in the currency of the invoice</p>
-                                                <p class="small hint-text">Insight retains the right to decline to extend credit and to require that the applicable purchase price be paid prior to performance of Services based on changes in insight's credit policies or your financial
-                                                    condition and/or payment record. Insight reserves the right to charge interest of 1.5% per month or the maximum allowable by applicable law, whichever is less, for any undisputed past due invoices. You
-                                                    are responsible for all costs of collection, including reasonable attorneys' fees, for any payment default on undisputed invoices. In addition, Insight may terminate all further work if payment is not
-                                                    received in a timely manner.</p>
-                                                <hr>
-                                                <div class="text-right">
-                                                    <button class="btn btn-primary" (click)="downloadAsPDF();">Export To PDF</button>
-                                                    <button type="button" class="btn btn-default" onClick="javascript:window.print();"> <i class="icmn-printer margin-right-5"></i> Print </button>
+                                                    <br><br>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <img src="../../../assets/img/download.png" style="width: 200px;height: 200px;" alt="" srcset="">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="text-right clearfix">
+                                                                <div class="pull-right">
+                                                                    <p> Sub - Total amount: <strong><span>$35,400.00</span></strong> </p>
+                                                                    <p> VAT: <strong><span>$123.00</span></strong> </p>
+                                                                    <p class="page-invoice-amount"> <strong>Grand Total: <span>$35,523.00</span></strong> </p>
+                                                                    <br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr>
+                                                    <p class="small hint-text">Services will be invoiced in accordance with the Service Description. You must pay all undisputed invoices in full within 30 days of the invoice date, unless otherwise specified under the Special Terms
+                                                        and Conditions. All payments must reference the invoice number. Unless otherwise specified, all invoices shall be paid in the currency of the invoice</p>
+                                                    <p class="small hint-text">Insight retains the right to decline to extend credit and to require that the applicable purchase price be paid prior to performance of Services based on changes in insight's credit policies or your
+                                                        financial condition and/or payment record. Insight reserves the right to charge interest of 1.5% per month or the maximum allowable by applicable law, whichever is less, for any undisputed past due
+                                                        invoices. You are responsible for all costs of collection, including reasonable attorneys' fees, for any payment default on undisputed invoices. In addition, Insight may terminate all further work
+                                                        if payment is not received in a timely manner.</p>
+                                                    <hr>
+                                                    <div class="text-right">
+                                                        <!-- <button class="btn btn-primary" (click)="openPDF();">Export To PDF</button>
+                                                    <button type="button" class="btn btn-default" onClick="javascript:window.print();"> <i class="icmn-printer margin-right-5"></i> Print </button> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -377,34 +393,43 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="text-right">
+    <button class="btn btn-primary" (click)="openPDF();">Export To PDF</button>
+    <button type="button" class="btn btn-default" onClick="javascript:window.print();"> <i class="icmn-printer margin-right-5"></i> Print </button>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Pie Chart</h4>
+            </div>
+            <div class="card-content">
+                <div class="chart chart-js-container">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Doughnut Chart</h4>
+            </div>
+            <div class="card-content">
+                <div id="jscharts-doughnut" class="chart chart-js-container">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!-- <div class="container">
-    <div id="pdfTable" #pdfTable>
-        <h2>Angular HTML To PDF Generator Example - FreakyJolly.com</h2>
-
-        <table class="table">
-            <thead>
-                <tr *ngFor="let item of items,let i = index  ">
-                    <th>{{item.itemName}}</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{invoicePdf.name}}</td>
-                    <td>{{invoicePdf.emailId}}</td>
-                    <td>john@example.com</td>
-                </tr>
-
-            </tbody>
-        </table>
-        
-    </div>
-    <button class="btn btn-primary" (click)="downloadAsPDF();">Export To PDF</button>
-</div> -->

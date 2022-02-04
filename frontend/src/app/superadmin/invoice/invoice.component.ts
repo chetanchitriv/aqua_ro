@@ -6,12 +6,8 @@ import { InvoiceService } from 'src/app/shared/invoice.service';
 import { LeadService } from 'src/app/shared/lead.service';
 import { UserService } from 'src/app/shared/user.service';
 
-declare var require: any;
-
-import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
-const htmlToPdfmake = require("html-to-pdfmake");
-(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-invoice',
@@ -61,6 +57,7 @@ dueDate:any
   invoiceAll: any=[];
   invoicePdf:any=[]
   items:any=[]
+  DATA:any
 
 
 
@@ -273,11 +270,22 @@ this.items=res.data.itemList
 //   link.download = `${fileName}.pdf`
 //   link.click();
 // }
-public downloadAsPDF() {
-  const pdfTable = this.pdfTable.nativeElement;
-  var html = htmlToPdfmake(pdfTable.innerHTML);
-  const documentDefinition = { content: html };
-  pdfMake.createPdf(documentDefinition).download(); 
-   
-}
+
+
+public openPDF():void {
+    this.DATA = document.getElementById('htmlData');
+      
+    html2canvas(this.DATA).then(canvas => {
+        
+        let fileWidth = 208;
+        let fileHeight = canvas.height * fileWidth / canvas.width;
+        
+        const FILEURI = canvas.toDataURL('image/png')
+        let PDF = new jsPDF('p', 'mm', 'a4');
+        let position = 0;
+        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+        
+        PDF.save('angular-demo.pdf');
+    });     
+  }
 }
