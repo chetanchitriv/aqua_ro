@@ -19,6 +19,7 @@ export class TopnavComponent implements OnInit {
   len:any
   role:any
   note:boolean=false
+  assignleads:any=[]
 
   constructor(private authservice: AuthserviceService, private router:Router, private leadService: LeadService) { 
     this.username=localStorage.getItem('username')
@@ -27,6 +28,8 @@ export class TopnavComponent implements OnInit {
 
   ngOnInit(): void {
    this.notify()
+   this.getAllLeads()
+   this.len = this.assignleads.length + this.leadsAll.length
 
     this.role=localStorage.getItem('role')
  
@@ -69,7 +72,7 @@ console.log(res.lead,"notification");
 
   if( this.role == 'Superadmin' || this.role == 'Admin'){
     this.leadsAll=res.lead
-  this.len=res.lead.length
+  this.len=res.lead.length 
   }else{
     console.log("i am not sa");
     
@@ -83,5 +86,15 @@ this.len=this.leadsAll.length
   
 })
 
+}
+
+getAllLeads(){
+     
+  this.leadService.getLeads().subscribe((res: any)=>{  
+ console.log(res);
+this.assignleads=res.filter((a:any)=>{
+  return a.assignTo == this.username && a.status == 'New Lead'
+})
+  })
 }
 }

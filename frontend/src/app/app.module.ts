@@ -23,6 +23,8 @@ import { EditprofileComponent } from './superadmin/editprofile/editprofile.compo
 import { StockComponent } from './superadmin/stock/stock.component';
 import { InvoiceComponent } from './superadmin/invoice/invoice.component';
 import { StockallotmentComponent } from './superadmin/stockallotment/stockallotment.component';
+import { SelectteamComponent } from './superadmin/selectteam/selectteam.component';
+import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads.component';
 
 
 
@@ -42,9 +44,11 @@ import { StockallotmentComponent } from './superadmin/stockallotment/stockallotm
      StockComponent,
      InvoiceComponent,
      StockallotmentComponent,
+     SelectteamComponent,
+     AssignedleadsComponent,
     
      
-
+ 
    
   ],
   imports: [

@@ -30,11 +30,22 @@
                     <p>Users</p>
                 </a>
             </li>
-
+            <li *ngIf="isSuperAdmin ">
+                <a routerLink="/dashboard/selectteam">
+                    <i class="material-icons">people</i>
+                    <p>select Team</p>
+                </a>
+            </li>
             <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">
                 <a routerLink="/dashboard/leads">
                     <i class="material-icons">person_add</i>
                     <p>Leads</p>
+                </a>
+            </li>
+            <li *ngIf=" isTechnician">
+                <a routerLink="/dashboard/assignedlead">
+                    <i class="material-icons">dashboard</i>
+                    <p>Assigned Lead </p>
                 </a>
             </li>
             <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">

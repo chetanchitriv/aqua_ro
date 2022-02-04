@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import { ComplaintService } from 'src/app/shared/complaint.service';
@@ -6,12 +6,22 @@ import { InvoiceService } from 'src/app/shared/invoice.service';
 import { LeadService } from 'src/app/shared/lead.service';
 import { UserService } from 'src/app/shared/user.service';
 
+import {jsPDF} from 'jspdf'
+import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.css']
 })
 export class InvoiceComponent implements OnInit {
+
+
+  @ViewChild('pdfTable')
+  pdfTable!: ElementRef;
+
+
+
   dtOptions:DataTables.Settings={}
   searchLead: any=FormGroup;
   allLeads: any=[];
@@ -45,6 +55,9 @@ dueDate:any
   username:any
   itemList: any= FormArray;
   invoiceAll: any=[];
+  invoicePdf:any=[]
+  items:any=[]
+  DATA:any
 
 
 
@@ -68,8 +81,8 @@ console.log("dueDate", this.future);
    
     this.invoiceUpdateForm = this.formbuilder.group({
       name : ['',Validators.required],
-      mobileNo : ['',Validators.required],
-      AltmobileNo : [''],
+      // mobileNo : ['',Validators.required],
+      // AltmobileNo : [''],
       emailId : ['',Validators.required],
       // assignTo : ['',Validators.required],
       address : ['',Validators.required],
@@ -154,8 +167,8 @@ console.log("dueDate", this.future);
       this.showinvoiceUpdateForm=false
       this.invoiceForm = this.formbuilder.group({
         name : [this.leadData.name,Validators.required],
-        mobileNo : [this.leadData.mobileNo,Validators.required],
-        AltmobileNo : [this.leadData.AltmobileNo,Validators.required],
+        // mobileNo : [this.leadData.mobileNo,Validators.required],
+        // AltmobileNo : [this.leadData.AltmobileNo,Validators.required],
        
         emailId : [this.leadData.emailId,Validators.required],
         // assignTo : [this.leadData.assignTo,Validators.required],
@@ -229,9 +242,14 @@ getAllInvoice() {
   })
 }
 generateInvoice(){
-
+  
     this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
-      console.log(res);
+      console.log(res.data,"post res");
+      console.log(res.data.itemList);
+      
+this.invoicePdf=res.data
+this.items=res.data.itemList
+
       // this.showinvoicesearchForm=false
       // this.showinvoiceTable=true
       // this.showinvoiceForm=false
@@ -245,11 +263,29 @@ generateInvoice(){
     })
 }
 
-downloadPdf(base64String:any, fileName:any) {
-  const source = `data:application/pdf;base64,${base64String}`;
-  const link = document.createElement("a");
-  link.href = source;
-  link.download = `${fileName}.pdf`
-  link.click();
-}
+// downloadPdf(base64String:any, fileName:any) {
+//   const source = `data:application/pdf;base64,${base64String}`;
+//   const link = document.createElement("a");
+//   link.href = source;
+//   link.download = `${fileName}.pdf`
+//   link.click();
+// }
+
+
+public openPDF():void {
+    this.DATA = document.getElementById('htmlData');
+      
+    html2canvas(this.DATA).then(canvas => {
+        
+        let fileWidth = 208;
+        let fileHeight = canvas.height * fileWidth / canvas.width;
+        
+        const FILEURI = canvas.toDataURL('image/png')
+        let PDF = new jsPDF('p', 'mm', 'a4');
+        let position = 0;
+        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+        
+        PDF.save('angular-demo.pdf');
+    });     
+  }
 }

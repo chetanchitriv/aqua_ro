@@ -1,0 +1,49 @@
+<div class="d-flex">
+    <div class="col-md-12">
+
+        <div class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+
+            <div class="card-header card-header-text">
+                <span><h4 class="card-title">Select Your Team</h4></span>
+
+            </div>
+
+            <div class="card-content">
+
+
+
+                <div class="row">
+                    <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+                        <div class="col-md-4"><select class="form-control" placeholder="Select an option" formControlName="admin">
+                            
+                        <option  ><p>Select </p></option>
+                           
+                            <option  *ngFor="let admins of admin">{{admins.userName}}</option>   
+                        </select></div>
+
+                        <div class="col-md-4">
+                            <button (click)="checkboar()" style="border: none;background-color: white;">select Team Members</button>
+                            <div *ngIf="show">
+                                <div *ngFor="let user of users; let i=index">
+                                    <label>
+                                      <input type="checkbox" [value]="user.userName" (change)="onCheckboxChange($event)" />
+                                      {{user.userName}}
+                                         </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
