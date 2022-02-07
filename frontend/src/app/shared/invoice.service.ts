@@ -15,6 +15,8 @@ export class InvoiceService {
 
   postInvoice(data : any){
     return this.http.post<any>(this.nodeUrl+"invoice", data)
+    // return this.http.post<any>("http://391e-43-224-0-173.ngrok.io/api/invoice", data)
+
   }
 
   getInvoice(){

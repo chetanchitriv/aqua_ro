@@ -4,7 +4,7 @@ const mongoose=require("mongoose")
 const cors=require("cors")
 const dotenv=require("dotenv")
 const bodyparser = require("body-parser")
-
+const port = process.env.PORT
 dotenv.config()
 
 mongoose.connect(
@@ -16,7 +16,7 @@ mongoose.connect(
     }
 )
 
-// app.use(express.json())
+app.use(express.json())
 app.use(bodyparser.urlencoded({extended: true}))
 app.use(bodyparser.json())
 

@@ -25,6 +25,9 @@ export class InvoiceComponent implements OnInit {
 
   today:any
   times:any
+future= new Date()
+dueDate:any
+
 
   invoiceForm: any = FormGroup;
   invoiceUpdateForm: any = FormGroup;
@@ -45,11 +48,14 @@ export class InvoiceComponent implements OnInit {
 
 
 
-
   constructor(private formbuilder:FormBuilder, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
   
 
   ngOnInit(): void {
+    
+this.future.setDate(this.future.getDate()+15)
+console.log("dueDate", this.future);
+
   
     this.username=localStorage.getItem('username')
     this.initiatedtOption()
@@ -58,7 +64,7 @@ export class InvoiceComponent implements OnInit {
     this.getAllLeads()
     this.getAllComplaints()
    
-   
+    
    
     this.invoiceUpdateForm = this.formbuilder.group({
       name : ['',Validators.required],
@@ -69,7 +75,7 @@ export class InvoiceComponent implements OnInit {
       address : ['',Validators.required],
       serviceType : ['',Validators.required],
       date : [this.today,Validators.required],
-      dueDate : ['',Validators.required],
+      dueDate : [this.future,Validators.required],
 
       items: this.formbuilder.array([ this.createItem() ])
       
@@ -85,6 +91,7 @@ export class InvoiceComponent implements OnInit {
     
       
     })
+    
 
   }
 
@@ -131,6 +138,7 @@ export class InvoiceComponent implements OnInit {
     console.log(this.searchLead.controls.mobile.value);
     
     this.today = this.date.toISOString().slice(0, 10);
+    this.dueDate = this.future.toISOString().slice(0, 10);
     this.times =  this.date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
     this.allLeads.forEach((element:any )=> {
       if(element.mobileNo==this.searchLead.controls.mobile.value || element.AltmobileNo==this.searchLead.controls.mobile.value){
@@ -153,7 +161,7 @@ export class InvoiceComponent implements OnInit {
         // assignTo : [this.leadData.assignTo,Validators.required],
         address : [this.leadData.address,Validators.required],
         date : [this.today,Validators.required],
-        dueDate : ['',Validators.required],
+        dueDate : [this.dueDate,Validators.required],
   
         serviceType:['',Validators.required],
         itemList: this.formbuilder.array([ this.createItem() ])
@@ -229,7 +237,7 @@ generateInvoice(){
       // this.showinvoiceForm=false
       // this.showinvoiceUpdateForm=false
       alert("Complaint Added Successfully!");
-      this.downloadPdf(res.pdf,"invoice")
+      // this.downloadPdf(res.pdf,"invoice")
       // this.getAllInvoice();
     },
       (  err: any)=>{
