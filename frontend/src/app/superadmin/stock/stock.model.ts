@@ -4,6 +4,6 @@ export class stockModel{
     qnt : string = '';
     purchaseAmount : string = '';
     sellingPrice : string = '';
-   
+    balanceAmount:string = '';
    
 }

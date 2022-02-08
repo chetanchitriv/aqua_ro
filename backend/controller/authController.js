@@ -30,7 +30,7 @@ exports.login = async (req, res) => {
       console.log(req.body);
       console.log("Invalid Password");
 
-      res.status(400).json({
+      res.status(400).json({ 
         success: false,
         message: "Invalid Password"
       });
@@ -43,5 +43,5 @@ console.log("User does not exist");
       message: "User does not exist"
     });
   }
-
 }
+  

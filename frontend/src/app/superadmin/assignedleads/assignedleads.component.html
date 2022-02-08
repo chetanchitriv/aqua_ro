@@ -1,0 +1,61 @@
+<div class="d-flex">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-content">
+                <h4 class="card-title"> Assigned Leads</h4>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                                <thead>
+                                    <tr role="row">
+                                        <th style="width: 87px;">ID</th>
+
+
+                                        <th style="width: 87px;">Name</th>
+                                        <th style="width: 87px;">Mobile no.</th>
+                                        <th style="width: 87px;">Alternate no.</th>
+
+                                        <th style="width: 87px;">Email ID</th>
+
+
+                                        <th style="width: 87px;">Follow-up Date</th>
+                                        <th style="width: 87px;">Assigned By</th>
+                                        <th style="width: 87px;">Next Follow-up Date</th>
+
+
+                                        <th style="width: 87px;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of assignleads; let i = index">
+                                        <td>{{i+1}}</td>
+
+                                        <td>{{data.name}}</td>
+                                        <td>{{data.mobileNo}}</td>
+                                        <td>{{data.AltmobileNo}}</td>
+                                        <td>{{data.emailId}}</td>
+
+                                        <td>{{data.followUpdate}}</td>
+                                        <td>{{data.createdBy}}</td>
+                                        <td>{{data.nextFollowupdate}}</td>
+
+                                        <td class="text-right">
+                                            <a class="btn btn-simple btn-success btn-icon edit"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
+                                            <a class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">edit</i></a>
+                                            <a class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
