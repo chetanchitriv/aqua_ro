@@ -4,16 +4,10 @@ const invoiceSchema=new mongoose.Schema({
     name : String,
     emailId  : String,
     address  : String,
-    serviceType : Number,
+    serviceType : String,
     date:String,
     dueDate:String,
-    itemList:[{
-        itemName : String,
-        description: String,
-        qnt:Number,
-        rate:Number,
-        amt:Number
-    }]
+    itemList:[Object]
 });
 
 module.exports=mongoose.model("invoice_pdf",invoiceSchema)

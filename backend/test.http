@@ -13,3 +13,23 @@ Content-Type: :application/json
     "password":"123",
     "role":"Admin"
 }
+
+
+   var teamMemberArray = req.body.team_member
+         var array = []
+         console.log(array);
+         teamMemberArray.forEach(element => {
+             array.push(element)
+         }); 
+        console.log(req.body);
+        console.log(req.body.admin, "nulla", req.body.team_member);
+ 
+     
+        var store = new stock({
+            admin:req.body.admin,
+            team_memeber:array
+        })
+         var save = await store.save()
+        res.status(201).json({data:save})
+        console.log("Stock added");
+        console.log("start", save, "end");
