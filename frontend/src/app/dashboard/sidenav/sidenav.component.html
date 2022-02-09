@@ -11,7 +11,7 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician" class="active">
+            <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">
                 <a routerLink="/dashboard/">
                     <i class="material-icons">person
                     </i>
@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">
-                <a routerLink="/dashboard/leads">
+                <a routerLink="/dashboard/leads" routerLinkActive="active">
                     <i class="material-icons">person_add</i>
                     <p>Leads</p>
                 </a>

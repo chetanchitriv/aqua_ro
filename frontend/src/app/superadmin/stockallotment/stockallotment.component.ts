@@ -63,7 +63,7 @@ postStockallotDetails(){
   this.stockallotservice.postStockallot(this.formStockAllot.value).subscribe(res=>{
     alert("Stock Added Successfully!");
     this.formStockAllot.reset();
-
+    this.initiatedtOption()
   this.getAllStockallot()
   this.showStockTable()
   })

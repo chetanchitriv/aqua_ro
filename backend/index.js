@@ -4,7 +4,7 @@ const mongoose=require("mongoose")
 const cors=require("cors")
 const dotenv=require("dotenv")
 const bodyparser = require("body-parser")
-
+const port = process.env.PORT
 dotenv.config()
 
 mongoose.connect(
@@ -16,7 +16,7 @@ mongoose.connect(
     }
 )
 
-// app.use(express.json())
+app.use(express.json())
 app.use(bodyparser.urlencoded({extended: true}))
 app.use(bodyparser.json())
 
@@ -44,6 +44,7 @@ app.get("/", (req, res)=>{
 const userRouts=require("./routes/user")
 const authRoute=require("./routes/auth")
 const stockRoute=require("./routes/stockRouter")
+const teamAllotRoute=require("./routes/teamAllotRout")
 const graphRouth=require("./routes/graphRoute")
 const stockTechRougth=require("./routes/stockTechRouter")
 const leadRoute=require("./routes/lead")
@@ -53,6 +54,7 @@ const complaintRoute=require("./routes/complaint")
 
 app.use("/api/users",userRouts)
 app.use("/api/invoice",invoiceRoute)
+app.use('/api/teams',teamAllotRoute)
 app.use("/api/login",authRoute)
 app.use("/api/graph",graphRouth)
 app.use('/api/leads',leadRoute)

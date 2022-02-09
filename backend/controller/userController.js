@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const user_all=async(req,res)=>{
     try{
         const users=await User.find({ role: { $ne: 'Superadmin' } })
+        
         res.json(users)
     }catch(error){
         res.json({
@@ -27,10 +28,15 @@ const user_details=async(req,res)=>{
 const user_create= async(req,res)=>{
     // checking user email id in database
     const emailExit = await User.findOne({
-        email: req.body.email
+        email: req.body.email,
+    });
+    const userExit = await User.findOne({
+        userName: req.body.userName,
     });
 
     if (emailExit) return res.status(400).send("Email already exists");
+    if (userExit) return res.status(400).send("username already exists");
+    
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword  = await bcrypt.hash(req.body.password, salt);
