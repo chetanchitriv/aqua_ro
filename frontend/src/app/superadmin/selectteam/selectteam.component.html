@@ -1,49 +1,111 @@
 <div class="d-flex">
+    <div>
+        <button type="button" (click)="showForm()" class="btn btn-success">Add Team Members <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showTable()" class="btn btn-success">show Team List <i class="bi bi-briefcase-fill"></i></button>
+    </div>
     <div class="col-md-12">
-
-        <div class="card" style="width: 80%; margin: 10px 0 0px 144px;">
-
-            <div class="card-header card-header-text">
-                <span><h4 class="card-title">Select Your Team</h4></span>
-
-            </div>
+        <div class="card" *ngIf="!showTeamForm && showTeamTable">
 
             <div class="card-content">
+                <h3 class="card-title" style="color: rgb(26, 175, 39);"><b>Team List</b></h3>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                                <thead>
+                                    <tr role="row">
+                                        <th style="width: 87px;">ID</th>
+                                        <th style="width: 87px;">Team Leader</th>
+                                        <th style="width: 87px;">Team members</th>
+                                        <th style="width: 87px;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let team of teamarr,let i=index ">
+                                        <td>{{i+1}}</td>
+                                        <td>{{team.admin}}</td>
+                                        <td *ngFor=" let item of team.team_memeber">
+                                            {{item}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            <a (click)="onEdit(team._id)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">edit</i></a>
+                                            <a (click)="deleteTeams(team._id)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+
+                            </table>
+                        </div>
+                    </div>
 
 
 
-                <div class="row">
-                    <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
-                        <div class="col-md-4"><select class="form-control" placeholder="Select an option" formControlName="admin">
-                            
-                        <option  ><p>Select </p></option>
-                           
-                            <option  *ngFor="let admins of admin">{{admins.userName}}</option>   
-                        </select></div>
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
 
-                        <div class="col-md-4">
-                            <button (click)="checkboar()" style="border: none;background-color: white;">select Team Members</button>
-                            <div *ngIf="show">
-                                <div *ngFor="let user of users; let i=index">
-                                    <label>
-                                      <input type="checkbox" [value]="user.userName" (change)="onCheckboxChange($event)" />
-                                      {{user.userName}}
-                                         </label>
-                                </div>
-                            </div>
+
+        <div *ngIf="showTeamForm && !showTeamTable" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+
+            <div class="d-flex">
+                <div class="col-md-12">
+
+                    <div class="card" style="width: 80%; margin: 10px 0 0px 15px;">
+
+                        <div class="card-header card-header-text">
+                            <h4 class="card-title" style="color: rgb(26, 175, 39);"><b>Select Your Team Members</b></h4>
+
                         </div>
 
-                        <input type="submit" value="Submit">
-                    </form>
+                        <div class="card-content">
+
+
+
+                            <div class="row">
+                                <form [formGroup]="form" novalidate>
+                                    <div class="col-md-4"><select class="form-control" placeholder="Select an option" formControlName="admin">
+                                        
+                                    <option  ><p>Select </p></option>
+                                       
+                                        <option  *ngFor="let adminss of admins">{{adminss.userName}}</option>   
+                                    </select></div>
+
+                                    <div class="col-md-4">
+                                        <button (click)="checkboar()" style="border: none;background-color: white;">select Team Members</button>
+
+                                        <div *ngIf="show">
+                                            <div *ngFor="let user of users; let i=index">
+                                                <label>
+                                                  <input type="checkbox" [value]="user.userName" (change)="onCheckboxChange($event)" />
+                                                  {{user.userName}}
+                                                     </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button (click)="submitForm()" class="button btn btn-success" type="submit">Submit</button>
+
+
+                                </form>
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+                    </div>
                 </div>
-
-
-
             </div>
-
 
 
 
         </div>
     </div>
-</div>

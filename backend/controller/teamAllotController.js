@@ -8,15 +8,15 @@ exports.team_create =  (req, res) => {
         var teamArray = req.body.team_member
         var  teamMemberArray = []
         teamArray.forEach(element => {
-            if(element!=null){
+ 
                 teamMemberArray.push(element)
-            }
+            
         });
         const insert = new stock({
             admin: req.body.admin,
             team_memeber: teamMemberArray
         })
-        const saveData =  insert.save()
+        const saveData =   insert.save()
         res.send(saveData)
         console.log("start", saveData, "end");
     } catch (error) {
@@ -58,6 +58,7 @@ exports.team_update = async (req, res) => {
     try {
         const update = await stock.findByIdAndUpdate(req.params.id, req.body)
         res.status(200).json({ message: "updated successfully" })
+        // console.log(update);
         console.log("stock Updated");
 
     } catch (error) {
@@ -70,6 +71,7 @@ exports.team_update = async (req, res) => {
 //deleteing stocks
 exports.team_delete = async (req, res) => {
     try {
+        console.log(req.params.id);
         const deleteStock = await stock.findByIdAndDelete(req.params.id)
         res.status(200).json({ message: "Deleted successfully" })
         console.log("stock Deleted");
