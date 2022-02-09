@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from "highcharts";
 import { ComplaintService } from 'src/app/shared/complaint.service';
+import { GraphService } from 'src/app/shared/graph.service';
 import { LeadService } from 'src/app/shared/lead.service';
 import { UserService } from 'src/app/shared/user.service';
+import { ApexOptions } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-chartboart',
@@ -22,13 +24,15 @@ export class ChartboartComponent implements OnInit {
     leadCount: any;
     complaintCount: any;
     teleCallerList: any=[];
+    leadByTelecaller: any
 
-  constructor(private userService:UserService,private leadService:LeadService,private complaintService:ComplaintService) { }
+  constructor(private userService:UserService,private leadService:LeadService,private complaintService:ComplaintService,private graph:GraphService) { }
 
   ngOnInit(): void {
     this.getallUser();
     this.getallLead();
     this.getallComplaint()
+    this.getLeadByTelecaller()
     this.chartoptions={
       chart: {
       type: 'column'
@@ -125,5 +129,51 @@ export class ChartboartComponent implements OnInit {
         this.complaintCount=this.AllComplaints.length
         })
     }
+
+    getLeadByTelecaller(){
+      this.graph.getLeadBytelecaller().subscribe(
+      (resp: any) => {
+        this.leadByTelecaller = this._prepareBarChartData([{ name: 'Telecaller', data: resp['count'] }], resp['label'])
+      }
+    )
+    }
     
+    private _prepareBarChartData(series:any = [], categories:any = []) {
+
+        return {
+          series,
+          chart: {
+            type: "bar",
+            height: 250,
+            stacked: true,
+            toolbar: {
+              show: true
+            },
+            zoom: {
+              enabled: true
+            }
+          },
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                legend: {
+                  position: "bottom",
+                  offsetX: -10,
+                  offsetY: 0
+                }
+              }
+            }
+          ],
+          plotOptions: {
+            bar: {
+              horizontal: false
+            }
+          },
+          xaxis: {
+            type: "category",
+            categories
+          }
+        }
+      }
 }

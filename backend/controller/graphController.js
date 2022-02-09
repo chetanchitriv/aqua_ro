@@ -6,7 +6,7 @@ exports.getGraphTele = async (req, res) => {
         const lead = await Lead.find()
         var TelecallerName = []
         for(x in lead){
-            TelecallerName.push(lead(x).cratedBy)
+            TelecallerName.push(lead[x].cratedBy)
         }
             
         
