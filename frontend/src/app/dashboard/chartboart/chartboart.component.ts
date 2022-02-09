@@ -25,6 +25,7 @@ export class ChartboartComponent implements OnInit {
     complaintCount: any;
     teleCallerList: any=[];
     leadByTelecaller: any
+  leadByTechnician:any;
 
   constructor(private userService:UserService,private leadService:LeadService,private complaintService:ComplaintService,private graph:GraphService) { }
 
@@ -33,56 +34,7 @@ export class ChartboartComponent implements OnInit {
     this.getallLead();
     this.getallComplaint()
     this.getLeadByTelecaller()
-    this.chartoptions={
-      chart: {
-      type: 'column'
-  },
-  // title: {
-  //     text: 'Monthly Average Rainfall'
-  // },
-  // subtitle: {
-  //     text: 'Source: WorldClimate.com'
-  // },
-  xAxis: {
-      categories: [
-          'monika',
-          'shital',
-          'sahil',
-          'shashank',
-          'nisha',
-          'komal',
-          'mona',
-      ],
-      crosshair: true
-  },
-  yAxis: {
-      min: 0,
-      title: {
-          text: 'total count'
-      }
-  },
-  tooltip: {
-      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-          '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-      footerFormat: '</table>',
-      shared: true,
-      useHTML: true
-  },
-  plotOptions: {
-      column: {
-          pointPadding: 0.2,
-          borderWidth: 0
-      }
-  },
-  series: [{
-      name: 'Telecallers',
-      data: [10,5,7,2,6,8,3]
-  
-  }]
-  }
-    
- 
+    this.getLeadByTechnician()
   }
 
     getallUser(){
@@ -133,9 +85,21 @@ export class ChartboartComponent implements OnInit {
     getLeadByTelecaller(){
       this.graph.getLeadBytelecaller().subscribe(
       (resp: any) => {
-        this.leadByTelecaller = this._prepareBarChartData([{ name: 'Telecaller', data: resp['count'] }], resp['label'])
+        console.log(resp);
+        
+        this.leadByTelecaller = this._prepareBarChartData([{ name: 'Total Lead', data: resp['count'] }], resp['label'])
       }
     )
+    }
+
+    getLeadByTechnician(){
+      this.graph.getLeadBytechnician().subscribe(
+        (resp: any) => {
+          console.log(resp);
+          
+          this.leadByTechnician = this._prepareBarChartData([{ name: 'Total Lead', data: resp['count'] }], resp['label'])
+        }
+      )
     }
     
     private _prepareBarChartData(series:any = [], categories:any = []) {

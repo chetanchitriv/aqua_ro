@@ -15,4 +15,7 @@ export class GraphService {
   getLeadBytelecaller(){
     return this.http.get<any>(this.nodeUrl+"graph/telecaller")
   }
+  getLeadBytechnician(){
+    return this.http.get<any>(this.nodeUrl+"graph/technician")
+  }
 }
