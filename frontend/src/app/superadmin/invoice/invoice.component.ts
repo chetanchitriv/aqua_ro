@@ -58,6 +58,11 @@ dueDate:any
   invoicePdf:any=[]
   items:any=[]
   DATA:any
+  newArray:any=[]
+  grandTotal:any=Number
+  tax:any
+  basePrice:any
+  invoice:boolean=false
 
 
 
@@ -156,6 +161,8 @@ console.log("dueDate", this.future);
     this.allLeads.forEach((element:any )=> {
       if(element.mobileNo==this.searchLead.controls.mobile.value || element.AltmobileNo==this.searchLead.controls.mobile.value){
         this.leadData=element
+    
+        
         leadExist=true
       }
     });
@@ -242,19 +249,44 @@ getAllInvoice() {
   })
 }
 generateInvoice(){
-  
+  this.showinvoicesearchForm =false
+  this.showinvoiceTable=false
+  this.showinvoiceForm=false
+  this.invoice=true
     this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
       console.log(res.data,"post res");
       console.log(res.data.itemList);
       
+var array=res.data.itemList
+
+      for (let x in array) {
+
+        // console.log((array[x].qnt) * (array[x].rate));
+        var amt = (array[x].qnt) * (array[x].rate)
+        this.newArray.push(amt)
+            // array[x].amt = amt
+    
+    }
+      
+    function sum(sahil:any, shank:any) {
+      return sahil + shank
+  }
+  
+  this.grandTotal = this.newArray.reduce(sum)
+  this.tax = this.grandTotal* 0.16
+  this.basePrice =this.grandTotal*0.84
+  
+      console.log(this.grandTotal,"jadu jadu");
+      
 this.invoicePdf=res.data
 this.items=res.data.itemList
+
 
       // this.showinvoicesearchForm=false
       // this.showinvoiceTable=true
       // this.showinvoiceForm=false
       // this.showinvoiceUpdateForm=false
-      alert("Complaint Added Successfully!");
+      alert("Invoice Generated Successfully!");
       // this.downloadPdf(res.pdf,"invoice")
       // this.getAllInvoice();
     },
@@ -273,6 +305,10 @@ this.items=res.data.itemList
 
 
 public openPDF():void {
+  this.showinvoicesearchForm =true
+  this.showinvoiceTable=true
+  this.showinvoiceForm=true
+  this.invoice=false
     this.DATA = document.getElementById('htmlData');
       
     html2canvas(this.DATA).then(canvas => {
@@ -285,7 +321,8 @@ public openPDF():void {
         let position = 0;
         PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
         
-        PDF.save('angular-demo.pdf');
-    });     
+        PDF.save(this.leadData.name+ '_'+this.today );
+    });    
+    alert("Pdf Downloaded Succefully") 
   }
 }

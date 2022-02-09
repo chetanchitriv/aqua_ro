@@ -147,9 +147,9 @@
                                                     </select>
                                                         </td>
                                                         <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td>
-                                                        <td> <input type="text" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
-                                                        <td> <input type="text" placeholder="Rate" class="form-control" formControlName="rate"></td>
-                                                        <td> <input type="text" placeholder="Amount" class="form-control" formControlName="amt"></td>
+                                                        <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
+                                                        <td> <input type="number" placeholder="Rate" class="form-control" formControlName="rate"></td>
+                                                        <td> <input type="number" placeholder="Amount" class="form-control" formControlName="amt"></td>
                                                         <td (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
                                                         </i>
                                                         </td>
@@ -186,7 +186,7 @@
     <div class="col-md-12">
         <div *ngIf="!showinvoicesearchForm && showinvoiceTable && !showinvoiceForm && !showinvoiceUpdateForm" class="card-form card">
             <div class="card-content">
-                <h4 class="card-title">Complaints</h4>
+                <h4 class="card-title">Invoice</h4>
                 <div class="content">
                     <!-- <div class="toolbar">
                   
@@ -285,7 +285,7 @@
     <br><br>
 
 </div>
-<div id="htmlData">
+<div *ngIf="invoice" id="htmlData">
     <div class="container card " style="width: 80%; margin: 10px 0 0px 144px;">
         <div class="row">
             <div class="col-md-12">
@@ -296,18 +296,36 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div>
-                                        <div class="card-header">
-                                            <h3>Invoice</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card-header">
+                                                    <h1 style="color: #4caf50">Invoice</h1>
+                                                    <p> Invoice No. :<strong> E1234-567-89</strong></p>
+                                                    <p> Date : <strong>{{invoicePdf.date}}</strong> &nbsp;&nbsp;</p>
+                                                    <p>Due Date : <strong>{{invoicePdf.dueDate}}</strong></p>
+                                                    <p>Service Type: <strong>{{invoicePdf.serviceType}}</strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card-header">
+                                                    <img src="../../../assets/img/logo.png" style="width: 200px;height: 200px;margin-left: 50px;" alt="" srcset="">
+                                                </div>
+                                            </div>
                                         </div>
+
                                         <div class="card-content card-padding">
                                             <div class="m-b-20">
                                                 <div>
                                                     <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h4> Amazon Delivery <br>
-                                                                <br>
-                                                            </h4>
-                                                            <address>
+                                                        <div class="col-md-5  text-center">
+                                                            <div class="card">
+                                                                <!-- <table>
+                                                                    <tr><th></th></tr>
+                                                                </table> -->
+                                                                <b><h3 style="background-color: #4caf50;"> Billed By 
+                                                                   
+                                                                </h3></b>
+                                                                <address>
                               1234 Silver Gate Avenue, Suite 430 <br>
                               San Francisco, CA, 94118 <br>
                               <abbr title="Mail">E-mail:</abbr>&nbsp;&nbsp;example@company.com <br>
@@ -315,26 +333,28 @@
                               <abbr title="Fax">Fax:</abbr>&nbsp;&nbsp;800-692-7753 <br>
                               <br>
                               </address>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6 text-right">
-                                                            <h4>Invoice Info</h4>
-                                                            <p> <a class="font-size-20" href="javascript:void(0)">E1234-567-89</a> <br>
-                                                                <span class="font-size-20">{{invoicePdf.name}}</span> </p>
-                                                            <p> <span class="font-size-20">{{invoicePdf.emailId}}</span> </p>
-                                                            <address>
+                                                        <div class="col-md-1 light"></div>
+                                                        <div class="col-md-5 text-center" style="height: 231px;">
+                                                            <div class="card">
+                                                                <b> <h3 style="background-color: #4caf50;">Billed To</h3></b>
+                                                                <p>
+                                                                    Name : <span class="font-size-20">{{invoicePdf.name}}</span> </p>
+                                                                <p>Email : <span class="font-size-20">{{invoicePdf.emailId}}</span> </p>
+                                                                <address>
                               {{invoicePdf.address}}
                              
-                              </address>
-                                                            <span>{{invoicePdf.date}}</span> <br>
-                                                            <span>{{invoicePdf.dueDate}}</span> <br>
-                                                            <span>{{invoicePdf.serviceType}}</span> <br>
-                                                            <br>
+                              </address> <br>
+                                                                <br>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <br><br>
                                                     <div class="table-responsive">
                                                         <table class="table table-striped text-right">
                                                             <thead>
-                                                                <tr>
+                                                                <tr class="headInvoice">
                                                                     <th class="text-center">#</th>
                                                                     <th class="text-center">Item Name</th>
                                                                     <th class="text-center">Description</th>
@@ -350,7 +370,7 @@
                                                                     <td class="text-center">{{item.description}}</td>
                                                                     <td class="text-center">{{item.qnt}}</td>
                                                                     <td class="text-center">{{item.rate}}</td>
-                                                                    <td class="text-center">{{item.amt}}</td>
+                                                                    <td class="text-center">{{item.qnt * item.rate}}</td>
                                                                 </tr>
 
                                                             </tbody>
@@ -364,9 +384,9 @@
                                                         <div class="col-md-6">
                                                             <div class="text-right clearfix">
                                                                 <div class="pull-right">
-                                                                    <p> Sub - Total amount: <strong><span>$35,400.00</span></strong> </p>
-                                                                    <p> VAT: <strong><span>$123.00</span></strong> </p>
-                                                                    <p class="page-invoice-amount"> <strong>Grand Total: <span>$35,523.00</span></strong> </p>
+                                                                    <p> Sub - Total amount: <strong><span>{{basePrice}}</span></strong> </p>
+                                                                    <p> VAT: <strong><span>{{tax}}</span></strong> </p>
+                                                                    <p class="page-invoice-amount"> <strong>Grand Total: <span>{{grandTotal}}</span></strong> </p>
                                                                     <br>
                                                                 </div>
                                                             </div>
@@ -400,36 +420,7 @@
         </div>
     </div>
 </div>
-<div class="text-right">
+<div *ngIf="invoice" class="text-right">
     <button class="btn btn-primary" (click)="openPDF();">Export To PDF</button>
-    <button type="button" class="btn btn-default" onClick="javascript:window.print();"> <i class="icmn-printer margin-right-5"></i> Print </button>
-</div>
 
-
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h4>Pie Chart</h4>
-            </div>
-            <div class="card-content">
-                <div class="chart chart-js-container">
-                    <canvas id="pieChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h4>Doughnut Chart</h4>
-            </div>
-            <div class="card-content">
-                <div id="jscharts-doughnut" class="chart chart-js-container">
-                    <canvas id="doughnutChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
