@@ -25,8 +25,7 @@ import { InvoiceComponent } from './superadmin/invoice/invoice.component';
 import { StockallotmentComponent } from './superadmin/stockallotment/stockallotment.component';
 import { SelectteamComponent } from './superadmin/selectteam/selectteam.component';
 import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads.component';
-
-
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -58,7 +57,8 @@ import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads
     HighchartsChartModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgApexchartsModule
   ],
   providers: [
     {
