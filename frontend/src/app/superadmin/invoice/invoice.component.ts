@@ -63,6 +63,8 @@ dueDate:any
   tax:any
   basePrice:any
   invoice:boolean=false
+  qnt: any;
+  rate: any;
 
 
 
@@ -71,6 +73,7 @@ dueDate:any
 
   ngOnInit(): void {
     
+   
 this.future.setDate(this.future.getDate()+15)
 console.log("dueDate", this.future);
 
@@ -109,19 +112,25 @@ console.log("dueDate", this.future);
     
       
     })
-    
 
   }
+    // getamount(){
+    //   this.invoiceForm.value.amt=this.invoiceForm.value.qnt*this.invoiceForm.value.rate
+    // return (this.invoiceForm.value.amt)
+    // }
+    
 
   createItem(): FormGroup {
     return this.formbuilder.group({
       itemName: '',
       description: '',
-      qnt: '',
+      qnt:10,
       rate:'',
-      amt: ''
+      amt:''
     });
   }
+    
+
   addItem(): void {
     this.itemList = this.invoiceForm.get('itemList') as FormArray;
     this.itemList.push(this.createItem());
@@ -186,6 +195,8 @@ console.log("dueDate", this.future);
         serviceType:['',Validators.required],
         itemList: this.formbuilder.array([ this.createItem() ])
       })
+      console.log(this.invoiceForm.itemList.value.qnt)
+     
     }
   
     else{

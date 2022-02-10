@@ -87,6 +87,7 @@ export class UsersComponent implements OnInit {
   }
 
   showForm(){
+    this.formValue.reset();
     this.showUserForm=true
     this.showUpdateButton = false;
     this.showAddButton = true;
