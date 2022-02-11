@@ -1,12 +1,12 @@
 const Lead = require('../model/Lead')
 var date = new Date()
-var todayDate = date.toISOString().slice(0, 10)
+// var todayDate = date.toISOString().slice(0, 10)
 
 //adding stock into the database
 exports.getAllNotification = async(req, res) => {
     try {
         // const followupLead = await Lead.find({nextFollowupdate:`${todayDate}`})
-        const followupLead = await Lead.find({ $or: [ {read: false }, {nextFollowupdate:`${todayDate}` }] } )
+        const followupLead = await Lead.find({read:false})
         // const followupLead = await Lead.find({nextFollowupdate:`2022-01-17`}) //for checking
         // console.log(followupLead.length);
         if(followupLead){
