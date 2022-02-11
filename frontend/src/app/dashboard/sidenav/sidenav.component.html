@@ -11,52 +11,52 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician" class="active">
-                <a routerLink="/dashboard/">
+            <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">
+                <a routerLink="/dashboard/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                     <i class="material-icons">person
                     </i>
                     <p>Profile</p>
                 </a>
             </li>
             <li *ngIf="isSuperAdmin">
-                <a routerLink="/dashboard/chart">
+                <a routerLink="/dashboard/chart" routerLinkActive="active">
                     <i class="material-icons">dashboard</i>
                     <p>Dashboard</p>
                 </a>
             </li>
             <li *ngIf="isSuperAdmin || isAdmin">
-                <a routerLink="/dashboard/users">
+                <a routerLink="/dashboard/users" routerLinkActive="active">
                     <i class="material-icons">people</i>
                     <p>Users</p>
                 </a>
             </li>
             <li *ngIf="isSuperAdmin ">
-                <a routerLink="/dashboard/selectteam">
+                <a routerLink="/dashboard/selectteam" routerLinkActive="active">
                     <i class="material-icons">people</i>
                     <p>select Team</p>
                 </a>
             </li>
             <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">
-                <a routerLink="/dashboard/leads">
+                <a routerLink="/dashboard/leads" routerLinkActive="active">
                     <i class="material-icons">person_add</i>
                     <p>Leads</p>
                 </a>
             </li>
             <li *ngIf=" isTechnician">
-                <a routerLink="/dashboard/assignedlead">
+                <a routerLink="/dashboard/assignedlead" routerLinkActive="active">
                     <i class="material-icons">dashboard</i>
                     <p>Assigned Lead </p>
                 </a>
             </li>
             <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">
-                <a routerLink="/dashboard/complaints">
+                <a routerLink="/dashboard/complaints" routerLinkActive="active">
                     <i class="material-icons">help</i>
                     <p>Complaints</p>
                 </a>
             </li>
 
             <li *ngIf="isSuperAdmin || isAdmin ">
-                <a routerLink="/dashboard/stock">
+                <a routerLink="/dashboard/stock" routerLinkActive="active">
                     <i class="material-icons">store
                     </i>
                     <p>Stock</p>
@@ -64,7 +64,7 @@
             </li>
 
             <li *ngIf="isTechnician">
-                <a routerLink="/dashboard/invoice">
+                <a routerLink="/dashboard/invoice" routerLinkActive="active">
                     <i class="material-icons">receipt
                     </i>
                     <p>Invoice</p>
@@ -72,7 +72,7 @@
             </li>
 
             <li *ngIf="isSuperAdmin || isAdmin">
-                <a routerLink="/dashboard/stockallotment">
+                <a routerLink="/dashboard/stockallotment" routerLinkActive="active">
                     <i class="material-icons">local_grocery_store</i>
                     <p>Stock Allotment</p>
                 </a>

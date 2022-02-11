@@ -12,6 +12,7 @@ export class SidenavComponent implements OnInit {
   isTelecaller :boolean = false
   isTechnician :boolean = false
 
+ 
   constructor() { }
 
   ngOnInit(): void {
@@ -64,5 +65,7 @@ export class SidenavComponent implements OnInit {
     //    }
   
   }
+  
+
 
 }

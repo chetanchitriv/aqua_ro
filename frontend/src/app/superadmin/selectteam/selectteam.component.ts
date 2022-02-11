@@ -34,13 +34,14 @@ export class SelectteamComponent implements OnInit {
   ngOnInit(): void {
 
  
-
+    this.getAllUser()
+    this.getallTeam()
+    this.initiatedtOption()
     this.form = this.fb.group({
       admin: [''],
       team_member: this.fb.array([])
     })
-    this.getAllUser()
-    this.getallTeam()
+ 
   
   }
 
@@ -138,9 +139,9 @@ export class SelectteamComponent implements OnInit {
     this.ser.deleteTeams(data._id)
       .subscribe((res: any) => {
         alert("Records Deleted Successfully!");
-       
- 
-
+        this.initiatedtOption()
+        this.getallTeam()
+        this.showTable()
       })
   }
   onEdit(data:any){
