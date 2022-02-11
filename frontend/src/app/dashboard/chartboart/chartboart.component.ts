@@ -33,8 +33,7 @@ export class ChartboartComponent implements OnInit {
     this.getallUser();
     this.getallLead();
     this.getallComplaint()
-    this.getLeadByTelecaller()
-    this.getLeadByTechnician()
+  this.getAllGraph()
   }
 
     getallUser(){
@@ -82,26 +81,19 @@ export class ChartboartComponent implements OnInit {
         })
     }
 
-    getLeadByTelecaller(){
+    getAllGraph(){
+      
       this.graph.getLeadBytelecaller().subscribe(
       (resp: any) => {
         console.log(resp);
         
-        this.leadByTelecaller = this._prepareBarChartData([{ name: 'Total Lead', data: resp['count'] }], resp['label'])
+        this.leadByTelecaller = this._prepareBarChartData([{ name: 'Total Lead', data: resp.label['telecount'] }], resp.label['telecaller'])
+        this.leadByTechnician = this._prepareBarChartData([{ name: 'Total Lead', data: resp.label['techcount'] }], resp.label['technicion'])
       }
     )
     }
 
-    getLeadByTechnician(){
-      this.graph.getLeadBytechnician().subscribe(
-        (resp: any) => {
-          console.log(resp);
-          
-          this.leadByTechnician = this._prepareBarChartData([{ name: 'Total Lead', data: resp['count'] }], resp['label'])
-        }
-      )
-    }
-    
+  
     private _prepareBarChartData(series:any = [], categories:any = []) {
 
         return {

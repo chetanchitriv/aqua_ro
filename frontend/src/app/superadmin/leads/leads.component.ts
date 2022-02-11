@@ -128,8 +128,8 @@ if (Role=='Telecaller'){
     comment : [''],
     nextFollowupdate : [''],
     nextFollowuptime : [''],
-    status:[],
-    createdBy:[this.currentUser,Validators.required]
+    status:[''],
+    createdBy:[this.currentUser]
   })
 }
 
@@ -207,7 +207,7 @@ if (Role=='Telecaller'){
       comment : [''],
       nextFollowupdate : [''],
       nextFollowuptime : [''],
-      createdBy:[this.currentUser,Validators.required],
+      createdBy:[this.currentUser],
       status:['New Lead'],
     })
     this.showLeadForm=true

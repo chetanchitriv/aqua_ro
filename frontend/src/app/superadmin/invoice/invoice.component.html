@@ -149,7 +149,7 @@
                                                         <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td>
                                                         <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
                                                         <td> <input type="number" placeholder="Rate" class="form-control" formControlName="rate"></td>
-                                                        <td><input type="number" placeholder="Amount" class="form-control" formControlName="amt"></td>
+                                                        <td><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
                                                         <td (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
                                                         </i>
                                                         </td>

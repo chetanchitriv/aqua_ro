@@ -19,11 +19,11 @@
                                     <tr>
                                         <th>ID</th>
 
+                                        <th>Technician Name</th>
 
                                         <th>Spare Name</th>
 
                                         <th>Quantity</th>
-                                        <th>Technician Name</th>
 
 
                                         <th>Date</th>
@@ -35,9 +35,10 @@
                                 <tbody>
                                     <tr *ngFor="let data of stockallotAll; let i = index">
                                         <td>{{i+1}}</td>
+                                        <td>{{data.techname}}</td>
                                         <td>{{data.spare_name}}</td>
                                         <td>{{data.qnt}}</td>
-                                        <td>{{data.techname}}</td>
+
 
 
                                         <td>{{data.date}}</td>
@@ -76,65 +77,86 @@
 
             </div>
 
+
             <div class="card-content">
+                <div class="row">
+                    <label class="col-sm-3 label-on-left">Select technician name</label>&nbsp;
+                    <div class="col-sm-8">
+                        <div class="form-group label-floating is-empty">
+                            <select placeholder="Enter Role" formControlName="techname" class="form-control">
+                        <option value=""> Select name --</option>
+                        <option [ngValue]="data.userName" *ngFor="let data of usersAll">{{data.userName}}</option>
+                             </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-3 label-on-left">Date</label>&nbsp;
+                    <div class="col-sm-8">
+
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label"></label>
+                            <input type="date" class="form-control" formControlName="date">
+
+                        </div>
+                    </div>
+                </div>
+
 
 
                 <div class="row">
-                    <label class="col-sm-2 label-on-left">Spare allotment</label>
-                    <div class="col-sm-10">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group label-floating is-empty">
-                                    <select placeholder="Enter Role" formControlName="spare_name" class="form-control">
-                                    <option value=""> Select spare name --</option>
-                                    <option [ngValue]="data.spare_name" *ngFor="let data of stockAll">{{data.spare_name}}</option>
-                                 
-                                    <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
-                                </select>
-                                </div>
-                            </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
 
-                            <div class="row">
+                                <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
+                                            </i>
+                                        </a>
+                                <form [formGroup]="formStockAllot">
+                                    <div formArrayName="itemList" *ngFor="let item of formStockAllot.get('itemList')['controls']; let i = index;">
 
-                                <div class="col-md-3">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label"></label>
-                                        <input type="number" placeholder="Enter quntity" formControlName="qnt" class="form-control" value>
+                                        <div [formGroupName]="i">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
 
+                                                        <td>
+                                                            <select placeholder="Enter Role" formControlName="spare_name" class="form-control">
+                                                                            <option value=""> Select spare name --</option>
+                                                                            <option [ngValue]="data.spare_name" *ngFor="let data of stockAll">{{data.spare_name}}</option>
+                                                                         
+                                                                            <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
+                                                                        </select>
+                                                        </td>
 
-                                    </div>
-                                </div>
+                                                        <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
 
+                                                        <td (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
+                                                                    </i>
+                                                        </td>
+                                                    </tr>
 
-                                <div class="col-md-5">
-                                    <div class="form-group label-floating is-empty">
-                                        <select placeholder="Enter Role" formControlName="techname" class="form-control">
-                                        <option value=""> Select technician name --</option>
-                                        <option [ngValue]="data.userName" *ngFor="let data of usersAll">{{data.userName}}</option>
-                                             </select>
-                                    </div>
-                                </div>
+                                                </thead>
 
-                                <div class="row">
-                                    <label class="col-sm-2 label-on-left">Date</label>&nbsp;
-                                    <div class="col-sm-8">
+                                                {{ formStockAllot.controls.itemList.controls[i].controls.spare_name.value }}
 
-                                        <div class="form-group label-floating is-empty">
-                                            <label class="control-label"></label>
-                                            <input type="date" class="form-control" formControlName="date">
-
+                                            </table>
                                         </div>
                                     </div>
-                                </div>
-
+                                </form>
                             </div>
                         </div>
                     </div>
 
-
                 </div>
 
             </div>
+
+
+
+
+
 
 
 
@@ -144,9 +166,9 @@
 
             </div> -->
             <div class="text-center">
-                <button *ngIf="showAddButton" type="button" [disabled]="!formStockAllot.valid" (click)="postStockallotDetails()" class="btn btn-success">Submit <i
+                <button *ngIf="showAddButton" type="button" (click)="postStockallotDetails()" class="btn btn-success">Submit <i
                         class="bi bi-briefcase-fill"></i></button>
-                <button *ngIf="showUpdateButton" type="button" [disabled]="!formStockAllot.valid" (click)="updateStockallotDetails()" class="btn btn-success">Update <i
+                <button *ngIf="showUpdateButton" type="button" (click)="updateStockallotDetails()" class="btn btn-success">Update <i
                         class="bi bi-briefcase-fill"></i></button>
             </div>
 
@@ -167,22 +189,19 @@
 
                     <div class="row m-l-5">
                         <div class="col-sm-3 p-4">
-
+                            <p><strong>Technician Name</strong></p>
                             <p><strong>Spare name</strong></p>
                             <p><strong>Quantity</strong></p>
-                            <p><strong>Technician Name</strong></p>
+
 
 
                             <p><strong>Date</strong></p>
 
                         </div>
                         <div>
-
+                            <p>{{stockallotDetails.techname }}</p>
                             <p>{{stockallotDetails.spare_name }}</p>
                             <p>{{stockallotDetails.qnt }}</p>
-                            <p>{{stockallotDetails.techname }}</p>
-
-
                             <p>{{stockallotDetails.date }}</p>
 
                         </div>
