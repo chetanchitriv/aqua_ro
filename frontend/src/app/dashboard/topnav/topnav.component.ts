@@ -20,6 +20,7 @@ export class TopnavComponent implements OnInit {
   role:any
   note:boolean=false
   assignleads:any=[]
+  leadnotification:any=[]
 
   constructor(private authservice: AuthserviceService, private router:Router, private leadService: LeadService) { 
     this.username=localStorage.getItem('username')
@@ -27,6 +28,8 @@ export class TopnavComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // console.log(this.assignleads,"sahilchaware");
+    
    this.notify()
    this.getAllLeads()
    this.len = this.assignleads.length + this.leadsAll.length
@@ -34,7 +37,7 @@ export class TopnavComponent implements OnInit {
     this.role=localStorage.getItem('role')
  
     this.today = this.date.toISOString().slice(0, 10);
-    console.log("sahil",this.today );
+    // console.log("sahil",this.today );
     // this. getAllLeads()
     
   }
@@ -68,7 +71,7 @@ notify(){
 
 
 this.leadService.getnotification().subscribe((res:any)=>{
-console.log(res.lead,"notification");
+// console.log(res.lead,"notification");
 
   if( this.role == 'Superadmin' || this.role == 'Admin'){
     this.leadsAll=res.lead
@@ -91,10 +94,21 @@ this.len=this.leadsAll.length
 getAllLeads(){
      
   this.leadService.getLeads().subscribe((res: any)=>{  
+<<<<<<< HEAD
 
 this.assignleads=res.filter((a:any)=>{
   return a.assignTo == this.username && a.status == 'New Lead'
+=======
+    this.assignleads=res
+ 
+this.leadnotification=this.assignleads.filter((a:any)=>{
+  return  a.status == "New Lead" && a.assignTo == this.username
+>>>>>>> 601e28f808397bcc2e7aa9027a3de3d066c9d549
 })
+// console.log(this.assignleads,"leadsres");
+// .filter((a:any)=>{
+//   return a.assignTo == this.username && a.status == "New Lead"
+// })
   })
 }
 }
