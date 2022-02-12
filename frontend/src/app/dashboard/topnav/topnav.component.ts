@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthserviceService } from 'src/app/shared/authservice.service';
 import { LeadService } from 'src/app/shared/lead.service';
@@ -22,16 +23,15 @@ export class TopnavComponent implements OnInit {
   assignleads:any=[]
   leadnotification:any=[]
 
-  constructor(private authservice: AuthserviceService, private router:Router, private leadService: LeadService) { 
+  constructor(private authservice: AuthserviceService, private fb:FormBuilder ,private router:Router, private leadService: LeadService) { 
     this.username=localStorage.getItem('username')
-    
   }
 
   ngOnInit(): void {
     // console.log(this.assignleads,"sahilchaware");
     
    this.notify()
-   this.getAllLeads()
+   
    this.len = this.assignleads.length + this.leadsAll.length
 
     this.role=localStorage.getItem('role')
@@ -94,10 +94,9 @@ this.len=this.leadsAll.length
 getAllLeads(){
      
   this.leadService.getLeads().subscribe((res: any)=>{  
-    this.assignleads=res
- 
-this.leadnotification=this.assignleads.filter((a:any)=>{
-  return  a.status == "New Lead" && a.assignTo == this.username
+
+this.assignleads=res.filter((a:any)=>{
+  return a.assignTo == this.username && a.status == 'New Lead'
 })
 // console.log(this.assignleads,"leadsres");
 // .filter((a:any)=>{
@@ -105,4 +104,5 @@ this.leadnotification=this.assignleads.filter((a:any)=>{
 // })
   })
 }
+
 }

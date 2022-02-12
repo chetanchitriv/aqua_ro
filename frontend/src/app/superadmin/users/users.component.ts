@@ -75,6 +75,7 @@ export class UsersComponent implements OnInit {
   getAllUser(){
     var role=localStorage.getItem('role')
     this.api.getUsers().subscribe(res=>{
+      console.log(res,"userbhaiya");
       if(role=='Admin'){
       this.usersAll = res.filter((ele:any) => ele.role != 'Admin');
       // console.log(res);

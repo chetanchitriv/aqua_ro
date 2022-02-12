@@ -20,6 +20,6 @@ export class InvoiceService {
   }
 
   getInvoice(){
-    // return this.http.get<any>(this.nodeUrl+"invoice")
+    return this.http.get<any>(this.nodeUrl+"invoice")
   }
 }

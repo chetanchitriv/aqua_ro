@@ -41,5 +41,7 @@ export class LeadService {
   getnotification(){
     return this.http.get<any>(this.nodeUrl+`notification`)
   }  
-
+  createNotification(data:any){
+    return this.http.post(this.nodeUrl+"notification", data)
+  }
 }

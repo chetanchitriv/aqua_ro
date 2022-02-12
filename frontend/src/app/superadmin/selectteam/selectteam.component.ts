@@ -64,6 +64,8 @@ viewTeam:any=[]
 
       res.forEach((a: any) => {
 
+        console.log(a,"userbhaiya");
+        
         if (a.role == 'Admin') {
           this.admins.push(a)
         } else if (a.role == 'Telecaller' || a.role == 'Technician') {
@@ -159,17 +161,8 @@ viewTeam:any=[]
   
   }
 
-  showFormupdate(){
-    this.showTeamForm=false
-    this.showformupdate=true
-    this.showUpdateButton = true;
-    this.showAddButton = false;
-    this.showTeamTable=false;
-}
-
-
-  deleteTeams(data : any) {
-    this.ser.deleteTeams(data._id)
+  deleteTeams(data: any) {
+    this.ser.deleteTeams(data)
       .subscribe((res: any) => {
         alert("Records Deleted Successfully!");
         this.initiatedtOption()

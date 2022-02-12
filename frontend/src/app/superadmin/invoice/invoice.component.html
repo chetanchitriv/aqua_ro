@@ -218,35 +218,25 @@
                                         <th style="width: 87px;">Due Date</th>
 
                                         <th style="width: 87px;">Service type</th>
-                                        <th style="width: 87px;">Item name</th>
 
-                                        <th style="width: 87px;">Description</th>
-                                        <th style="width: 87px;">Quantity</th>
-                                        <th style="width: 87px;">Rate</th>
-                                        <th style="width: 87px;">Amount</th>
 
 
                                         <th style="width: 87px;">Download pdf</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
+                                    <tr *ngFor="let invoice of invoiceAll,let i = index">
+                                        <td>{{i+1}}</td>
 
-                                        <td>Nisha</td>
-                                        <td>n@gmail.com</td>
-                                        <td>03-02-2022</td>
-                                        <td>15-02-2022</td>
-                                        <td>AMC</td>
-                                        <td>RO</td>
-                                        <td>Two type</td>
-                                        <td>2</td>
-                                        <td>10</td>
-                                        <td>100</td>
+                                        <td>{{invoice.name}}</td>
+                                        <td>{{invoice.emailId}}</td>
+                                        <td>{{invoice.date}}</td>
+                                        <td>{{invoice.dueDate}}</td>
+                                        <td>{{invoice.serviceType}}</td>
 
 
                                         <td class="text-right">
-                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" data-toggle="modal" data-target="#myModal" class="material-icons">picture_as_pdf
+                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" data-toggle="modal" data-target="#myModal" class="material-icons" (click)="viewinvoice(invoice)">picture_as_pdf
                                             </i></a>
 
                                         </td>

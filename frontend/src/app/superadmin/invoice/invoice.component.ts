@@ -84,6 +84,7 @@ console.log("dueDate", this.future);
     this.getAllUser()
     this.getAllLeads()
     this.getAllComplaints()
+    this.getAllInvoice()
    
     
    
@@ -276,8 +277,10 @@ getAllComplaints(){
 // }
 
 getAllInvoice() {
-  this.api.getInvoice().subscribe((res:any) => {
+  this.invoiceService.getInvoice().subscribe((res:any) => {
     this.invoiceAll = res;
+    console.log(res,"invoices");
+    
     
   })
 }
@@ -358,5 +361,13 @@ public openPDF():void {
         PDF.save(this.leadData.name+ '_'+this.today );
     });    
     // alert("Pdf Downloaded Succefully") 
+  }
+
+viewinvoice(item:any){
+
+    this.invoicePdf=item
+    this.items=item.itemList
+    this.invoice=true
+    this.showinvoiceTable=false
   }
 }
