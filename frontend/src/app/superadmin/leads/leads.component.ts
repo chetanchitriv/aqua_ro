@@ -267,7 +267,7 @@ export class LeadsComponent implements OnInit {
 
 
   deleteLeads(data: any) {
-    this.leadService.deleteLeads(data._id)
+    this.leadService.deleteLeads(data)
       .subscribe((res: any) => {
         alert("Records Deleted Successfully!")
         this.initiatedtOption()
