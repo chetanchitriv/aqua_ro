@@ -64,7 +64,7 @@
                 </a>
             </li>
 
-            <li *ngIf="isTechnician">
+            <li *ngIf="isTechnician || isSuperAdmin">
                 <a routerLink="/dashboard/invoice" routerLinkActive="active">
                     <i class="material-icons">receipt
                     </i>
