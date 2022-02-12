@@ -45,7 +45,11 @@
                                         <td>{{data.role}}</td>
                                         <td>
                                             <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
+
                                             <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i  title="edit" class="material-icons">edit</i></a>
+
+                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)" routerLink="/dashboard/changepassword"><i title="change password" class="material-icons">remove_red_eye</i></a>
+
                                             <a (click)="deleteUsers(data)" class="btn btn-simple btn-danger btn-icon remove"><i  title="delete" class="material-icons">close</i></a>
                                         </td>
                                     </tr>

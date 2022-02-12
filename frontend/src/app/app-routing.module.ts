@@ -15,6 +15,7 @@ import { InvoiceComponent } from './superadmin/invoice/invoice.component';
 import { StockallotmentComponent } from './superadmin/stockallotment/stockallotment.component';
 import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads.component';
 import { SelectteamComponent } from './superadmin/selectteam/selectteam.component';
+import { ChangepasswordComponent } from './superadmin/changepassword/changepassword.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'leads', component: LeadsComponent },
       { path: 'complaints', component: ComplaintsComponent },
       { path: 'editprofile', component:EditprofileComponent},
+      { path: 'changepassword', component:ChangepasswordComponent},
 
       { path: 'stock', component:StockComponent},
       { path: 'invoice', component:InvoiceComponent},

@@ -31,7 +31,6 @@ export class AuthserviceService {
   }
   deleteToken(){
     return localStorage.removeItem('token')
-    
   }
   
   getUserPayload() {

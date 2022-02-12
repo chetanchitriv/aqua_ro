@@ -26,6 +26,7 @@ import { StockallotmentComponent } from './superadmin/stockallotment/stockallotm
 import { SelectteamComponent } from './superadmin/selectteam/selectteam.component';
 import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { ChangepasswordComponent } from './superadmin/changepassword/changepassword.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
      StockallotmentComponent,
      SelectteamComponent,
      AssignedleadsComponent,
+     ChangepasswordComponent,
     
      
  
