@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SelectTeamService } from 'src/app/shared/selectteam.service';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -10,10 +11,6 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./selectteam.component.css']
 })
 export class SelectteamComponent implements OnInit {
-
-
-
-
 
   dtOptions: DataTables.Settings = {}
  
@@ -30,9 +27,9 @@ export class SelectteamComponent implements OnInit {
   teamarr:any=[]
 
   constructor(private api: UserService, private fb: FormBuilder, private http: HttpClient, private ser: SelectTeamService) { }
-
+ 
   ngOnInit(): void {
-
+   
  
     this.getAllUser()
     this.getallTeam()
@@ -45,20 +42,21 @@ export class SelectteamComponent implements OnInit {
   
   }
 
-  initiatedtOption() {
-
+  initiatedtOption(){
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       processing: true,
-      lengthMenu: [10, 20, 30]
-    };}
-
+      lengthMenu:[10,20,30]
+    };
+  }
   getAllUser() {
     this.api.getUsers().subscribe((res: any) => {
 
       res.forEach((a: any) => {
 
+        console.log(a,"userbhaiya");
+        
         if (a.role == 'Admin') {
           this.admins.push(a)
         } else if (a.role == 'Telecaller' || a.role == 'Technician') {
@@ -94,8 +92,14 @@ export class SelectteamComponent implements OnInit {
   submitForm() {
     this.ser.postTeams(this.form.value).subscribe(
       (res: any) => {
-        console.log(res, "js");
-
+        alert("Team Created")
+        this.getallTeam()
+     
+        this.showTeamTable=true
+        this.showTeamForm=false
+        this.showUpdateButton = false;
+        this.showAddButton = false;
+      
       }
     )
 
@@ -107,11 +111,15 @@ export class SelectteamComponent implements OnInit {
 
     this.show = true
   }
+  
   getallTeam() {
+    
     this.ser.getTeams().subscribe((res: any) => {
     
      this.teamarr=res
        console.log(this.teamarr, "j");
+
+       
 
     })
   }
@@ -127,7 +135,8 @@ export class SelectteamComponent implements OnInit {
 
   }
   showTable(){
- 
+    this.initiatedtOption()
+    
     this.showTeamTable=true
     this.showTeamForm=false
     this.showUpdateButton = false;
@@ -136,7 +145,7 @@ export class SelectteamComponent implements OnInit {
   }
 
   deleteTeams(data: any) {
-    this.ser.deleteTeams(data._id)
+    this.ser.deleteTeams(data)
       .subscribe((res: any) => {
         alert("Records Deleted Successfully!");
         this.initiatedtOption()

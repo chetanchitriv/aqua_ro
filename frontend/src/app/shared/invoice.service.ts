@@ -14,12 +14,12 @@ export class InvoiceService {
   constructor(private http : HttpClient) { }
 
   postInvoice(data : any){
-    // return this.http.post<any>(this.nodeUrl+"invoice", data)
-    return this.http.post<any>("http://bfb3-43-224-0-168.ngrok.io/api/invoice", data)
+    return this.http.post<any>(this.nodeUrl+"invoice", data)
+    // return this.http.post<any>(this.nodeUrl+`invoice`, data)
 
   }
 
   getInvoice(){
-    // return this.http.get<any>(this.nodeUrl+"invoice")
+    return this.http.get<any>(this.nodeUrl+"invoice")
   }
 }

@@ -44,7 +44,7 @@ export class UsersComponent implements OnInit {
        
         workingHours: ['',Validators.required],
         role: ['',Validators.required],
-    })
+    });
 
   }
 
@@ -75,6 +75,7 @@ export class UsersComponent implements OnInit {
   getAllUser(){
     var role=localStorage.getItem('role')
     this.api.getUsers().subscribe(res=>{
+      console.log(res,"userbhaiya");
       if(role=='Admin'){
       this.usersAll = res.filter((ele:any) => ele.role != 'Admin');
       // console.log(res);
@@ -87,7 +88,16 @@ export class UsersComponent implements OnInit {
   }
 
   showForm(){
-    this.formValue.reset();
+    // this.formValue.reset();
+    this.formValue = this.formbuilder.group({
+      userName : ['',Validators.required],
+      mobile : ['',Validators.required],
+      email : ['',Validators.required],
+      password : ['',Validators.required],
+     
+      workingHours: ['',Validators.required],
+      role: ['',Validators.required],
+  });
     this.showUserForm=true
     this.showUpdateButton = false;
     this.showAddButton = true;

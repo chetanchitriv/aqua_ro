@@ -2,6 +2,7 @@
     <div>
         <button type="button" (click)="showForm()" class="btn btn-success">Add Leads <i class="bi bi-briefcase-fill"></i></button>
         <button type="button" (click)="showTable()" class="btn btn-success">showList <i class="bi bi-briefcase-fill"></i></button>
+
     </div>
     <div class="col-md-12">
         <div *ngIf="!showLeadForm && showLeadTable" class="card">
@@ -124,7 +125,7 @@
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
                                 <input type="text" placeholder="Enter name" formControlName="name" class="form-control" value>
-                                <!-- <span class="text-info" *ngIf="formValue.touched && (!formValue.value.name || formValue.value.name.length == 0)" class="validation">*Name is required</span> -->
+                                <span class="text-info" *ngIf="formValue.touched && (!formValue.value.name || formValue.value.name.length == 0)" class="validation">*Name is required</span>
 
                             </div>
                         </div>
@@ -138,7 +139,7 @@
 
                         <div class="form-group label-floating is-empty col-md-4">
                             <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" placeholder="Enter 10 digit mobile number" formControlName="mobileNo" class="form-control">
-                            <!-- <span class="text-info" *ngIf="formValue.touched && (!formValue.value.mobileNo || formValue.value.mobileNo.length == 0)" class="validation">*Mobile number is required</span> -->
+                            <span class="text-info" *ngIf="formValue.touched && (!formValue.value.mobileNo || formValue.value.mobileNo.length == 0)" class="validation">*Mobile number is required</span>
                         </div>
 
                         <label class="col-sm-2 label-on-left">Alternate No.</label>
@@ -158,7 +159,7 @@
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
                                 <input type="email" placeholder="Enter email id" formControlName="emailId" class="form-control" value>
-                                <!-- <span class="text-info" *ngIf="formValue.touched && (!formValue.value.emailId || formValue.value.emailId.length == 0)" class="validation">*Email ID is required</span> -->
+                                <span class="text-info" *ngIf="formValue.touched && (!formValue.value.emailId || formValue.value.emailId.length == 0)" class="validation">*Email ID is required</span>
                             </div>
                         </div>
 
@@ -193,7 +194,7 @@
                                                 <option  *ngFor="let assign of assigntoList">{{assign.userName}}</option>   
                                             </select>
 
-                                        <!-- <span class="text-info" *ngIf="formValue.touched && (!formValue.value.assignTo || formValue.value.assignTo.length == 0)" class="validation">*Assign feild is required</span> -->
+                                        <span class="text-info" *ngIf="formValue.touched && (!formValue.value.assignTo || formValue.value.assignTo.length == 0)" class="validation">*Assign feild is required</span>
                                     </div>
                                     <span class="material-input"></span></div>
                             </div>
@@ -206,7 +207,7 @@
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label"></label>
                                     <input type="text-area" placeholder="Enter address" formControlName="address" class="form-control">
-                                    <!-- <span class="text-info" *ngIf="formValue.touched && (!formValue.value.address || formValue.value.address.length == 0)" class="validation">*Address is required</span> -->
+                                    <span class="text-info" *ngIf="formValue.touched && (!formValue.value.address || formValue.value.address.length == 0)" class="validation">*Address is required</span>
                                 </div>
                             </div>
                         </div>
@@ -273,8 +274,8 @@
                         </div>
 
                         <div class="text-center" style="margin-left: 100px;">
-                            <button *ngIf="showAddButton" type="button" (click)="postLeadsDetails()" [disabled]="!formValue.valid" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
-                            <button *ngIf="showUpdateButton" type="button" (click)="updateLeadsDetails()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
+                            <button *ngIf="showAddButton" type="button" (click)="postLeadsDetails()" (click)="showTable()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
+                            <button *ngIf="showUpdateButton" type="button" (click)="updateLeadsDetails()" (click)="showTable()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
 
                         </div>
 
