@@ -47,7 +47,7 @@ export class StockallotmentComponent implements OnInit {
       // spare_name : ['',Validators.required],
       // qnt  : ['',Validators.required],
       techname  : ['',Validators.required],
-      date:  [this.today,Validators.required],
+      date:  [this.today],
       itemList: this.formbuilder.array([ this.createItem() ])
      
   });
@@ -104,7 +104,7 @@ view(data:any){
     this.api.getStock().subscribe((res:any) => {
       this.stockAll = res;
       console.log(res,"nisha");
-      
+     
     })
   }
 
@@ -124,6 +124,7 @@ view(data:any){
         .subscribe(res=>{
       
           alert("Records Deleted Successfully!")
+       
           this.initiatedtOption()
           this.getAllStockallot()
         this.showStockTable()
@@ -139,6 +140,7 @@ view(data:any){
           this.updateId=data._id
       
         this.formStockAllot.patchValue(data)
+        
       }
     
       
@@ -168,6 +170,14 @@ view(data:any){
       }
     
   showStockForm(){
+    this.formStockAllot = this.formbuilder.group({
+      // spare_name : ['',Validators.required],
+      // qnt  : ['',Validators.required],
+      techname  : ['',Validators.required],
+      date:  [this.today],
+      itemList: this.formbuilder.array([ this.createItem() ])
+     
+  });
     this.showstockForm=true;
     this.showstockTable=false;
     this.showAddButton = true;
@@ -187,5 +197,16 @@ view(data:any){
     this.showUpdateButton = true;
     this.showAddButton = false;
     this.showstockTable=false;
+}
+getSum(itemlist:any=[]){ 
+  var sum=0;
+  var a:any=[]
+  itemlist.forEach((element:any) => {
+     a.push(element.qnt)
+  }); 
+  for(var i in a) { 
+      sum += a[i];
+  }
+  return sum;
 }
 }

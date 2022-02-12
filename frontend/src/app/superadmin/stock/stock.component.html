@@ -98,7 +98,7 @@
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
-                                <input type="text" placeholder="Enter Quantity" formControlName="qnt" class="form-control" value>
+                                <input type="number" placeholder="Enter Quantity" formControlName="qnt" class="form-control" value>
                                 <!-- <span class="text-info" *ngIf="formStock.touched && (!formStock.value.qnt || formStock.value.qnt.length == 0)" class="validation" style="color: red;">*Quantity is required</span> -->
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
-                                <input type="number" placeholder="Enter Purchase Amount " formControlName="purchaseAmount" class="form-control">
+                                <input type="number" placeholder="Enter Purchase Amount " formControlName="purchaseAmount" class="form-control" value>
                                 <!-- <span class="text-info" *ngIf="formStock.touched && (!formStock.value.purchaseAmount || formStock.value.purchaseAmount.length == 0)" class="validation" style="color: red;">*purchase Amount is required</span> -->
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
-                                <input type="number" placeholder="Enter Selling Price" formControlName="sellingPrice" class="form-control">
+                                <input type="number" placeholder="Enter Selling Price" formControlName="sellingPrice" class="form-control" value>
                                 <!-- <span class="text-info" *ngIf="formStock.touched && (!formStock.value.sellingPrice || formStock.value.sellingPrice.length == 0)" class="validation" style="color: red;">*Selling Price is required</span> -->
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button *ngIf="showAddButton" type="button" (click)="postStockDetails()" [disabled]="!formStock.valid" class="btn btn-success">Submit <i
+                    <button *ngIf="showAddButton" type="button" (click)="postStockDetails()" class="btn btn-success">Submit <i
                             class="bi bi-briefcase-fill"></i></button>
                     <button *ngIf="showUpdateButton" type="button" (click)="updateUsersDetails()" class="btn btn-success">Update <i
                             class="bi bi-briefcase-fill"></i></button>
