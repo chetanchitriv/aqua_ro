@@ -6,6 +6,7 @@ import { formatDate } from '@angular/common';
 import { LeadsModel } from './leads.model';
 import { UserService } from 'src/app/shared/user.service';
 import { data } from 'jquery';
+import { SelectTeamService } from 'src/app/shared/selectteam.service';
 
 @Component({
   selector: 'app-leads',
@@ -43,11 +44,15 @@ export class LeadsComponent implements OnInit {
   currentUser:any;
   currentRole: any;
   currentTelecaller:any
+  teams:any
+  teamsofadmin:any=[]
 
-  constructor(private formbuilder: FormBuilder, private leadService: LeadService, private userService: UserService) {}
+  constructor(private formbuilder: FormBuilder, private leadService: LeadService, private userService: UserService, private SelectTeamService: SelectTeamService) {}
   dtOptions:DataTables.Settings={}
     
   ngOnInit(): void {
+   this. getallteams()
+    
     this.currentRole=localStorage.getItem('role')    
     this.currentUser=localStorage.getItem('username')
    
@@ -159,10 +164,32 @@ if (Role=='Telecaller'){
     })
 
   }
+  
   getAllLeads(){
+    
+    
     this.leadService.getLeads().subscribe((res: any)=>{
-      if(this.currentRole == 'Superadmin' || this.currentRole == 'Admin'){
+      console.log(res);
+      
+      if(this.currentRole == 'Superadmin' ){
         this.leadsAll = res;
+      }else if( this.currentRole == 'Admin'){
+         console.log("i am admin ");
+        // for(let x in res){
+             
+        //   for(let y in this.teams){
+
+        //     for(let z in this.teams[y].team_memeber){
+        //               if(res[x].createdBy == this.teams[y].team_memeber[z]){
+        //           this.leadsAll.push(res[x])
+        //       }
+        //     }
+              
+        //   }
+              
+        // }
+
+
       }else {
          this.leadsAll=res.filter((a:any)=>{
             return a.createdBy == this.currentUser
@@ -176,7 +203,7 @@ if (Role=='Telecaller'){
   getAllUser(){
     this.userService.getUsers().subscribe(res=>{
       this.usersAll = res;
-      console.log(res);
+      // console.log(res);
       
       // this.usersAll.forEach((element:any) => {
       //   if(element.currentRolee =='Telecaller' || element.currentRolee =='Technician'){
@@ -192,6 +219,7 @@ if (Role=='Telecaller'){
   getcurrentUser(){
     return localStorage.getItem('currentUser')
   }
+
   showForm(){
     this.formValue = this.formbuilder.group({
    
@@ -294,6 +322,31 @@ updateLeadsDetails(){
     }
   }
 
+  getallteams(){
+
+    this.SelectTeamService.getTeams().subscribe((res:any)=>{
+console.log(this.currentUser," i am user");
+
+      console.log(res,"teamlead");
+  res.forEach((element:any) => {
+console.log(element.admin,"all admins");
+
+    if( element.admin == this.currentUser ){
+      console.log(element,"i am if condition");
+      
+this.teams.push(element)
+console.log(this.teams,"sahilkwork");
+
+    }
+    
+  });
+  // this.teams=res.filter((a:any)=>{
+  //   return a.admin == this.currentUser
+  // })
+  
+       
+     })
+  }
 }
 
 
