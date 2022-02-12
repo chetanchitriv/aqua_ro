@@ -3,11 +3,6 @@
         <button type="button" (click)="showForm()" class="btn btn-success">Add Leads <i class="bi bi-briefcase-fill"></i></button>
         <button type="button" (click)="showTable()" class="btn btn-success">showList <i class="bi bi-briefcase-fill"></i></button>
 
-        <table>
-            <tr *ngFor=" let teamsofadmins of teamsofadmin">
-                <th>{{teamsofadmins.admin}}</th>
-            </tr>
-        </table>
     </div>
     <div class="col-md-12">
         <div *ngIf="!showLeadForm && showLeadTable" class="card">

@@ -16,7 +16,7 @@ export class SelectTeamService {
   constructor(private http : HttpClient) { }
 
   postTeams(data : any){
-    // return this.http.post<any>(this.dbUrl+"teams", data)
+   
     return this.http.post<any>(this.nodeUrl+"teams", data)
   }
   
@@ -24,12 +24,12 @@ export class SelectTeamService {
     return this.http.get<any>(this.nodeUrl+"teams")
   }
   updateTeams(data : any,id: number){
-    // return this.http.put<any>(this.dbUrl+`teams/`+`${id}`,data)
+ 
     return this.http.put<any>(this.nodeUrl+`teams/`+`${id}`,data)
    
   }
   deleteTeams(id : number){
-    // return this.http.delete<any>(this.dbUrl+`teams/`+`${id}`)
+   
     return this.http.delete<any>(this.nodeUrl+`teams/`+`${id}`)
     
   }

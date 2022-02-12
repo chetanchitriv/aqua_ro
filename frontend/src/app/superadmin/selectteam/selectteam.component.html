@@ -16,7 +16,7 @@
                                     <tr role="row">
                                         <th style="width: 87px;">ID</th>
                                         <th style="width: 87px;">Team Leader</th>
-                                        <!-- <th style="width: 87px;">Team members</th> -->
+                                        <th style="width: 87px;">Total team members</th>
                                         <th style="width: 87px;">Actions</th>
                                     </tr>
                                 </thead>
@@ -24,13 +24,15 @@
                                     <tr *ngFor="let team of teamarr,let i=index ">
                                         <td>{{i+1}}</td>
                                         <td>{{team.admin}}</td>
-                                        <!-- <td *ngFor=" let item of team.team_memeber">
-                                            {{item}}
-                                        </td> -->
+                                        <td>
+                                            {{team.team_memeber.length}}
+                                        </td>
+                                        <!-- <td *ngFor=" let item of team.team_memeber"> -->
 
                                         <td class="text-center">
-                                            <a (click)="onEdit(team._id)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">edit</i></a>
-                                            <a (click)="deleteTeams(team._id)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
+                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(team)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
+                                            <a (click)="onEdit(team)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">edit</i></a>
+                                            <a (click)="deleteTeams(team)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
                                         </td>
                                     </tr>
 
@@ -62,21 +64,28 @@
 
                         </div>
 
-                        <div class="card-content">
+                        <form [formGroup]="form">
 
-
-
-                            <div class="row">
-                                <form [formGroup]="form" novalidate>
-                                    <div class="col-md-4"><select class="form-control" placeholder="Select an option" formControlName="admin">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <select class="form-control" placeholder="Select an option" formControlName="admin">
                                         
-                                    <option  ><p>Select </p></option>
-                                       
-                                        <option  *ngFor="let adminss of admins">{{adminss.userName}}</option>   
+                                    <option  ><p>Select Team Leader </p></option>
+                                   
+                                        <option  [ngValue]="adminss.userName"  *ngFor="let adminss of admins">{{adminss.userName}}</option>   
+                                    </select></div>
+                                    <div class="col-md-4">
+                                        <select class="form-control" placeholder="Select Team Members" formControlName="team_member" multiple>
+                                        
+                                    <option  ><p>Select Team Member </p></option>
+                                   
+                                        <option  [ngValue]="user.userName"  *ngFor="let user of users">{{user.userName}}</option>   
                                     </select></div>
 
-                                    <div class="col-md-4">
-                                        <button (click)="checkboar()" style="border: none;background-color: white;">select Team Members</button>
+
+                                    <!-- <div class="col-md-4">
+                                        <button (click)="checkboar()" style="border: none;background-color: white;">Select Team Members</button>
 
                                         <div *ngIf="show">
                                             <div *ngFor="let user of users; let i=index">
@@ -86,26 +95,113 @@
                                                      </label>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <button (click)="submitForm()" class="button btn btn-success" type="submit">Submit</button>
+                                    <button type="button" (click)="submitForm()" class="button btn btn-success">Submit</button>
 
-
-                                </form>
+                                </div>
                             </div>
-
-
-
-                        </div>
-
-
-
-
+                        </form>
                     </div>
+
                 </div>
             </div>
 
 
 
+        </div>
+
+        <div *ngIf="showformupdate && !showTeamTable" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+
+            <div class="d-flex">
+                <div class="col-md-12">
+
+                    <div class="card" style="width: 80%; margin: 10px 0 0px 15px;">
+
+                        <div class="card-header card-header-text">
+                            <h4 class="card-title" style="color: rgb(26, 175, 39);"><b>Select Your Team Members</b></h4>
+
+                        </div>
+
+                        <form [formGroup]="teamUpdate">
+
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-md-4"><select class="form-control" placeholder="Select an option" formControlName="admin">
+                                        
+                                    <option  ><p>Select Team Leader </p></option>
+                                   
+                                        <option  [ngValue]="adminss.userName"  *ngFor="let adminss of admins">{{adminss.userName}}</option>   
+                                    </select></div>
+
+                                    <div class="col-md-4">
+                                        <select class="form-control" placeholder="Select Team Members" formControlName="team_member" multiple>
+                                        
+                                    <option  ><p>Select Team Member </p></option>
+                                   
+                                        <option  [ngValue]="user.userName"  *ngFor="let user of users">{{user.userName}}</option>   
+                                    </select></div>
+
+                                    <button type="button" (click)="updateTeamDetails()" class="button btn btn-success">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button (click)="nullarr()" type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">User Details</h4>
+                </div>
+                <div class="modal-body" *ngFor="let item of viewTeam">
+
+                    <div class="row m-l-5">
+                        <div class="col-sm-3 p-4">
+                            <p><strong>Team Leader :</strong></p>
+                            <p><strong>Team length :</strong></p>
+                        </div>
+                        <div class="col-sm-3 p-4">
+                            <p>{{item.admin}}</p>
+                            <p>{{item.team_memeber.length}}</p>
+                        </div><br>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-3">
+
+                            <p><strong>Team Member :</strong></p>
+
+                        </div>
+                        <div class="col-md-3">
+                            <ul>
+                                <li *ngFor=" let team of item.team_memeber">{{team}}
+
+                                </li>
+                            </ul>
+                            <!-- <p *ngFor=" let team of item.team_memeber">{{team}}</p> -->
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="nullarr()">Close</button>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
