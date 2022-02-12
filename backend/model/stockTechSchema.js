@@ -1,10 +1,9 @@
 const mongoose=require("mongoose")
 
 const stockTechSchema=new mongoose.Schema({
-    spare_name : String,
     techname: String,
-    qnt : Number,
-    date : String
+    date : String,
+    itemList:[Object]
 });
 
 module.exports=mongoose.model("stockTech",stockTechSchema)

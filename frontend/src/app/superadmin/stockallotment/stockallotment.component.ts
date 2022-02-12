@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StockService } from 'src/app/shared/stock.service';
 import { StockallotService } from 'src/app/shared/stockallot.service';
@@ -20,7 +20,7 @@ export class StockallotmentComponent implements OnInit {
   formStockAllot: any=FormGroup;
   stockAll: any=[]
   usersAll: any;
-
+  itemList: any= FormArray;
  date = new Date()
   today: any
   times: any
@@ -44,26 +44,50 @@ export class StockallotmentComponent implements OnInit {
   this.times =  this.date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
   console.log(this.today)
     this.formStockAllot = this.formbuilder.group({
-      spare_name : ['',Validators.required],
-      qnt  : ['',Validators.required],
+      // spare_name : ['',Validators.required],
+      // qnt  : ['',Validators.required],
       techname  : ['',Validators.required],
       date:  [this.today,Validators.required],
+      itemList: this.formbuilder.array([ this.createItem() ])
      
   });
+
   }
+  createItem(): FormGroup {
+    return this.formbuilder.group({
+      spare_name: '',
+     qnt:0,
+   
+    });
+  
+  }
+
+  addItem(): void {
+    this.itemList = this.formStockAllot.get('itemList') as FormArray;
+    this.itemList.push(this.createItem());
+  }
+
+  removeItem(index: any): void
+   { this.itemList.removeAt(index); 
+  }
+ 
+
+  
   getAllStockallot(){
     this.stockallotservice.getStockallot().subscribe((res: any) => {
       this.stockallotAll = res;    
       console.log(res,"niya");
       
   })
+
+
 }
 
 postStockallotDetails(){
   this.stockallotservice.postStockallot(this.formStockAllot.value).subscribe(res=>{
     alert("Stock Added Successfully!");
     this.formStockAllot.reset();
-
+    this.initiatedtOption()
   this.getAllStockallot()
   this.showStockTable()
   })

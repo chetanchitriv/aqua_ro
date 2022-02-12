@@ -63,6 +63,8 @@ dueDate:any
   tax:any
   basePrice:any
   invoice:boolean=false
+  qnt: any;
+  rate: any;
 
 
 
@@ -71,6 +73,7 @@ dueDate:any
 
   ngOnInit(): void {
     
+   
 this.future.setDate(this.future.getDate()+15)
 console.log("dueDate", this.future);
 
@@ -109,19 +112,39 @@ console.log("dueDate", this.future);
     
       
     })
-    
+    this.invoiceForm = this.formbuilder.group({
+      name : ['',Validators.required],
+      // mobileNo : [this.leadData.mobileNo,Validators.required],
+      // AltmobileNo : [this.leadData.AltmobileNo,Validators.required],
+     
+      emailId : ['',Validators.required],
+      // assignTo : [this.leadData.assignTo,Validators.required],
+      address : ['',Validators.required],
+      date : [this.today,Validators.required],
+      dueDate : [this.dueDate,Validators.required],
+
+      serviceType:['',Validators.required],
+      itemList: this.formbuilder.array([ this.createItem() ])
+    })
 
   }
+    getamount(i:any){
+      this.invoiceForm.controls['itemList'].value.at(i).amt=this.invoiceForm.controls['itemList'].value.at(i).qnt*this.invoiceForm.controls['itemList'].value.at(i).rate
+    return (this.invoiceForm.controls['itemList'].value.at(i).amt)
+    }
+    
 
   createItem(): FormGroup {
     return this.formbuilder.group({
       itemName: '',
       description: '',
-      qnt: '',
-      rate:'',
-      amt: ''
+      qnt:0,
+      rate:0,
+      amt:0
     });
   }
+    
+
   addItem(): void {
     this.itemList = this.invoiceForm.get('itemList') as FormArray;
     this.itemList.push(this.createItem());
@@ -141,6 +164,7 @@ console.log("dueDate", this.future);
       this.showinvoiceForm=false
       this.showinvoiceTable=false
       this.showinvoiceUpdateForm=false
+      this.invoice=false
   }
 
   getAllLeads(){
@@ -186,6 +210,13 @@ console.log("dueDate", this.future);
         serviceType:['',Validators.required],
         itemList: this.formbuilder.array([ this.createItem() ])
       })
+    //   var arrayControl = this.invoiceForm.get('itemList') as FormArray;
+    //   // console.log(arrayControl.value.at(2))
+    //   var item = arrayControl.at(2);
+    //  console.log(item);
+    // console.log(this.invoiceForm.get('itemList.0.qnt').value);
+    
+     
     }
   
     else{
@@ -210,6 +241,8 @@ console.log("dueDate", this.future);
     this.showinvoiceTable=true
     this.showinvoiceUpdateForm=false
     this.showinvoicesearchForm=false
+    this.invoice=false
+    
   }
 
   view(data:any){
@@ -249,10 +282,7 @@ getAllInvoice() {
   })
 }
 generateInvoice(){
-  this.showinvoicesearchForm =false
-  this.showinvoiceTable=false
-  this.showinvoiceForm=false
-  this.invoice=true
+  
     this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
       console.log(res.data,"post res");
       console.log(res.data.itemList);
@@ -287,6 +317,10 @@ this.items=res.data.itemList
       // this.showinvoiceForm=false
       // this.showinvoiceUpdateForm=false
       alert("Invoice Generated Successfully!");
+      this.showinvoicesearchForm =false
+  this.showinvoiceTable=false
+  this.showinvoiceForm=false
+  this.invoice=true
       // this.downloadPdf(res.pdf,"invoice")
       // this.getAllInvoice();
     },
@@ -305,10 +339,10 @@ this.items=res.data.itemList
 
 
 public openPDF():void {
-  this.showinvoicesearchForm =true
-  this.showinvoiceTable=true
-  this.showinvoiceForm=true
-  this.invoice=false
+  this.showinvoicesearchForm =false
+  this.showinvoiceTable=false
+  this.showinvoiceForm=false
+  this.invoice=true
     this.DATA = document.getElementById('htmlData');
       
     html2canvas(this.DATA).then(canvas => {
@@ -323,6 +357,6 @@ public openPDF():void {
         
         PDF.save(this.leadData.name+ '_'+this.today );
     });    
-    alert("Pdf Downloaded Succefully") 
+    // alert("Pdf Downloaded Succefully") 
   }
 }

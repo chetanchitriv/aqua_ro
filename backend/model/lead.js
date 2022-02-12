@@ -1,20 +1,24 @@
-const mongoose=require("mongoose")
+const mongoose = require("mongoose")
 
-const leadSchema=new mongoose.Schema({
-    name : String,
-    mobileNo : Number,
-    AltmobileNo:Number,
-    emailId : String,
-    assignTo : String,
-    address : String,
-    followUpmode : String,
-    followUpdate : String,
-    followUptime : String,
-    comment : String,
-    nextFollowupdate : String,
-    nextFollowuptime : String,
-    createdBy:String,
-    status: String,
+const leadSchema = new mongoose.Schema({
+    name: { type: String },
+    mobileNo: { type: Number },
+    AltmobileNo: { type: Number },
+    emailId: { type: String },
+    assignTo: { type: String },
+    address: { type: String },
+    followUpmode: { type: String },
+    followUpdate: { type: String },
+    followUptime: { type: String },
+    comment: { type: String },
+    nextFollowupdate: { type: String },
+    nextFollowuptime: { type: String },
+    createdBy: { type: String },
+    status: { type: String },
+    read: {
+        type: Boolean,
+        default: false
+    }
 });
 
-module.exports=mongoose.model("Lead",leadSchema)
+module.exports = mongoose.model("Lead", leadSchema)

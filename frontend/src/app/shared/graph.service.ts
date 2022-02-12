@@ -5,21 +5,17 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class InvoiceService {
-  
+export class GraphService {
+
   dbUrl=environment.apiUrl
   nodeUrl=environment.nodeapiUrl
-
-
+  
   constructor(private http : HttpClient) { }
 
-  postInvoice(data : any){
-    return this.http.post<any>(this.nodeUrl+"invoice", data)
-    // return this.http.post<any>(this.nodeUrl+`invoice`, data)
-
+  getLeadBytelecaller(){
+    return this.http.get<any>(this.nodeUrl+"graph/telecaller")
   }
-
-  getInvoice(){
-    // return this.http.get<any>(this.nodeUrl+"invoice")
+  getLeadBytechnician(){
+    return this.http.get<any>(this.nodeUrl+"graph/technician")
   }
 }

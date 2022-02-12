@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from "highcharts";
 import { ComplaintService } from 'src/app/shared/complaint.service';
+import { GraphService } from 'src/app/shared/graph.service';
 import { LeadService } from 'src/app/shared/lead.service';
 import { UserService } from 'src/app/shared/user.service';
+import { ApexOptions } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-chartboart',
@@ -22,63 +24,16 @@ export class ChartboartComponent implements OnInit {
     leadCount: any;
     complaintCount: any;
     teleCallerList: any=[];
+    leadByTelecaller: any
+  leadByTechnician:any;
 
-  constructor(private userService:UserService,private leadService:LeadService,private complaintService:ComplaintService) { }
+  constructor(private userService:UserService,private leadService:LeadService,private complaintService:ComplaintService,private graph:GraphService) { }
 
   ngOnInit(): void {
     this.getallUser();
     this.getallLead();
     this.getallComplaint()
-    this.chartoptions={
-      chart: {
-      type: 'column'
-  },
-  // title: {
-  //     text: 'Monthly Average Rainfall'
-  // },
-  // subtitle: {
-  //     text: 'Source: WorldClimate.com'
-  // },
-  xAxis: {
-      categories: [
-          'monika',
-          'shital',
-          'sahil',
-          'shashank',
-          'nisha',
-          'komal',
-          'mona',
-      ],
-      crosshair: true
-  },
-  yAxis: {
-      min: 0,
-      title: {
-          text: 'total count'
-      }
-  },
-  tooltip: {
-      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-          '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-      footerFormat: '</table>',
-      shared: true,
-      useHTML: true
-  },
-  plotOptions: {
-      column: {
-          pointPadding: 0.2,
-          borderWidth: 0
-      }
-  },
-  series: [{
-      name: 'Telecallers',
-      data: [10,5,7,2,6,8,3]
-  
-  }]
-  }
-    
- 
+  this.getAllGraph()
   }
 
     getallUser(){
@@ -125,5 +80,56 @@ export class ChartboartComponent implements OnInit {
         this.complaintCount=this.AllComplaints.length
         })
     }
-    
+
+    getAllGraph(){
+      
+      this.graph.getLeadBytelecaller().subscribe(
+      (resp: any) => {
+        console.log(resp);
+        
+        this.leadByTelecaller = this._prepareBarChartData([{ name: 'Total Lead', data: resp.label['telecount'] }], resp.label['telecaller'])
+        this.leadByTechnician = this._prepareBarChartData([{ name: 'Total Lead', data: resp.label['techcount'] }], resp.label['technicion'])
+      }
+    )
+    }
+
+  
+    private _prepareBarChartData(series:any = [], categories:any = []) {
+
+        return {
+          series,
+          chart: {
+            type: "bar",
+            height: 250,
+            stacked: true,
+            toolbar: {
+              show: true
+            },
+            zoom: {
+              enabled: true
+            }
+          },
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                legend: {
+                  position: "bottom",
+                  offsetX: -10,
+                  offsetY: 0
+                }
+              }
+            }
+          ],
+          plotOptions: {
+            bar: {
+              horizontal: false
+            }
+          },
+          xaxis: {
+            type: "category",
+            categories
+          }
+        }
+      }
 }

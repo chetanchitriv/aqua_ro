@@ -4,8 +4,8 @@
         <button type="button" (click)="showTable()" class="btn btn-success">showList <i class="bi bi-briefcase-fill"></i></button>
 
         <table>
-            <tr>
-                <th>{{teams.admin}}</th>
+            <tr *ngFor=" let teamsofadmins of teamsofadmin">
+                <th>{{teamsofadmins.admin}}</th>
             </tr>
         </table>
     </div>
