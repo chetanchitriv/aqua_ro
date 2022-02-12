@@ -12,10 +12,6 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class SelectteamComponent implements OnInit {
 
-
-
-
-
   dtOptions: DataTables.Settings = {}
  
   showTeamForm: boolean = false;
@@ -31,9 +27,9 @@ export class SelectteamComponent implements OnInit {
   teamarr:any=[]
 
   constructor(private api: UserService, private fb: FormBuilder, private http: HttpClient, private ser: SelectTeamService) { }
-
+ 
   ngOnInit(): void {
-
+   
  
     this.getAllUser()
     this.getallTeam()
@@ -46,15 +42,14 @@ export class SelectteamComponent implements OnInit {
   
   }
 
-  initiatedtOption() {
-
+  initiatedtOption(){
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       processing: true,
-      lengthMenu: [10, 20, 30]
-    };}
-
+      lengthMenu:[10,20,30]
+    };
+  }
   getAllUser() {
     this.api.getUsers().subscribe((res: any) => {
 
@@ -110,11 +105,15 @@ export class SelectteamComponent implements OnInit {
 
     this.show = true
   }
+  
   getallTeam() {
+    
     this.ser.getTeams().subscribe((res: any) => {
     
      this.teamarr=res
        console.log(this.teamarr, "j");
+
+       
 
     })
   }
@@ -130,7 +129,8 @@ export class SelectteamComponent implements OnInit {
 
   }
   showTable(){
- 
+    this.initiatedtOption()
+    
     this.showTeamTable=true
     this.showTeamForm=false
     this.showUpdateButton = false;

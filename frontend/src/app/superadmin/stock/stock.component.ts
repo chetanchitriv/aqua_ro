@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { UserService } from 'src/app/shared/user.service';
 import { Router } from '@angular/router';
 import { stockModel } from './stock.model';
@@ -34,10 +34,18 @@ export class StockComponent implements OnInit {
     this.getAllStock()
     this.initiatedtOption()
     this.today = this.date.toISOString().slice(0, 10);
-   
-    console.log(this.today)
+
+    this.formStock = this.formbuilder.group({
+      spare_name : ['',Validators.required],
+      qnt  : ['',Validators.required],
+      purchaseAmount  : ['',Validators.required],
+      sellingPrice  : ['',Validators.required],
+      balanceAmount : ['',Validators.required],
+      date:  [this.today,Validators.required],
+    
       
-  }
+  });
+}
  
   getbalance(){
     this.formStock.value.balanceAmount=this.formStock.value.sellingPrice-this.formStock.value.purchaseAmount
@@ -154,7 +162,6 @@ updateUsersDetails(){
 })
 
 }
-
 
 
 

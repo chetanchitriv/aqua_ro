@@ -21,9 +21,7 @@
 
                                         <th>Technician Name</th>
 
-                                        <th>Spare Name</th>
-
-                                        <th>Quantity</th>
+                                        <th>Total quantity</th>
 
 
                                         <th>Date</th>
@@ -36,8 +34,8 @@
                                     <tr *ngFor="let data of stockallotAll; let i = index">
                                         <td>{{i+1}}</td>
                                         <td>{{data.techname}}</td>
-                                        <td>{{data.spare_name}}</td>
-                                        <td>{{data.qnt}}</td>
+
+                                        <td>{{getSum(data.itemList)}}</td>
 
 
 
@@ -77,30 +75,25 @@
 
             </div>
 
-
             <div class="card-content">
                 <div class="row">
-                    <label class="col-sm-3 label-on-left">Select technician name</label>&nbsp;
+                    <label class="col-sm-2 label-on-left">Technician</label>
                     <div class="col-sm-8">
-                        <div class="form-group label-floating is-empty">
+                        <div class="form-group label-floating is-empty col-md-5">
                             <select placeholder="Enter Role" formControlName="techname" class="form-control">
-                        <option value=""> Select name --</option>
+                        <option value=""> Select technician name --</option>
                         <option [ngValue]="data.userName" *ngFor="let data of usersAll">{{data.userName}}</option>
                              </select>
                         </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <label class="col-sm-3 label-on-left">Date</label>&nbsp;
-                    <div class="col-sm-8">
+                        <label class="col-sm-2 label-on-left">Date</label>
+                        <div class="form-group label-floating is-empty col-md-5">
 
-                        <div class="form-group label-floating is-empty">
-                            <label class="control-label"></label>
                             <input type="date" class="form-control" formControlName="date">
 
                         </div>
                     </div>
+
                 </div>
 
 
@@ -190,21 +183,35 @@
                     <div class="row m-l-5">
                         <div class="col-sm-3 p-4">
                             <p><strong>Technician Name</strong></p>
-                            <p><strong>Spare name</strong></p>
-                            <p><strong>Quantity</strong></p>
-
-
 
                             <p><strong>Date</strong></p>
-
                         </div>
                         <div>
                             <p>{{stockallotDetails.techname }}</p>
-                            <p>{{stockallotDetails.spare_name }}</p>
-                            <p>{{stockallotDetails.qnt }}</p>
+                            <!-- <p>{{stockallotDetails.spare_name }}</p>
+                            <p>{{stockallotDetails.qnt }}</p> -->
                             <p>{{stockallotDetails.date }}</p>
 
                         </div>
+                    </div>
+                    <div class="row m-l-5">
+                        <table style="width:100%; border: 1px solid black;">
+                            <tr>
+                                <th style="border: 1px solid black;text-align: center;">Spare Name</th>
+                                <th style="border: 1px solid black;text-align: center;">Quantity</th>
+                            </tr>
+
+                            <tr *ngFor="let item of stockallotDetails?.itemList">
+                                <td style="border: 1px solid black;text-align: center;">{{item.spare_name}}</td>
+                                <td style="border: 1px solid black;text-align: center;">{{item.qnt}}</td>
+
+                            </tr>
+                            <tr style="border: 1px solid black;">
+                                <td style="border: 1px solid black; text-align: center;"><strong>Total Quantity</strong></td>
+                                <td style="border: 1px solid black; text-align: center;"><strong>{{getSum(stockallotDetails?.itemList)}}</strong></td>
+                            </tr>
+
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
