@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SelectTeamService } from 'src/app/shared/selectteam.service';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -89,6 +90,8 @@ export class SelectteamComponent implements OnInit {
   submitForm() {
     this.ser.postTeams(this.form.value).subscribe(
       (res: any) => {
+        alert("Team added succesfully")
+        this.showTable()
         console.log(res, "js");
 
       }
