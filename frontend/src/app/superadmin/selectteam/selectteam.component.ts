@@ -58,6 +58,8 @@ export class SelectteamComponent implements OnInit {
 
       res.forEach((a: any) => {
 
+        console.log(a,"userbhaiya");
+        
         if (a.role == 'Admin') {
           this.admins.push(a)
         } else if (a.role == 'Telecaller' || a.role == 'Technician') {
@@ -93,8 +95,14 @@ export class SelectteamComponent implements OnInit {
   submitForm() {
     this.ser.postTeams(this.form.value).subscribe(
       (res: any) => {
-        console.log(res, "js");
-
+        alert("Team Created")
+        this.getallTeam()
+     
+        this.showTeamTable=true
+        this.showTeamForm=false
+        this.showUpdateButton = false;
+        this.showAddButton = false;
+      
       }
     )
 
@@ -135,12 +143,11 @@ export class SelectteamComponent implements OnInit {
   }
 
   deleteTeams(data: any) {
-    this.ser.deleteTeams(data._id)
+    this.ser.deleteTeams(data)
       .subscribe((res: any) => {
         alert("Records Deleted Successfully!");
+        this.getallTeam()
        
- 
-
       })
   }
   onEdit(data:any){

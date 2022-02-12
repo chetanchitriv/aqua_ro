@@ -2,6 +2,12 @@
     <div>
         <button type="button" (click)="showForm()" class="btn btn-success">Add Leads <i class="bi bi-briefcase-fill"></i></button>
         <button type="button" (click)="showTable()" class="btn btn-success">showList <i class="bi bi-briefcase-fill"></i></button>
+        <!-- <table>
+            <tr *ngFor="let item of teams">
+                <th>{{item}}</th>
+                <th>sahil</th>
+            </tr>
+        </table> -->
     </div>
     <div class="col-md-12">
         <div *ngIf="!showLeadForm && showLeadTable" class="card">
@@ -262,7 +268,7 @@
                             <div class="col-sm-10">
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label"></label>
-                                    <select  class="form-control" formControlName="status">
+                                    <select class="form-control" formControlName="status">
                     
                                         <option *ngFor="let data of status" [ngValue]="data">
                                             {{data}}
@@ -271,14 +277,14 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                         <div class="text-center" style="margin-left: 100px;">
                             <button *ngIf="showAddButton" type="button" (click)="postLeadsDetails()" (click)="showTable()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
                             <button *ngIf="showUpdateButton" type="button" (click)="updateLeadsDetails()" (click)="showTable()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
 
                         </div>
-                       
-                        
+
+
                     </div>
                 </div>
 

@@ -81,6 +81,7 @@ console.log("dueDate", this.future);
     this.getAllUser()
     this.getAllLeads()
     this.getAllComplaints()
+    this.getAllInvoice()
    
     
    
@@ -141,6 +142,7 @@ console.log("dueDate", this.future);
       this.showinvoiceForm=false
       this.showinvoiceTable=false
       this.showinvoiceUpdateForm=false
+      this.invoice=false
   }
 
   getAllLeads(){
@@ -210,6 +212,7 @@ console.log("dueDate", this.future);
     this.showinvoiceTable=true
     this.showinvoiceUpdateForm=false
     this.showinvoicesearchForm=false
+    this.invoice=false
   }
 
   view(data:any){
@@ -243,8 +246,10 @@ getAllComplaints(){
 // }
 
 getAllInvoice() {
-  this.api.getInvoice().subscribe((res:any) => {
+  this.invoiceService.getInvoice().subscribe((res:any) => {
     this.invoiceAll = res;
+    console.log(res,"invoices");
+    
     
   })
 }
@@ -324,5 +329,13 @@ public openPDF():void {
         PDF.save(this.leadData.name+ '_'+this.today );
     });    
     alert("Pdf Downloaded Succefully") 
+  }
+
+viewinvoice(item:any){
+
+    this.invoicePdf=item
+    this.items=item.itemList
+    this.invoice=true
+    this.showinvoiceTable=false
   }
 }

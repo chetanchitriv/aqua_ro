@@ -91,7 +91,7 @@ this.len=this.leadsAll.length
 getAllLeads(){
      
   this.leadService.getLeads().subscribe((res: any)=>{  
- console.log(res);
+
 this.assignleads=res.filter((a:any)=>{
   return a.assignTo == this.username && a.status == 'New Lead'
 })
