@@ -96,11 +96,43 @@ const user_delete=async(req,res)=>{
       }
 };
 
+const changePassword=async(req,res)=>{
+    const userId=req.params.id
+    const userExist = await User.findOne({
+        _id: userId,
+    });
+    if(userExist){
+        console.log(userExist)
+    }
+    // try{
+     
+    //     console.log(req.params.id);
+    //     const salt = await bcrypt.genSalt(10);
+    //     const hashedPassword  = await bcrypt.hash(req.body.password, salt);    
+    //     const user={
+    //         userName:req.body.userName,
+    //         email:req.body.email,
+    //         password:hashedPassword,
+    //         mobile:req.body.mobile,
+    //         workingHours:req.body.workingHours,
+    //         role:req.body.role
+    //     };
+
+   
+    //     const updatedUser = await User.findByIdAndUpdate(
+    //         {_id:req.params.id},user
+    //     )
+    //     res.json(updatedUser)
+    // }catch(error){
+    //     res.status(400).send(error)
+    // }
+};
 
 module.exports={
     user_all,
     user_details,
     user_create,
     user_update,
-    user_delete
+    user_delete,
+    changePassword
 }
