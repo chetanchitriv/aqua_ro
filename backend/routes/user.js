@@ -7,5 +7,4 @@ router.get('/',userController.user_all,verifyToken.verifyToken);
 router.get('/:id',userController.user_details, verifyToken.verifyToken);
 router.put("/:id",userController.user_update, verifyToken.verifyToken);
 router.delete('/:id',userController.user_delete, verifyToken.verifyToken);
-router.put("/:id",userController.changePassword, verifyToken.verifyToken)
 module.exports=router

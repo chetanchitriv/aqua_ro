@@ -42,6 +42,7 @@ app.get("/", (req, res)=>{
 
 
 const userRouts=require("./routes/user")
+const userPasswordRouts=require("./routes/changepassword")
 const authRoute=require("./routes/auth")
 const stockRoute=require("./routes/stockRouter")
 const teamAllotRoute=require("./routes/teamAllotRout")
@@ -53,6 +54,7 @@ const invoiceRoute=require("./routes/invoice_pdfRouter")
 const complaintRoute=require("./routes/complaint")
 
 app.use("/api/users",userRouts)
+app.use("/api/users/changepassword",userPasswordRouts)
 app.use("/api/invoice",invoiceRoute)
 app.use('/api/teams',teamAllotRoute)
 app.use("/api/login",authRoute)
