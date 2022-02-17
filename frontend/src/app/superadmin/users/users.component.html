@@ -204,7 +204,7 @@
             <div class="modal-body" style="padding:20px;">
 
                 <div class="card-header card-header-text">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
+                    <button type="button" #modalClose class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
                     <h4 class="card-title" style="color:#2196F3;"><b>Change Password</b></h4>
                 </div>
                 <form [formGroup]="passwordForm">
@@ -212,7 +212,7 @@
 
                         <div class="form-group">
                             <label for="newPassword">New Password</label>
-                            <input formControlName="newPassword" name="newPassword" type="password" class="form-control" placeholder="Enter new password">
+                            <input formControlName="newPassword"  name="newPassword" type="password" class="form-control" placeholder="Enter new password">
 
                             <!-- <div class="text-info" *ngIf="newPassword.invalid && ( newPassword.dirty || newPassword.touched )" class="validation">
                                     *Password is required</div> -->
@@ -242,7 +242,7 @@
                             <!-- </div> -->
                             <span *ngIf="passwordmatch" style="color: red;">password must be same</span>
                         </div>
-                        <button (click)="submitPassword()" type="submit" class="btn btn-primary">Change Password</button>&nbsp;&nbsp;
+                        <button (click)="submitPassword()" type="submit" class="btn btn-primary" [disabled]="!passwordForm.valid">Change Password</button>&nbsp;&nbsp;
                         <button type="button" class="btn btn-dark" (click)="reset()" data-dismiss="modal">Close</button>
                     </div>
                 </form>

@@ -1,6 +1,6 @@
 <div class="d-flex">
-    <button type="button" (click)="showSearchForm()" class="btn btn-success"> Generate Invoice<i class="bi bi-briefcase-fill"></i></button>
-    <button type="button" (click)="showTable()" class="btn btn-success">show List <i class="bi bi-briefcase-fill"></i></button>
+    <button type="button" (click)="showSearchForm()" class="btn btn-dark"> Generate Invoice<i class="bi bi-briefcase-fill"></i></button>
+    <button type="button" (click)="showTable()" class="btn btn-info">show List <i class="bi bi-briefcase-fill"></i></button>
 
     <div *ngIf="showinvoicesearchForm &&! showinvoiceForm && !showinvoiceUpdateForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
         <form [formGroup]="searchLead" (ngSubmit)="search()">
