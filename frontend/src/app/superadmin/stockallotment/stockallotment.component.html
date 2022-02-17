@@ -1,7 +1,7 @@
 <div class="d-flex">
     <div>
-        <button type="button" (click)="showStockForm()" class="btn btn-success">Allot Stock <i class="bi bi-briefcase-fill"></i></button>
-        <button type="button" (click)="showStockTable()" class="btn btn-success">showList <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showStockForm()" class="btn btn-primary">Allot Stock <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showStockTable()" class="btn btn-primary">showList <i class="bi bi-briefcase-fill"></i></button>
     </div>
 
     <div class="col-md-12">
@@ -43,7 +43,7 @@
 
                                         <td>
                                             <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
-                                            <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i  title="edit" class="material-icons">edit</i></a>
+                                            <a (click)="onEdit(data)" class="btn btn-simple btn-white btn-icon edit"><i  title="edit" class="material-icons" style="background-color: rgb(230, 197, 54);">edit</i></a>
                                             <a (click)="deleteStockallot(data)" class="btn btn-simple btn-danger btn-icon remove"><i  title="delete" class="material-icons">close</i></a>
                                         </td>
                                     </tr>
@@ -115,24 +115,22 @@
                                                     <tr>
 
                                                         <td>
-                                                            <select placeholder="Enter Role" formControlName="spare_name" class="form-control">
-                                                                            <option value=""> Select spare name --</option>
-                                                                            <option [ngValue]="data.spare_name" *ngFor="let data of stockAll">{{data.spare_name}}</option>
-                                                                         
-                                                                            <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
-                                                                        </select>
+                                                            <select placeholder="Enter Role" formControlName="spare_name" (change)='selectSpare($event,i)' class="form-control">
+       <option value=""> Select spare name --</option>
+         <option [ngValue]="data.spare_name" *ngFor="let data of stockAll">{{data.spare_name}}</option>
+     <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
+          </select>
                                                         </td>
-
+                                                        <td> <input type="number" placeholder="Total Quantity" class="form-control" formControlName="totalqnt" [value]="getTotalQnt(i)" [readonly]="true"></td>
                                                         <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
+                                                        <td> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getamount(i)"></td>
 
-                                                        <td (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
-                                                                    </i>
+                                                        <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
+        </i>
                                                         </td>
                                                     </tr>
 
                                                 </thead>
-
-                                                {{ formStockAllot.controls.itemList.controls[i].controls.spare_name.value }}
 
                                             </table>
                                         </div>
@@ -141,17 +139,9 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
             </div>
-
-
-
-
-
-
-
 
             <!-- <div class="text-center" style="margin-left: 100px;">
                 <button *ngIf="showAddButton" type="button" (click)="postStockallotDetails()" class="btn btn-success">Allot<i class="bi bi-briefcase-fill"></i></button>

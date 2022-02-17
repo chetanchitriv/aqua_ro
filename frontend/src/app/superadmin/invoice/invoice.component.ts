@@ -20,7 +20,10 @@ export class InvoiceComponent implements OnInit {
   @ViewChild('pdfTable')
   pdfTable!: ElementRef;
 
-
+  isSuperAdmin :boolean = false
+  isAdmin :boolean = false
+  isTelecaller :boolean = false
+  isTechnician :boolean = false
 
   dtOptions:DataTables.Settings={}
   searchLead: any=FormGroup;
@@ -72,7 +75,33 @@ dueDate:any
   
 
   ngOnInit(): void {
+    var Role= localStorage.getItem("role")
+    if (Role=='Superadmin'){
+      this.isSuperAdmin = true
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = false
     
+    }
+    if (Role=='Admin'){
+      this.isSuperAdmin = false
+      this.isAdmin =true
+      this.isTelecaller=  false
+      this.isTechnician = false
+    }
+    if (Role=='Technician'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = true
+    }
+    if (Role=='Telecaller'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  true
+      this.isTechnician = false
+    }
+
    
 this.future.setDate(this.future.getDate()+15)
 console.log("dueDate", this.future);
@@ -369,5 +398,24 @@ viewinvoice(item:any){
     this.items=item.itemList
     this.invoice=true
     this.showinvoiceTable=false
+
+    var array=item.itemList
+
+      for (let x in array) {
+
+        // console.log((array[x].qnt) * (array[x].rate));
+        var amt = (array[x].qnt) * (array[x].rate)
+        this.newArray.push(amt)
+            // array[x].amt = amt
+    
+    }
+      
+    function sum(sahil:any, shank:any) {
+      return sahil + shank
+  }
+  
+  this.grandTotal = this.newArray.reduce(sum)
+  this.tax = this.grandTotal* 0.16
+  this.basePrice =this.grandTotal*0.84
   }
 }

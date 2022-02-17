@@ -1,7 +1,7 @@
 <div class="d-flex">
     <div>
-        <button type="button" (click)="showForm()" class="btn btn-success">Add Team Members <i class="bi bi-briefcase-fill"></i></button>
-        <button type="button" (click)="showTable()" class="btn btn-success">show Team List <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showForm()" class="btn btn-primary">Add Team Members <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showTable()" class="btn btn-primary">show Team List <i class="bi bi-briefcase-fill"></i></button>
     </div>
     <div class="col-md-12">
         <div class="card" *ngIf="!showTeamForm && showTeamTable">
@@ -31,7 +31,7 @@
 
                                         <td class="text-center">
                                             <a class="btn btn-simple btn-success btn-icon edit" (click)="view(team)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
-                                            <a (click)="onEdit(team)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">edit</i></a>
+                                            <a (click)="onEdit(team)" class="btn btn-simple btn-white btn-icon edit"><i class="material-icons" style="background-color: rgb(230, 197, 54);">edit</i></a>
                                             <a (click)="deleteTeams(team)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
                                         </td>
                                     </tr>
@@ -64,24 +64,25 @@
 
                         </div>
 
-                        <form [formGroup]="form">
+                        <form [formGroup]="form" (ngSubmit)="submitForm()">
 
                             <div class="card-content">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <select class="form-control" placeholder="Select an option" formControlName="admin">
                                         
-                                    <option  ><p>Select Team Leader </p></option>
+                                    <option><p>Select Team Leader </p></option>
                                    
-                                        <option  [ngValue]="adminss.userName"  *ngFor="let adminss of admins">{{adminss.userName}}</option>   
+                                        <option  *ngFor="let adminss of admins">{{adminss.userName}}</option>   
                                     </select></div>
                                     <div class="col-md-4">
                                         <select class="form-control" placeholder="Select Team Members" formControlName="team_member" multiple>
                                         
                                     <option  ><p>Select Team Member </p></option>
                                    
-                                        <option  [ngValue]="user.userName"  *ngFor="let user of users">{{user.userName}}</option>   
-                                    </select></div>
+                                        <option  *ngFor="let user of users">{{user.userName}}</option>   
+                                    </select>
+                                    </div>
 
 
                                     <!-- <div class="col-md-4">
@@ -97,7 +98,7 @@
                                         </div>
                                     </div> -->
 
-                                    <button type="button" (click)="submitForm()" class="button btn btn-success">Submit</button>
+                                    <button type="submit" class="button btn btn-success">Submit</button>
 
                                 </div>
                             </div>
@@ -127,11 +128,12 @@
 
                             <div class="card-content">
                                 <div class="row">
-                                    <div class="col-md-4"><select class="form-control" placeholder="Select an option" formControlName="admin">
+                                    <div class="col-md-4">
+                                        <select class="form-control" placeholder="Select an option" formControlName="admin">
                                         
                                     <option  ><p>Select Team Leader </p></option>
                                    
-                                        <option  [ngValue]="adminss.userName"  *ngFor="let adminss of admins">{{adminss.userName}}</option>   
+                                        <option [ngValue]="adminss.userName"  *ngFor="let adminss of admins">{{adminss.userName}}</option>   
                                     </select></div>
 
                                     <div class="col-md-4">
@@ -140,8 +142,21 @@
                                     <option  ><p>Select Team Member </p></option>
                                    
                                         <option  [ngValue]="user.userName"  *ngFor="let user of users">{{user.userName}}</option>   
-                                    </select></div>
+                                    </select>
+                                    </div>
 
+                                    <!-- <div class="col-md-4">
+                                        <button (click)="checkboar()" style="border: none;background-color: white;">Select Team Members</button>
+
+                                        <div *ngIf="show">
+                                            <div *ngFor="let user of users; let i=index">
+                                                <label>
+                                                  <input  type="checkbox" [value]="user.userName" (change)="onCheckboxChange($event)" />
+                                                  {{user.userName}}
+                                                     </label>
+                                            </div>
+                                        </div>
+                                    </div> -->
                                     <button type="button" (click)="updateTeamDetails()" class="button btn btn-success">Update</button>
                                 </div>
                             </div>
@@ -150,13 +165,7 @@
 
                 </div>
             </div>
-
-
-
         </div>
-
-
-
     </div>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

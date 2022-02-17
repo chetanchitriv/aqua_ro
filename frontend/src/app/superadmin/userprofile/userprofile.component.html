@@ -7,7 +7,7 @@
                     <div class="card-content">
 
 
-                        <h3>Welcome {{userProfile?.userName}}!
+                        <h3 style="color:#127cc2">&nbsp;&nbsp; Welcome {{userProfile?.userName}}!
 
                             <a *ngIf="currentRole=='Superadmin'" routerLink="/dashboard/editprofile" class="btn btn-simple btn-warning btn-icon edit" style="float:right"><i  title="edit" class="material-icons">edit</i></a>
                         </h3>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="card-content">
                         <h6 class="category text-gray">{{userProfile?.role}}</h6>
-                        <h4 class="card-title">{{userProfile?.userName}}</h4>
+                        <h4 class="card-title" style="color:#127cc2">{{userProfile?.userName}}</h4>
 
                         <a class="btn btn-rose btn-round">Follow</a>
                     </div>

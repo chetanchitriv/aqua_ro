@@ -23,7 +23,7 @@ export class SelectteamComponent implements OnInit {
 
   admins: any = []
   users: any = []
-  show: boolean = false
+  // show: boolean = false
   form: any = FormGroup;
   teamUpdate:any = FormGroup;
   teamarr:any=[]
@@ -40,6 +40,7 @@ viewTeam:any=[]
  
     this.getAllUser()
     this.getallTeam()
+ 
     this.initiatedtOption()
     
   
@@ -99,6 +100,8 @@ viewTeam:any=[]
 
 
   submitForm() {
+    console.log(this.form.value)
+
     this.ser.postTeams(this.form.value).subscribe(
       (res: any) => {
         alert("Team added succesfully")
@@ -107,17 +110,14 @@ viewTeam:any=[]
         this.getallTeam()
         this.showTable()
 
-        console.log(res, "js");
+        // console.log(res, "js");
 
       })
-
-  
-    console.log(this.form.value)
   }
 
   checkboar() {
 
-    this.show = true
+    // this.show = true
   }
 
   getallTeam() {
@@ -126,21 +126,16 @@ viewTeam:any=[]
     
      this.teamarr=res;
        console.log(this.teamarr, "j");
-
-       
-
     })
 
   }
-
-
   // sheetal mam
 
   showForm() {
 
     this.form = this.fb.group({
       admin: [''],
-      team_member: this.fb.array([])
+      team_member: this.fb.array([''])
     })
 
     this.showTeamForm = true
@@ -162,7 +157,7 @@ viewTeam:any=[]
   }
 
   deleteTeams(data: any) {
-    this.ser.deleteTeams(data)
+    this.ser.deleteTeams(data._id)
       .subscribe((res: any) => {
         alert("Records Deleted Successfully!");
         this.initiatedtOption()
@@ -171,18 +166,16 @@ viewTeam:any=[]
       })
   }
  
-
-  
-onEdit(data : any){
+  onEdit(data : any){
   console.log(data);
-  
+
   this.showTeamTable=false
   this.showformupdate=true;
     this.showTeamForm=false
     this.showUpdateButton = true;
     this.showAddButton = false;
     this.updateId=data._id
-
+  
   this.teamUpdate.patchValue(data)
 }
 
@@ -196,6 +189,7 @@ updateTeamDetails(){
   alert("Record Updated Successfully!")
   this.form.reset();
   this.initiatedtOption()
+ 
   this.getallTeam()
 
   this.showTable()

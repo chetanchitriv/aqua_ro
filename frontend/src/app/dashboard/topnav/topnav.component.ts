@@ -11,6 +11,12 @@ import { LeadService } from 'src/app/shared/lead.service';
   styleUrls: ['./topnav.component.css']
 })
 export class TopnavComponent implements OnInit {  
+
+  isSuperAdmin :boolean = false
+  isAdmin :boolean = false
+  isTelecaller :boolean = false
+  isTechnician :boolean = false
+  
   username: any
   leadsAll:any=[]
   notification:any=[]
@@ -22,23 +28,53 @@ export class TopnavComponent implements OnInit {
   note:boolean=false
   assignleads:any=[]
   leadnotification:any=[]
+  newLeads: any=[]
 
   constructor(private authservice: AuthserviceService, private fb:FormBuilder ,private router:Router, private leadService: LeadService) { 
     this.username=localStorage.getItem('username')
   }
 
   ngOnInit(): void {
+
+
+    var Role= localStorage.getItem("role")
+    if (Role=='Superadmin'){
+      this.isSuperAdmin = true
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = false
+    
+    }
+    if (Role=='Admin'){
+      this.isSuperAdmin = false
+      this.isAdmin =true
+      this.isTelecaller=  false
+      this.isTechnician = false
+    }
+    if (Role=='Technician'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = true
+    }
+    if (Role=='Telecaller'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  true
+      this.isTechnician = false
+    }
+
     // console.log(this.assignleads,"sahilchaware");
     
-   this.notify()
+  //  this.notify()
    
-   this.len = this.assignleads.length + this.leadsAll.length
+  //  this.len = this.assignleads.length + this.leadsAll.length
 
-    this.role=localStorage.getItem('role')
+  //   this.role=localStorage.getItem('role')
  
-    this.today = this.date.toISOString().slice(0, 10);
+  //   this.today = this.date.toISOString().slice(0, 10);
     // console.log("sahil",this.today );
-    // this. getAllLeads()
+    this. getAllAssignedLeads()
     
   }
 
@@ -70,39 +106,53 @@ export class TopnavComponent implements OnInit {
 notify(){
 
 
-this.leadService.getnotification().subscribe((res:any)=>{
-// console.log(res.lead,"notification");
+// this.leadService.getnotification().subscribe((res:any)=>{
+// // console.log(res.lead,"notification");
 
-  if( this.role == 'Superadmin' || this.role == 'Admin'){
-    this.leadsAll=res.lead
-  this.len=res.lead.length 
-  }else{
-    console.log("i am not sa");
+//   if( this.role == 'Superadmin' || this.role == 'Admin'){
+//     this.leadsAll=res.lead
+//   this.len=res.lead.length 
+//   }else{
+//     console.log("i am not sa");
     
-    this.leadsAll=res.lead.filter((a:any)=>{
-          return a.createdBy == this.username
-    })
-this.len=this.leadsAll.length
-  }
+//     this.leadsAll=res.lead.filter((a:any)=>{
+//           return a.createdBy == this.username
+//     })
+// this.len=this.leadsAll.length
+//   }
   
  
   
-})
+// })
 
 }
 
-getAllLeads(){
+// getAllLeads(){
+     
+//   this.leadService.getLeads().subscribe((res: any)=>{  
+
+// this.assignleads=res.filter((a:any)=>{
+//   return a.assignTo == this.username && a.status == 'New Lead'
+// })
+// // console.log(this.assignleads,"leadsres");
+// // .filter((a:any)=>{
+// //   return a.assignTo == this.username && a.status == "New Lead"
+// // })
+//   })
+// }
+
+getAllAssignedLeads(){
      
   this.leadService.getLeads().subscribe((res: any)=>{  
-
+ console.log(res);
 this.assignleads=res.filter((a:any)=>{
-  return a.assignTo == this.username && a.status == 'New Lead'
+  return a.assignTo == this.username
 })
-// console.log(this.assignleads,"leadsres");
-// .filter((a:any)=>{
-//   return a.assignTo == this.username && a.status == "New Lead"
-// })
+this.newLeads = this.assignleads.filter((a:any)=>{
+  return a.status == 'New Lead'
+})
+this.len=this.newLeads.length
   })
+  console.log(this.assignleads);  
 }
-
 }

@@ -33,4 +33,9 @@ export class StockallotService {
 getStockallotbyid(id : any){
   return this.http.get<any>(this.nodeUrl+`stocktech/`+`${id}`)
   }
+
+  getspareQuantity(spare:any){
+return this.http.get<any>(this.nodeUrl+`stock/`+`${spare}`)
+  }
+  
 }

@@ -1,7 +1,7 @@
 <div class="d-flex">
     <div>
-        <button type="button" (click)="showForm()" class="btn btn-success">Add Users <i class="bi bi-briefcase-fill"></i></button>
-        <button type="button" (click)="showTable()" class="btn btn-success">showList <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showForm()" class="btn btn-primary">Add Users <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showTable()" class="btn btn-primary">showList <i class="bi bi-briefcase-fill"></i></button>
     </div>
 
     <div class="col-md-12">
@@ -45,7 +45,7 @@
                                         <td>{{data.role}}</td>
                                         <td>
                                             <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
-                                            <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i  title="edit" class="material-icons">edit</i></a>
+                                            <a (click)="onEdit(data)" class="btn btn-simple btn-white btn-icon edit"><i  title="edit" class="material-icons" style="background-color: rgb(230, 197, 54);">edit</i></a>
                                             <a (click)="deleteUsers(data)" class="btn btn-simple btn-danger btn-icon remove"><i  title="delete" class="material-icons">close</i></a>
                                         </td>
                                     </tr>

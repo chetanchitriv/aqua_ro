@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComplaintsComponent } from './superadmin/complaints/complaints.component';
 import { LeadsComponent } from './superadmin/leads/leads.component';
 import { DataTablesModule } from 'angular-datatables';
-import { UserprofileComponent } from './superadmin/userprofile/userprofile.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthserviceService } from './shared/authservice.service';
 import { AuthGuard } from './auth/auth.guard';
@@ -26,6 +25,7 @@ import { StockallotmentComponent } from './superadmin/stockallotment/stockallotm
 import { SelectteamComponent } from './superadmin/selectteam/selectteam.component';
 import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { UserprofileComponent } from './superadmin/userprofile/userprofile.component';
 
 @NgModule({
   declarations: [
@@ -38,17 +38,13 @@ import { NgApexchartsModule } from 'ng-apexcharts';
      UsersComponent,
      LeadsComponent,
      ComplaintsComponent,
-     UserprofileComponent,
      EditprofileComponent,
      StockComponent,
      InvoiceComponent,
      StockallotmentComponent,
      SelectteamComponent,
      AssignedleadsComponent,
-    
-     
- 
-   
+    UserprofileComponent
   ],
   imports: [
     BrowserModule,

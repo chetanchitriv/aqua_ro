@@ -17,7 +17,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" style="cursor: pointer;">
+                <!-- <li class="dropdown" style="cursor: pointer;">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <i class="material-icons">notifications</i>
                         <span class="notification">{{len}}</span>
@@ -37,7 +37,30 @@
                         <li *ngIf="len == 0"><img src="../../../assets/img/notification.png" style="width: 100px;height: 100px;margin-left: 60px;" alt="" srcset=""></li>
                         <li *ngIf="len == 0"><a>Opps.. No Follow-Up for Today</a></li>
                     </ul>
+                </li> -->
+
+
+
+                <li class="dropdown" style="cursor: pointer;" *ngIf=" isTechnician">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">notifications</i>
+                        <span class="notification">{{len}}</span>
+                        <p class="hidden-lg hidden-md">
+                            Notifications
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li *ngIf="len > 0" style="background-color: rgb(232, 231, 231);" routerLink="/dashboard/assignedlead">
+                            <a> <strong>{{len}}</strong> New Lead assigned to you </a>
+                        </li>
+                        <li *ngIf="len == 0"><img src="../../../assets/img/notification.png" style="width: 100px;height: 100px;margin-left: 100px;" alt="" srcset=""></li>
+                        <li *ngIf="len == 0"><a>Opps.. No new leads assigned on your name</a></li>
+                    </ul>
                 </li>
+
+
+
                 <li style="cursor: pointer;">
                     <h5>Welcome {{username}}</h5>
                 </li>
