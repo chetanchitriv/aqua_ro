@@ -8,7 +8,6 @@ exports.postStockTech = (req, res) => {
         var store = new stockTech(req.body).save()
         res.status(201).json({ message: "stock has been Alloted" })
         console.log(`Stock alloted to ${req.body.techname}`);
-
     } catch (error) {
         res.status(400).json({ error: error })
         console.log(error);
