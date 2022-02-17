@@ -1,8 +1,8 @@
 <div class="d-flex">
     <div>
-        <button type="button" (click)="showForm()" class="btn btn-success">Add Stock <i
+        <button type="button" (click)="showForm()" class="btn btn-dark">Add Stock <i
                 class="bi bi-briefcase-fill"></i></button>
-        <button type="button" (click)="showTable()" class="btn btn-success">showList <i
+        <button type="button" (click)="showTable()" class="btn btn-primary">showList <i
                 class="bi bi-briefcase-fill"></i></button>
     </div>
 
@@ -20,10 +20,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr.no.</th>
-
-
                                         <th>Spare name</th>
-
                                         <th>Quantity</th>
                                         <th>Purchase Amount</th>
 
@@ -49,8 +46,8 @@
                                             <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i
                                                     title="read" data-toggle="modal" data-target="#myModal"
                                                     class="material-icons">assignment </i></a>
-                                            <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i title="edit"
-                                                    class="material-icons">edit</i></a>
+                                            <a (click)="onEdit(data)" class="btn btn-simple btn-white btn-icon edit"><i title="edit"
+                                                    class="material-icons" style="background-color: rgb(230, 197, 54);">edit</i></a>
                                             <a (click)="deleteUsers(data)" class="btn btn-simple btn-danger btn-icon remove"><i title="delete"
                                                     class="material-icons">close</i></a>
                                         </td>
@@ -88,7 +85,6 @@
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
                                 <input type="text" placeholder="Enter Spare name" formControlName="spare_name" class="form-control" value>
-
 
                             </div>
                         </div>
@@ -150,7 +146,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button *ngIf="showAddButton" type="button" (click)="postStockDetails()" class="btn btn-success">Submit <i
+                    <button type="submit" *ngIf="showAddButton" (click)="postStockDetails()" class="btn btn-success">Submit <i
                             class="bi bi-briefcase-fill"></i></button>
                     <button *ngIf="showUpdateButton" type="button" (click)="updateUsersDetails()" class="btn btn-success">Update <i
                             class="bi bi-briefcase-fill"></i></button>

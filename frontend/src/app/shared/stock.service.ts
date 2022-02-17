@@ -36,4 +36,5 @@ export class StockService {
     return this.http.get<any>(this.nodeUrl+`stock/`+`${id}`)
     }
 
+  
 }

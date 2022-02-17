@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComplaintsComponent } from './superadmin/complaints/complaints.component';
 import { LeadsComponent } from './superadmin/leads/leads.component';
 import { DataTablesModule } from 'angular-datatables';
-import { UserprofileComponent } from './superadmin/userprofile/userprofile.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthserviceService } from './shared/authservice.service';
 import { AuthGuard } from './auth/auth.guard';
@@ -26,7 +25,8 @@ import { StockallotmentComponent } from './superadmin/stockallotment/stockallotm
 import { SelectteamComponent } from './superadmin/selectteam/selectteam.component';
 import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { ChangepasswordComponent } from './superadmin/changepassword/changepassword.component';
+import { UserprofileComponent } from './superadmin/userprofile/userprofile.component';
+
 
 @NgModule({
   declarations: [
@@ -39,19 +39,15 @@ import { ChangepasswordComponent } from './superadmin/changepassword/changepassw
      UsersComponent,
      LeadsComponent,
      ComplaintsComponent,
-     UserprofileComponent,
      EditprofileComponent,
      StockComponent,
      InvoiceComponent,
      StockallotmentComponent,
      SelectteamComponent,
      AssignedleadsComponent,
-     ChangepasswordComponent,
-    
-     
- 
-   
-  ],
+     UserprofileComponent
+
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -72,3 +68,4 @@ import { ChangepasswordComponent } from './superadmin/changepassword/changepassw
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -1,7 +1,7 @@
 <div class="d-flex">
     <div>
-        <button type="button" (click)="showForm()" class="btn btn-success">Add Team Members <i class="bi bi-briefcase-fill"></i></button>
-        <button type="button" (click)="showTable()" class="btn btn-success">show Team List <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showForm()" class="btn btn-dark">Add Team Members <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showTable()" class="btn btn-primary">show Team List <i class="bi bi-briefcase-fill"></i></button>
     </div>
     <div class="col-md-12">
         <div class="card" *ngIf="!showTeamForm && showTeamTable">
@@ -61,7 +61,7 @@
 
                         </div>
 
-                        <form [formGroup]="form">
+                        <form [formGroup]="form" (ngSubmit)="submitForm()">
 
 
 

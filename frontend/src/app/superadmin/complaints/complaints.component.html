@@ -1,6 +1,6 @@
 <div class="d-flex">
-    <button type="button" (click)="showSearchForm()" class="btn btn-success">Add Complaints <i class="bi bi-briefcase-fill"></i></button>
-    <button type="button" (click)="showTable()" class="btn btn-success">show Complaint List <i class="bi bi-briefcase-fill"></i></button>
+    <button type="button" (click)="showSearchForm()" class="btn btn-dark">Add Complaints <i class="bi bi-briefcase-fill"></i></button>
+    <button type="button" (click)="showTable()" class="btn btn-primary">show Complaint List <i class="bi bi-briefcase-fill"></i></button>
 
 
     <div class="col-md-12">
@@ -61,7 +61,7 @@
 
                                         <td class="text-right">
                                             <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
-                                            <a (click)="onEdit(data)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons" >edit</i></a>
+                                            <a (click)="onEdit(data)" class="btn btn-simple btn-white btn-icon edit"><i class="material-icons" style="background-color: rgb(230, 197, 54);">edit</i></a>
                                             <a (click)="deleteComplaints(data)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
 
                                         </td>

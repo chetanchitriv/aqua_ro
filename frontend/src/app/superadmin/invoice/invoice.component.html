@@ -150,14 +150,14 @@
                                                         <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
                                                         <td> <input type="number" placeholder="Rate" class="form-control" formControlName="rate"></td>
                                                         <td><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
-                                                        <td (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
+                                                        <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
                                                         </i>
                                                         </td>
                                                     </tr>
 
                                                 </thead>
 
-                                                {{ invoiceForm.controls.itemList.controls[i].controls.itemName.value }}
+                                                {{ invoiceForm.controls.itemList.controls[i].controls.value }}
 
                                             </table>
                                         </div>
@@ -171,12 +171,9 @@
 
 
                 <div class="text-center" style="margin-left: 100px;">
-                    <button type="submit" class="btn btn-danger">Cancel<i class="bi bi-briefcase-fill"></i></button>
 
                     <button type="submit" class="btn btn-success">Generate invoice<i class="bi bi-briefcase-fill"></i></button>
-
-
-
+                    <button type="button" (click)="showSearchForm()" class="btn btn-danger">Cancel<i class="bi bi-briefcase-fill"></i></button>
                 </div>
             </div>
         </form>
@@ -236,7 +233,7 @@
 
 
                                         <td class="text-right">
-                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" data-toggle="modal" data-target="#myModal" class="material-icons" (click)="viewinvoice(invoice)">picture_as_pdf
+                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" d class="material-icons" (click)="viewinvoice(invoice)">picture_as_pdf
                                             </i></a>
 
                                         </td>
@@ -289,7 +286,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="card-header">
-                                                    <h1 style="color: #4caf50">Invoice</h1>
+                                                    <h1 style="color: #2196F3"><b>Invoice</b></h1>
                                                     <p> Invoice No. :<strong> E1234-567-89</strong></p>
                                                     <p> Date : <strong>{{invoicePdf.date}}</strong> &nbsp;&nbsp;</p>
                                                     <p>Due Date : <strong>{{invoicePdf.dueDate}}</strong></p>
@@ -308,11 +305,11 @@
                                                 <div>
                                                     <div class="row">
                                                         <div class="col-md-5  text-center">
-                                                            <div class="card">
+                                                            <div class="card color-light">
                                                                 <!-- <table>
                                                                     <tr><th></th></tr>
                                                                 </table> -->
-                                                                <b><h3 style="background-color: #4caf50;"> Billed By 
+                                                                <b><h3 style="background-color: #999999;color: #fff;"> Billed By 
                                                                    
                                                                 </h3></b>
                                                                 <address>
@@ -328,7 +325,7 @@
                                                         <div class="col-md-1 light"></div>
                                                         <div class="col-md-5 text-center" style="height: 231px;">
                                                             <div class="card">
-                                                                <b> <h3 style="background-color: #4caf50;">Billed To</h3></b>
+                                                                <b> <h3 style="background-color: #999999;color: #fff;">Billed To</h3></b>
                                                                 <p>
                                                                     Name : <span class="font-size-20">{{invoicePdf.name}}</span> </p>
                                                                 <p>Email : <span class="font-size-20">{{invoicePdf.emailId}}</span> </p>
