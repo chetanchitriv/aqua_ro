@@ -11,6 +11,7 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./stockallotment.component.css']
 })
 export class StockallotmentComponent implements OnInit {
+  
   dtOptions: DataTables.Settings = {};
   showstockForm: boolean= false;
   showstockTable: boolean=false;
@@ -28,6 +29,7 @@ export class StockallotmentComponent implements OnInit {
   stockallotAll: any=[];
   updateId: any;
   stockallotDetails: any={};
+  qnty: any;
  
  
 
@@ -56,10 +58,12 @@ export class StockallotmentComponent implements OnInit {
   createItem(): FormGroup {
     return this.formbuilder.group({
       spare_name: '',
+      totalqnt:0,
+      qntdiff:0,
      qnt:0,
    
     });
-  
+
   }
 
   addItem(): void {
@@ -79,9 +83,12 @@ export class StockallotmentComponent implements OnInit {
       console.log(res,"niya");
       
   })
+  }
+  getamount(i:any){
 
-
-}
+    this.formStockAllot.controls['itemList'].value.at(i).qntdiff=this.formStockAllot.controls['itemList'].value.at(i).totalqnt-this.formStockAllot.controls['itemList'].value.at(i).qnt
+  return (this.formStockAllot.controls['itemList'].value.at(i).qntdiff)
+  }
 
 postStockallotDetails(){
   this.stockallotservice.postStockallot(this.formStockAllot.value).subscribe(res=>{
@@ -209,4 +216,24 @@ getSum(itemlist:any=[]){
   }
   return sum;
 }
+
+selectSpare(e:any,i:any){
+var spare=e.target.value
+console.log(e.target.value);
+const array=spare.split(": ");
+var sparename=array[1]
+console.log(sparename);
+const sparedata=this.stockAll.find((x:any) => x.spare_name == sparename);
+var qnty=sparedata.qnt
+this.formStockAllot.controls['itemList'].value.at(i).totalqnt=qnty
+this.formStockAllot.controls['itemList'].value.at(i).totalqnt
+
 }
+getTotalQnt(i:any){ 
+  return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
+
+}
+
+
+}
+

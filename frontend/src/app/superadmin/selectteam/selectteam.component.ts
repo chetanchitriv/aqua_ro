@@ -99,6 +99,8 @@ export class SelectteamComponent implements OnInit {
 
 
   submitForm() {
+    console.log(this.form.value)
+
     this.ser.postTeams(this.form.value).subscribe(
       (res: any) => {
         alert("Team Created")
@@ -121,7 +123,7 @@ export class SelectteamComponent implements OnInit {
 
   checkboar() {
 
-    this.show = true
+    // this.show = true
   }
 
   getallTeam() {
