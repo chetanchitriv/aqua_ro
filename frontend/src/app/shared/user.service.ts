@@ -30,8 +30,8 @@ export class UserService {
   getUsersbyid(id : any){
     return this.http.get<any>(this.nodeUrl+`users/`+`${id}`)
     }
-    //change password
-    updatepassword(data : any,id: number){
-      return this.http.put<any>(this.nodeUrl+`users/changepassword/`+`${id}`,data)
-    }
+   //change password
+   updatepassword(data : any,id: number){
+    return this.http.put<any>(this.nodeUrl+`users/changepassword/`+`${id}`,data)
+  }
 }

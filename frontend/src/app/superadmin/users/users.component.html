@@ -1,7 +1,7 @@
 <div class="d-flex">
     <div>
-        <button type="button" (click)="showForm()" class="btn btn-success">Add Users <i class="bi bi-briefcase-fill"></i></button>
-        <button type="button" (click)="showTable()" class="btn btn-success">showList <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showForm()" class="btn btn-dark">Add Users <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showTable()" class="btn btn-warning">showList <i class="bi bi-briefcase-fill"></i></button>
     </div>
 
     <div class="col-md-12">
@@ -44,7 +44,7 @@
 
                                             <!-- <a *ngIf="isSuperAdmin" class="btn btn-simple btn-success btn-icon edit" (click)="view(data)" routerLink="/dashboard/changepassword"><i title="change password" class="material-icons">remove_red_eye</i></a> -->
 
-                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="changepass(data)"><i title="read" data-toggle="modal" data-target="#myModal2" class="material-icons">remove_red_eye </i></a>
+                                            <a class="btn btn-simple btn-info btn-icon edit" (click)="changepass(data)"><i title="change password" data-toggle="modal" data-target="#myModal2" class="material-icons">remove_red_eye </i></a>
 
                                             <a (click)="deleteUsers(data)" class="btn btn-simple btn-danger btn-icon remove"><i  title="delete" class="material-icons">close</i></a>
                                         </td>
@@ -193,50 +193,62 @@
             </div>
         </div>
     </div>
+</div>
 
 
-    <!-- change password -->
+<!-- change password -->
 
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body" style="padding:30px;">
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body" style="padding:20px;">
 
-                    <div class="card-header card-header-text">
-                        <button type="button" class="close" data-dismiss="modal2" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="card-title" style="color:#2196F3;"><b>Change Password</b></h4>
-                    </div>
-                    <form [formGroup]="passwordForm">
-                        <div class="card-content">
-                            <div class="form-group">
-                                <label for="oldPassword">Old Password</label>
-                                <input formControlName="oldPassword" name="oldPassword" type="password" class="form-control" id="oldPassword" placeholder="Enter old password">
-                                <div *ngIf="submitted && passwordForm.oldPassword.errors" class="validation">
-                                    <div *ngIf="passwordForm.oldPassword.errors.required">password is required</div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="newPassword">New Password</label>
-                                <input formControlName="newPassword" name="newPassword" type="password" class="form-control" placeholder="Enter new password">
-
-                                <div *ngIf="submitted && passwordForm.newPassword.errors" class="validation">
-                                    <div *ngIf="passwordForm.newPassword.errors.required">password is required</div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="confirmPassword">Confirm Password</label>
-                                <input formControlName="confirmPassword" name="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm new Password">
-                                <div *ngIf="submitted && passwordForm.confirmPassword.errors" class="validation">
-                                    <div *ngIf="passwordForm.confirmPassword.errors.required">Password is required</div>
-                                    <div *ngIf="passwordForm.confirmPassword.errors.minLength">Password At Least 6</div>
-                                </div>
-                            </div>
-                            <button (click)="submitPassword()" (click)="showForm()" type="submit" class="btn btn-primary">Change Password</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </form>
-
-
+                <div class="card-header card-header-text">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
+                    <h4 class="card-title" style="color:#2196F3;"><b>Change Password</b></h4>
                 </div>
+                <form [formGroup]="passwordForm">
+                    <div class="card-content">
+
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <input formControlName="newPassword" name="newPassword" type="password" class="form-control" placeholder="Enter new password">
+
+                            <!-- <div class="text-info" *ngIf="newPassword.invalid && ( newPassword.dirty || newPassword.touched )" class="validation">
+                                    *Password is required</div> -->
+
+                            <!-- <span class="text-info" *ngIf="(newPassword.touched || passwordForm.submitted) && newPassword.errors?.requried" class="validation">*Password is required</span> -->
+
+
+                            <!-- <div *ngIf="submitted && f.newPassword.errors" class="validation">
+                                    <div *ngIf="f.newPassword.errors.required">password is required</div>
+                                </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input formControlName="confirmPassword" name="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm new Password">
+
+                            <!-- <div class="text-info" *ngIf="confirmPassword.invalid && ( confirmPassword.dirty || confirmPassword.touched )" class="validation">
+                                    <div *ngIf="confirmPassword.errors['requried']">*Password is required</div>
+                                    <div *ngIf="confirmPassword.errors['compare']">*Password do not match</div>
+
+                                </div> -->
+
+                            <!-- [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" -->
+                            <!-- <div *ngIf="submitted && f.confirmPassword.errors" class="validation">
+                                    <div *ngIf="f.confirmPassword.errors.required">Password is required</div>
+                                    <div *ngIf="f.confirm_password.errors.ConfirmedValidator">Password and Confirm Password must be match.</div>-->
+                            <!-- <div *ngIf="passwordForm.confirmPassword.errors.minLength">Password At Least 6</div> -->
+                            <!-- </div> -->
+                            <span *ngIf="passwordmatch" style="color: red;">password must be same</span>
+                        </div>
+                        <button (click)="submitPassword()" type="submit" class="btn btn-primary">Change Password</button>&nbsp;&nbsp;
+                        <button type="button" class="btn btn-dark" (click)="reset()" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+
+
             </div>
+        </div>
+    </div>
 </div>
