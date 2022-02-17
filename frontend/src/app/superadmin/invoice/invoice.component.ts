@@ -417,5 +417,6 @@ viewinvoice(item:any){
   this.grandTotal = this.newArray.reduce(sum)
   this.tax = this.grandTotal* 0.16
   this.basePrice =this.grandTotal*0.84
+  
   }
 }

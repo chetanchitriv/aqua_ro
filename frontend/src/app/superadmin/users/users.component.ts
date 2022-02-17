@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/user.service';
 import { Data, Router } from '@angular/router';
 import { UsersModel } from '../users.model';
-import { Subject } from 'rxjs';
 
 
 @Component({
@@ -14,25 +13,49 @@ import { Subject } from 'rxjs';
 export class UsersComponent implements OnInit {
  
   dtOptions: DataTables.Settings = {};
+
   showUserForm: boolean=false;
   showUserTable: boolean=false;
   showAddButton: boolean=false;
   showUpdateButton: boolean=false;
+
+  isSuperAdmin :boolean = false
+  isAdmin :boolean = false
+  isTelecaller :boolean = false
+  isTechnician :boolean = false
  
  usersModelObj : UsersModel = new UsersModel();
+
   formValue:any= FormGroup;
+
+  passwordForm:any=FormGroup;
+  
+  passwordmatch:boolean=false
   usersAll: any=[];
+
   
 
   roles=["Admin","Technician","Telecaller","Vendor"]
   updateId: any;
   userDetails: any={};
   serverErrorMessages: any;
+
+  submitted: boolean=false;
+  changepassId: any;
   
 
  constructor(private formbuilder: FormBuilder, private api: UserService, private router:Router) { }
 
   ngOnInit(): void {
+
+    var Role= localStorage.getItem("role")
+    if (Role=='Superadmin'){
+      this.isSuperAdmin = true
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = false
+    
+    }
     
     this.getAllUser()
     this.initiatedtOption()
@@ -41,12 +64,26 @@ export class UsersComponent implements OnInit {
         mobile : ['',Validators.required],
         email : ['',Validators.required],
         password : ['',Validators.required],
-       
         workingHours: ['',Validators.required],
         role: ['',Validators.required],
-    });
+    })
 
-  }
+    // change password start
+  this.passwordForm = this.formbuilder.group({
+        newPassword: ['', Validators.required],
+        confirmPassword: ['', [Validators.required]]
+    }
+    // ,{
+    //   validator: ConfirmedValidator('newPassword', 'confirmPassword')
+    // }
+    );
+      // this.showUserForm=false;
+      // this.showUpdateButton = false;
+      // this.showAddButton = true;
+      // this.showUserTable=true;
+     
+      // change password end
+}
 
   initiatedtOption(){
     this.dtOptions = {
@@ -72,6 +109,8 @@ export class UsersComponent implements OnInit {
     })
 
   }
+  
+
   getAllUser(){
     var role=localStorage.getItem('role')
     this.api.getUsers().subscribe(res=>{
@@ -97,7 +136,7 @@ export class UsersComponent implements OnInit {
      
       workingHours: ['',Validators.required],
       role: ['',Validators.required],
-  });
+    });
     this.showUserForm=true
     this.showUpdateButton = false;
     this.showAddButton = true;
@@ -167,5 +206,47 @@ updateUsersDetails(){
 })
 
 }
- 
+// change password
+
+changepass(data:any){
+  this.changepassId=data._id
 }
+
+submitPassword(){
+  // console.log(this.passwordForm.controls.newPassword.value, this.passwordForm.controls.confirmPassword.value);
+  // this.submitted = true;
+//  if(this.passwordForm.controls.newPassword.value === this.passwordForm.controls.confirmPassword.value){
+// console.log("match ho gya ");
+
+
+    if(this.passwordForm.controls.newPassword.value === this.passwordForm.controls.confirmPassword.value){
+      this.api.updatepassword(this.passwordForm.value, this.changepassId)
+      .subscribe((res: any) => {
+        alert("Password Updated Successfully!")
+        this.passwordForm.reset();
+    }
+    )}
+      else{
+        this.passwordmatch=true;
+        
+      }
+           
+}
+reset()
+{
+  this.passwordmatch=false;
+  this.passwordForm.reset();
+}
+}
+  // this.api.updatepassword(this.passwordForm.value, this.changepassId)
+  // .subscribe((res: any) => {
+    // alert("Password Updated Successfully!")
+    // this.passwordForm.reset();
+    // console.log(this.passwordForm.value);
+    
+// get newPassword(){
+//   return this.passwordForm.get('newPassword');
+// }
+// get confirmPassword(){
+//   return this.passwordForm.get('confirmPassword');
+// }

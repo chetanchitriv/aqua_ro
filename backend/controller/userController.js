@@ -97,6 +97,7 @@ const user_delete=async(req,res)=>{
 };
 
 
+
 module.exports={
     user_all,
     user_details,

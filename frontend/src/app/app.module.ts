@@ -27,6 +27,7 @@ import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { UserprofileComponent } from './superadmin/userprofile/userprofile.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,8 +45,9 @@ import { UserprofileComponent } from './superadmin/userprofile/userprofile.compo
      StockallotmentComponent,
      SelectteamComponent,
      AssignedleadsComponent,
-    UserprofileComponent
-  ],
+     UserprofileComponent
+
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -66,3 +68,4 @@ import { UserprofileComponent } from './superadmin/userprofile/userprofile.compo
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

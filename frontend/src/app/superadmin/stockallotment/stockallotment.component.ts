@@ -11,6 +11,7 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./stockallotment.component.css']
 })
 export class StockallotmentComponent implements OnInit {
+  
   dtOptions: DataTables.Settings = {};
   showstockForm: boolean= false;
   showstockTable: boolean=false;

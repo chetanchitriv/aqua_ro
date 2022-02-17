@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SelectTeamService } from 'src/app/shared/selectteam.service';
 import { UserService } from 'src/app/shared/user.service';
@@ -13,69 +13,68 @@ import { UserService } from 'src/app/shared/user.service';
 export class SelectteamComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {}
- 
+
   showTeamForm: boolean = false;
   showTeamTable: boolean = false;
   showAddButton: boolean = false;
   showUpdateButton: boolean = false;
-  showformupdate: boolean = false;
 
 
   admins: any = []
-  users: any = []
-  // show: boolean = false
+  technician: any = []
+  telecaller: any = []
+  show: boolean = false
   form: any = FormGroup;
-  teamUpdate:any = FormGroup;
-  teamarr:any=[]
-  updateId: any;
-  data:any;
-viewTeam:any=[]
+  teamarr: any = []
+  display: any
+  updateId:any
+  showUpdate:boolean=false
+  showbutton:boolean=true
+  Admins:any=[]
+
   constructor(private api: UserService, private fb: FormBuilder, private http: HttpClient, private ser: SelectTeamService) { }
- 
+
   ngOnInit(): void {
-    this.form = this.fb.group({
-      admin: [''],
-      team_member: this.fb.array([])
-    })
- 
+
+   
     this.getAllUser()
     this.getallTeam()
- 
+    // this.chngecss()
     this.initiatedtOption()
-    
+    this.form = this.fb.group({
+      admin: [''],
+      technician: [''],
+      telecaller: ['']
+
+    })
   
+
   }
 
-  initiatedtOption(){
+  initiatedtOption() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       processing: true,
-      lengthMenu:[10,20,30]
+      lengthMenu: [10, 20, 30]
     };
-
-    this.teamUpdate = this.fb.group({
-      admin: [''],
-      team_member: this.fb.array([])
-    })
- 
   }
   getAllUser() {
     this.api.getUsers().subscribe((res: any) => {
-
+   
       res.forEach((a: any) => {
 
-        console.log(a,"userbhaiya");
-        
         if (a.role == 'Admin') {
           this.admins.push(a)
-        } else if (a.role == 'Telecaller' || a.role == 'Technician') {
-          this.users.push(a)
+
+        } else if (a.role == 'Telecaller') {
+          this.technician.push(a)
+        } else if (a.role == 'Technician') {
+          this.telecaller.push(a)
         }
 
       });
 
-      console.log(res, "selectem");
 
     })
   }
@@ -104,15 +103,22 @@ viewTeam:any=[]
 
     this.ser.postTeams(this.form.value).subscribe(
       (res: any) => {
-        alert("Team added succesfully")
-        this.form.reset();
-        this.initiatedtOption()
+        alert("Team Created")
+   
         this.getallTeam()
-        this.showTable()
 
-        // console.log(res, "js");
+        this.showTeamTable = true
+        this.showTeamForm = false
+        this.showUpdateButton = false;
+        this.showAddButton = false;
+        this.form.reset()
 
-      })
+      }
+
+    )
+
+
+    console.log(this.form.value)
   }
 
   checkboar() {
@@ -121,87 +127,96 @@ viewTeam:any=[]
   }
 
   getallTeam() {
-    
-    this.ser.getTeams().subscribe((res: any) => {
-    
-     this.teamarr=res;
-       console.log(this.teamarr, "j");
-    })
 
+    this.ser.getTeams().subscribe((res: any) => {
+
+      this.teamarr = res
+      console.log(this.teamarr, "j");
+
+    })
   }
+
   // sheetal mam
 
   showForm() {
-
-    this.form = this.fb.group({
-      admin: [''],
-      team_member: this.fb.array([''])
-    })
-
     this.showTeamForm = true
     this.showTeamTable = false
     this.showUpdateButton = false;
     this.showAddButton = true;
-    this.showformupdate=false;
+this.chngecss() 
+   
 
   }
-  showTable(){
+
+  showTable() {
     this.initiatedtOption()
-    
-    this.showTeamTable=true
-    this.showTeamForm=false
+
+    this.showTeamTable = true
+    this.showTeamForm = false
     this.showUpdateButton = false;
     this.showAddButton = false;
-    this.showformupdate=false;
-  
+
   }
 
   deleteTeams(data: any) {
-    this.ser.deleteTeams(data._id)
+ 
+    this.ser.deleteTeams(data)
       .subscribe((res: any) => {
+      
         alert("Records Deleted Successfully!");
-        this.initiatedtOption()
-        this.getallTeam()
+        window.location.reload()
+
+     
         this.showTable()
+       this.chngecss()
       })
   }
- 
-  onEdit(data : any){
-  console.log(data);
 
-  this.showTeamTable=false
-  this.showformupdate=true;
-    this.showTeamForm=false
-    this.showUpdateButton = true;
-    this.showAddButton = false;
-    this.updateId=data._id
-  
-  this.teamUpdate.patchValue(data)
-}
+  onEdit(data: any) {
+    this.showTeamForm = true
+    this.showTeamTable = false
+    this.showUpdate=true
+    this.showbutton=false
 
-updateTeamDetails(){
-  console.log(this.updateId);
-  
-  this.ser.updateTeams(this.teamUpdate.value,this.updateId)
-.subscribe((res: any)=>{
-  console.log(res);
-  
-  alert("Record Updated Successfully!")
-  this.form.reset();
-  this.initiatedtOption()
- 
-  this.getallTeam()
+    console.log(data, "data");
+    console.log(this.form.controls.admin.value,"admin hai bhaiya ");
+    
+this.updateId=data._id
+    this.form.patchValue(data)
+    // this.form.controls.admin.patchValue(data.Admin)
+    
 
-  this.showTable()
-})
-}
-view(data:any){
- 
-this.viewTeam.push(data)
-}
-nullarr(){
-  this.viewTeam=[]
-}
-}
+    
+  }
 
+  update(){
+    this.ser.updateTeams(this.form.value,this.updateId).subscribe((res:any)=>{
+      alert("team update succefully")
+      this.form.reset()
+      this.getallTeam()
+      this.showTable()
+    })
+  }
+
+  chngecss() {
+   
+    this.showUpdate=false
+    this.showbutton=true
+    this.getallTeam()
+    this.admins.forEach((element:any) => {
+      console.log(element,"heyyy");
+
+       for(let x in this.teamarr){
+     
+         
+         if(element.userName == this.teamarr[x].admin){
+          element.userName = 'hide_element'
+        console.log(element.userName,"jadu");
+
+        
+         }
+       }
+     });
+  }
+}
 
