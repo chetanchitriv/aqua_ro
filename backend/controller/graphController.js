@@ -1,4 +1,4 @@
-const Lead = require('../model/Lead')
+
 const User = require('../model/User')
 
 exports.getGraphTele = async (req, res) => {
