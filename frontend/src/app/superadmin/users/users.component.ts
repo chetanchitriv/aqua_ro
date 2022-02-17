@@ -14,25 +14,47 @@ import { Subject } from 'rxjs';
 export class UsersComponent implements OnInit {
  
   dtOptions: DataTables.Settings = {};
+
   showUserForm: boolean=false;
   showUserTable: boolean=false;
   showAddButton: boolean=false;
   showUpdateButton: boolean=false;
+
+  isSuperAdmin :boolean = false
+  isAdmin :boolean = false
+  isTelecaller :boolean = false
+  isTechnician :boolean = false
  
  usersModelObj : UsersModel = new UsersModel();
+
   formValue:any= FormGroup;
+  passwordForm:any=FormGroup;
+
   usersAll: any=[];
+
   
 
   roles=["Admin","Technician","Telecaller","Vendor"]
   updateId: any;
   userDetails: any={};
   serverErrorMessages: any;
+
+  submitted: boolean=false;
+  changepassId: any;
   
 
  constructor(private formbuilder: FormBuilder, private api: UserService, private router:Router) { }
 
   ngOnInit(): void {
+
+    var Role= localStorage.getItem("role")
+    if (Role=='Superadmin'){
+      this.isSuperAdmin = true
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = false
+    
+    }
     
     this.getAllUser()
     this.initiatedtOption()
@@ -46,7 +68,13 @@ export class UsersComponent implements OnInit {
         role: ['',Validators.required],
     });
 
-  }
+    this.passwordForm = this.formbuilder.group({
+      oldPassword : ['',Validators.required],
+      newPassword : ['',Validators.required],
+      confirmPassword : ['',Validators.required],
+    })
+
+}
 
   initiatedtOption(){
     this.dtOptions = {
@@ -71,6 +99,9 @@ export class UsersComponent implements OnInit {
       this.userDetails=res
     })
 
+  }
+  changepass(data:any){
+    this.changepassId=data._id
   }
   getAllUser(){
     var role=localStorage.getItem('role')
@@ -97,7 +128,13 @@ export class UsersComponent implements OnInit {
      
       workingHours: ['',Validators.required],
       role: ['',Validators.required],
+// change password
+      oldPassword: ['', Validators.required],
+      newPassword: ['', Validators.required],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
   });
+
+
     this.showUserForm=true
     this.showUpdateButton = false;
     this.showAddButton = true;
@@ -165,6 +202,23 @@ updateUsersDetails(){
   this.getAllUser()
   this.showTable()
 })
+
+}
+// change password
+
+get f (){return this.formValue.controls}
+
+submitPassword(){
+  // this.submitted = true;
+  //   if(this.passwordForm.invalid){
+  //   return;
+  // }
+  this.api.updatepassword(this.passwordForm.value, this.changepassId)
+  .subscribe((res: any) => {
+    alert("Password Updated Successfully!")
+    this.passwordForm.reset();
+   
+  })
 
 }
  

@@ -30,6 +30,7 @@ export class SelectteamComponent implements OnInit {
   updateId:any
   showUpdate:boolean=false
   showbutton:boolean=true
+  Admins:any=[]
 
   constructor(private api: UserService, private fb: FormBuilder, private http: HttpClient, private ser: SelectTeamService) { }
 
@@ -65,6 +66,7 @@ export class SelectteamComponent implements OnInit {
 
         if (a.role == 'Admin') {
           this.admins.push(a)
+
         } else if (a.role == 'Telecaller') {
           this.technician.push(a)
         } else if (a.role == 'Technician') {
@@ -137,7 +139,7 @@ export class SelectteamComponent implements OnInit {
     this.showTeamTable = false
     this.showUpdateButton = false;
     this.showAddButton = true;
-    this.chngecss() 
+this.chngecss() 
    
 
   }
@@ -153,13 +155,16 @@ export class SelectteamComponent implements OnInit {
   }
 
   deleteTeams(data: any) {
+ 
     this.ser.deleteTeams(data)
       .subscribe((res: any) => {
+      
         alert("Records Deleted Successfully!");
-        this.initiatedtOption()
-        this.getallTeam()
+        window.location.reload()
+
+     
         this.showTable()
-        this.chngecss()
+       this.chngecss()
       })
   }
 

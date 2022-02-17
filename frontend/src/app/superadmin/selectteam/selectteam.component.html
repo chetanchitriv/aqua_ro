@@ -16,7 +16,7 @@
                                     <tr role="row">
                                         <th style="width: 87px;">ID</th>
                                         <th style="width: 87px;">Team Leader</th>
-                                        <!-- <th style="width: 87px;">Team members</th> -->
+
                                         <th style="width: 87px;">Actions</th>
                                     </tr>
                                 </thead>
@@ -24,9 +24,8 @@
                                     <tr *ngFor="let team of teamarr,let i=index ">
                                         <td>{{i+1}}</td>
                                         <td>{{team.admin}}</td>
-                                        <!-- <td *ngFor=" let item of team.team_memeber">
-                                            {{item}}
-                                        </td> -->
+
+                                        <!-- <td *ngFor=" let item of team.team_memeber"> -->
 
                                         <td class="text-center">
                                             <a (click)="onEdit(team)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">edit</i></a>
@@ -62,7 +61,7 @@
 
                         </div>
 
-                        <div class="card-content">
+                        <form [formGroup]="form">
 
 
 
@@ -115,23 +114,16 @@
                                     <button *ngIf="showUpdate" (click)="update()" class="button btn btn-success" type="submit">Update</button>
 
 
-
                                 </form>
                             </div>
-
-
-
-                        </div>
-
-
-
-
+                        </form>
                     </div>
+
                 </div>
             </div>
 
 
 
         </div>
+
     </div>
-</div>

@@ -2,21 +2,14 @@ const stock = require('../model/teamallotment')
 
 
 //adding stock into the database
-exports.team_create =  (req, res) => {
+exports.team_create = async (req, res) => {
     try {
-        console.log(req.body);
-        var teamArray = req.body.team_member
-        var  teamMemberArray = []
-        teamArray.forEach(element => {
- 
-                teamMemberArray.push(element)
-            
-        });
         const insert = new stock({
             admin: req.body.admin,
-            team_memeber: teamMemberArray
+            telecaller: req.body.telecaller,
+            technician:req.body.technician
         })
-        const saveData =   insert.save()
+        const saveData = await  insert.save()
         res.send(saveData)
         console.log("start", saveData, "end");
     } catch (error) {
