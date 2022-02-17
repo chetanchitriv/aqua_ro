@@ -31,6 +31,20 @@ exports.getStock = async (req, res)=>{
     }
 }
 
+exports.getStockByName = async (req, res)=>{
+    console.log(req.params.spare);
+
+    // try {
+    //     const data = await stock.findOne(req.params.spare_name)
+    //     res.status(200).send(data)
+    //     console.log("data sent");
+    // } catch (error) {
+    //     res.status(400).json({error:error})
+    //     console.log(error);
+        
+    // }
+}
+
 exports.getallStock = async (req, res)=>{
     try {
        

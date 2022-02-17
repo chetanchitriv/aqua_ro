@@ -2,7 +2,8 @@ const mongoose=require("mongoose")
 
 const teamAllotmentSchema=mongoose.Schema({
     admin : String,
-    team_memeber: Array,
+    telecaller: Array,
+    technician:Array
 });
 
 module.exports= new mongoose.model("teamaAllotment",teamAllotmentSchema)

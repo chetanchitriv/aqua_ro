@@ -369,5 +369,25 @@ viewinvoice(item:any){
     this.items=item.itemList
     this.invoice=true
     this.showinvoiceTable=false
+
+    var array=item.itemList
+
+      for (let x in array) {
+
+        // console.log((array[x].qnt) * (array[x].rate));
+        var amt = (array[x].qnt) * (array[x].rate)
+        this.newArray.push(amt)
+            // array[x].amt = amt
+    
+    }
+      
+    function sum(sahil:any, shank:any) {
+      return sahil + shank
+  }
+  
+  this.grandTotal = this.newArray.reduce(sum)
+  this.tax = this.grandTotal* 0.16
+  this.basePrice =this.grandTotal*0.84
+  
   }
 }
