@@ -13,7 +13,7 @@ import { UserService } from 'src/app/shared/user.service';
 export class SelectteamComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {}
- 
+
   showTeamForm: boolean = false;
   showTeamTable: boolean = false;
   showAddButton: boolean = false;
@@ -21,51 +21,58 @@ export class SelectteamComponent implements OnInit {
 
 
   admins: any = []
-  users: any = []
+  technician: any = []
+  telecaller: any = []
   show: boolean = false
   form: any = FormGroup;
-  teamarr:any=[]
+  teamarr: any = []
+  display: any
+  updateId:any
+  showUpdate:boolean=false
+  showbutton:boolean=true
 
   constructor(private api: UserService, private fb: FormBuilder, private http: HttpClient, private ser: SelectTeamService) { }
- 
+
   ngOnInit(): void {
+
    
- 
     this.getAllUser()
     this.getallTeam()
+    // this.chngecss()
     this.initiatedtOption()
     this.form = this.fb.group({
       admin: [''],
-      team_member: this.fb.array([])
+      technician: [''],
+      telecaller: ['']
+
     })
- 
   
+
   }
 
-  initiatedtOption(){
+  initiatedtOption() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       processing: true,
-      lengthMenu:[10,20,30]
+      lengthMenu: [10, 20, 30]
     };
   }
   getAllUser() {
     this.api.getUsers().subscribe((res: any) => {
-
+   
       res.forEach((a: any) => {
 
-        console.log(a,"userbhaiya");
-        
         if (a.role == 'Admin') {
           this.admins.push(a)
-        } else if (a.role == 'Telecaller' || a.role == 'Technician') {
-          this.users.push(a)
+        } else if (a.role == 'Telecaller') {
+          this.technician.push(a)
+        } else if (a.role == 'Technician') {
+          this.telecaller.push(a)
         }
 
       });
 
-      console.log(res, "selectem");
 
     })
   }
@@ -94,13 +101,14 @@ export class SelectteamComponent implements OnInit {
       (res: any) => {
         alert("Team Created")
         this.getallTeam()
-     
-        this.showTeamTable=true
-        this.showTeamForm=false
+
+        this.showTeamTable = true
+        this.showTeamForm = false
         this.showUpdateButton = false;
         this.showAddButton = false;
-      
+
       }
+
     )
 
 
@@ -111,15 +119,13 @@ export class SelectteamComponent implements OnInit {
 
     this.show = true
   }
-  
-  getallTeam() {
-    
-    this.ser.getTeams().subscribe((res: any) => {
-    
-     this.teamarr=res
-       console.log(this.teamarr, "j");
 
-       
+  getallTeam() {
+
+    this.ser.getTeams().subscribe((res: any) => {
+
+      this.teamarr = res
+      console.log(this.teamarr, "j");
 
     })
   }
@@ -131,17 +137,19 @@ export class SelectteamComponent implements OnInit {
     this.showTeamTable = false
     this.showUpdateButton = false;
     this.showAddButton = true;
-
+    this.chngecss() 
+   
 
   }
-  showTable(){
+
+  showTable() {
     this.initiatedtOption()
-    
-    this.showTeamTable=true
-    this.showTeamForm=false
+
+    this.showTeamTable = true
+    this.showTeamForm = false
     this.showUpdateButton = false;
     this.showAddButton = false;
-  
+
   }
 
   deleteTeams(data: any) {
@@ -151,12 +159,53 @@ export class SelectteamComponent implements OnInit {
         this.initiatedtOption()
         this.getallTeam()
         this.showTable()
+        this.chngecss()
       })
   }
-  onEdit(data:any){
 
+  onEdit(data: any) {
+    this.showTeamForm = true
+    this.showTeamTable = false
+    this.showUpdate=true
+    this.showbutton=false
+
+    console.log(data, "data");
+    console.log(this.form.controls.admin.value,"admin hai bhaiya ");
+    
+this.updateId=data._id
+    this.form.patchValue(data)
+    // this.form.controls.admin.patchValue(data.Admin)
+    
+
+    
   }
 
+  update(){
+    this.ser.updateTeams(this.form.value,this.updateId).subscribe((res:any)=>{
+      alert("team update succefully")
+      this.form.reset()
+      this.getallTeam()
+      this.showTable()
+    })
+  }
 
+  chngecss() {
+    
+    this.getallTeam()
+    this.admins.forEach((element:any) => {
+      console.log(element,"heyyy");
+
+       for(let x in this.teamarr){
+     
+         
+         if(element.userName == this.teamarr[x].admin){
+          element.userName = 'hide_element'
+        console.log(element.userName,"jadu");
+
+        
+         }
+       }
+     });
+  }
 }
 
