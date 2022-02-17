@@ -14,11 +14,11 @@ export class UserprofileComponent implements OnInit {
   
   passwordForm:any=FormGroup;
   passwordmatch:boolean=false
-  formbuilder: any;
+
   changepassId: any;
   usersAll: any=[];
   currentUserId:any
-  constructor(private userService:UserService, formbuilder:FormBuilder ) { }
+  constructor(private userService:UserService, private formbuilder:FormBuilder ) { }
 
   ngOnInit(): void {
    this.currentRole=localStorage.getItem('role')
