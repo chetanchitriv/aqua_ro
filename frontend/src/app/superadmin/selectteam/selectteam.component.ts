@@ -102,12 +102,14 @@ export class SelectteamComponent implements OnInit {
     this.ser.postTeams(this.form.value).subscribe(
       (res: any) => {
         alert("Team Created")
+   
         this.getallTeam()
 
         this.showTeamTable = true
         this.showTeamForm = false
         this.showUpdateButton = false;
         this.showAddButton = false;
+        this.form.reset()
 
       }
 
@@ -195,7 +197,9 @@ this.updateId=data._id
   }
 
   chngecss() {
-    
+   
+    this.showUpdate=false
+    this.showbutton=true
     this.getallTeam()
     this.admins.forEach((element:any) => {
       console.log(element,"heyyy");
