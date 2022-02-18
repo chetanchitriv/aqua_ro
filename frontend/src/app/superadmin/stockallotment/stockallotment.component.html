@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div *ngIf="!showstockForm && showstockTable" class="card">
             <div class="card-content">
-                <h4 class="card-title">Users</h4>
+                <h4 class="card-title title1">Users</h4>
                 <div class="content">
 
 
@@ -48,8 +48,7 @@
                                             <a (click)="onEdit(data)" class="btn btn-simple btn-white btn-icon edit"><i
                                                     title="edit" class="material-icons"
                                                     style="background-color: rgb(230, 197, 54);">edit</i></a>
-                                            <a (click)="deleteStockallot(data)"
-                                                class="btn btn-simple btn-danger btn-icon remove"><i title="delete"
+                                            <a (click)="deleteStockallot(data)" class="btn btn-simple btn-danger btn-icon remove"><i title="delete"
                                                     class="material-icons">close</i></a>
                                         </td>
                                     </tr>
@@ -71,10 +70,10 @@
         <form class="form-horizontal" [formGroup]="formStockAllot">
             <div class="card-header card-header-text">
                 <span *ngIf="showAddButton">
-                    <h4 class="card-title">Allot Stock</h4>
+                    <h4 class="card-title title1">Allot Stock</h4>
                 </span>
                 <span *ngIf="showUpdateButton">
-                    <h4 class="card-title">Update Stock Allot</h4>
+                    <h4 class="card-title title1">Update Stock Allot</h4>
                 </span>
             </div>
             <div class="card-header card-header-text">
@@ -116,8 +115,7 @@
                                     </i>
                                 </a>
                                 <form [formGroup]="formStockAllot">
-                                    <div formArrayName="itemList"
-                                        *ngFor="let item of formStockAllot.get('itemList')['controls']; let i = index;">
+                                    <div formArrayName="itemList" *ngFor="let item of formStockAllot.get('itemList')['controls']; let i = index;">
 
                                         <div [formGroupName]="i">
                                             <table class="table">
@@ -125,9 +123,7 @@
                                                     <tr>
 
                                                         <td>
-                                                            <select placeholder="Enter Role"
-                                                                formControlName="spare_name"
-                                                                (change)='selectSpare($event,i)' class="form-control">
+                                                            <select placeholder="Enter Role" formControlName="spare_name" (change)='selectSpare($event,i)' class="form-control">
                                                                 <option value=""> Select spare name --</option>
                                                                 <option [ngValue]="data.spare_name"
                                                                     *ngFor="let data of stockAll">{{data.spare_name}}
@@ -135,18 +131,11 @@
                                                                 <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
                                                             </select>
                                                         </td>
-                                                        <td> <input type="number" placeholder="Total Quantity"
-                                                                class="form-control" formControlName="totalqnt"
-                                                                [value]="getTotalQnt(i)" [readonly]="true"></td>
-                                                        <td> <input type="number" placeholder="Quantity"
-                                                                class="form-control" formControlName="qnt"></td>
-                                                        <td> <input type="number" placeholder="Balance Quantity"
-                                                                class="form-control" formControlName="qntdiff"
-                                                                [value]="getamount(i)"></td>
+                                                        <td> <input type="number" placeholder="Total Quantity" class="form-control" formControlName="totalqnt" [value]="getTotalQnt(i)" [readonly]="true"></td>
+                                                        <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
+                                                        <td> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getamount(i)"></td>
 
-                                                        <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i
-                                                                style="cursor: pointer;"
-                                                                class="material-icons">delete_forever
+                                                        <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
                                                             </i>
                                                         </td>
                                                     </tr>
@@ -170,10 +159,10 @@
 
             </div> -->
             <div class="text-center">
-                <button *ngIf="showAddButton" type="button" (click)="postStockallotDetails()"
-                    class="btn btn-success">Submit <i class="bi bi-briefcase-fill"></i></button>
-                <button *ngIf="showUpdateButton" type="button" (click)="updateStockallotDetails()"
-                    class="btn btn-success">Update <i class="bi bi-briefcase-fill"></i></button>
+                <button *ngIf="showAddButton" type="button" (click)="postStockallotDetails()" class="btn mycolor">Submit <i
+                        class="bi bi-briefcase-fill"></i></button>
+                <button *ngIf="showUpdateButton" type="button" (click)="updateStockallotDetails()" class="btn mycolor">Update <i
+                        class="bi bi-briefcase-fill"></i></button>
             </div>
 
 

@@ -2,6 +2,18 @@
     color: red;
 }
 
-.hide{
-    display:none !important;
+.hide {
+    display: none !important;
+}
+
+.title1 {
+    color: #2196f3;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.mycolor {
+    background: linear-gradient(to right, #0be93b 0%, #0285f0 100%);
+    /* background-color: #2196f3; */
+    font-weight: bold;
 }
