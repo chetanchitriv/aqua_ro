@@ -36,7 +36,14 @@ export class StockallotmentComponent implements OnInit {
   constructor(private formbuilder: FormBuilder, private api: StockService, private userservice:UserService, private stockallotservice:StockallotService, router:Router) { }
 
   ngOnInit(): void {
-
+    this.formStockAllot = this.formbuilder.group({
+      // spare_name : ['',Validators.required],
+      // qnt  : ['',Validators.required],
+      techname  : ['',Validators.required],
+      date:  [this.today],
+      itemList: this.formbuilder.array([ this.createItem() ])
+     
+  }); 
     this. initiatedtOption()
     this.getAllUser()
     this.getAllStock()
@@ -45,14 +52,7 @@ export class StockallotmentComponent implements OnInit {
   this.today = this.date.toISOString().slice(0, 10);
   this.times =  this.date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
   console.log(this.today)
-    this.formStockAllot = this.formbuilder.group({
-      // spare_name : ['',Validators.required],
-      // qnt  : ['',Validators.required],
-      techname  : ['',Validators.required],
-      date:  [this.today],
-      itemList: this.formbuilder.array([ this.createItem() ])
-     
-  });
+  
 
   }
   createItem(): FormGroup {
@@ -222,16 +222,15 @@ var spare=e.target.value
 console.log(e.target.value);
 const array=spare.split(": ");
 var sparename=array[1]
-console.log(sparename);
 const sparedata=this.stockAll.find((x:any) => x.spare_name == sparename);
-var qnty=sparedata.qnt
-this.formStockAllot.controls['itemList'].value.at(i).totalqnt=qnty
-this.formStockAllot.controls['itemList'].value.at(i).totalqnt
+// this.qnty=sparedata.qnt
+this.formStockAllot.controls['itemList'].value.at(i).totalqnt=sparedata.qnt
+// this.formStockAllot.controls['itemList'].value.at(i).totalqnt
 
 }
 getTotalQnt(i:any){ 
   return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
-
+// return this.qnty
 }
 
 
