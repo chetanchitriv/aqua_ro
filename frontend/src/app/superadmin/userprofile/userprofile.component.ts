@@ -56,7 +56,7 @@ submitPassword(){
         localStorage.removeItem('role')
         localStorage.removeItem('userId')
         localStorage.removeItem('token')
-        this.router.navigate(['/login']);
+        this.router.navigate(['login']);
 
       }
       )
