@@ -12,11 +12,11 @@ const notification_create= async(req,res)=>{
     //  });
     // console.log(todayDate);
    
-    // Lead.find({}, (err, doc) => {
-    //     doc.forEach((meme) => {
-    //         console.log(meme);
-    //       });
-    // })
+    Lead.find({}, (err, doc) => {
+        doc.forEach((meme) => {
+            console.log(meme);
+          });
+    })
     
     // .forEach( function(myDoc) { print( "user: " + myDoc.name ); } );
 
