@@ -1,6 +1,6 @@
 <div class="d-flex">
-    <button type="button" (click)="showSearchForm()" class="btn btn-primary"> Generate Invoice<i class="bi bi-briefcase-fill"></i></button>
-    <button *ngIf="isSuperAdmin || isAdmin" type="button" (click)="showTable()" class="btn btn-primary">show List <i class="bi bi-briefcase-fill"></i></button>
+    <button type="button" (click)="showSearchForm()" class="btn btn-dark"> Generate Invoice<i class="bi bi-briefcase-fill"></i></button>
+    <button type="button" (click)="showTable()" class="btn btn-info">show List <i class="bi bi-briefcase-fill"></i></button>
 
     <div *ngIf="showinvoicesearchForm &&! showinvoiceForm && !showinvoiceUpdateForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
         <form [formGroup]="searchLead" (ngSubmit)="search()">
@@ -286,7 +286,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="card-header">
-                                                    <h1 style="color: #4caf50">Invoice</h1>
+                                                    <h1 style="color: #2196F3"><b>Invoice</b></h1>
                                                     <p> Invoice No. :<strong> E1234-567-89</strong></p>
                                                     <p> Date : <strong>{{invoicePdf.date}}</strong> &nbsp;&nbsp;</p>
                                                     <p>Due Date : <strong>{{invoicePdf.dueDate}}</strong></p>
@@ -305,11 +305,11 @@
                                                 <div>
                                                     <div class="row">
                                                         <div class="col-md-5  text-center">
-                                                            <div class="card">
+                                                            <div class="card color-light">
                                                                 <!-- <table>
                                                                     <tr><th></th></tr>
                                                                 </table> -->
-                                                                <b><h3 style="background-color: #4caf50;"> Billed By 
+                                                                <b><h3 style="background-color: #999999;color: #fff;"> Billed By 
                                                                    
                                                                 </h3></b>
                                                                 <address>
@@ -325,7 +325,7 @@
                                                         <div class="col-md-1 light"></div>
                                                         <div class="col-md-5 text-center" style="height: 231px;">
                                                             <div class="card">
-                                                                <b> <h3 style="background-color: #4caf50;">Billed To</h3></b>
+                                                                <b> <h3 style="background-color: #999999;color: #fff;">Billed To</h3></b>
                                                                 <p>
                                                                     Name : <span class="font-size-20">{{invoicePdf.name}}</span> </p>
                                                                 <p>Email : <span class="font-size-20">{{invoicePdf.emailId}}</span> </p>

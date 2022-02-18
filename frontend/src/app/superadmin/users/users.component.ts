@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/user.service';
 import { Data, Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { UsersModel } from '../users.model';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+   @ViewChild('myModalClose') modalClose: any;
  
   dtOptions: DataTables.Settings = {};
 
@@ -63,7 +64,6 @@ export class UsersComponent implements OnInit {
         userName : ['',Validators.required],
         mobile : ['',Validators.required],
         email : ['',Validators.required],
-        password : ['',Validators.required],
         workingHours: ['',Validators.required],
         role: ['',Validators.required],
     })
@@ -132,8 +132,6 @@ export class UsersComponent implements OnInit {
       userName : ['',Validators.required],
       mobile : ['',Validators.required],
       email : ['',Validators.required],
-      password : ['',Validators.required],
-     
       workingHours: ['',Validators.required],
       role: ['',Validators.required],
     });
@@ -213,17 +211,17 @@ changepass(data:any){
 }
 
 submitPassword(){
-  // console.log(this.passwordForm.controls.newPassword.value, this.passwordForm.controls.confirmPassword.value);
-  // this.submitted = true;
-//  if(this.passwordForm.controls.newPassword.value === this.passwordForm.controls.confirmPassword.value){
-// console.log("match ho gya ");
-
-
     if(this.passwordForm.controls.newPassword.value === this.passwordForm.controls.confirmPassword.value){
       this.api.updatepassword(this.passwordForm.value, this.changepassId)
       .subscribe((res: any) => {
         alert("Password Updated Successfully!")
         this.passwordForm.reset();
+         this.modalClose.nativeElement.click();
+        localStorage.removeItem('username')
+        localStorage.removeItem('role')
+        localStorage.removeItem('userId')
+        localStorage.removeItem('token')
+        this.router.navigate(['/login']);
     }
     )}
       else{

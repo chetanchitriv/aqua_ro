@@ -9,9 +9,9 @@
 
                         <h3 style="color:#127cc2">&nbsp;&nbsp; Welcome {{userProfile?.userName}}!
 
-                            <a *ngIf="currentRole=='Superadmin'" routerLink="/dashboard/editprofile" class="btn btn-simple btn-warning btn-icon edit" style="float:right"><i  title="edit" class="material-icons">edit</i></a>
+                            <a *ngIf="currentRole=='Superadmin'" routerLink="/dashboard/editprofile" class="btn editicon" style="float:right"><i  title="edit" class="material-icons">edit</i></a>
 
-                            <a *ngIf="currentRole=='Superadmin'" class="btn btn-simple btn-info btn-icon edit"><i title="change password" data-toggle="modal" data-target="#myModal" class="material-icons">remove_red_eye </i></a>
+                            <a *ngIf="currentRole=='Superadmin'" class="btn passwordicon"><i title="change password" data-toggle="modal" data-target="#myModal" class="material-icons">remove_red_eye </i></a>
                         </h3>
 
                         <div role="tabpanel">
@@ -69,6 +69,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
             <!-- change password -->
 
@@ -78,8 +81,12 @@
                         <div class="modal-body" style="padding:20px;">
 
                             <div class="card-header card-header-text">
-                                <button type="button" #myModalClose class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
-                                <h4 class="card-title" style="color:#2196F3;"><b>Change Password</b></h4>
+                                <button type="button" #modalClose class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
+                                
+                                <h4 class="card-title title"><b>Change Password</b></h4>
+
+                            
+
                             </div>
                             <form [formGroup]="passwordForm" (ngSubmit)="submitPassword()">
                                 <div class="card-content">
@@ -94,7 +101,7 @@
 
                                         <span *ngIf="passwordmatch" style="color: red;">password must be same</span>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" >Change Password</button>&nbsp;&nbsp;
+                                    <button type="submit" class="btn btn-primary" [disabled]="!passwordForm.valid">Change Password</button>&nbsp;&nbsp;
                                     <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
                                 </div>
                             </form>
@@ -105,6 +112,4 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-</div>
+        

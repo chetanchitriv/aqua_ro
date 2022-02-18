@@ -1,7 +1,6 @@
 <div class="d-flex">
     <div>
-
-        <button type="button" (click)="showForm()" class="btn btn-primary">Add Users <i class="bi bi-briefcase-fill"></i></button>
+        <button type="button" (click)="showForm()" class="btn btn-dark">Add Users <i class="bi bi-briefcase-fill"></i></button>
         <button type="button" (click)="showTable()" class="btn btn-primary">showList <i class="bi bi-briefcase-fill"></i></button>
     </div>
 
@@ -103,16 +102,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <label class="col-sm-2 label-on-left">Password</label>&nbsp;
-                        <div class="col-sm-8">
-                            <div class="form-group label-floating is-empty">
-                                <label class="control-label"></label>
-                                <input type="password" placeholder="Enter password" formControlName="password" class="form-control">
-                                <!-- <span class="text-info" *ngIf="formValue.touched && (!formValue.value.password || formValue.value.password.length == 0)" class="validation">*Password is required</span> -->
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="row">
                         <label class="col-sm-2 label-on-left">Working hours</label>&nbsp;
@@ -204,7 +193,7 @@
             <div class="modal-body" style="padding:20px;">
 
                 <div class="card-header card-header-text">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
+                    <button type="button" #modalClose class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
                     <h4 class="card-title" style="color:#2196F3;"><b>Change Password</b></h4>
                 </div>
                 <form [formGroup]="passwordForm">
@@ -242,7 +231,7 @@
                             <!-- </div> -->
                             <span *ngIf="passwordmatch" style="color: red;">password must be same</span>
                         </div>
-                        <button (click)="submitPassword()" type="submit" class="btn btn-primary">Change Password</button>&nbsp;&nbsp;
+                        <button (click)="submitPassword()" type="submit" class="btn btn-primary" [disabled]="!passwordForm.valid">Change Password</button>&nbsp;&nbsp;
                         <button type="button" class="btn btn-dark" (click)="reset()" data-dismiss="modal">Close</button>
                     </div>
                 </form>

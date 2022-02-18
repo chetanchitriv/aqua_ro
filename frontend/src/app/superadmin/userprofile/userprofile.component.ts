@@ -16,7 +16,7 @@ export class UserprofileComponent implements OnInit {
   
   passwordForm:any=FormGroup;
   passwordmatch:boolean=false
-  
+
   changepassId: any;
   usersAll: any=[];
   currentUserId:any
@@ -52,7 +52,12 @@ submitPassword(){
         alert("Password Updated Successfully!")
         this.passwordForm.reset();
         this.modalClose.nativeElement.click();
-        this.router.navigate(['/login'])
+        localStorage.removeItem('username')
+        localStorage.removeItem('role')
+        localStorage.removeItem('userId')
+        localStorage.removeItem('token')
+        this.router.navigate(['/login']);
+
       }
       )
   }
