@@ -1,0 +1,5 @@
+.mycolor {
+    background: linear-gradient(to right, #0be93b 0%, #0285f0 100%);
+    /* background-color: #2196f3; */
+    font-weight: bold;
+}

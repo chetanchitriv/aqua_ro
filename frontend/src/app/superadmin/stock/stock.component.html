@@ -9,7 +9,7 @@
     <div class="col-md-12">
         <div *ngIf="!showUserForm && showUserTable" class="card">
             <div class="card-content">
-                <h4 class="card-title">Stock</h4>
+                <h4 class="card-title title1">Stock</h4>
                 <div class="content">
 
 
@@ -71,10 +71,10 @@
 
                 <div class="card-header card-header-text">
                     <span *ngIf="showAddButton">
-                        <h4 class="card-title">Add Stock</h4>
+                        <h4 class="card-title title1">Add Stock</h4>
                     </span>
                     <span *ngIf="showUpdateButton">
-                        <h4 class="card-title">Update Stock</h4>
+                        <h4 class="card-title title1">Update Stock</h4>
                     </span>
                 </div>
 
@@ -146,9 +146,9 @@
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" *ngIf="showAddButton" (click)="postStockDetails()" class="btn btn-success">Submit <i
+                    <button type="submit" *ngIf="showAddButton" (click)="postStockDetails()" class="btn mycolor">Submit <i
                             class="bi bi-briefcase-fill"></i></button>
-                    <button *ngIf="showUpdateButton" type="button" (click)="updateUsersDetails()" class="btn btn-success">Update <i
+                    <button *ngIf="showUpdateButton" type="button" (click)="updateUsersDetails()" class="btn mycolor">Update <i
                             class="bi bi-briefcase-fill"></i></button>
                 </div>
 

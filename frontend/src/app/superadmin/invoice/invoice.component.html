@@ -23,7 +23,7 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="btn btn-success">Search <i class="bi bi-briefcase-fill"></i></button>
+                    <button type="submit" class="btn mycolor">Search <i class="bi bi-briefcase-fill"></i></button>
                 </div>
 
 
@@ -36,7 +36,7 @@
         <form class="form-horizontal" [formGroup]="invoiceForm" (ngSubmit)="generateInvoice()">
             <div class="card-header card-header-text">
 
-                <h4 class="card-title">Invoice Form</h4>
+                <h4 class="card-title title1">Invoice Form</h4>
                 <!-- <h4 *ngIf="showUpdateButton" class="card-title">Update Complaint</h4> -->
             </div>
 
@@ -172,7 +172,7 @@
 
                 <div class="text-center" style="margin-left: 100px;">
 
-                    <button type="submit" class="btn btn-success">Generate invoice<i class="bi bi-briefcase-fill"></i></button>
+                    <button type="submit" class="btn mycolor">Generate invoice<i class="bi bi-briefcase-fill"></i></button>
                     <button type="button" (click)="showSearchForm()" class="btn btn-danger">Cancel<i class="bi bi-briefcase-fill"></i></button>
                 </div>
             </div>
@@ -183,7 +183,7 @@
     <div class="col-md-12">
         <div *ngIf="!showinvoicesearchForm && showinvoiceTable && !showinvoiceForm && !showinvoiceUpdateForm" class="card-form card">
             <div class="card-content">
-                <h4 class="card-title">Invoice</h4>
+                <h4 class="card-title title1">Invoice</h4>
                 <div class="content">
                     <!-- <div class="toolbar">
                   

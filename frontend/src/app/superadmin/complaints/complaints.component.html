@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <div *ngIf="!showsearchform && showComplaintTable && !showComplaintForm && !showComplaintUpdateForm" class="card-form card">
             <div class="card-content">
-                <h4 class="card-title">Complaints</h4>
+                <h4 class="card-title title1">Complaints</h4>
                 <div class="content">
                     <!-- <div class="toolbar">
                   
@@ -136,7 +136,7 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-success">Search <i class="bi bi-briefcase-fill"></i></button>
+                        <button type="submit" class="btn mycolor">Search <i class="bi bi-briefcase-fill"></i></button>
                     </div>
 
 
@@ -148,7 +148,7 @@
             <form class="form-horizontal" [formGroup]="complaintForm">
                 <div class="card-header card-header-text">
 
-                    <h4 class="card-title">Add Complaint</h4>
+                    <h4 class="card-title title1">Add Complaint</h4>
                     <!-- <h4 *ngIf="showUpdateButton" class="card-title">Update Complaint</h4> -->
                 </div>
 
@@ -220,7 +220,7 @@
                         </div>
                     </div>
                     <div class="card-header card-header-text">
-                        <h4 class="card-title">Follow-up</h4>
+                        <h4 class="card-title title1">Follow-up</h4>
                     </div>
                     <div class="row">
                         <label class="col-sm-2 label-on-left">Follow-up</label>
@@ -264,7 +264,7 @@
                         </div>
                     </div>
                     <div class="card-header card-header-text">
-                        <h4 class="card-title">Complaint</h4>
+                        <h4 class="card-title title1">Complaint</h4>
                     </div>
                     <div class="row">
                         <label class="col-sm-2 label-on-left">Complaint Details</label>
@@ -284,7 +284,7 @@
                     </div>
 
                     <div class="text-center" style="margin-left: 100px;">
-                        <button type="submit" [disabled]="!complaintForm.valid" (click)="postComplaintsDetails()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
+                        <button type="submit" [disabled]="!complaintForm.valid" (click)="postComplaintsDetails()" class="btn mycolor">Submit<i class="bi bi-briefcase-fill"></i></button>
                         <!-- <button *ngIf="showUpdateButton" type="submit" [disabled]="!complaintForm.valid" (click)="updateComplaintsDetails()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button> -->
 
 
@@ -298,7 +298,7 @@
                 <div class="card-header card-header-text">
 
                     <!-- <h4 class="card-title">Add Complaint</h4> -->
-                    <h4 class="card-title">Update Complaint</h4>
+                    <h4 class="card-title title1">Update Complaint</h4>
                 </div>
 
                 <div class="card-content">
@@ -376,7 +376,7 @@
                         </div>
                     </div>
                     <div class="card-header card-header-text">
-                        <h4 class="card-title">Follow-up</h4>
+                        <h4 class="card-title title1">Follow-up</h4>
                     </div>
                     <div class="row">
                         <label class="col-sm-2 label-on-left">Follow-up</label>
@@ -420,7 +420,7 @@
                         </div>
                     </div>
                     <div class="card-header card-header-text">
-                        <h4 class="card-title">Complaint</h4>
+                        <h4 class="card-title title1">Complaint</h4>
                     </div>
                     <div class="row">
                         <label class="col-sm-2 label-on-left">Complaint Details</label>
@@ -441,7 +441,7 @@
 
                     <div class="text-center" style="margin-left: 100px;">
                         <!-- <button *ngIf="showAddButton" type="submit" [disabled]="!complaintForm.valid" (click)="postComplaintsDetails()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button> -->
-                        <button type="submit" (click)="updateComplaintsDetails()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
+                        <button type="submit" (click)="updateComplaintsDetails()" class="btn mycolor">Update<i class="bi bi-briefcase-fill"></i></button>
 
 
 
