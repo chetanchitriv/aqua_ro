@@ -42,9 +42,14 @@
                                         <td>{{data.date}}</td>
 
                                         <td>
-                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons">assignment </i></a>
-                                            <a (click)="onEdit(data)" class="btn btn-simple btn-white btn-icon edit"><i  title="edit" class="material-icons" style="background-color: rgb(230, 197, 54);">edit</i></a>
-                                            <a (click)="deleteStockallot(data)" class="btn btn-simple btn-danger btn-icon remove"><i  title="delete" class="material-icons">close</i></a>
+                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(data)"><i
+                                                    title="read" data-toggle="modal" data-target="#myModal"
+                                                    class="material-icons">assignment </i></a>
+                                            <a (click)="onEdit(data)" class="btn btn-simple btn-white btn-icon edit"><i
+                                                    title="edit" class="material-icons"
+                                                    style="background-color: rgb(230, 197, 54);">edit</i></a>
+                                            <a (click)="deleteStockallot(data)" class="btn btn-simple btn-danger btn-icon remove"><i title="delete"
+                                                    class="material-icons">close</i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -81,9 +86,10 @@
                     <div class="col-sm-8">
                         <div class="form-group label-floating is-empty col-md-5">
                             <select placeholder="Enter Role" formControlName="techname" class="form-control">
-                        <option value=""> Select technician name --</option>
-                        <option [ngValue]="data.userName" *ngFor="let data of usersAll">{{data.userName}}</option>
-                             </select>
+                                <option value=""> Select technician name --</option>
+                                <option [ngValue]="data.userName" *ngFor="let data of usersAll">{{data.userName}}
+                                </option>
+                            </select>
                         </div>
 
                         <label class="col-sm-2 label-on-left">Date</label>
@@ -103,9 +109,11 @@
                         <div class="card">
                             <div class="card-content">
 
-                                <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
-                                            </i>
-                                        </a>
+                                <a type="button" (click)="addItem()"><i
+                                        style="margin-left: 96%; cursor: pointer; font-size:35px"
+                                        class="material-icons ">add_circle_outline
+                                    </i>
+                                </a>
                                 <form [formGroup]="formStockAllot">
                                     <div formArrayName="itemList" *ngFor="let item of formStockAllot.get('itemList')['controls']; let i = index;">
 
@@ -116,17 +124,19 @@
 
                                                         <td>
                                                             <select placeholder="Enter Role" formControlName="spare_name" (change)='selectSpare($event,i)' class="form-control">
-       <option value=""> Select spare name --</option>
-         <option [ngValue]="data.spare_name" *ngFor="let data of stockAll">{{data.spare_name}}</option>
-     <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
-          </select>
+                                                                <option value=""> Select spare name --</option>
+                                                                <option [ngValue]="data.spare_name"
+                                                                    *ngFor="let data of stockAll">{{data.spare_name}}
+                                                                </option>
+                                                                <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
+                                                            </select>
                                                         </td>
                                                         <td> <input type="number" placeholder="Total Quantity" class="form-control" formControlName="totalqnt" [value]="getTotalQnt(i)" [readonly]="true"></td>
                                                         <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
                                                         <td> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getamount(i)"></td>
 
                                                         <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
-        </i>
+                                                            </i>
                                                         </td>
                                                     </tr>
 
@@ -197,8 +207,10 @@
 
                             </tr>
                             <tr style="border: 1px solid black;">
-                                <td style="border: 1px solid black; text-align: center;"><strong>Total Quantity</strong></td>
-                                <td style="border: 1px solid black; text-align: center;"><strong>{{getSum(stockallotDetails?.itemList)}}</strong></td>
+                                <td style="border: 1px solid black; text-align: center;"><strong>Total Quantity</strong>
+                                </td>
+                                <td style="border: 1px solid black; text-align: center;">
+                                    <strong>{{getSum(stockallotDetails?.itemList)}}</strong></td>
                             </tr>
 
                         </table>
