@@ -36,10 +36,15 @@ const user_create= async(req,res)=>{
 
     if (emailExit) return res.status(400).send("Email already exists");
     if (userExit) return res.status(400).send("username already exists");
-       
+    
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword  = await bcrypt.hash(req.body.password, salt);
+    
     const user=new User({
         userName:req.body.userName,
         email:req.body.email,
+        password:hashedPassword,
         mobile:req.body.mobile,
         workingHours:req.body.workingHours,
         role:req.body.role
@@ -58,7 +63,9 @@ const user_create= async(req,res)=>{
 // update user
 const user_update=async(req,res)=>{
     try{
-        console.log(req.params.id);    
+        console.log(req.params.id);
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword  = await bcrypt.hash(req.body.password, salt);    
         const user={
             userName:req.body.userName,
             email:req.body.email,
@@ -67,6 +74,7 @@ const user_update=async(req,res)=>{
             role:req.body.role
         };
 
+   
         const updatedUser = await User.findByIdAndUpdate(
             {_id:req.params.id},user
         )
