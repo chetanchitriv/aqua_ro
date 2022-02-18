@@ -11,6 +11,7 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class UserprofileComponent implements OnInit {
   @ViewChild('myModalClose') modalClose: any;
+
   userProfile: any;
   currentRole: any;
   
@@ -44,20 +45,16 @@ export class UserprofileComponent implements OnInit {
  
 
 submitPassword(){
-  console.log("hi");
-
   if (this.passwordForm.controls.newPassword.value === this.passwordForm.controls.confirmPassword.value) {
     this.userService.updatepassword(this.passwordForm.value, this.currentUserId)
       .subscribe((res: any) => {
         alert("Password Updated Successfully!")
-        this.passwordForm.reset();
         this.modalClose.nativeElement.click();
         localStorage.removeItem('username')
         localStorage.removeItem('role')
         localStorage.removeItem('userId')
         localStorage.removeItem('token')
         this.router.navigate(['/login']);
-
       }
       )
   }
