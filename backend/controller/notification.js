@@ -14,7 +14,9 @@ const notification_create= async(req,res)=>{
    
     Lead.find({}, (err, doc) => {
         doc.forEach((meme) => {
-            console.log(meme);
+            if(meme.nextFollowupdate==todayDate){
+                console.log("Date match");
+            }
           });
     })
     

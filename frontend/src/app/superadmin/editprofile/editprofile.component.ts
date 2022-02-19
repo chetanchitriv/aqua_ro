@@ -21,7 +21,7 @@ export class EditprofileComponent implements OnInit {
       mobile : ["",Validators.required],
       email : ["",Validators.required],  
       workingHours: ["",Validators.required],
-      role: ["",Validators.required],
+      role:["",Validators.required]
   })
     this.getUserProfile()
     
