@@ -38,8 +38,8 @@ export class InvoiceComponent implements OnInit {
 
   today:any
   times:any
-future= new Date()
-dueDate:any
+ future= new Date()
+ dueDate:any
 
 
   invoiceForm: any = FormGroup;
@@ -272,6 +272,7 @@ console.log("dueDate", this.future);
     this.showinvoiceUpdateForm=false
     this.showinvoicesearchForm=false
     this.invoice=false
+    this.getAllInvoice()
     
   }
 
@@ -319,7 +320,7 @@ generateInvoice(){
       console.log(res.data,"post res");
       console.log(res.data.itemList);
       
-var array=res.data.itemList
+       var array=res.data.itemList
 
       for (let x in array) {
 
@@ -334,9 +335,9 @@ var array=res.data.itemList
       return sahil + shank
   }
   
-  this.grandTotal = this.newArray.reduce(sum)
-  this.tax = this.grandTotal* 0.16
-  this.basePrice =this.grandTotal*0.84
+  this.basePrice = this.newArray.reduce(sum)
+  this.tax = this.basePrice * 0.16
+  this.grandTotal=this.basePrice + this.tax
   
       console.log(this.grandTotal,"jadu jadu");
       
@@ -387,13 +388,14 @@ public openPDF():void {
         let position = 0;
         PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
         
-        PDF.save(this.leadData.name+ '_'+this.today );
+        PDF.save(this.invoicePdf.name+ '_'+this.today );
     });    
     // alert("Pdf Downloaded Succefully") 
   }
 
 viewinvoice(item:any){
 
+  this.newArray=[]
     this.invoicePdf=item
     this.items=item.itemList
     this.invoice=true
@@ -414,9 +416,9 @@ viewinvoice(item:any){
       return sahil + shank
   }
   
-  this.grandTotal = this.newArray.reduce(sum)
-  this.tax = this.grandTotal* 0.16
-  this.basePrice =this.grandTotal*0.84
+  this.basePrice = this.newArray.reduce(sum)
+  this.tax = this.basePrice* 0.16
+  this.grandTotal=this.basePrice + this.tax
   
   }
 }
