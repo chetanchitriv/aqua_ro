@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div *ngIf="!showLeadForm && showLeadTable" class="card">
             <div class="card-content">
-                <h4 class="card-title">Leads</h4>
+                <h4 class="card-title title1">Leads</h4>
                 <div class="content">
 
                     <!-- <div class="toolbar">
@@ -114,8 +114,8 @@
         <div *ngIf="showLeadForm && !showLeadTable" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
             <form class="form-horizontal" [formGroup]="formValue">
                 <div class="card-header card-header-text">
-                    <span *ngIf="showAddButton"><h4 class="card-title">Add Leads</h4></span>
-                    <span *ngIf="showUpdateButton"><h4 class="card-title">Update Leads</h4></span>
+                    <span *ngIf="showAddButton"><h4 class="card-title title1">Add Leads</h4></span>
+                    <span *ngIf="showUpdateButton"><h4 class="card-title title1">Update Leads</h4></span>
                 </div>
 
                 <div class="card-content">
@@ -216,7 +216,7 @@
 
 
                         <div class="card-header card-header-text">
-                            <h4 class="card-title">Follow-up</h4>
+                            <h4 class="card-title title1">Follow-up</h4>
                         </div>
                         <div class="row">
                             <label class="col-sm-2 label-on-left">Follow-up</label>
@@ -275,8 +275,8 @@
                         </div>
 
                         <div class="text-center" style="margin-left: 100px;">
-                            <button [disabled]="!formValue.valid" *ngIf="showAddButton" type="button" (click)="postLeadsDetails()" (click)="showTable()" class="btn btn-success">Submit<i class="bi bi-briefcase-fill"></i></button>
-                            <button *ngIf="showUpdateButton" type="button" (click)="updateLeadsDetails()" (click)="showTable()" class="btn btn-success">Update<i class="bi bi-briefcase-fill"></i></button>
+                            <button [disabled]="!formValue.valid" *ngIf="showAddButton" type="button" (click)="postLeadsDetails()" (click)="showTable()" class="btn mycolor">Submit<i class="bi bi-briefcase-fill"></i></button>
+                            <button *ngIf="showUpdateButton" type="button" (click)="updateLeadsDetails()" (click)="showTable()" class="btn mycolor">Update<i class="bi bi-briefcase-fill"></i></button>
 
                         </div>
 

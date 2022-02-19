@@ -19,11 +19,9 @@ export class EditprofileComponent implements OnInit {
     this.UpdateProfile = this.fb.group({
       userName : ["",Validators.required],
       mobile : ["",Validators.required],
-      email : ["",Validators.required],
-      password : ["",Validators.required],
-     
+      email : ["",Validators.required],  
       workingHours: ["",Validators.required],
-      role: ["",Validators.required],
+      role:["",Validators.required]
   })
     this.getUserProfile()
     
@@ -44,15 +42,9 @@ export class EditprofileComponent implements OnInit {
     this.userService.updateUsers(this.UpdateProfile.value,this.currentUserId).subscribe(res=>{
       if(res){    
         alert("Profile Updated Successfully");
-        this.logout()
+        this.router.navigate(['/dashboard/'])
       }
     })
   }
-  logout(){
-    localStorage.removeItem('username')
-    localStorage.removeItem('role')
-    localStorage.removeItem('userId')
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
+
 }

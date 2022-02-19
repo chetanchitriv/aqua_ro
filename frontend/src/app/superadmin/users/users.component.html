@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div *ngIf="!showUserForm && showUserTable" class="card">
             <div class="card-content">
-                <h4 class="card-title">Users</h4>
+                <h4 class="card-title title1">Users</h4>
                 <div class="content">
 
 
@@ -66,8 +66,8 @@
             <form class="form-horizontal" [formGroup]="formValue">
 
                 <div class="card-header card-header-text">
-                    <span *ngIf="showAddButton"><h4 class="card-title">Add Users</h4></span>
-                    <span *ngIf="showUpdateButton"><h4 class="card-title">Update Users</h4></span>
+                    <span *ngIf="showAddButton"><h4 class="card-title title1">Add Users</h4></span>
+                    <span *ngIf="showUpdateButton"><h4 class="card-title title1">Update Users</h4></span>
                 </div>
 
                 <div class="card-content">
@@ -102,17 +102,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="showAddButton">
                         <label class="col-sm-2 label-on-left">Password</label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
                                 <input type="password" placeholder="Enter password" formControlName="password" class="form-control">
-                                <!-- <span class="text-info" *ngIf="formValue.touched && (!formValue.value.password || formValue.value.password.length == 0)" class="validation">*Password is required</span> -->
+                                <!-- <span class="text-info" *ngIf="formValue.touched && (!formValue.value.email || formValue.value.email.length == 0)" class="validation">*Email ID required</span> -->
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <label class="col-sm-2 label-on-left">Working hours</label>&nbsp;
                         <div class="col-sm-8">
@@ -146,8 +145,8 @@
                 </div>
 
                 <div class="text-center">
-                    <button *ngIf="showAddButton" type="button" (click)="postUsersDetails()" [disabled]="!formValue.valid" class="btn btn-success">Submit <i class="bi bi-briefcase-fill"></i></button>
-                    <button *ngIf="showUpdateButton" type="button" (click)="updateUsersDetails()" [disabled]="!formValue.valid" class="btn btn-success">Update <i class="bi bi-briefcase-fill"></i></button>
+                    <button *ngIf="showAddButton" type="button" (click)="postUsersDetails()" [disabled]="!formValue.valid" class="btn mycolor">Submit <i class="bi bi-briefcase-fill"></i></button>
+                    <button *ngIf="showUpdateButton" type="button" (click)="updateUsersDetails()" [disabled]="!formValue.valid" class="btn mycolor">Update <i class="bi bi-briefcase-fill"></i></button>
                 </div>
 
             </form>

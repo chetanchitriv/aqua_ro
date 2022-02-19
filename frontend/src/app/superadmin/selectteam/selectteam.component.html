@@ -7,7 +7,7 @@
         <div class="card" *ngIf="!showTeamForm && showTeamTable">
 
             <div class="card-content">
-                <h4 class="modal-title" id="myModalLabel">Teams</h4>
+                <h3 class="card-title title1"><b>Team List</b></h3><br>
                 <div class="content">
                     <div class="row">
                         <div class="col-sm-12">
@@ -57,9 +57,9 @@
                     <div class="card" style="width: 80%; margin: 10px 0 0px 15px;">
 
                         <div class="card-header card-header-text">
-                            <h4 class="modal-title" id="myModalLabel">Select Team Members</h4>
+                            <h4 class="card-title title1"><b>Select Your Team Members</b></h4>
 
-                        </div>
+                        </div><br><br><br>
 
                         <form [formGroup]="form" (ngSubmit)="submitForm()">
 
@@ -110,8 +110,8 @@
 
                                     </div>
 
-                                    <button *ngIf="showbutton" (click)="submitForm()" class="button btn btn-success" type="submit">Submit</button>
-                                    <button *ngIf="showUpdate" (click)="update()" class="button btn btn-success" type="submit">Update</button>
+                                    <button *ngIf="showbutton" (click)="submitForm()" class="button btn mycolor" type="submit">Submit</button>
+                                    <button *ngIf="showUpdate" (click)="update()" class="button btn mycolor" type="submit">Update</button>
 
 
                                 </form>
