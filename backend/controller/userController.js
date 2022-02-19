@@ -75,7 +75,7 @@ const user_update=async(req,res)=>{
         };
 
         const updatedUser = await User.findByIdAndUpdate(
-            {_id:req.params.id}, user
+            {_id:req.params.id}, user 
         )
         res.json(updatedUser)
     }catch(error){

@@ -42,15 +42,9 @@ export class EditprofileComponent implements OnInit {
     this.userService.updateUsers(this.UpdateProfile.value,this.currentUserId).subscribe(res=>{
       if(res){    
         alert("Profile Updated Successfully");
-        this.logout()
+        this.router.navigate(['/dashboard/'])
       }
     })
   }
-  logout(){
-    localStorage.removeItem('username')
-    localStorage.removeItem('role')
-    localStorage.removeItem('userId')
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
+
 }
