@@ -64,6 +64,7 @@ export class UsersComponent implements OnInit {
         userName : ['',Validators.required],
         mobile : ['',Validators.required],
         email : ['',Validators.required],
+        password : ['',Validators.required],
         workingHours: ['',Validators.required],
         role: ['',Validators.required],
     })
