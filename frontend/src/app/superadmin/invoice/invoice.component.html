@@ -125,10 +125,14 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-content">
+                                <!-- <button type="button" (click)="addItem()" class="btn btn-success" style="margin-left: 86%;">+Add item</button> -->
+                                <button type="button" (click)="addItem()" style="margin-left: 86%;" class="btn btn-success btn-round btn-fab btn-fab-mini">
+                                    <i class="material-icons" >control_point</i>
+                                </button>
 
-                                <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
+                                <!-- <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
                                 </i>
-                            </a>
+                            </a> -->
                                 <form [formGroup]="invoiceForm">
                                     <div formArrayName="itemList" *ngFor="let item of invoiceForm.get('itemList')['controls']; let i = index;">
 
@@ -137,12 +141,23 @@
                                                 <thead>
                                                     <tr>
 
-                                                        <td>
+                                                        <td *ngIf="isAdmin || isSuperAdmin">
                                                             <select class="form-control" placeholder="Select an item name" formControlName="itemName">
                                 
                                                         <option value="">Select item name --</option>
-                                                        <option value="1">option 1</option>   
-                                                        <option value="2">option 2</option>   
+                                                        
+                                                        <option *ngFor="let data of stockAll">{{data.spare_name}}</option>   
+                                                        
+                                                        
+                                                    </select>
+                                                        </td>
+                                                        <td *ngIf="isTechnician">
+                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName" *ngFor="let data of stockallotAll">
+                                
+                                                        <option value="">Select item name --</option>
+                                                      
+                                                        <option *ngFor="let item of data.itemList">{{item.spare_name}}</option>   
+                                                        
                                                         
                                                     </select>
                                                         </td>
@@ -409,5 +424,6 @@
 </div>
 <div *ngIf="invoice" class="text-right">
     <button class="btn btn-primary" (click)="openPDF();">Export To PDF</button>
-
+    <!-- <button type="button" class="btn btn-default" (click)="print()"> <i class="icmn-printer margin-right-5"></i> Print <div class="ripple-container"></div></button> -->
+    <!-- <button type="button" class="btn btn-default" onclick="javascript:window.print();"> <i class="icmn-printer margin-right-5"></i> Print <div class="container card"></div></button> -->
 </div>

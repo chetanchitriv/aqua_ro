@@ -103,9 +103,12 @@
                         <div class="card">
                             <div class="card-content">
 
-                                <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
-                                            </i>
-                                        </a>
+                                <button type="button" (click)="addItem()" style="margin-left: 86%;" class="btn btn-success btn-round btn-fab btn-fab-mini">
+                                    <i class="material-icons" >control_point</i>
+                                </button>
+                                <!-- <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline -->
+                                <!-- </i> -->
+                                <!-- </a> -->
                                 <form [formGroup]="formStockAllot">
                                     <div formArrayName="itemList" *ngFor="let item of formStockAllot.get('itemList')['controls']; let i = index;">
 
@@ -122,7 +125,10 @@
           </select>
                                                         </td>
                                                         <td> <input type="number" placeholder="Total Quantity" class="form-control" formControlName="totalqnt" [value]="getTotalQnt(i)" [readonly]="true"></td>
+
                                                         <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
+
+
                                                         <td> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getamount(i)"></td>
 
                                                         <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever

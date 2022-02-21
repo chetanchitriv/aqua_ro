@@ -8,6 +8,10 @@ import { UserService } from 'src/app/shared/user.service';
 
 import {jsPDF} from 'jspdf'
 import html2canvas from 'html2canvas';
+import { StockallotService } from 'src/app/shared/stockallot.service';
+import { StockService } from 'src/app/shared/stock.service';
+
+
 
 @Component({
   selector: 'app-invoice',
@@ -68,13 +72,21 @@ dueDate:any
   invoice:boolean=false
   qnt: any;
   rate: any;
+  in: any;
+  stockallotAll: any=[];
+  currentUser: any;
+  stockAll: any=[];
+  techname: any;
 
 
 
-  constructor(private formbuilder:FormBuilder, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
+  constructor(private formbuilder:FormBuilder, private stockallservice:StockallotService, private stockinv: StockService, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
   
 
   ngOnInit(): void {
+
+   
+   
     var Role= localStorage.getItem("role")
     if (Role=='Superadmin'){
       this.isSuperAdmin = true
@@ -110,11 +122,13 @@ console.log("dueDate", this.future);
     this.username=localStorage.getItem('username')
     this.initiatedtOption()
 //  this.getAllInvoice()
+
     this.getAllUser()
     this.getAllLeads()
+    this.getAllStockallot()
     this.getAllComplaints()
     this.getAllInvoice()
-   
+    this.getAllStock() 
     
    
     this.invoiceUpdateForm = this.formbuilder.group({
@@ -291,6 +305,30 @@ getAllComplaints(){
   
   })
 }
+getAllStockallot(){
+  this.stockallservice.getStockallot().subscribe((res: any) => {
+ console.log(res, "ni");
+    console.log(this.username, "user");
+    
+    this.stockallotAll = res.filter((a: any) => {
+      return a.techname == this.username
+    })
+    
+    
+    
+})
+
+  }  
+  getAllStock() {
+    this.stockinv.getStock().subscribe(res => {
+      this.stockAll = res;
+      
+    })
+  } 
+  getcurrentUser() {
+    return localStorage.getItem('currentUser')
+  } 
+
   getAllUser(){
     this.userService.getUsers().subscribe(res=>{
       this.usersAll = res;
@@ -299,6 +337,7 @@ getAllComplaints(){
       });
       })
 }
+
 
 // generateInvoice(){
 
@@ -419,4 +458,16 @@ viewinvoice(item:any){
   this.basePrice =this.grandTotal*0.84
   
   }
+
+  // print(){
+  //   window.print()
+  //    this.in=document.getElementById("htmlData");
+  //   this.in.print();
+  // }
+
+ Nisha(){
+   console.log(this.stockallotAll, "sahil");
+   
+ }
+
 }

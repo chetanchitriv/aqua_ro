@@ -59,8 +59,9 @@ export class StockallotmentComponent implements OnInit {
     return this.formbuilder.group({
       spare_name: '',
       totalqnt:0,
-      qntdiff:0,
+     
      qnt:0,
+     qntdiff:0,
    
     });
 
@@ -84,10 +85,13 @@ export class StockallotmentComponent implements OnInit {
       
   })
   }
+  
   getamount(i:any){
 
     this.formStockAllot.controls['itemList'].value.at(i).qntdiff=this.formStockAllot.controls['itemList'].value.at(i).totalqnt-this.formStockAllot.controls['itemList'].value.at(i).qnt
+ 
   return (this.formStockAllot.controls['itemList'].value.at(i).qntdiff)
+
   }
 
 postStockallotDetails(){
@@ -219,19 +223,24 @@ getSum(itemlist:any=[]){
 
 selectSpare(e:any,i:any){
 var spare=e.target.value
+
 console.log(e.target.value);
 const array=spare.split(": ");
 var sparename=array[1]
 console.log(sparename);
 const sparedata=this.stockAll.find((x:any) => x.spare_name == sparename);
+
 var qnty=sparedata.qnt
+
 this.formStockAllot.controls['itemList'].value.at(i).totalqnt=qnty
+
 this.formStockAllot.controls['itemList'].value.at(i).totalqnt
 
 }
 getTotalQnt(i:any){ 
-  return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
 
+  return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
+ 
 }
 
 

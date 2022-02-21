@@ -41,6 +41,7 @@
                                         <td>{{data.nextFollowupdate}}</td>
                                         <td>{{data.status}}</td>
 
+
                                         <td class="text-right">
                                             <a class="btn btn-simple btn-success btn-icon edit"><i title="read" data-toggle="modal" data-target="#myModal" class="material-icons"(click)="view(data)">assignment </i></a>
                                             <a (click)="onEdit(data)" class="btn btn-simple btn-white btn-icon edit" style="background-color: rgb(230, 197, 54);"><i class="material-icons">edit</i></a>
@@ -196,7 +197,7 @@
                         <label class="control-label"></label>
                         <select class="form-control" formControlName="status">
             
-                                <option *ngFor="let data of status" [ngValue]="data">
+                                <option  [ngValue]="data" *ngFor="let data of status">
                                     {{data}}
                                 </option>
                              </select>
