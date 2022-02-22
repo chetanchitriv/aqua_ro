@@ -115,6 +115,7 @@ export class StockallotmentComponent implements OnInit {
     });
     this.formStockAllot.reset();
     this.initiatedtOption()
+    this.getAllStock()
   this.getAllStockallot()
   this.showStockTable()
   })
@@ -228,6 +229,7 @@ export class StockallotmentComponent implements OnInit {
       }
       
   showStockForm(){
+    this.getAllStock()
     this.formStockAllot = this.formbuilder.group({
       // spare_name : ['',Validators.required],
       // qnt  : ['',Validators.required],
