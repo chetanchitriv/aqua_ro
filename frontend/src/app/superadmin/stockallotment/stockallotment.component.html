@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div *ngIf="!showstockForm && showstockTable" class="card">
             <div class="card-content">
-                <h4 class="card-title title1">Users</h4>
+                <h4 class="card-title title1">Alloted Stock List</h4>
                 <div class="content">
 
 
@@ -129,7 +129,7 @@
                                                             
                                                                      </select>
                                                         </td>
-                                                        <td>Available quantity : {{qnty[i]}} </td>
+                                                        <td *ngIf=" this.formStockAllot.controls['itemList'].value.at(i).spare_name != 0">Available quantity : {{qnty[i]}} </td>
                                                         <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
                                                         <td> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getbalanceQnty(i)" [readonly]="true"></td>
 
