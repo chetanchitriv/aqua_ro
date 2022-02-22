@@ -111,7 +111,7 @@ export class StockComponent implements OnInit {
     alert("Stock Added Successfully!");
     this.formStock.reset();
     this.initiatedtOption()
-  this.getAllStock()
+    this.getAllStock()
   this.showTable()
   },
   err => {

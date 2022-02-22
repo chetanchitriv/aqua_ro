@@ -22,7 +22,7 @@ export class StockallotmentComponent implements OnInit {
   stockAll: any=[]
   usersAll: any;
   itemList: any= FormArray;
- date = new Date()
+  date = new Date()
   today: any
   times: any
   stockData: any;
@@ -55,12 +55,12 @@ export class StockallotmentComponent implements OnInit {
   
 
   }
+
   createItem(): FormGroup {
     return this.formbuilder.group({
       spare_name: '',
-      qntdiff:0,
-     qnt:0,
-    
+      qntdiff:'',
+     qnt:'',
    
     });
 
@@ -75,8 +75,6 @@ export class StockallotmentComponent implements OnInit {
    { this.itemList.removeAt(index); 
   }
  
-
-  
   getAllStockallot(){
     this.stockallotservice.getStockallot().subscribe((res: any) => {
       this.stockallotAll = res;    
@@ -84,6 +82,7 @@ export class StockallotmentComponent implements OnInit {
       
   })
   }
+
   getbalanceQnty(i:any){
 
     this.formStockAllot.controls['itemList'].value.at(i).qntdiff=this.qnty[i]-this.formStockAllot.controls['itemList'].value.at(i).qnt
@@ -91,7 +90,7 @@ export class StockallotmentComponent implements OnInit {
 
   }
 
-postStockallotDetails(){
+ postStockallotDetails(){
   this.stockallotservice.postStockallot(this.formStockAllot.value).subscribe(res=>{
     alert("Stock Added Successfully!");
     this.formStockAllot.reset();
@@ -100,13 +99,25 @@ postStockallotDetails(){
   this.showStockTable()
   })
 
-}
-view(data:any){
+  
+//   this.formStock = this.formbuilder.group({
+//     spare_name : ['',Validators.required],
+//     qnt  : [,Validators.required],
+//     purchaseAmount  : ['',Validators.required],
+//     sellingPrice  : ['',Validators.required],
+//     balanceAmount : ['',Validators.required],
+//     date:  [this.today,Validators.required],
+  
+    
+// });
+ }
+
+ view(data:any){
   this.stockallotservice.getStockallotbyid(data._id)
   .subscribe(res=>{
     this.stockallotDetails=res
   })
-}
+ }
 
   getAllStock(){
     this.api.getStock().subscribe((res:any) => {
@@ -127,7 +138,8 @@ view(data:any){
 
     
     }
-      deleteStockallot(data:any){
+
+  deleteStockallot(data:any){
         this.stockallotservice.deleteStockallot(data._id)
         .subscribe(res=>{
       
@@ -139,20 +151,46 @@ view(data:any){
           
         })
       }
-      
-      onEdit(data:any){
-        this.showstockTable=false
-          this.showstockForm=true
-          this.showUpdateButton = true;
-          this.showAddButton = false;
-          this.updateId=data._id
-      
-        this.formStockAllot.patchValue(data)
-        
-      }
+
+  onEdit(data:any){
     
-      
-      updateStockallotDetails(){
+    // console.log(data.itemList,"sahiol");
+   this.showstockTable=false
+     this.showstockForm=true
+     this.showUpdateButton = true;
+     this.showAddButton = false;
+     this.updateId=data._id
+
+  //  this.formStockAllot.controls.techname.setValue(data.techname)
+  //  this.formStockAllot.controls.date.setValue(data.date)
+   
+  //  data.itemList.forEach((element:any,index:any) => {
+  //    console.log(element,"each");
+  
+  //    this.formStockAllot.itemList.get('qnt').patchValue(element.qnt);
+  
+  //  });
+  // for(let x in data.itemList){
+  //   this.addItem()
+  //   this.formStockAllot.controls.itemList.patchValue(data.itemList)
+  
+  // }
+  // this.formStockAllot.controls.itemList.patchValue(data.itemList)
+  for (let i = 0; i < data.itemList.length; i++){
+    const linesFormArray = this.formStockAllot.get("itemList") as FormArray;
+    linesFormArray.push(this.createItem());
+      }
+      this.formStockAllot.patchValue(data)
+    }
+ 
+  // ptachformarray(){
+  //     let control = <FormArray>this.formStockAllot.controls.itemList;
+  //      this.itemList.forEach((x:any) => {
+  //        control.push(this.createItem(x));
+  //       })
+  // }
+     
+   updateStockallotDetails(){
         console.log(this.updateId);
         
         this.stockallotservice.updateStockallot(this.formStockAllot.value,this.updateId)
@@ -165,8 +203,9 @@ view(data:any){
         this.getAllStockallot()
         this.showStockTable()
       })
-    }
-      initiatedtOption(){
+  }
+     
+  initiatedtOption(){
         this.dtOptions = {
           pagingType: 'full_numbers',
           pageLength: 10,
@@ -176,7 +215,7 @@ view(data:any){
 
 
       }
-    
+      
   showStockForm(){
     this.formStockAllot = this.formbuilder.group({
       // spare_name : ['',Validators.required],
@@ -192,21 +231,26 @@ view(data:any){
     this.showUpdateButton = false;
    
 
+
   }
+
   showStockTable(){
     this.showstockForm=false;
     this.showstockTable=true;
     this.showAddButton = false;
     this.showUpdateButton=false;
+   <FormArray>this.formStockAllot.controls['itemList'].clear()
 
   }
+
   showFormupdate(){
     this.showstockForm=true
     this.showUpdateButton = true;
     this.showAddButton = false;
     this.showstockTable=false;
 }
-getSum(itemlist:any=[]){ 
+
+ getSum(itemlist:any=[]){ 
   var sum=0;
   var a:any=[]
   itemlist.forEach((element:any) => {
@@ -218,7 +262,7 @@ getSum(itemlist:any=[]){
   return sum;
 }
 
-selectSpare(e:any,i:any){
+ selectSpare(e:any,i:any){
 var spare=e.target.value
 
 console.log(e.target.value);
@@ -230,12 +274,12 @@ const sparedata=this.stockAll.find((x:any) => x.spare_name == sparename);
 // this.formStockAllot.controls['itemList'].value.at(i).totalqnt
 
 }
-getTotalQnt(i:any){ 
+
+ getTotalQnt(i:any){ 
   return this.qnty[i]
   // return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
 
 }
-
 
 }
 

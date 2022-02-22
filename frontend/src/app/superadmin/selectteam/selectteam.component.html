@@ -77,7 +77,7 @@
                                     </select> -->
 
                                         <select placeholder="Select Admin" formControlName="admin" class="form-control">
-                                        <option value=""> <p>Select Admin --</p></option>
+                                        <option value="" [defaultSelected]> <p>Select Admin </p></option>
                                         <option [ngValue]="adminss.userName" *ngFor="let adminss of admins" [ngClass]="adminss.userName == 'hide_element' ? 'class1' : 'class2'" >{{adminss.userName}}</option>    
                                     </select>
                                     </div>

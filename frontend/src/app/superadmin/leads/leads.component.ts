@@ -5,7 +5,7 @@ import { formatDate } from '@angular/common';
 
 import { LeadsModel } from './leads.model';
 import { UserService } from 'src/app/shared/user.service';
-import { data } from 'jquery';
+
 import { SelectTeamService } from 'src/app/shared/selectteam.service';
 
 @Component({
@@ -149,6 +149,7 @@ export class LeadsComponent implements OnInit {
 
 
   }
+
   showTable() {
 
     this.showLeadTable = true
@@ -157,13 +158,14 @@ export class LeadsComponent implements OnInit {
     this.showAddButton = false;
 
   }
-  view(data: any) {
+
+view(data: any) {
     this.leadService.getLeadsbyid(data._id)
       .subscribe(res => {
         this.leadDetails = res
       })
-
   }
+
   getAllLeads() {
     this.leadService.getLeads().subscribe((res: any) => {
       console.log(res);
@@ -174,21 +176,8 @@ export class LeadsComponent implements OnInit {
 
         if (this.currentRole == 'Admin') {
               this.leadsAll
-          // res.forEach((a: any) => {
-
-
-          //   for (let x in this.teamMember) {    
-          //     if (a.createdBy.toLowerCase() == this.teamMember[x] ) {
-          //       this.leadsAll.push(a)
-          //     }
-
-          //   }
-          // });
-          // console.log(this.leadsAll,);
-
           for (let x in this.teamMember) {
-            console.log(this.teamMember[x],"yee");
-            
+
             for (let y in res) {
               if (res[y].createdBy.toLowerCase() == this.teamMember[x].toLowerCase()) {
                 this.leadsAll.push(res[y])
@@ -201,8 +190,6 @@ export class LeadsComponent implements OnInit {
             return a.createdBy == this.currentUser
           })
         }
-
-
     })
   }
 
@@ -210,21 +197,13 @@ export class LeadsComponent implements OnInit {
     this.userService.getUsers().subscribe(res => {
       this.usersAll = res;
       console.log(res);
-
-      // this.usersAll.forEach((element:any) => {
-      //   if(element.currentRolee =='Telecaller' || element.currentRolee =='Technician'){
-      //     var assign=element.currentUser
-      //     this.assigntoList.push(assign)
-      //   }
-      // });
-
-      // this.formValue.patchValue({assignTo:this.currentUser});
     })
   }
 
   getcurrentUser() {
     return localStorage.getItem('currentUser')
   }
+
   showForm() {
     this.formValue = this.formbuilder.group({
 
@@ -266,7 +245,6 @@ export class LeadsComponent implements OnInit {
       })
   }
 
-
   deleteLeads(data: any) {
     this.leadService.deleteLeads(data)
       .subscribe((res: any) => {
@@ -291,7 +269,6 @@ export class LeadsComponent implements OnInit {
 
   updateLeadsDetails() {
 
-    // this.leadService.updateLeads(this.leadsModelObj,this.leadsModelObj.id)
     this.leadService.updateLeads(this.formValue.value, this.updateId)
       .subscribe((res: any) => {
         alert("Record Updated Successfully!")
@@ -326,21 +303,17 @@ export class LeadsComponent implements OnInit {
       })
     }
   }
-  getallTems() {
+
+getallTems() {
     this.TeamService.getTeams().subscribe((res: any) => {
-      // this.teams=res
-
-
-
       res.forEach((a: any) => {
         if (a.admin == this.currentUser) {
-          this.teams.push(a.team_memeber)
-          this.teamMember = this.teams[0]
-          console.log(this.teamMember, "teammeber");
+          this.teamMember =  this.teams.concat(a.technician,a.telecaller)
         }
       })
     })
   }
+
 }
 
 

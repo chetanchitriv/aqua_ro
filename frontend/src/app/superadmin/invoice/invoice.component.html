@@ -142,7 +142,7 @@
                                                     <tr>
 
                                                         <td *ngIf="isAdmin || isSuperAdmin">
-                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName">
+                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare1($event,i)'>
                                 
                                                         <option value="">Select item name --</option>
                                                         
@@ -152,16 +152,19 @@
                                                     </select>
                                                         </td>
                                                         <td *ngIf="isTechnician">
-                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName" *ngFor="let data of stockallotAll">
+                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare($event,i)'>
                                 
                                                         <option value="">Select item name --</option>
                                                       
-                                                        <option *ngFor="let item of data.itemList">{{item.spare_name}}</option>   
+                                                        <option   [ngValue]="data.spare_name"   *ngFor="let data of newStockallot">{{data.spare_name}}</option>   
                                                         
                                                         
                                                     </select>
                                                         </td>
-                                                        <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td>
+
+                                                        <td *ngIf="qnty[i] != null">Available quantity : {{qnty[i]}} </td>
+
+                                                        <!-- <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td> -->
 
 
 
@@ -436,7 +439,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="invoice" class="text-right">
+<div *ngIf="invoice" class="text-center">
     <button class="btn btn-primary" (click)="openPDF();">Export To PDF</button>
     <!-- <button type="button" class="btn btn-default" (click)="print()"> <i class="icmn-printer margin-right-5"></i> Print <div class="ripple-container"></div></button> -->
     <!-- <button type="button" class="btn btn-default" onclick="javascript:window.print();"> <i class="icmn-printer margin-right-5"></i> Print <div class="container card"></div></button> -->

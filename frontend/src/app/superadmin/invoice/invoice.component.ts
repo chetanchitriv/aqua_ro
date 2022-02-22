@@ -77,6 +77,8 @@ dueDate:any
   currentUser: any;
   stockAll: any=[];
   techname: any;
+  qnty:any=[]
+  newStockallot:any=[]
 
 
 
@@ -182,9 +184,9 @@ console.log("dueDate", this.future);
     return this.formbuilder.group({
       itemName: '',
       description: '',
-      qnt:0,
-      rate:0,
-      amt:0
+      qnt:'',
+      rate:'',
+      amt:''
     });
   }
     
@@ -314,6 +316,13 @@ getAllStockallot(){
       
       return a.techname == this.username
     })
+    
+    // console.log(this.stockallotAll[0].itemList.concat(this.stockallotAll[1].itemList),"kapya");
+    for (let x in this.stockallotAll){
+
+    var combinedItemlist = this.stockallotAll[0].itemList.concat(this.stockallotAll[x].itemList)
+    }
+this.newStockallot=combinedItemlist
 
 })
 }
@@ -464,6 +473,45 @@ viewinvoice(item:any){
   //   this.in.print();
   // }
 
+  selectSpare(e:any,i:any){
+    var spare=e.target.value
 
+    console.log(e.target.value);
+    const array=spare.split(": ");
+    console.log(array,"jaduuuuu");
+    
+    var sparename=array[1]
+    console.log(this.stockallotAll[0].itemList.concat(this.stockallotAll[1].itemList),"heyyyyy");
+    
+    const sparedata=this.stockallotAll[0].itemList.find((x:any) => x.spare_name == sparename);
+    
+
+    console.log(sparedata,"he");
+    
+     return this.qnty[i]=sparedata.qnt
+
+  } 
+
+  getTotalQnt(i:any){ 
+    return this.qnty[i]
+    // return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
+  
+  }
+  
+  selectSpare1(e:any,i:any){
+    var spare=e.target.value
+    console.log(e.target.value, "k");
+    
+    // const array=spare.split(": ");
+    var sparename=e.target.value
+
+    
+    const sparedata=this.stockAll.find((x:any) => x.spare_name == sparename);
+    
+
+    console.log(sparedata,"he");
+    
+     return this.qnty[i]=sparedata.qnt
+  }
 
 }
