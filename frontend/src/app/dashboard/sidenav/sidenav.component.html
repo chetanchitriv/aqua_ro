@@ -15,7 +15,7 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician">
+            <li *ngIf="isSuperAdmin || isAdmin || isTelecaller || isTechnician || isVendor">
                 <a routerLink="/dashboard/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                     <i class="material-icons">person
                     </i>
@@ -80,6 +80,12 @@
                 <a routerLink="/dashboard/stockallotment" routerLinkActive="active">
                     <i class="material-icons">local_grocery_store</i>
                     <p>Stock Allotment</p>
+                </a>
+            </li>
+            <li *ngIf="isVendor">
+                <a routerLink="/dashboard/payment" routerLinkActive="active">
+                    <i class="material-icons">payment</i>
+                    <p>Recharge</p>
                 </a>
             </li>
         </ul>
