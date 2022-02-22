@@ -1,0 +1,49 @@
+<div class="col-md-12">
+    <div class="card" style="width: 80%; margin: 10px 0 0px 144px;">
+
+        <div class="d-flex">
+            <div class="col-md-12">
+
+                <div class="card" style="width: 80%; margin: 10px 0 0px 15px;">
+                    <h4 class="card-title title1"><b>Get Your Recharge</b></h4>
+                    <div class="card-header card-header-text">
+
+
+                    </div><br>
+
+                    <form [formGroup]="paymentform">
+                        <!-- (ngSubmit)="submitForm()" -->
+
+
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Your Recharge Amount</label>&nbsp;
+                            <div class="col-sm-8">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    <input type="number" placeholder="Rs 500" formControlName="recharge" class="form-control" disable>
+                                </div>
+                            </div>
+
+
+                        </div><br>
+
+
+                        <!-- <button class="button btn mycolor" type="submit">payment</button> -->
+                        <button id="rzp-button1" class="button" style="background-color:#D10024 ; color: white;border-radius: 5px;width: 110px;height: 40px;margin-bottom: 50px;" (click)="pay()"><b>Payment</b></button>
+                        <!-- *ngIf="showbutton" (click)="submitForm()" -->
+                        <!-- <button *ngIf="showUpdate" class="button btn mycolor" type="submit">Update</button> -->
+                        <!-- (click)="update()" -->
+
+
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

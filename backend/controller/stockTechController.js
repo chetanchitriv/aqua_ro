@@ -2,11 +2,11 @@ const stockTech = require('../model/stockTechSchema')
 
 
 //adding stock into the database
-exports.postStockTech = (req, res) => {
+exports.postStockTech = async (req, res) => {
     try {
         console.log(req.body);
-        var store = new stockTech(req.body).save()
-        res.status(201).json({ message: "stock has been Alloted" })
+        const store =await new stockTech(req.body).save()
+        res.send(store)
         console.log(`Stock alloted to ${req.body.techname}`);
     } catch (error) {
         res.status(400).json({ error: error })

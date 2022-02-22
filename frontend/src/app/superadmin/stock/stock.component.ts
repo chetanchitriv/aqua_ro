@@ -38,6 +38,7 @@ export class StockComponent implements OnInit {
     this.formStock = this.formbuilder.group({
       spare_name : ['',Validators.required],
       qnt  : ['',Validators.required],
+      availqnt:['',Validators.required],
       purchaseAmount  : ['',Validators.required],
       sellingPrice  : ['',Validators.required],
       balanceAmount : ['',Validators.required],
@@ -87,6 +88,7 @@ export class StockComponent implements OnInit {
     this.formStock = this.formbuilder.group({
       spare_name : ['',Validators.required],
       qnt  : ['',Validators.required],
+      availqnt:['',Validators.required],
       purchaseAmount  : ['',Validators.required],
       sellingPrice  : ['',Validators.required],
       balanceAmount : ['',Validators.required],
@@ -107,12 +109,15 @@ export class StockComponent implements OnInit {
 }
 
   postStockDetails(){
-  this.api.postStock(this.formStock.value).subscribe(res=>{
+    this.formStock.patchValue({
+      availqnt: this.formStock.value.qnt,
+      balanceAmount:this.getbalance()
+    })    
+    this.api.postStock(this.formStock.value).subscribe(res=>{
     alert("Stock Added Successfully!");
     this.formStock.reset();
-    this.initiatedtOption()
-    this.getAllStock()
-  this.showTable()
+    this.getAllStock()  
+    this.showTable()
   },
   err => {
     if (err.status === 422) {
