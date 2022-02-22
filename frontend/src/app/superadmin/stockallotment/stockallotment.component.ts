@@ -92,6 +92,14 @@ export class StockallotmentComponent implements OnInit {
 postStockallotDetails(){
   this.stockallotservice.postStockallot(this.formStockAllot.value).subscribe(res=>{
     alert("Stock Added Successfully!");
+    res.itemList.forEach((element:any) => {
+      var sparename=element.spare_name
+      var sparedata=this.stockAll.filter((a:any)=>{
+        a.spare_name == sparename 
+     })
+     console.log(sparedata);
+     
+    });
     this.formStockAllot.reset();
     this.initiatedtOption()
   this.getAllStockallot()
