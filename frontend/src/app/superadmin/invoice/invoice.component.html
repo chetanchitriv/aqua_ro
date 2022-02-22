@@ -125,10 +125,14 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-content">
+                                <!-- <button type="button" (click)="addItem()" class="btn btn-success" style="margin-left: 86%;">+Add item</button> -->
+                                <button type="button" (click)="addItem()" style="margin-left: 86%;" class="btn btn-success btn-round btn-fab btn-fab-mini">
+                                    <i class="material-icons" >control_point</i>
+                                </button>
 
-                                <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
+                                <!-- <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
                                 </i>
-                            </a>
+                            </a> -->
                                 <form [formGroup]="invoiceForm">
                                     <div formArrayName="itemList" *ngFor="let item of invoiceForm.get('itemList')['controls']; let i = index;">
 
@@ -137,19 +141,47 @@
                                                 <thead>
                                                     <tr>
 
-                                                        <td>
-                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName">
+                                                        <td *ngIf="isAdmin || isSuperAdmin">
+                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare1($event,i)'>
                                 
                                                         <option value="">Select item name --</option>
-                                                        <option value="1">option 1</option>   
-                                                        <option value="2">option 2</option>   
+                                                        
+                                                        <option *ngFor="let data of stockAll">{{data.spare_name}}</option>   
+                                                        
                                                         
                                                     </select>
                                                         </td>
-                                                        <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td>
+                                                        <td *ngIf="isTechnician">
+                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare($event,i)'>
+                                
+                                                        <option value="">Select item name --</option>
+                                                      
+                                                        <option   [ngValue]="data.spare_name"   *ngFor="let data of newStockallot">{{data.spare_name}}</option>   
+                                                        
+                                                        
+                                                    </select>
+                                                        </td>
+
+                                                        <td *ngIf="qnty[i] != null">Available quantity : {{qnty[i]}} </td>
+
+                                                        <!-- <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td> -->
+
+
+
+                                                        <!-- <td>
+                                                            <select *ngFor="let data of stockallotAll">
+                                                            <option *ngFor="let item of data.itemList">{{item.qnt}} </option>
+                                                            </select>
+                                                        </td> -->
+
                                                         <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
+
+
+
                                                         <td> <input type="number" placeholder="Rate" class="form-control" formControlName="rate"></td>
+
                                                         <td><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
+
                                                         <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
                                                         </i>
                                                         </td>
@@ -407,7 +439,8 @@
         </div>
     </div>
 </div>
-<div *ngIf="invoice" class="text-right">
+<div *ngIf="invoice" class="text-center">
     <button class="btn btn-primary" (click)="openPDF();">Export To PDF</button>
-
+    <!-- <button type="button" class="btn btn-default" (click)="print()"> <i class="icmn-printer margin-right-5"></i> Print <div class="ripple-container"></div></button> -->
+    <!-- <button type="button" class="btn btn-default" onclick="javascript:window.print();"> <i class="icmn-printer margin-right-5"></i> Print <div class="container card"></div></button> -->
 </div>

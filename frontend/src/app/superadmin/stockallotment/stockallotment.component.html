@@ -109,11 +109,14 @@
                         <div class="card">
                             <div class="card-content">
 
-                                <a type="button" (click)="addItem()"><i
-                                        style="margin-left: 96%; cursor: pointer; font-size:35px"
-                                        class="material-icons ">add_circle_outline
-                                    </i>
-                                </a>
+                                <button type="button" (click)="addItem()" style="margin-left: 86%;" class="btn btn-success btn-round btn-fab btn-fab-mini">
+                                    <i class="material-icons">control_point</i>
+                                    </button>
+                                <!-- <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline -->
+                                <!-- </i> -->
+                                <!-- </a> -->
+
+
                                 <form [formGroup]="formStockAllot">
                                     <div formArrayName="itemList" *ngFor="let item of formStockAllot.get('itemList')['controls']; let i = index;">
 

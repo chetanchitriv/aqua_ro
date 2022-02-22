@@ -98,6 +98,7 @@ export class StockallotmentComponent implements OnInit {
 
     this.formStockAllot.controls['itemList'].value.at(i).qntdiff=this.qnty[i]-this.formStockAllot.controls['itemList'].value.at(i).qnt
   return (this.formStockAllot.controls['itemList'].value.at(i).qntdiff)
+
   }
 
  postStockallotDetails(){
@@ -277,6 +278,7 @@ export class StockallotmentComponent implements OnInit {
 
  selectSpare(e:any,i:any){
 var spare=e.target.value
+
 console.log(e.target.value);
 const array=spare.split(": ");
 var sparename=array[1]
