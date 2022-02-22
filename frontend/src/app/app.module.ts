@@ -26,6 +26,7 @@ import { SelectteamComponent } from './superadmin/selectteam/selectteam.componen
 import { AssignedleadsComponent } from './superadmin/assignedleads/assignedleads.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { UserprofileComponent } from './superadmin/userprofile/userprofile.component';
+import { PaymentComponent } from './superadmin/payment/payment.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { UserprofileComponent } from './superadmin/userprofile/userprofile.compo
      StockallotmentComponent,
      SelectteamComponent,
      AssignedleadsComponent,
-     UserprofileComponent
+     UserprofileComponent,
+     PaymentComponent
 
    ],
   imports: [

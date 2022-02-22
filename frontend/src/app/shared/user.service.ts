@@ -4,11 +4,20 @@ import { map } from 'rxjs/operators';
 import { UsersModel } from '../superadmin/users.model';
 import { environment } from 'src/environments/environment';
 
+function _window() : any {
+  return window;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+    [x: string]: any;
   
+    get nativeWindow() : any {
+      return _window();
+   }
+
   dbUrl=environment.apiUrl
   nodeUrl=environment.nodeapiUrl
   
@@ -34,4 +43,5 @@ export class UserService {
    updatepassword(data : any,id: number){
     return this.http.put<any>(this.nodeUrl+`users/changepassword/`+`${id}`,data)
   }
+  
 }

@@ -11,6 +11,7 @@ export class SidenavComponent implements OnInit {
   isAdmin :boolean = false
   isTelecaller :boolean = false
   isTechnician :boolean = false
+  isVendor :boolean = false
 
  
   constructor() { }
@@ -22,6 +23,7 @@ export class SidenavComponent implements OnInit {
       this.isAdmin =false
       this.isTelecaller=  false
       this.isTechnician = false
+      this.isVendor = false
     
     }
     if (Role=='Admin'){
@@ -29,18 +31,28 @@ export class SidenavComponent implements OnInit {
       this.isAdmin =true
       this.isTelecaller=  false
       this.isTechnician = false
+      this.isVendor = false
     }
     if (Role=='Technician'){
       this.isSuperAdmin = false
       this.isAdmin =false
       this.isTelecaller=  false
       this.isTechnician = true
+      this.isVendor = false
     }
     if (Role=='Telecaller'){
       this.isSuperAdmin = false
       this.isAdmin =false
       this.isTelecaller=  true
       this.isTechnician = false
+      this.isVendor = false
+    }
+    if (Role=='Vendor'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = false
+      this.isVendor = true
     }
 
     //      console.log(Role)

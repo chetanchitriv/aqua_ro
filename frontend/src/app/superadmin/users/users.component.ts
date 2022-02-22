@@ -134,6 +134,7 @@ export class UsersComponent implements OnInit {
       mobile : ['',Validators.required],
       email : ['',Validators.required],
       workingHours: ['',Validators.required],
+      password:['',Validators.required],
       role: ['',Validators.required],
     });
     this.showUserForm=true
@@ -163,7 +164,7 @@ export class UsersComponent implements OnInit {
       alert(this.serverErrorMessages)
     }
     else
-      this.serverErrorMessages = 'Something went wrong. Please contact admin.';
+      this.serverErrorMessages = 'Username or email already exists';
       alert(this.serverErrorMessages)
   })
 }
