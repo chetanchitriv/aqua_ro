@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const leadSchema = new mongoose.Schema({
+const notificationSchema = new mongoose.Schema({
     name: { type: String },
     mobileNo: { type: Number },
     AltmobileNo: { type: Number },
@@ -17,4 +17,4 @@ const leadSchema = new mongoose.Schema({
     status: { type: String }
 });
 
-module.exports = mongoose.model("Lead", leadSchema)
+module.exports = mongoose.model("Notification", notificationSchema)

@@ -311,14 +311,13 @@ getAllStockallot(){
     console.log(this.username, "user");
     
     this.stockallotAll = res.filter((a: any) => {
+      
       return a.techname == this.username
     })
-    
-    
-    
-})
 
-  }  
+})
+}
+
   getAllStock() {
     this.stockinv.getStock().subscribe(res => {
       this.stockAll = res;
@@ -465,9 +464,6 @@ viewinvoice(item:any){
   //   this.in.print();
   // }
 
- Nisha(){
-   console.log(this.stockallotAll, "sahil");
-   
- }
+
 
 }

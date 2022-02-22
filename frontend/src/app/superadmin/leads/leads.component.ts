@@ -27,6 +27,7 @@ export class LeadsComponent implements OnInit {
 
 
   leadsModelObj: LeadsModel = new LeadsModel();
+  
   formValue: any = FormGroup;
   leadsAll: any = [];
   status = ["New Lead", "Follow Up", "Ongoing", "Denied", "Completed"];
