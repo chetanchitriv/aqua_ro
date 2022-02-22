@@ -6,7 +6,7 @@ exports.postStock = (req, res)=>{
     try {
         console.log(req.body);
         var store = new stock(req.body).save()
-        res.status(200).json({message:"stock has been added"})
+        res.status(201).json({message:"stock has been added"})
         console.log("Stock added");
         
     } catch (error) {
@@ -34,15 +34,15 @@ exports.getStock = async (req, res)=>{
 exports.getStockByName = async (req, res)=>{
     console.log(req.params.spare);
 
-    try {
-        const data = await stock.findOne(req.params.spare_name)
-        res.status(200).send(data)
-        console.log("data sent");
-    } catch (error) {
-        res.status(400).json({error:error})
-        console.log(error);
+    // try {
+    //     const data = await stock.findOne(req.params.spare_name)
+    //     res.status(200).send(data)
+    //     console.log("data sent");
+    // } catch (error) {
+    //     res.status(400).json({error:error})
+    //     console.log(error);
         
-    }
+    // }
 }
 
 exports.getallStock = async (req, res)=>{
@@ -71,7 +71,6 @@ exports.putStock = async(req, res)=>{
         
     }
 }
-
 
 //deleteing stocks
 exports.deleteStock = async(req, res)=>{
