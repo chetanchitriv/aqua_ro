@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div *ngIf="!showstockForm && showstockTable" class="card">
             <div class="card-content">
-                <h4 class="card-title title1">Users</h4>
+                <h4 class="card-title title1">Alloted Stock List</h4>
                 <div class="content">
 
 
@@ -124,19 +124,17 @@
 
                                                         <td>
                                                             <select placeholder="Enter Role" formControlName="spare_name" (change)='selectSpare($event,i)' class="form-control">
-                                                                <option value=""> Select spare name --</option>
-                                                                <option [ngValue]="data.spare_name"
-                                                                    *ngFor="let data of stockAll">{{data.spare_name}}
-                                                                </option>
-                                                                <!-- <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>     -->
-                                                            </select>
+                                                                  <option value=""> Select spare name --</option>
+                                                                    <option [ngValue]="data.spare_name" *ngFor="let data of stockAll">{{data.spare_name}}</option>
+                                                            
+                                                                     </select>
                                                         </td>
-                                                        <td> <input type="number" placeholder="Total Quantity" class="form-control" formControlName="totalqnt" [value]="getTotalQnt(i)" [readonly]="true"></td>
+                                                        <td *ngIf=" this.formStockAllot.controls['itemList'].value.at(i).spare_name != 0">Available quantity : {{qnty[i]}} </td>
                                                         <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
-                                                        <td> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getamount(i)"></td>
+                                                        <td> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getbalanceQnty(i)" [readonly]="true"></td>
 
                                                         <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
-                                                            </i>
+                           </i>
                                                         </td>
                                                     </tr>
 
@@ -202,6 +200,7 @@
                             </tr>
 
                             <tr *ngFor="let item of stockallotDetails?.itemList">
+
                                 <td style="border: 1px solid black;text-align: center;">{{item.spare_name}}</td>
                                 <td style="border: 1px solid black;text-align: center;">{{item.qnt}}</td>
 
@@ -223,3 +222,4 @@
             </div>
         </div>
     </div>
+</div>
