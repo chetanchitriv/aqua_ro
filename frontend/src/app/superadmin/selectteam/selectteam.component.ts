@@ -26,6 +26,8 @@ export class SelectteamComponent implements OnInit {
   show: boolean = false
   form: any = FormGroup;
   teamarr: any = []
+  teamdetails: any=[];
+
   display: any
   updateId:any
   showUpdate:boolean=false
@@ -218,5 +220,13 @@ this.updateId=data._id
        }
      });
   }
+
+  // view team data
+  view(data:any){
+    this.ser.getTeamsbyid(data._id)
+    .subscribe((res:any)=>{
+      this.teamdetails=res
+    })
+   }
 }
 
