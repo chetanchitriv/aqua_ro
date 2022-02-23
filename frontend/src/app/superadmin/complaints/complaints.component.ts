@@ -12,6 +12,12 @@ import { ComplaintsModel } from './complaints.model';
 })
 export class ComplaintsComponent implements OnInit {
 
+
+  isSuperAdmin :boolean = false
+  isAdmin :boolean = false
+  isTelecaller :boolean = false
+  isTechnician :boolean = false
+
   dtOptions:DataTables.Settings={}
   searchLead: any=FormGroup;
   allLeads: any=[];
@@ -39,18 +45,52 @@ export class ComplaintsComponent implements OnInit {
   usersAll: any=[];
   assigntoList: any=[];
   username:any
+  currentTechnician: any;
+  currentRole: any;
+  currentUser: any;
 
 
   constructor(private formbuilder:FormBuilder, private leadService:LeadService, private api:ComplaintService, private userService: UserService) { }
   
 
   ngOnInit(): void {
+
+    
+
+    var Role= localStorage.getItem("role")
+    if (Role=='Superadmin'){
+      this.isSuperAdmin = true
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = false
+    
+    }
+    if (Role=='Admin'){
+      this.isSuperAdmin = false
+      this.isAdmin =true
+      this.isTelecaller=  false
+      this.isTechnician = false
+    }
+    if (Role=='Technician'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = true
+    }
+    if (Role=='Telecaller'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  true
+      this.isTechnician = false
+    }
+
   
     this.username=localStorage.getItem('username')
     this.initiatedtOption()
     this.getAllUser()
     this.getAllLeads()
     this.getAllComplaints()
+    this.assignto()
    
    
     this.complaintUpdateForm = this.formbuilder.group({
@@ -249,4 +289,14 @@ updateComplaintsDetails(){
   //   this.showComplaintUpdateForm:boolean=false
   //   this.showsearchform=false
   // }
+
+  assignto() {
+    if (this.currentRole == 'Technician') {
+
+      this.currentTechnician = this.currentUser
+     
+    }
+    }
   }
+
+  

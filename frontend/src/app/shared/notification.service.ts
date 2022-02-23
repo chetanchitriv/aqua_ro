@@ -14,7 +14,10 @@ export class NotificationService {
   constructor(private http : HttpClient) { }
 
  
-  getnotification(){
+  getNotification(){
     return this.http.get<any>(this.nodeUrl+"notification")
+  }
+  creatNoti(data:any){
+    return this.http.post(this.nodeUrl+"notification",data)
   }
 }

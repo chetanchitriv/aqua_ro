@@ -246,7 +246,7 @@ view(data: any) {
   }
 
   deleteLeads(data: any) {
-    this.leadService.deleteLeads(data)
+    this.leadService.deleteLeads(data._id)
       .subscribe((res: any) => {
         alert("Records Deleted Successfully!")
         this.initiatedtOption()

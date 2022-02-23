@@ -25,7 +25,7 @@ export class TopnavComponent implements OnInit {
   date = new Date()
   today:any
   exam:any=[]
-  len:any
+  len:any=0
   role:any
   note:boolean=false
   assignleads:any=[]
@@ -40,9 +40,10 @@ export class TopnavComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     var Role= localStorage.getItem("role")
     if (Role=='Superadmin'){
+      this.createNotification()
+      this.getAllnotification()
       this.isSuperAdmin = true
       this.isAdmin =false
       this.isTelecaller=  false
@@ -50,18 +51,23 @@ export class TopnavComponent implements OnInit {
     
     }
     if (Role=='Admin'){
+      this.createNotification()
+      this.getAllnotification()
       this.isSuperAdmin = false
       this.isAdmin =true
       this.isTelecaller=  false
       this.isTechnician = false
     }
     if (Role=='Technician'){
+      this. getAllAssignedLeads()
       this.isSuperAdmin = false
       this.isAdmin =false
       this.isTelecaller=  false
       this.isTechnician = true
     }
     if (Role=='Telecaller'){
+      this.createNotification()
+      this.getAllnotification()
       this.isSuperAdmin = false
       this.isAdmin =false
       this.isTelecaller=  true
@@ -78,9 +84,15 @@ export class TopnavComponent implements OnInit {
  
   //   this.today = this.date.toISOString().slice(0, 10);
     // console.log("sahil",this.today );
-    this. getAllAssignedLeads()
-    this.getAllnotification()
     
+  }
+
+  createNotification(){
+    var data
+    this.notificationser.creatNoti(data).subscribe((res:any) => {
+     
+    })  
+
   }
 
 
@@ -132,6 +144,18 @@ notify(){
 
 }
 
+
+getAllnotification(){
+  this.notificationser.getNotification().subscribe((res:any) => {
+    console.log(res, "no");
+  this.notificationAll = res;
+  this.len=this.notificationAll.length
+    
+  })
+  
+  
+  }
+
 // getAllLeads(){
      
 //   this.leadService.getLeads().subscribe((res: any)=>{  
@@ -161,14 +185,5 @@ this.len=this.newLeads.length
   console.log(this.assignleads);  
 }
 
-getAllnotification(){
-this.notificationser.getnotification().subscribe((res:any) => {
-  console.log(res, "no");
-this.notificationAll = res;
-  
- 
-  })
-
-}
 
 }
