@@ -11,6 +11,7 @@ export class SelectTeamService {
   
   dbUrl=environment.apiUrl
   nodeUrl=environment.nodeapiUrl
+  updateId: any;
   
 
   constructor(private http : HttpClient) { }

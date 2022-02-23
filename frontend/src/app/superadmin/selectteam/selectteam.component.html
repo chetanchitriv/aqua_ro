@@ -14,10 +14,11 @@
                             <table datatable [dtOptions]="dtOptions" class="row-border hover">
                                 <thead>
                                     <tr role="row">
-                                        <th style="width: 87px;">ID</th>
-                                        <th style="width: 87px;">Team Leader</th>
+                                        <th style="width: 27px;">ID</th>
+                                        <th style="width: 27px;">Team Leader</th>
 
-                                        <th style="width: 87px;">Actions</th>
+                                        <th style="width: 27px;">Actions</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -27,7 +28,10 @@
 
                                         <!-- <td *ngFor=" let item of team.team_memeber"> -->
 
-                                        <td class="text-center">
+                                        <td class="text-center" style="width: 75px;float: left;">
+                                            <a class="btn btn-simple btn-success btn-icon edit" (click)="view(team)"><i
+                                                title="read" data-toggle="modal" data-target="#myModal"
+                                                class="material-icons">assignment </i></a>
                                             <a (click)="onEdit(team)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">edit</i></a>
                                             <a (click)="deleteTeams(team._id)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
                                         </td>
@@ -126,4 +130,61 @@
 
         </div>
 
+    </div>
+
+    <!-- modal 2 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Team Allotment Details</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row m-l-5">
+                        <div class="col-sm-3 p-4">
+                            <p><strong>Team Leader</strong></p>
+
+                            <p><strong>Team Members</strong></p>
+                        </div>
+                        <div>
+                            <p>{{teamdetails.admin }}</p>
+                            <ul>
+                                <li>{{teamdetails.technician }}</li>
+                                <li>{{teamdetails.telecaller }}</li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <!-- <div class="row m-l-5">
+                        <table style="width:100%; border: 1px solid black;">
+                            <tr>
+                                <th style="border: 1px solid black;text-align: center;">Spare Name</th>
+                                <th style="border: 1px solid black;text-align: center;">Quantity</th>
+                            </tr>
+
+                            <tr *ngFor="let item of teamarr?.itemList">
+
+                                <td style="border: 1px solid black;text-align: center;">{{item.spare_name}}</td>
+                                <td style="border: 1px solid black;text-align: center;">{{item.qnt}}</td>
+
+                            </tr>
+                            <tr style="border: 1px solid black;">
+                                <td style="border: 1px solid black; text-align: center;"><strong>Total Quantity</strong>
+                                </td>
+                                <td style="border: 1px solid black; text-align: center;">
+                            </tr>
+
+                        </table>
+                    </div> -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
