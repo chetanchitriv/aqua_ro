@@ -40,8 +40,11 @@ export class TopnavComponent implements OnInit {
 
   ngOnInit(): void {
 
+this.createNotification()
+
     var Role= localStorage.getItem("role")
     if (Role=='Superadmin'){
+      this.createNotification()
       this.getAllnotification()
       this.isSuperAdmin = true
       this.isAdmin =false
@@ -50,6 +53,7 @@ export class TopnavComponent implements OnInit {
     
     }
     if (Role=='Admin'){
+      this.createNotification()
       this.getAllnotification()
       this.isSuperAdmin = false
       this.isAdmin =true
@@ -64,6 +68,7 @@ export class TopnavComponent implements OnInit {
       this.isTechnician = true
     }
     if (Role=='Telecaller'){
+      this.createNotification()
       this.getAllnotification()
       this.isSuperAdmin = false
       this.isAdmin =false
@@ -145,6 +150,12 @@ getAllnotification(){
   })
   
   
+  }
+  createNotification(){
+    var data
+    this.notificationser.creatNoti(data).subscribe((res:any) => {
+     
+    })  
   }
 
 // getAllLeads(){
