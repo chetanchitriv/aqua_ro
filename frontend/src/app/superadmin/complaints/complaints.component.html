@@ -354,7 +354,8 @@
                                 <div class="select" aria-expanded="true">
                                     <select class="form-control" placeholder="Select an option" formControlName="assignTo">
                                         
-                                            <option value="">Select your option --</option>
+                                            <option  value="">Select your option --</option>
+                                            <option *ngIf="isTechnician" value="">{{currentTechnician}}</option>
                                             <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
                                     </select>
                                 </div>

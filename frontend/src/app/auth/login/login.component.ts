@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthserviceService } from 'src/app/shared/authservice.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
 
 
@@ -18,9 +19,11 @@ export class LoginComponent implements OnInit {
   chukl:boolean=false
   
 
-  constructor(private formbuilder: FormBuilder,  private service: UserService, private authservice: AuthserviceService,  private router: Router) { }
+  constructor(private formbuilder: FormBuilder,  private service: UserService, private authservice: AuthserviceService, private notificationser:NotificationService,  private router: Router) { }
 
   ngOnInit(): void {
+
+    // this.createNotification()
 
     if(this.authservice.isLoggedIn()){
     this.router.navigate(['/dashboard']);
@@ -61,6 +64,13 @@ export class LoginComponent implements OnInit {
         this.chukl=true
       }
       )
+  }
+  createNotification(){
+    var data
+    this.notificationser.creatNoti(data).subscribe((res:any) => {
+     
+    })  
+
   }
 }
 

@@ -55,7 +55,8 @@ export class ComplaintsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
+    this.currentRole = localStorage.getItem('role')
+    this.currentUser = localStorage.getItem('username')
 
     var Role= localStorage.getItem("role")
     if (Role=='Superadmin'){
@@ -91,7 +92,7 @@ export class ComplaintsComponent implements OnInit {
     this.getAllLeads()
     this.getAllComplaints()
     this.assignto()
-   
+  
    
     this.complaintUpdateForm = this.formbuilder.group({
       name : ['',Validators.required],
@@ -294,9 +295,24 @@ updateComplaintsDetails(){
     if (this.currentRole == 'Technician') {
 
       this.currentTechnician = this.currentUser
-     
-    }
+      this.userService.getUsers().subscribe(res => {
+        this.assigntoList = res;
+        })
+      
+
+    } else if (this.currentRole == 'Superadmin') {
+
+      this.userService.getUsers().subscribe(res => {
+        this.assigntoList = res
+      })
+    } else if (this.currentRole == 'Admin') {
+
+      this.userService.getUsers().subscribe(res => {
+        this.assigntoList = res.filter((a: any) => {
+          return a.role != this.currentRole
+        })
+      })
     }
   }
-
+}
   
