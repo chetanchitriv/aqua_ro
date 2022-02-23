@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Notification } from 'rxjs';
 import { AuthserviceService } from 'src/app/shared/authservice.service';
 import { LeadService } from 'src/app/shared/lead.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 
 @Component({
@@ -29,8 +31,10 @@ export class TopnavComponent implements OnInit {
   assignleads:any=[]
   leadnotification:any=[]
   newLeads: any=[]
+  getAllNotify:any=[]
+  Allnotification: any=[];
 
-  constructor(private authservice: AuthserviceService, private fb:FormBuilder ,private router:Router, private leadService: LeadService) { 
+  constructor(private authservice: AuthserviceService, private fb:FormBuilder ,private router:Router, private leadService: LeadService, private notificationser:NotificationService) { 
     this.username=localStorage.getItem('username')
   }
 
@@ -75,6 +79,7 @@ export class TopnavComponent implements OnInit {
   //   this.today = this.date.toISOString().slice(0, 10);
     // console.log("sahil",this.today );
     this. getAllAssignedLeads()
+    this.getAllnotification()
     
   }
 
@@ -155,4 +160,20 @@ this.len=this.newLeads.length
   })
   console.log(this.assignleads);  
 }
+
+getAllnotification(){
+this.notificationser.getnotification().subscribe((res:any) => {
+this.Allnotification = res.filter((a:any)=>{
+  console.log(res, "no");
+  
+  return a.assignTo == this.username
+})
+this.newLeads = this.Allnotification.filter((a:any)=>{
+  return a.status == 'New Lead'
+})
+this.len=this.newLeads.length
+  })
+
 }
+}
+
