@@ -5,6 +5,7 @@ const stockSchema = new mongoose.Schema({
     spare_name: String,
     qnt: Number,
     availqnt:Number,
+    unitprice:Number,
     purchaseAmount: Number,
     sellingPrice: Number,
     balanceAmount: Number,

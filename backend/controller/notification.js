@@ -14,6 +14,7 @@ const notification_create   = (req,res)=>{
           if(!objectExist)  {
             Notification.insertMany([meme]) 
           }
+         return
         });
       });
 
