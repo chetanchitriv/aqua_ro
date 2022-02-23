@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 const user_all=async(req,res)=>{
     try{
         const users=await User.find({ role: { $ne: 'Superadmin' } })
-        
         res.json(users)
     }catch(error){
         res.json({

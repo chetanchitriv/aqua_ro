@@ -3,17 +3,13 @@ const Notification=require('../model/notification')
 var date = new Date()
 var todayDate = date.toISOString().slice(0, 10)
 
-const notification_create= async(req,res)=>{
+const notification_create   = (req,res)=>{
 try{
-    await Lead.find({ nextFollowupdate:todayDate}, (err, doc) => {
+   Lead.find({ nextFollowupdate:todayDate}, (err, doc) => {
         doc.forEach((meme) => {
-          console.log(meme);
-          Notification.insertMany([meme])
+          Notification.insertMany([meme]) 
         });
       });
-
-    const notifications=await Notification.find()
-    res.json(notifications)
 
 }catch(error){
     res.json({
@@ -21,7 +17,17 @@ try{
     });
     }
 }
-
+const getAllNotification =async (req,res)=>{
+    try{
+        const notifications=await Notification.find()
+        res.json(notifications)
+    }catch(error){
+        res.json({
+            message:error
+        });
+        }
+    }
 module.exports={
-    notification_create
+    notification_create,
+    getAllNotification
 }
