@@ -4,18 +4,20 @@ var date = new Date()
 var todayDate = date.toISOString().slice(0, 10)
 
 const notification_create   = (req,res)=>{
-try{
-   Lead.find({ nextFollowupdate:todayDate}, (err, doc) => {
+
+  
+    Lead.find({ nextFollowupdate:todayDate}, (err, doc) => {
         doc.forEach((meme) => {
-          Notification.insertMany([meme]) 
+            const objectExist =  Notification.findOne({
+                _id: meme._id,
+            });
+          if(!objectExist)  {
+            Notification.insertMany([meme]) 
+          }
         });
       });
 
-}catch(error){
-    res.json({
-        message:error
-    });
-    }
+  
 }
 const getAllNotification =async (req,res)=>{
     try{
