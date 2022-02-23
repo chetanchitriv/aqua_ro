@@ -27,7 +27,7 @@ export class AssignedleadsComponent implements OnInit {
   updateId: any;
   formValue: any = FormGroup;
   currentUser: any;
-  status = ["New Lead", "Follow Up", "Ongoing", "Denied", "Complete"];
+  status = ["New Lead", "Follow Up", "Ongoing", "Denied", "Completed"];
 
   constructor(private formbuilder: FormBuilder, private leadService: LeadService) { 
    
@@ -58,6 +58,7 @@ export class AssignedleadsComponent implements OnInit {
       nextFollowuptime: [''],
       createdBy: [this.currentUser, Validators.required],
       status: ['New Lead'],
+    
     })
     
 this.username=localStorage.getItem('username')
@@ -83,7 +84,7 @@ this.initiatedtOption()
     this.leadService.getLeads().subscribe((res: any)=>{  
    console.log(res);
   this.assignleads=res.filter((a:any)=>{
-    return a.assignTo == this.username
+    return (a.assignTo == this.username && a.status != 'Completed')
    
   })
  

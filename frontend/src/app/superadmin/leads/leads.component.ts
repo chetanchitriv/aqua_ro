@@ -30,7 +30,7 @@ export class LeadsComponent implements OnInit {
   
   formValue: any = FormGroup;
   leadsAll: any = [];
-  status = ["New Lead", "Follow Up", "Ongoing", "Denied", "Complete"];
+  status = ["New Lead", "Follow Up", "Ongoing", "Denied", "Completed"];
 
 
   currentRolees = ["Admin", "Technician", "Telecaller"]

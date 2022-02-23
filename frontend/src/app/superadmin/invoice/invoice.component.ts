@@ -8,6 +8,10 @@ import { UserService } from 'src/app/shared/user.service';
 
 import {jsPDF} from 'jspdf'
 import html2canvas from 'html2canvas';
+import { StockallotService } from 'src/app/shared/stockallot.service';
+import { StockService } from 'src/app/shared/stock.service';
+
+
 
 @Component({
   selector: 'app-invoice',
@@ -38,8 +42,8 @@ export class InvoiceComponent implements OnInit {
 
   today:any
   times:any
- future= new Date()
- dueDate:any
+future= new Date()
+dueDate:any
 
 
   invoiceForm: any = FormGroup;
@@ -68,13 +72,23 @@ export class InvoiceComponent implements OnInit {
   invoice:boolean=false
   qnt: any;
   rate: any;
+  in: any;
+  stockallotAll: any=[];
+  currentUser: any;
+  stockAll: any=[];
+  techname: any;
+  qnty:any=[]
+  newStockallot:any=[]
 
 
 
-  constructor(private formbuilder:FormBuilder, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
+  constructor(private formbuilder:FormBuilder, private stockallservice:StockallotService, private stockinv: StockService, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
   
 
   ngOnInit(): void {
+
+   
+   
     var Role= localStorage.getItem("role")
     if (Role=='Superadmin'){
       this.isSuperAdmin = true
@@ -110,11 +124,13 @@ console.log("dueDate", this.future);
     this.username=localStorage.getItem('username')
     this.initiatedtOption()
 //  this.getAllInvoice()
+
     this.getAllUser()
     this.getAllLeads()
+    this.getAllStockallot()
     this.getAllComplaints()
     this.getAllInvoice()
-   
+    this.getAllStock() 
     
    
     this.invoiceUpdateForm = this.formbuilder.group({
@@ -168,9 +184,9 @@ console.log("dueDate", this.future);
     return this.formbuilder.group({
       itemName: '',
       description: '',
-      qnt:0,
-      rate:0,
-      amt:0
+      qnt:'',
+      rate:'',
+      amt:''
     });
   }
     
@@ -272,7 +288,6 @@ console.log("dueDate", this.future);
     this.showinvoiceUpdateForm=false
     this.showinvoicesearchForm=false
     this.invoice=false
-    this.getAllInvoice()
     
   }
 
@@ -292,6 +307,36 @@ getAllComplaints(){
   
   })
 }
+getAllStockallot(){
+  this.stockallservice.getStockallot().subscribe((res: any) => {
+ console.log(res, "ni");
+    console.log(this.username, "user");
+    
+    this.stockallotAll = res.filter((a: any) => {
+      
+      return a.techname == this.username
+    })
+    
+    // console.log(this.stockallotAll[0].itemList.concat(this.stockallotAll[1].itemList),"kapya");
+    for (let x in this.stockallotAll){
+
+    var combinedItemlist = this.stockallotAll[0].itemList.concat(this.stockallotAll[x].itemList)
+    }
+this.newStockallot=combinedItemlist
+
+})
+}
+
+  getAllStock() {
+    this.stockinv.getStock().subscribe(res => {
+      this.stockAll = res;
+      
+    })
+  } 
+  getcurrentUser() {
+    return localStorage.getItem('currentUser')
+  } 
+
   getAllUser(){
     this.userService.getUsers().subscribe(res=>{
       this.usersAll = res;
@@ -300,6 +345,7 @@ getAllComplaints(){
       });
       })
 }
+
 
 // generateInvoice(){
 
@@ -320,7 +366,7 @@ generateInvoice(){
       console.log(res.data,"post res");
       console.log(res.data.itemList);
       
-       var array=res.data.itemList
+var array=res.data.itemList
 
       for (let x in array) {
 
@@ -335,9 +381,9 @@ generateInvoice(){
       return sahil + shank
   }
   
-  this.basePrice = this.newArray.reduce(sum)
-  this.tax = this.basePrice * 0.16
-  this.grandTotal=this.basePrice + this.tax
+  this.grandTotal = this.newArray.reduce(sum)
+  this.tax = this.grandTotal* 0.16
+  this.basePrice =this.grandTotal*0.84
   
       console.log(this.grandTotal,"jadu jadu");
       
@@ -388,14 +434,13 @@ public openPDF():void {
         let position = 0;
         PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
         
-        PDF.save(this.invoicePdf.name+ '_'+this.today );
+        PDF.save(this.leadData.name+ '_'+this.today );
     });    
     // alert("Pdf Downloaded Succefully") 
   }
 
 viewinvoice(item:any){
 
-  this.newArray=[]
     this.invoicePdf=item
     this.items=item.itemList
     this.invoice=true
@@ -416,9 +461,57 @@ viewinvoice(item:any){
       return sahil + shank
   }
   
-  this.basePrice = this.newArray.reduce(sum)
-  this.tax = this.basePrice* 0.16
-  this.grandTotal=this.basePrice + this.tax
+  this.grandTotal = this.newArray.reduce(sum)
+  this.tax = this.grandTotal* 0.16
+  this.basePrice =this.grandTotal*0.84
   
   }
+
+  // print(){
+  //   window.print()
+  //    this.in=document.getElementById("htmlData");
+  //   this.in.print();
+  // }
+
+  selectSpare(e:any,i:any){
+    var spare=e.target.value
+
+    console.log(e.target.value);
+    const array=spare.split(": ");
+    console.log(array,"jaduuuuu");
+    
+    var sparename=array[1]
+    console.log(this.stockallotAll[0].itemList.concat(this.stockallotAll[1].itemList),"heyyyyy");
+    
+    const sparedata=this.stockallotAll[0].itemList.find((x:any) => x.spare_name == sparename);
+    
+
+    console.log(sparedata,"he");
+    
+     return this.qnty[i]=sparedata.qnt
+
+  } 
+
+  getTotalQnt(i:any){ 
+    return this.qnty[i]
+    // return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
+  
+  }
+  
+  selectSpare1(e:any,i:any){
+    var spare=e.target.value
+    console.log(e.target.value, "k");
+    
+    // const array=spare.split(": ");
+    var sparename=e.target.value
+
+    
+    const sparedata=this.stockAll.find((x:any) => x.spare_name == sparename);
+    
+
+    console.log(sparedata,"he");
+    
+     return this.qnty[i]=sparedata.qnt
+  }
+
 }

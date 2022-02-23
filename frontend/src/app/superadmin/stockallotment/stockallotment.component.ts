@@ -30,6 +30,8 @@ export class StockallotmentComponent implements OnInit {
   updateId: any;
   stockallotDetails: any={};
   qnty: any=[];
+  sparedata: any={};
+  formStock: any=FormGroup;
  
  
 
@@ -44,6 +46,15 @@ export class StockallotmentComponent implements OnInit {
       itemList: this.formbuilder.array([ this.createItem() ])
      
   }); 
+  this.formStock = this.formbuilder.group({
+        spare_name : ['',Validators.required],
+        qnt  : ['',Validators.required],
+        availqnt:['',Validators.required],
+        purchaseAmount  : ['',Validators.required],
+        sellingPrice  : ['',Validators.required],
+        balanceAmount : ['',Validators.required],
+        date:  ['',Validators.required],
+    });     
     this. initiatedtOption()
     this.getAllUser()
     this.getAllStock()
@@ -87,29 +98,32 @@ export class StockallotmentComponent implements OnInit {
 
     this.formStockAllot.controls['itemList'].value.at(i).qntdiff=this.qnty[i]-this.formStockAllot.controls['itemList'].value.at(i).qnt
   return (this.formStockAllot.controls['itemList'].value.at(i).qntdiff)
+
   }
 
  postStockallotDetails(){
-  this.stockallotservice.postStockallot(this.formStockAllot.value).subscribe(res=>{
+  this.stockallotservice.postStockallot(this.formStockAllot.value).subscribe((res:any)=>{
     alert("Stock Added Successfully!");
+    res.itemList.forEach((element:any) => {
+    var test=this.findspare(element.spare_name)
+    this.formStock.patchValue(test)
+    this.formStock.patchValue({
+      availqnt: element.qntdiff, 
+    })
+    this.api.updateStock(this.formStock.value,test._id).subscribe(res=>{
+
+    })
+    });
     this.formStockAllot.reset();
     this.initiatedtOption()
+    this.getAllStock()
   this.getAllStockallot()
   this.showStockTable()
   })
-
-  
-//   this.formStock = this.formbuilder.group({
-//     spare_name : ['',Validators.required],
-//     qnt  : [,Validators.required],
-//     purchaseAmount  : ['',Validators.required],
-//     sellingPrice  : ['',Validators.required],
-//     balanceAmount : ['',Validators.required],
-//     date:  [this.today,Validators.required],
-  
-    
-// });
  }
+  findspare(sparename:any){
+    return this.stockAll.find((x:any) => x.spare_name === sparename);
+  }
 
  view(data:any){
   this.stockallotservice.getStockallotbyid(data._id)
@@ -216,6 +230,7 @@ export class StockallotmentComponent implements OnInit {
       }
       
   showStockForm(){
+    this.getAllStock()
     this.formStockAllot = this.formbuilder.group({
       // spare_name : ['',Validators.required],
       // qnt  : ['',Validators.required],
@@ -263,11 +278,12 @@ export class StockallotmentComponent implements OnInit {
 
  selectSpare(e:any,i:any){
 var spare=e.target.value
+
 console.log(e.target.value);
 const array=spare.split(": ");
 var sparename=array[1]
 const sparedata=this.stockAll.find((x:any) => x.spare_name == sparename);
- return this.qnty[i]=sparedata.qnt
+ return this.qnty[i]=sparedata.availqnt
 // this.formStockAllot.controls['itemList'].value.at(i).totalqnt=qnty
 // this.formStockAllot.controls['itemList'].value.at(i).totalqnt
 
