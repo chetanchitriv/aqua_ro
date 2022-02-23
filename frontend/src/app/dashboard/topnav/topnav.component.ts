@@ -32,7 +32,7 @@ export class TopnavComponent implements OnInit {
   leadnotification:any=[]
   newLeads: any=[]
   getAllNotify:any=[]
-  Allnotification: any=[];
+  notificationAll: any=[];
 
   constructor(private authservice: AuthserviceService, private fb:FormBuilder ,private router:Router, private leadService: LeadService, private notificationser:NotificationService) { 
     this.username=localStorage.getItem('username')
@@ -149,7 +149,7 @@ notify(){
 getAllAssignedLeads(){
      
   this.leadService.getLeads().subscribe((res: any)=>{  
- console.log(res);
+ console.log(res, "ho");
 this.assignleads=res.filter((a:any)=>{
   return a.assignTo == this.username
 })
@@ -163,17 +163,12 @@ this.len=this.newLeads.length
 
 getAllnotification(){
 this.notificationser.getnotification().subscribe((res:any) => {
-this.Allnotification = res.filter((a:any)=>{
   console.log(res, "no");
+this.notificationAll = res;
   
-  return a.assignTo == this.username
-})
-this.newLeads = this.Allnotification.filter((a:any)=>{
-  return a.status == 'New Lead'
-})
-this.len=this.newLeads.length
+ 
   })
 
 }
-}
 
+}
