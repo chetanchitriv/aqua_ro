@@ -42,7 +42,7 @@
 
             <div class="card-content">
                 <div class="row">
-                    <label class="col-sm-2 label-on-left">Name</label>
+                    <label class="col-sm-2 label-on-left">Name </label>
                     <div class="col-sm-8">
                         <div class="form-group label-floating is-empty">
                             <label class="control-label"></label>
@@ -100,7 +100,7 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-2 label-on-left">Service type</label>
+                    <label class="col-sm-2 label-on-left">Service type <b style="color: rgb(243, 11, 11);">*</b></label>
                     <div class="col-sm-4">
 
 
@@ -156,7 +156,7 @@
                                 
                                                         <option value="">Select item name --</option>
                                                       
-                                                        <option   [ngValue]="data.spare_name"   *ngFor="let data of newStockallot">{{data.spare_name}}</option>   
+                                                        <option [ngValue]="data.spare_name" *ngFor="let data of newStockallot">{{data.spare_name}}</option>   
                                                         
                                                         
                                                     </select>
@@ -178,7 +178,9 @@
 
 
 
-                                                        <td> <input type="number" placeholder="Rate" class="form-control" formControlName="rate"></td>
+                                                        <!-- <td> <input type="number" placeholder="Rate" class="form-control" formControlName="rate"></td> -->
+                                                        <td *ngIf="unitprice[i] != null">per unit price:{{unitprice[i]}} </td>
+                                                        <!-- <td> <input type="number" placeholder="Per Unit Price" class="form-control" formControlName="unitprice" [value]="getperunit()"></td> -->
 
                                                         <td><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
 

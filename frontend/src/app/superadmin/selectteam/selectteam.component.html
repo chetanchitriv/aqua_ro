@@ -30,7 +30,7 @@
 
                                         <td class="text-center" style="width: 75px;float: left;">
                                             <a class="btn btn-simple btn-success btn-icon edit" (click)="view(team)"><i
-                                                title="read" data-toggle="modal" data-target="#myModal"
+                                                title="view team" data-toggle="modal" data-target="#myModal"
                                                 class="material-icons">assignment </i></a>
                                             <a (click)="onEdit(team)" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">edit</i></a>
                                             <a (click)="deleteTeams(team._id)" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
@@ -139,7 +139,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Team Allotment Details</h4>
+                    <h4 class="modal-title title1" id="myModalLabel">Team Allotment Details</h4>
                 </div>
                 <div class="modal-body">
 
@@ -151,35 +151,36 @@
                         </div>
                         <div>
                             <p>{{teamdetails.admin }}</p>
-                            <ul>
-                                <li>{{teamdetails.technician }}</li>
-                                <li>{{teamdetails.telecaller }}</li>
-                            </ul>
+
 
 
                         </div>
                     </div>
-                    <!-- <div class="row m-l-5">
-                        <table style="width:100%; border: 1px solid black;">
+                    <div class="row m-l-5">
+                        <table class="allottable-main" height="80px">
                             <tr>
-                                <th style="border: 1px solid black;text-align: center;">Spare Name</th>
-                                <th style="border: 1px solid black;text-align: center;">Quantity</th>
+                                <th class="allottable">Technician</th>
+                                <th class="allottable">Telecaller</th>
                             </tr>
 
-                            <tr *ngFor="let item of teamarr?.itemList">
+                            <tr>
 
-                                <td style="border: 1px solid black;text-align: center;">{{item.spare_name}}</td>
-                                <td style="border: 1px solid black;text-align: center;">{{item.qnt}}</td>
+                                <td class="allottable">{{teamdetails.technician}}</td>
+                                <td class="allottable">{{teamdetails.telecaller}}
 
-                            </tr>
-                            <tr style="border: 1px solid black;">
-                                <td style="border: 1px solid black; text-align: center;"><strong>Total Quantity</strong>
+
                                 </td>
-                                <td style="border: 1px solid black; text-align: center;">
+
                             </tr>
+                            <!-- <tr class="allottable-main">
+                                <td class="allottable"><strong>Total Quantity</strong>
+                                </td>
+                                <td style="border: 1px solid rgb(177, 175, 175); text-align: center;">
+                                    <strong>{{getSum(stockallotDetails?.itemList)}}</strong></td>
+                            </tr> -->
 
                         </table>
-                    </div> -->
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 

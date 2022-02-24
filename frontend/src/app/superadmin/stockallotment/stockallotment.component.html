@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div *ngIf="!showstockForm && showstockTable" class="card">
             <div class="card-content">
-                <h4 class="card-title title1">Users</h4>
+                <h4 class="card-title title1">Stock Allotment List</h4>
                 <div class="content">
 
 
@@ -177,7 +177,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">User Details</h4>
+                    <h4 class="modal-title title1" id="myModalLabel">Stock Details</h4>
                 </div>
                 <div class="modal-body">
 
@@ -196,22 +196,22 @@
                         </div>
                     </div>
                     <div class="row m-l-5">
-                        <table style="width:100%; border: 1px solid black;">
+                        <table class="allottable-main" height="180px">
                             <tr>
-                                <th style="border: 1px solid black;text-align: center;">Spare Name</th>
-                                <th style="border: 1px solid black;text-align: center;">Quantity</th>
+                                <th class="allottable">Spare Name</th>
+                                <th class="allottable">Quantity</th>
                             </tr>
 
                             <tr *ngFor="let item of stockallotDetails?.itemList">
 
-                                <td style="border: 1px solid black;text-align: center;">{{item.spare_name}}</td>
-                                <td style="border: 1px solid black;text-align: center;">{{item.qnt}}</td>
+                                <td class="allottable">{{item.spare_name}}</td>
+                                <td class="allottable">{{item.qnt}}</td>
 
                             </tr>
-                            <tr style="border: 1px solid black;">
-                                <td style="border: 1px solid black; text-align: center;"><strong>Total Quantity</strong>
+                            <tr class="allottable-main">
+                                <td class="allottable"><strong>Total Quantity</strong>
                                 </td>
-                                <td style="border: 1px solid black; text-align: center;">
+                                <td style="border: 1px solid rgb(177, 175, 175); text-align: center;">
                                     <strong>{{getSum(stockallotDetails?.itemList)}}</strong></td>
                             </tr>
 

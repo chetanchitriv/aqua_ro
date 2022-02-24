@@ -72,7 +72,7 @@
 
                 <div class="card-content">
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">User name</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">User name <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Mobile no.</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">Mobile no. <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Email ID</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">Email ID <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="row" *ngIf="showAddButton">
-                        <label class="col-sm-2 label-on-left">Password</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">Password <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Working hours</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">Working hours <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -125,7 +125,7 @@
 
 
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Role</label>
+                        <label class="col-sm-2 label-on-left">Role <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>
                         <div class="col-sm-8">
 
 
@@ -160,7 +160,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">User Details</h4>
+                <h4 class="modal-title title1" id="myModalLabel">User Details</h4>
             </div>
             <div class="modal-body">
 
@@ -203,7 +203,7 @@
 
                 <div class="card-header card-header-text">
                     <button type="button" #modalClose class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
-                    <h4 class="card-title" style="color:#2196F3;"><b>Change Password</b></h4>
+                    <h4 class="card-title tittle1">Change Password</h4>
                 </div>
                 <form [formGroup]="passwordForm">
                     <div class="card-content">

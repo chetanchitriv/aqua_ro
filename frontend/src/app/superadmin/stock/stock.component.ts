@@ -41,6 +41,7 @@ export class StockComponent implements OnInit {
       availqnt:['',Validators.required],
       purchaseAmount  : ['',Validators.required],
       sellingPrice  : ['',Validators.required],
+      unitprice  : ['',Validators.required],
       balanceAmount : ['',Validators.required],
       date:  [this.today,Validators.required],
     
@@ -91,6 +92,7 @@ export class StockComponent implements OnInit {
       availqnt:['',Validators.required],
       purchaseAmount  : ['',Validators.required],
       sellingPrice  : ['',Validators.required],
+      unitprice  : ['',Validators.required],
       balanceAmount : ['',Validators.required],
       date:  [this.today,Validators.required],
      
@@ -111,8 +113,10 @@ export class StockComponent implements OnInit {
   postStockDetails(){
     this.formStock.patchValue({
       availqnt: this.formStock.value.qnt,
+      unitprice  : this.getperunit(),
       balanceAmount:this.getbalance()
-    })    
+    })
+    console.log(this.formStock.value)    
     this.api.postStock(this.formStock.value).subscribe(res=>{
     alert("Stock Added Successfully!");
     this.formStock.reset();
@@ -169,6 +173,9 @@ updateUsersDetails(){
 }
 
 
-
-
+getperunit(){
+  this.formStock.value.unitprice=this.formStock.value.sellingPrice/this.formStock.value.qnt
+  return (this.formStock.value.unitprice)
+  }
+ 
 }

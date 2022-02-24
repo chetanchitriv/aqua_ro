@@ -48,6 +48,8 @@ dueDate:any
 
   invoiceForm: any = FormGroup;
   invoiceUpdateForm: any = FormGroup;
+
+  
   complaintsAll: any=[];
 
  
@@ -78,16 +80,18 @@ dueDate:any
   stockAll: any=[];
   techname: any;
   qnty:any=[]
+  unitprice: any=[];
   newStockallot:any=[]
 
 
 
-  constructor(private formbuilder:FormBuilder, private stockallservice:StockallotService, private stockinv: StockService, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
+  constructor(private formbuilder:FormBuilder, private stockallservice:StockallotService, 
+    private stockinv: StockService, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
   
 
   ngOnInit(): void {
 
-   
+    // this.getAllstock()
    
     var Role= localStorage.getItem("role")
     if (Role=='Superadmin'){
@@ -489,6 +493,8 @@ viewinvoice(item:any){
     console.log(sparedata,"he");
     
      return this.qnty[i]=sparedata.qnt
+     
+     return this.unitprice[i]=sparedata.unitprice;
 
   } 
 
@@ -511,7 +517,23 @@ viewinvoice(item:any){
 
     console.log(sparedata,"he");
     
-     return this.qnty[i]=sparedata.qnt
+     return this.qnty[i]=sparedata.qnt;
+     return this.unitprice[i]=sparedata.unitprice;
   }
-
-}
+   
+  // perunit data get by stock 
+//   getAllstock() {
+//     this.stockinv.getStock().subscribe((res: any) => {
+//       this.stockAll = res;
+//     })
+// }
+// getperunit(){
+//   this.invoiceUpdateForm.value.unitprice=this.invoiceUpdateForm.value.sellingPrice/this.invoiceUpdateForm.value.qnt
+//   return (this.invoiceUpdateForm.value.unitprice)
+//   }
+  getperunit(i:any){ 
+    return this.unitprice[i]
+    // return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
+  
+  }
+  }

@@ -25,6 +25,7 @@
                                         <th>Available Quantity</th>
                                         <th>Purchase Amount</th>
                                         <th>Selling Price</th>
+                                        <th>Per Unit Price</th>
                                         <th>Balance Amount</th>
                                         <th>Date</th>
 
@@ -38,8 +39,8 @@
                                         <td>{{data.qnt}}</td>
                                         <td>{{data.availqnt}}</td>
                                         <td>{{data.purchaseAmount}}</td>
-
                                         <td>{{data.sellingPrice}}</td>
+                                        <td>{{data.unitprice}}</td>
                                         <td>{{data.balanceAmount}}</td>
                                         <td>{{data.date}}</td>
                                         <td>
@@ -80,7 +81,7 @@
 
                 <div class="card-content">
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Spare name</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">Spare name <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -90,7 +91,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Quantity</label>
+                        <label class="col-sm-2 label-on-left">Quantity <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -100,7 +101,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Purchase Amount</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">Purchase Amount <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -112,7 +113,7 @@
 
 
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Selling Price</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">Selling Price <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -121,8 +122,9 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Balance Amount</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">Profit Amount <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -131,7 +133,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Date</label>&nbsp;
+                        <label class="col-sm-2 label-on-left">Date <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>&nbsp;
                         <div class="col-sm-8">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -150,6 +152,7 @@
                             class="bi bi-briefcase-fill"></i></button>
                     <button *ngIf="showUpdateButton" type="button" (click)="updateUsersDetails()" class="btn mycolor">Update <i
                             class="bi bi-briefcase-fill"></i></button>
+
                 </div>
 
             </form>
@@ -164,7 +167,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">User Details</h4>
+                <h4 class="modal-title title1" id="myModalLabel">Stock Details</h4>
             </div>
             <div class="modal-body">
 
@@ -176,8 +179,10 @@
                         <p><strong>Purchase Ammount</strong></p>
 
                         <p><strong>Selling Price</strong></p>
+                        <p><strong>Per Unit Price</strong></p>
+                        <p><strong>Balance Amount</strong></p>
                         <p><strong>Date</strong></p>
-                        <p><strong>Role</strong></p>
+
                     </div>
                     <div>
 
@@ -186,9 +191,10 @@
                         <p>{{stockDetails.purchaseAmount }}</p>
 
                         <p>{{stockDetails.sellingPrice }}</p>
+                        <p>{{stockDetails.unitprice }}</p>
                         <p>{{stockDetails.balanceAmount }}</p>
                         <p>{{stockDetails.date }}</p>
-                        <p>{{stockDetails.role}}</p>
+
                     </div>
                 </div>
                 <div class="modal-footer">
