@@ -21,44 +21,6 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  
- 
-  //payment
-//   pay(){
-//   options = {
-//   "key": "rzp_test_QTqT8RlhnJKjDk", // Enter the Key ID generated from the Dashboard
-//   "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-//   "currency": "INR",
-//   "name": "Shankar Sales",
-//   "description": "Test Transaction",
-//   "image": "https://image.freepik.com/free-vector/credit-card-landing-page-payment-concept_23-2148298750.jpg",
-//   "order_id": "", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-//   "handler": function (response: { razorpay_payment_id: any; razorpay_order_id: any; razorpay_signature: any; }){
-//       alert(response.razorpay_payment_id);
-//       alert(response.razorpay_order_id);
-//       alert(response.razorpay_signature)
-//   },
-//   "prefill": {
-//       "name": "Aqua Ro",
-//       "email": "aqua@gmail.com",
-//       "contact": "9999999999"
-//   },
-//   "notes": {
-//       "address": "Razorpay Corporate Office"
-//   },
-//   "theme": {
-//       "color": "#0800ff"
-//   }
-// };
-
-
-// this.username=localStorage.getItem("user")
-    // this.rzp1 = new this.ser.nativeWindow.Razorpay(this.options)
-    // this.rzp1.open();
-
-// }
-
 pay(){
     this.options = {
       "key": "rzp_test_QTqT8RlhnJKjDk", 

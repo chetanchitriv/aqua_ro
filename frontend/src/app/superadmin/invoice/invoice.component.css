@@ -1,5 +1,5 @@
 .headInvoice {
-    background-color: #999999;
+    background-color: #833cbd;
     color: #fff;
 }
 
@@ -13,4 +13,11 @@
     background: linear-gradient(to right, #0be93b 0%, #0285f0 100%);
     /* background-color: #2196f3; */
     font-weight: bold;
+}
+
+.acc {
+    width: 39rem;
+    height: 220px;
+    background-color: #ede4f5;
+    padding: 13px;
 }

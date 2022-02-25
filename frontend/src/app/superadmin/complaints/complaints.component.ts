@@ -48,6 +48,7 @@ export class ComplaintsComponent implements OnInit {
   currentTechnician: any;
   currentRole: any;
   currentUser: any;
+  currentTelecaller: any;
 
 
   constructor(private formbuilder:FormBuilder, private leadService:LeadService, private api:ComplaintService, private userService: UserService) { }
@@ -93,7 +94,6 @@ export class ComplaintsComponent implements OnInit {
     this.getAllComplaints()
     this.assignto()
   
-   
     this.complaintUpdateForm = this.formbuilder.group({
       name : ['',Validators.required],
       mobileNo : ['',Validators.required],
@@ -282,7 +282,16 @@ updateComplaintsDetails(){
 
 }
 
+assignto() {
+  if (this.currentRole == 'Telecaller') {
 
+    this.currentTelecaller = this.currentUser
+    this.userService.getUsers().subscribe(res => {
+      this.assigntoList = res.filter((a: any) => {
+        return a.role == 'Technician'
+      })
+    })
+  }
 
   // showFormupdate(){
   //   this.showComplaintForm=true
@@ -291,28 +300,28 @@ updateComplaintsDetails(){
   //   this.showsearchform=false
   // }
 
-  assignto() {
-    if (this.currentRole == 'Technician') {
+  // assignto() {
+  //   if (this.currentRole == 'Technician') {
 
-      this.currentTechnician = this.currentUser
-      this.userService.getUsers().subscribe(res => {
-        this.assigntoList = res;
-        })
+  //     this.currentTechnician = this.currentUser
+  //     this.userService.getUsers().subscribe(res => {
+  //       this.assigntoList = res;
+  //       })
       
 
-    } else if (this.currentRole == 'Superadmin') {
+  //   } else if (this.currentRole == 'Superadmin') {
 
-      this.userService.getUsers().subscribe(res => {
-        this.assigntoList = res
-      })
-    } else if (this.currentRole == 'Admin') {
+  //     this.userService.getUsers().subscribe(res => {
+  //       this.assigntoList = res
+  //     })
+  //   } else if (this.currentRole == 'Admin') {
 
-      this.userService.getUsers().subscribe(res => {
-        this.assigntoList = res.filter((a: any) => {
-          return a.role != this.currentRole
-        })
-      })
-    }
+  //     this.userService.getUsers().subscribe(res => {
+  //       this.assigntoList = res.filter((a: any) => {
+  //         return a.role != this.currentRole
+  //       })
+  //     })
+  //   }
   }
+
 }
-  

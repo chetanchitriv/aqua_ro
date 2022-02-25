@@ -79,7 +79,7 @@ dueDate:any
   techname: any;
   qnty:any=[]
   newStockallot:any=[]
-
+  error:boolean=false;
 
 
   constructor(private formbuilder:FormBuilder, private stockallservice:StockallotService, private stockinv: StockService, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
@@ -395,7 +395,7 @@ this.items=res.data.itemList
       // this.showinvoiceTable=true
       // this.showinvoiceForm=false
       // this.showinvoiceUpdateForm=false
-      alert("Invoice Generated Successfully!");
+      // alert("Invoice Generated Successfully!");
       this.showinvoicesearchForm =false
   this.showinvoiceTable=false
   this.showinvoiceForm=false
@@ -514,4 +514,17 @@ viewinvoice(item:any){
      return this.qnty[i]=sparedata.qnt
   }
 
+  Checkqnt(i:any, e:any){
+
+    var quantity = e.target.value
+if(quantity > this.qnty[i]){
+   this.error = true;
+}else {
+  this.error=false
 }
+return this.error
+}
+
+  }
+
+
