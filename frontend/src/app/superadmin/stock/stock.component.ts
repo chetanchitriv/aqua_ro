@@ -39,9 +39,10 @@ export class StockComponent implements OnInit {
       spare_name : ['',Validators.required],
       qnt  : ['',Validators.required],
       availqnt:['',Validators.required],
+      unitprice  : ['',Validators.required],
       purchaseAmount  : ['',Validators.required],
       sellingPrice  : ['',Validators.required],
-      unitprice  : ['',Validators.required],
+    
       balanceAmount : ['',Validators.required],
       date:  [this.today,Validators.required],
     
@@ -90,9 +91,10 @@ export class StockComponent implements OnInit {
       spare_name : ['',Validators.required],
       qnt  : ['',Validators.required],
       availqnt:['',Validators.required],
+      unitprice  : ['',Validators.required],
       purchaseAmount  : ['',Validators.required],
       sellingPrice  : ['',Validators.required],
-      unitprice  : ['',Validators.required],
+      
       balanceAmount : ['',Validators.required],
       date:  [this.today,Validators.required],
      

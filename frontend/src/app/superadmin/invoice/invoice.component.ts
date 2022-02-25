@@ -48,8 +48,6 @@ dueDate:any
 
   invoiceForm: any = FormGroup;
   invoiceUpdateForm: any = FormGroup;
-
-  
   complaintsAll: any=[];
 
  
@@ -68,7 +66,7 @@ dueDate:any
   items:any=[]
   DATA:any
   newArray:any=[]
-  grandTotal:any=Number
+  grandTotal:any
   tax:any
   basePrice:any
   invoice:boolean=false
@@ -80,18 +78,16 @@ dueDate:any
   stockAll: any=[];
   techname: any;
   qnty:any=[]
-  unitprice: any=[];
   newStockallot:any=[]
+  unitRate: any=[];
+  total: any;
 
-
-
-  constructor(private formbuilder:FormBuilder, private stockallservice:StockallotService, 
-    private stockinv: StockService, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
+  constructor(private formbuilder:FormBuilder, private stockallservice:StockallotService, private stockinv: StockService, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
   
 
   ngOnInit(): void {
 
-    // this.getAllstock()
+   
    
     var Role= localStorage.getItem("role")
     if (Role=='Superadmin'){
@@ -179,7 +175,7 @@ console.log("dueDate", this.future);
 
   }
     getamount(i:any){
-      this.invoiceForm.controls['itemList'].value.at(i).amt=this.invoiceForm.controls['itemList'].value.at(i).qnt*this.invoiceForm.controls['itemList'].value.at(i).rate
+      this.invoiceForm.controls['itemList'].value.at(i).amt=this.invoiceForm.controls['itemList'].value.at(i).qnt*this.unitRate[i]
     return (this.invoiceForm.controls['itemList'].value.at(i).amt)
     }
     
@@ -189,7 +185,7 @@ console.log("dueDate", this.future);
       itemName: '',
       description: '',
       qnt:'',
-      rate:'',
+      unitprice:'',
       amt:''
     });
   }
@@ -365,6 +361,7 @@ getAllInvoice() {
   })
 }
 generateInvoice(){
+  console.log(this.invoiceForm.value,"check invoice unit rate")
   
     this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
       console.log(res.data,"post res");
@@ -375,21 +372,21 @@ var array=res.data.itemList
       for (let x in array) {
 
         // console.log((array[x].qnt) * (array[x].rate));
-        var amt = (array[x].qnt) * (array[x].rate)
-        this.newArray.push(amt)
+        // var amt = (array[x].qnt) * (array[x].unitprice)
+        this.newArray.push(this.invoiceForm.controls['itemList'].value.at(x).amt)
             // array[x].amt = amt
-    
+        this.total=this.getTotal()
+        this.tax = this.total* 0.16
+        this.grandTotal=this.total+this.tax
     }
       
-    function sum(sahil:any, shank:any) {
-      return sahil + shank
-  }
+   
   
-  this.grandTotal = this.newArray.reduce(sum)
-  this.tax = this.grandTotal* 0.16
-  this.basePrice =this.grandTotal*0.84
+//   this.grandTotal = 
+//   this.tax = this.grandTotal* 0.16
+//   this.basePrice =this.grandTotal*0.84
   
-      console.log(this.grandTotal,"jadu jadu");
+//       console.log(this.grandTotal,"jadu jadu");
       
 this.invoicePdf=res.data
 this.items=res.data.itemList
@@ -399,7 +396,7 @@ this.items=res.data.itemList
       // this.showinvoiceTable=true
       // this.showinvoiceForm=false
       // this.showinvoiceUpdateForm=false
-      alert("Invoice Generated Successfully!");
+      // alert("Invoice Generated Successfully!");
       this.showinvoicesearchForm =false
   this.showinvoiceTable=false
   this.showinvoiceForm=false
@@ -410,6 +407,11 @@ this.items=res.data.itemList
       (  err: any)=>{
       alert("Something Went Wrong!")
     })
+}
+
+getTotal(){
+var sum = this.newArray.reduce((x:any, y:any) => x + y);
+return sum
 }
 
 // downloadPdf(base64String:any, fileName:any) {
@@ -455,7 +457,7 @@ viewinvoice(item:any){
       for (let x in array) {
 
         // console.log((array[x].qnt) * (array[x].rate));
-        var amt = (array[x].qnt) * (array[x].rate)
+        var amt = (array[x].qnt) * (array[x].unitprice)
         this.newArray.push(amt)
             // array[x].amt = amt
     
@@ -492,9 +494,10 @@ viewinvoice(item:any){
 
     console.log(sparedata,"he");
     
-     return this.qnty[i]=sparedata.qnt
-     
-     return this.unitprice[i]=sparedata.unitprice;
+    this.qnty[i]=sparedata.qnt
+    this.unitRate[i]=sparedata.unitprice
+
+    return(this.qnty[i],this.unitRate[i])
 
   } 
 
@@ -517,23 +520,9 @@ viewinvoice(item:any){
 
     console.log(sparedata,"he");
     
-     return this.qnty[i]=sparedata.qnt;
-     return this.unitprice[i]=sparedata.unitprice;
+    this.qnty[i]=sparedata.qnt
+    this.unitRate[i]=sparedata.unitprice
+     return(this.qnty[i],this.unitRate[i])
   }
-   
-  // perunit data get by stock 
-//   getAllstock() {
-//     this.stockinv.getStock().subscribe((res: any) => {
-//       this.stockAll = res;
-//     })
-// }
-// getperunit(){
-//   this.invoiceUpdateForm.value.unitprice=this.invoiceUpdateForm.value.sellingPrice/this.invoiceUpdateForm.value.qnt
-//   return (this.invoiceUpdateForm.value.unitprice)
-//   }
-  getperunit(i:any){ 
-    return this.unitprice[i]
-    // return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
-  
-  }
-  }
+
+}

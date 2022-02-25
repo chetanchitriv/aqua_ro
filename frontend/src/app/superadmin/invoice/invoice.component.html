@@ -1,6 +1,8 @@
 <div class="d-flex">
-    <button type="button" (click)="showSearchForm()" class="btn btn-dark"> Generate Invoice<i class="bi bi-briefcase-fill"></i></button>
-    <button type="button" (click)="showTable()" class="btn btn-info">show List <i class="bi bi-briefcase-fill"></i></button>
+    <button type="button" (click)="showSearchForm()" class="btn btn-dark"> Generate Invoice<i
+            class="bi bi-briefcase-fill"></i></button>
+    <button *ngIf="isSuperAdmin || isAdmin" type="button" (click)="showTable()" class="btn btn-info">show List <i
+            class="bi bi-briefcase-fill"></i></button>
 
     <div *ngIf="showinvoicesearchForm &&! showinvoiceForm && !showinvoiceUpdateForm" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
         <form [formGroup]="searchLead" (ngSubmit)="search()">
@@ -42,7 +44,7 @@
 
             <div class="card-content">
                 <div class="row">
-                    <label class="col-sm-2 label-on-left">Name </label>
+                    <label class="col-sm-2 label-on-left">Name</label>
                     <div class="col-sm-8">
                         <div class="form-group label-floating is-empty">
                             <label class="control-label"></label>
@@ -100,24 +102,26 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-2 label-on-left">Service type <b style="color: rgb(243, 11, 11);">*</b></label>
+                    <label class="col-sm-2 label-on-left">Service type</label>
                     <div class="col-sm-4">
 
 
                         <div class="form-group open" style="margin-left: 20px;">
                             <div class="select" aria-expanded="true">
                                 <select class="form-control" placeholder="Select an option" formControlName="serviceType">
-                                
+
                                     <!-- <option value="">Select your option --</option>
                                     <option value="AMC">AMC</option>   
                                     <option value="Service type">Service type</option>    -->
-                                    
+
                                     <option value=""> Select Role --</option>
-                                    <option [ngValue]="serviceType" *ngFor="let serviceType of types">{{serviceType}}</option>    
+                                    <option [ngValue]="serviceType" *ngFor="let serviceType of types">{{serviceType}}
+                                    </option>
                                 </select>
 
                             </div>
-                            <span class="material-input"></span></div>
+                            <span class="material-input"></span>
+                        </div>
                     </div>
 
                 </div>
@@ -127,7 +131,7 @@
                             <div class="card-content">
                                 <!-- <button type="button" (click)="addItem()" class="btn btn-success" style="margin-left: 86%;">+Add item</button> -->
                                 <button type="button" (click)="addItem()" style="margin-left: 86%;" class="btn btn-success btn-round btn-fab btn-fab-mini">
-                                    <i class="material-icons" >control_point</i>
+                                    <i class="material-icons">control_point</i>
                                 </button>
 
                                 <!-- <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
@@ -143,26 +147,30 @@
 
                                                         <td *ngIf="isAdmin || isSuperAdmin">
                                                             <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare1($event,i)'>
-                                
-                                                        <option value="">Select item name --</option>
-                                                        
-                                                        <option *ngFor="let data of stockAll">{{data.spare_name}}</option>   
-                                                        
-                                                        
-                                                    </select>
+
+                                                                <option value="">Select item name --</option>
+
+                                                                <option *ngFor="let data of stockAll">
+                                                                    {{data.spare_name}}</option>
+
+
+                                                            </select>
                                                         </td>
                                                         <td *ngIf="isTechnician">
                                                             <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare($event,i)'>
-                                
-                                                        <option value="">Select item name --</option>
-                                                      
-                                                        <option [ngValue]="data.spare_name" *ngFor="let data of newStockallot">{{data.spare_name}}</option>   
-                                                        
-                                                        
-                                                    </select>
+
+                                                                <option value="">Select item name --</option>
+
+                                                                <option [ngValue]="data.spare_name"
+                                                                    *ngFor="let data of newStockallot">
+                                                                    {{data.spare_name}}</option>
+
+
+                                                            </select>
                                                         </td>
 
-                                                        <td *ngIf="qnty[i] != null">Available quantity : {{qnty[i]}} </td>
+                                                        <td *ngIf="qnty[i] != null">Available quantity : {{qnty[i]}}
+                                                        </td>
 
                                                         <!-- <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td> -->
 
@@ -178,14 +186,12 @@
 
 
 
-                                                        <!-- <td> <input type="number" placeholder="Rate" class="form-control" formControlName="rate"></td> -->
-                                                        <td *ngIf="unitprice[i] != null">per unit price:{{unitprice[i]}} </td>
-                                                        <!-- <td> <input type="number" placeholder="Per Unit Price" class="form-control" formControlName="unitprice" [value]="getperunit()"></td> -->
+                                                        <td> Per Unit Price: {{unitRate[i]}} </td>
 
                                                         <td><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
 
                                                         <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
-                                                        </i>
+                                                            </i>
                                                         </td>
                                                     </tr>
 
@@ -206,8 +212,10 @@
 
                 <div class="text-center" style="margin-left: 100px;">
 
-                    <button type="submit" class="btn mycolor">Generate invoice<i class="bi bi-briefcase-fill"></i></button>
-                    <button type="button" (click)="showSearchForm()" class="btn btn-danger">Cancel<i class="bi bi-briefcase-fill"></i></button>
+                    <button type="submit" class="btn mycolor">Generate invoice<i
+                            class="bi bi-briefcase-fill"></i></button>
+                    <button type="button" (click)="showSearchForm()" class="btn btn-danger">Cancel<i
+                            class="bi bi-briefcase-fill"></i></button>
                 </div>
             </div>
         </form>
@@ -267,8 +275,9 @@
 
 
                                         <td class="text-right">
-                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" d class="material-icons" (click)="viewinvoice(invoice)">picture_as_pdf
-                                            </i></a>
+                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" d
+                                                    class="material-icons" (click)="viewinvoice(invoice)">picture_as_pdf
+                                                </i></a>
 
                                         </td>
 
@@ -320,7 +329,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="card-header">
-                                                    <h1 style="color: #2196F3"><b>Invoice</b></h1>
+                                                    <h1 style="color: #833cbd">Invoice</h1>
                                                     <p> Invoice No. :<strong> E1234-567-89</strong></p>
                                                     <p> Date : <strong>{{invoicePdf.date}}</strong> &nbsp;&nbsp;</p>
                                                     <p>Due Date : <strong>{{invoicePdf.dueDate}}</strong></p>
@@ -334,39 +343,50 @@
                                             </div>
                                         </div>
 
-                                        <div class="card-content card-padding">
+                                        <div class="card-content card-padding" style="padding: 1px;">
                                             <div class="m-b-20">
                                                 <div>
                                                     <div class="row">
-                                                        <div class="col-md-5  text-center">
-                                                            <div class="card color-light">
+                                                        <div class="col-md-5 " style="padding-left:5">
+                                                            <div class="card color-light" style=" width:450px; background-color: #ede4f5; padding: 0px 0px 0px 20px;">
                                                                 <!-- <table>
                                                                     <tr><th></th></tr>
                                                                 </table> -->
-                                                                <b><h3 style="background-color: #999999;color: #fff;"> Billed By 
-                                                                   
-                                                                </h3></b>
-                                                                <address>
-                              1234 Silver Gate Avenue, Suite 430 <br>
-                              San Francisco, CA, 94118 <br>
-                              <abbr title="Mail">E-mail:</abbr>&nbsp;&nbsp;example@company.com <br>
-                              <abbr title="Phone">Phone:</abbr>&nbsp;&nbsp;(123) 456-7890 <br>
-                              <abbr title="Fax">Fax:</abbr>&nbsp;&nbsp;800-692-7753 <br>
-                              <br>
-                              </address>
+                                                                <b>
+                                                                    <h3 style="  width: 121%; color: #833cbd"> Billed By
+
+                                                                    </h3>
+                                                                </b>
+                                                                <address style=" width:400px; background-color: #ede4f5;">
+                                                                    1234 Silver Gate Avenue, Suite 430 <br>
+                                                                    San Francisco, CA, 94118 <br>
+                                                                    <abbr
+                                                                        title="Mail">E-mail:</abbr>&nbsp;&nbsp;example@company.com
+                                                                    <br>
+                                                                    <abbr title="Phone">Phone:</abbr>&nbsp;&nbsp;(123)
+                                                                    456-7890 <br>
+                                                                    <abbr
+                                                                        title="Fax">Fax:</abbr>&nbsp;&nbsp;800-692-7753
+                                                                    <br>
+                                                                    <br>
+                                                                </address>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-1 light"></div>
-                                                        <div class="col-md-5 text-center" style="height: 231px;">
-                                                            <div class="card">
-                                                                <b> <h3 style="background-color: #999999;color: #fff;">Billed To</h3></b>
+                                                        <div class="col-md-5 " style="height: 231px;">
+                                                            <div class="card" style="width: 121%;" style=" width:450px; height:208px; background-color: #ede4f5; padding: 0px 0px 0px 20px;">
+                                                                <b style="color: #833cbd">
+                                                                    <h3>Billed To</h3>
+                                                                </b>
                                                                 <p>
-                                                                    Name : <span class="font-size-20">{{invoicePdf.name}}</span> </p>
-                                                                <p>Email : <span class="font-size-20">{{invoicePdf.emailId}}</span> </p>
+                                                                    Name : <span class="font-size-20">{{invoicePdf.name}}</span>
+                                                                </p>
+                                                                <p>Email : <span class="font-size-20">{{invoicePdf.emailId}}</span>
+                                                                </p>
                                                                 <address>
-                              {{invoicePdf.address}}
-                             
-                              </address> <br>
+                                                                    {{invoicePdf.address}}
+
+                                                                </address> <br>
                                                                 <br>
                                                             </div>
                                                         </div>
@@ -380,18 +400,17 @@
                                                                     <th class="text-center">Item Name</th>
                                                                     <th class="text-center">Description</th>
                                                                     <th class="text-center">Quantity</th>
-                                                                    <th class="text-center">Rate</th>
                                                                     <th class="text-center">Amount</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr *ngFor="let item of items,let i = index  ">
+                                                                <tr *ngFor="let item of items,let i = index  " style="background-color: #ede4f5;">
                                                                     <td class="text-center">{{i+1}}</td>
                                                                     <td class="text-center">{{item.itemName}}</td>
                                                                     <td class="text-center">{{item.description}}</td>
                                                                     <td class="text-center">{{item.qnt}}</td>
-                                                                    <td class="text-center">{{item.rate}}</td>
-                                                                    <td class="text-center">{{item.qnt * item.rate}}</td>
+                                                                    <td class="text-center">{{item.amt}}
+                                                                    </td>
                                                                 </tr>
 
                                                             </tbody>
@@ -399,15 +418,43 @@
                                                     </div>
                                                     <br><br>
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-5">
+                                                            <div class="card acc">
+                                                                <div class="card-body">
+                                                                    <h3 class="card-title" style="color:#833cbd">Bank Details
+                                                                    </h3>
+
+                                                                    <p><strong>Account Holder Name &nbsp;&nbsp;&nbsp;
+                                                                            &nbsp;</strong>Rahul Karan Sharma</p>
+                                                                    <p><strong>Account Number &nbsp;&nbsp;&nbsp; &nbsp;
+                                                                            &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                            &nbsp;</strong>*****************</p>
+                                                                    <p><strong>IFSC &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+                                                                            &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>******
+                                                                    </p>
+                                                                    <p><strong>Account Type&nbsp;&nbsp;&nbsp; &nbsp;
+                                                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                            &nbsp;&nbsp;&nbsp;</strong>Current</p>
+                                                                    <p><strong>Bank &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+                                                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>HDFC Bank
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <h3 class="card-title" style="color:#833cbd">&nbsp;UPI - Scan to pay</h3>
                                                             <img src="../../../assets/img/download.png" style="width: 200px;height: 200px;" alt="" srcset="">
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="text-right clearfix">
-                                                                <div class="pull-right">
-                                                                    <p> Sub - Total amount: <strong><span>{{basePrice}}</span></strong> </p>
+                                                                <div class="pull-right" style="margin-right: 15px;">
+                                                                    <p> Sub - Total amount:
+                                                                        <strong><span>{{total}}</span></strong> </p>
                                                                     <p> VAT: <strong><span>{{tax}}</span></strong> </p>
-                                                                    <p class="page-invoice-amount"> <strong>Grand Total: <span>{{grandTotal}}</span></strong> </p>
+                                                                    <p class="page-invoice-amount"> <strong>Grand Total:
+                                                                            <span>{{grandTotal}}</span></strong> </p>
                                                                     <br>
                                                                 </div>
                                                             </div>
