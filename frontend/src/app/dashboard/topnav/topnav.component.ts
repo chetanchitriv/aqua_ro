@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Notification } from 'rxjs';
 import { AuthserviceService } from 'src/app/shared/authservice.service';
 import { LeadService } from 'src/app/shared/lead.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 
 @Component({
@@ -23,22 +25,27 @@ export class TopnavComponent implements OnInit {
   date = new Date()
   today:any
   exam:any=[]
-  len:any
+  len:any=0
   role:any
   note:boolean=false
   assignleads:any=[]
   leadnotification:any=[]
   newLeads: any=[]
+  getAllNotify:any=[]
+  notificationAll: any=[];
 
-  constructor(private authservice: AuthserviceService, private fb:FormBuilder ,private router:Router, private leadService: LeadService) { 
+  constructor(private authservice: AuthserviceService, private fb:FormBuilder ,private router:Router, private leadService: LeadService, private notificationser:NotificationService) { 
     this.username=localStorage.getItem('username')
   }
 
   ngOnInit(): void {
 
+this.createNotification()
 
     var Role= localStorage.getItem("role")
     if (Role=='Superadmin'){
+      this.createNotification()
+      this.getAllnotification()
       this.isSuperAdmin = true
       this.isAdmin =false
       this.isTelecaller=  false
@@ -46,18 +53,23 @@ export class TopnavComponent implements OnInit {
     
     }
     if (Role=='Admin'){
+      this.createNotification()
+      this.getAllnotification()
       this.isSuperAdmin = false
       this.isAdmin =true
       this.isTelecaller=  false
       this.isTechnician = false
     }
     if (Role=='Technician'){
+      this. getAllAssignedLeads()
       this.isSuperAdmin = false
       this.isAdmin =false
       this.isTelecaller=  false
       this.isTechnician = true
     }
     if (Role=='Telecaller'){
+      this.createNotification()
+      this.getAllnotification()
       this.isSuperAdmin = false
       this.isAdmin =false
       this.isTelecaller=  true
@@ -74,9 +86,10 @@ export class TopnavComponent implements OnInit {
  
   //   this.today = this.date.toISOString().slice(0, 10);
     // console.log("sahil",this.today );
-    this. getAllAssignedLeads()
     
   }
+
+ 
 
 
   logout(){
@@ -127,6 +140,24 @@ notify(){
 
 }
 
+
+getAllnotification(){
+  this.notificationser.getNotification().subscribe((res:any) => {
+    console.log(res, "no");
+  this.notificationAll = res;
+  this.len=this.notificationAll.length
+    
+  })
+  
+  
+  }
+  createNotification(){
+    var data
+    this.notificationser.creatNoti(data).subscribe((res:any) => {
+     
+    })  
+  }
+
 // getAllLeads(){
      
 //   this.leadService.getLeads().subscribe((res: any)=>{  
@@ -144,7 +175,7 @@ notify(){
 getAllAssignedLeads(){
      
   this.leadService.getLeads().subscribe((res: any)=>{  
- console.log(res);
+ console.log(res, "ho");
 this.assignleads=res.filter((a:any)=>{
   return a.assignTo == this.username
 })
@@ -155,4 +186,6 @@ this.len=this.newLeads.length
   })
   console.log(this.assignleads);  
 }
+
+
 }

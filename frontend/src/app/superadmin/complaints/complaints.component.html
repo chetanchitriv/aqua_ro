@@ -184,7 +184,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="isTechnician">
                         <label class="col-sm-2 label-on-left">Assign to <b style="color: rgb(243, 11, 11);">*</b></label>
                         <div class="col-sm-4">
 
@@ -192,10 +192,64 @@
                             <div class="form-group open" style="margin-left: 20px;">
                                 <div class="select" aria-expanded="true">
                                     <select class="form-control" placeholder="Select an option" formControlName="assignTo">
-                                        
+                                        <!-- <span *ngIf="isSuperAdmin || isAdmin || isTelecaller">
                                             <option value="">Select your option --</option>
-                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
-                                            
+                                           
+                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>
+                                        </span> -->
+                                     
+                                            <option  >{{currentUser}}</option>
+
+                                 
+    
+                                        </select>
+
+                                </div>
+                                <span class="material-input"></span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="row" *ngIf="isTelecaller">
+                        <label class="col-sm-2 label-on-left">Assign to</label>
+                        <div class="col-sm-4">
+
+
+                            <div class="form-group open" style="margin-left: 20px;">
+                                <div class="select" aria-expanded="true">
+                                    <select class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                        <!-- <span *ngIf="isSuperAdmin || isAdmin || isTelecaller">
+                                            <option value="">Select your option --</option>
+                                           
+                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>
+                                        </span> -->
+                                        
+                                            <option  >{{currentTelecaller}}</option>
+
+                                            <option  *ngFor="let assign of assigntoList">{{assign.userName}}</option> 
+    
+                                        </select>
+
+                                </div>
+                                <span class="material-input"></span></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row" *ngIf="isSuperAdmin || isAdmin">
+                        <label class="col-sm-2 label-on-left">Assign to</label>
+                        <div class="col-sm-4">
+
+
+                            <div class="form-group open" style="margin-left: 20px;">
+                                <div class="select" aria-expanded="true">
+                                    <select class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                      
+                                            <option value="">Select your option --</option>
+                                           
+                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>
+    
                                         </select>
 
                                 </div>
@@ -273,7 +327,7 @@
                         <label class="col-sm-2 label-on-left">Complaint Date <b style="color: rgb(243, 11, 11);">*</b></label>
                         <div class="col-sm-10">
                             <div class="form-group label-floating is-empty col-md-4">
-                                <input type="text-area" formControlName="complaintDate" class="form-control">
+                                <input type="date" formControlName="complaintDate" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -340,6 +394,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <label class="col-sm-2 label-on-left">Assign to</label>
                         <div class="col-sm-4">
@@ -347,18 +402,20 @@
 
                             <div class="form-group open" style="margin-left: 20px;">
                                 <div class="select" aria-expanded="true">
-                                    <select class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                    <select placeholder="Select an option" formControlName="assignTo" class="form-control">
                                         
-                                            <option value="">Select your option --</option>
+                                            <option  value=""><p>Select your option --</p></option>
+                                      
                                             <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
-                                        </select>
-
-
+                                    </select>
                                 </div>
+
                                 <span class="material-input"></span></div>
                         </div>
 
                     </div>
+
+
 
                     <div class="row">
                         <label class="col-sm-2 label-on-left">Address</label>
@@ -406,11 +463,11 @@
                         <div class="col-sm-10">
                             <div class="form-group label-floating is-empty col-md-6">
                                 <label class="control-label">date :</label><br>
-                                <input type="date" formControlName="nextFollowupdate" class="form-control" [readonly]="true" placeholder="">
+                                <input type="date" formControlName="nextFollowupdate" class="form-control" [readonly]="true">
                             </div>
                             <div class="form-group label-floating is-empty col-md-6">
                                 <label class="control-label">time :</label><br>
-                                <input type="time" formControlName="nextFollowuptime" class="form-control" [readonly]="true" placeholder="">
+                                <input type="time" formControlName="nextFollowuptime" class="form-control" [readonly]="true">
                             </div>
                         </div>
                     </div>
@@ -429,7 +486,7 @@
                         <label class="col-sm-2 label-on-left">Complaint Date</label>
                         <div class="col-sm-10">
                             <div class="form-group label-floating is-empty col-md-4">
-                                <input type="text-area" formControlName="complaintDate" class="form-control">
+                                <input type="date" formControlName="complaintDate" class="form-control">
                             </div>
                         </div>
                     </div>

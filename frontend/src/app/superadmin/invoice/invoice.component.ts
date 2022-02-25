@@ -81,6 +81,8 @@ dueDate:any
   newStockallot:any=[]
   unitRate: any=[];
   total: any;
+  error:boolean=false;
+
 
   constructor(private formbuilder:FormBuilder, private stockallservice:StockallotService, private stockinv: StockService, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
   
@@ -525,4 +527,17 @@ viewinvoice(item:any){
      return(this.qnty[i],this.unitRate[i])
   }
 
+  Checkqnt(i:any, e:any){
+
+    var quantity = e.target.value
+if(quantity > this.qnty[i]){
+   this.error = true;
+}else {
+  this.error=false
 }
+return this.error
+}
+
+  }
+
+

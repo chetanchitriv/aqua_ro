@@ -17,7 +17,8 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <!-- <li class="dropdown" style="cursor: pointer;">
+
+                <li class="dropdown" style="cursor: pointer;" *ngIf="isSuperAdmin || isAdmin || isTelecaller">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <i class="material-icons">notifications</i>
                         <span class="notification">{{len}}</span>
@@ -29,7 +30,7 @@
                     <ul class="dropdown-menu">
 
                         <li *ngFor=" let item of leadsAll ,let i = index ">
-                            <a>{{i + 1}}) Follow-up date of <strong>{{item.name}}</strong> is today </a>
+                            <a>{{i + 1}}) Next Follow-up date of <strong>{{item.name}}</strong> is today </a>
                         </li>
                         <li style="background-color: rgb(232, 231, 231);" *ngFor=" let assign of leadnotification ,let i = index ">
                             <a> New Lead assigne to you is <strong>{{assign.name}}</strong>  </a>
@@ -37,7 +38,10 @@
                         <li *ngIf="len == 0"><img src="../../../assets/img/notification.png" style="width: 100px;height: 100px;margin-left: 60px;" alt="" srcset=""></li>
                         <li *ngIf="len == 0"><a>Opps.. No Follow-Up for Today</a></li>
                     </ul>
-                </li> -->
+                </li>
+
+
+
 
 
 

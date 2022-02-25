@@ -12,6 +12,12 @@ import { ComplaintsModel } from './complaints.model';
 })
 export class ComplaintsComponent implements OnInit {
 
+
+  isSuperAdmin :boolean = false
+  isAdmin :boolean = false
+  isTelecaller :boolean = false
+  isTechnician :boolean = false
+
   dtOptions:DataTables.Settings={}
   searchLead: any=FormGroup;
   allLeads: any=[];
@@ -39,20 +45,55 @@ export class ComplaintsComponent implements OnInit {
   usersAll: any=[];
   assigntoList: any=[];
   username:any
+  currentTechnician: any;
+  currentRole: any;
+  currentUser: any;
+  currentTelecaller: any;
 
 
   constructor(private formbuilder:FormBuilder, private leadService:LeadService, private api:ComplaintService, private userService: UserService) { }
   
 
   ngOnInit(): void {
+
+    this.currentRole = localStorage.getItem('role')
+    this.currentUser = localStorage.getItem('username')
+
+    var Role= localStorage.getItem("role")
+    if (Role=='Superadmin'){
+      this.isSuperAdmin = true
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = false
+    
+    }
+    if (Role=='Admin'){
+      this.isSuperAdmin = false
+      this.isAdmin =true
+      this.isTelecaller=  false
+      this.isTechnician = false
+    }
+    if (Role=='Technician'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  false
+      this.isTechnician = true
+    }
+    if (Role=='Telecaller'){
+      this.isSuperAdmin = false
+      this.isAdmin =false
+      this.isTelecaller=  true
+      this.isTechnician = false
+    }
+
   
     this.username=localStorage.getItem('username')
     this.initiatedtOption()
     this.getAllUser()
     this.getAllLeads()
     this.getAllComplaints()
-   
-   
+    this.assignto()
+  
     this.complaintUpdateForm = this.formbuilder.group({
       name : ['',Validators.required],
       mobileNo : ['',Validators.required],
@@ -241,7 +282,16 @@ updateComplaintsDetails(){
 
 }
 
+assignto() {
+  if (this.currentRole == 'Telecaller') {
 
+    this.currentTelecaller = this.currentUser
+    this.userService.getUsers().subscribe(res => {
+      this.assigntoList = res.filter((a: any) => {
+        return a.role == 'Technician'
+      })
+    })
+  }
 
   // showFormupdate(){
   //   this.showComplaintForm=true
@@ -249,4 +299,29 @@ updateComplaintsDetails(){
   //   this.showComplaintUpdateForm:boolean=false
   //   this.showsearchform=false
   // }
+
+  // assignto() {
+  //   if (this.currentRole == 'Technician') {
+
+  //     this.currentTechnician = this.currentUser
+  //     this.userService.getUsers().subscribe(res => {
+  //       this.assigntoList = res;
+  //       })
+      
+
+  //   } else if (this.currentRole == 'Superadmin') {
+
+  //     this.userService.getUsers().subscribe(res => {
+  //       this.assigntoList = res
+  //     })
+  //   } else if (this.currentRole == 'Admin') {
+
+  //     this.userService.getUsers().subscribe(res => {
+  //       this.assigntoList = res.filter((a: any) => {
+  //         return a.role != this.currentRole
+  //       })
+  //     })
+  //   }
   }
+
+}

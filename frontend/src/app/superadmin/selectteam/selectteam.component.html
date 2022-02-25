@@ -3,7 +3,7 @@
         <button type="button" (click)="showForm()" class="btn btn-dark">Add Team Members <i class="bi bi-briefcase-fill"></i></button>
         <button type="button" (click)="showTable()" class="btn btn-primary">show Team List <i class="bi bi-briefcase-fill"></i></button>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-10">
         <div class="card" *ngIf="!showTeamForm && showTeamTable">
 
             <div class="card-content">
@@ -89,15 +89,15 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class=" col-md-4 mb-3">
-                                                <select multiple class="custom-select" formControlName="technician" placeholder="Select an option">
-                                                     <option value="">Choose your Technician</option>
-                                                     <option *ngFor="let item of technician" [ngValue]="item.userName" >{{item.userName}}</option>
+                                                <select multiple class="custom-select" formControlName="technician" placeholder="Select an option" style="height:150px">
+                                                     <option  value="" style="font-weight:bold">Choose your Technician </option>
+                                                     <option *ngFor="let item of technician" [ngValue]="item.userName">{{item.userName}}</option>
                                                </select>
                                             </div>
                                             <div class="col-md-4"></div>
                                             <div class=" col-md-4 mb-3">
-                                                <select multiple class="custom-select" formControlName="telecaller" placeholder="Select an option">
-                                                       <option value="">Choose your Telecaller</option>
+                                                <select multiple class="custom-select" formControlName="telecaller" placeholder="Select an option" style="height:150px">
+                                                       <option value="" style="font-weight:bold">Choose your Telecaller</option>
                                                        <option *ngFor="let item of telecaller" [ngValue]="item.userName" >{{item.userName}}</option>
                                                  </select>
                                             </div>
