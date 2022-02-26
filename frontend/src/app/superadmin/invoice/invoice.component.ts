@@ -83,7 +83,6 @@ dueDate:any
   total: any;
   error:boolean=false;
 
-
   constructor(private formbuilder:FormBuilder, private stockallservice:StockallotService, private stockinv: StockService, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private invoiceService:InvoiceService) { }
   
 
@@ -285,6 +284,9 @@ console.log("dueDate", this.future);
  
 
   showTable(){
+    this.total=0
+    this.tax=0
+    this.grandTotal=0
     this.showinvoiceForm=false
     this.showinvoiceTable=true
     this.showinvoiceUpdateForm=false
@@ -363,6 +365,7 @@ getAllInvoice() {
   })
 }
 generateInvoice(){
+  this.newArray=[]
   console.log(this.invoiceForm.value,"check invoice unit rate")
   
     this.invoiceService.postInvoice(this.invoiceForm.value).subscribe((res: any)=>{
@@ -377,7 +380,7 @@ var array=res.data.itemList
         // var amt = (array[x].qnt) * (array[x].unitprice)
         this.newArray.push(this.invoiceForm.controls['itemList'].value.at(x).amt)
             // array[x].amt = amt
-        this.total=this.getTotal()
+        this.total=this.getTotal(this.newArray)
         this.tax = this.total* 0.16
         this.grandTotal=this.total+this.tax
     }
@@ -411,8 +414,8 @@ this.items=res.data.itemList
     })
 }
 
-getTotal(){
-var sum = this.newArray.reduce((x:any, y:any) => x + y);
+getTotal(newarray:any){
+var sum = newarray.reduce((x:any, y:any) => x + y);
 return sum
 }
 
@@ -448,7 +451,7 @@ public openPDF():void {
   }
 
 viewinvoice(item:any){
-
+  this.newArray=[]
     this.invoicePdf=item
     this.items=item.itemList
     this.invoice=true
@@ -457,21 +460,17 @@ viewinvoice(item:any){
     var array=item.itemList
 
       for (let x in array) {
-
-        // console.log((array[x].qnt) * (array[x].rate));
-        var amt = (array[x].qnt) * (array[x].unitprice)
-        this.newArray.push(amt)
+        this.total=0
+        this.tax=0
+        this.grandTotal=0
+         this.newArray.push(array[x].amt)
             // array[x].amt = amt
+        this.total=this.getTotal(this.newArray)
+        this.tax = this.total* 0.16
+        this.grandTotal=this.total+this.tax
     
     }
       
-    function sum(sahil:any, shank:any) {
-      return sahil + shank
-  }
-  
-  this.grandTotal = this.newArray.reduce(sum)
-  this.tax = this.grandTotal* 0.16
-  this.basePrice =this.grandTotal*0.84
   
   }
 
