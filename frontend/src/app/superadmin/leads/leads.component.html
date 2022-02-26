@@ -120,7 +120,7 @@
 
                 <div class="card-content">
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Name</label>
+                        <label class="col-sm-2 label-on-left">Name <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>
                         <div class="col-sm-10">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -135,7 +135,7 @@
 
 
 
-                        <label class="col-sm-2 label-on-left">Mobile No.</label>
+                        <label class="col-sm-2 label-on-left">Mobile No. <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>
 
                         <div class="form-group label-floating is-empty col-md-4">
                             <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" placeholder="Enter 10 digit mobile number" formControlName="mobileNo" class="form-control">
@@ -154,7 +154,7 @@
 
 
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Email Id</label>
+                        <label class="col-sm-2 label-on-left">Email Id <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>
                         <div class="col-sm-10">
                             <div class="form-group label-floating is-empty">
                                 <label class="control-label"></label>
@@ -164,7 +164,7 @@
                         </div>
 
                         <div class="row " *ngIf="isSuperAdmin || isAdmin || isTelecaller">
-                            <label class="col-sm-2 label-on-left">Assign to</label>
+                            <label class="col-sm-2 label-on-left">Assign to <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>
                             <!-- <div class="col-sm-4">
 
 
@@ -205,7 +205,7 @@
                         </div>
 
                         <div class="row">
-                            <label class="col-sm-2 label-on-left">Address</label>
+                            <label class="col-sm-2 label-on-left">Address <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>
                             <div class="col-sm-10">
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label"></label>
@@ -249,7 +249,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-sm-2 label-on-left">Next follow-up</label>
+                            <label class="col-sm-2 label-on-left">Next follow-up <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>
                             <div class="col-sm-10">
                                 <div class="form-group label-floating is-empty col-md-6">
                                     <label class="control-label">date :</label><br>
@@ -262,7 +262,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-sm-2 label-on-left">Status</label>
+                            <label class="col-sm-2 label-on-left">Status <span *ngIf="showAddButton"><b style="color: rgb(243, 11, 11);">*</b></span></label>
                             <div class="col-sm-10">
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label"></label>

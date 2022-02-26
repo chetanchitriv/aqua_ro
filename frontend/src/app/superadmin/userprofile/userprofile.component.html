@@ -9,7 +9,7 @@
 
                         <h3 style="color:#127cc2">&nbsp;&nbsp; Welcome {{userProfile?.userName}}!
 
-                            <a *ngIf="currentRole=='Superadmin'" routerLink="/dashboard/editprofile" class="btn editicon" style="margin-left:350px;"><i  title="edit" class="material-icons">edit</i></a>
+                            <a *ngIf="currentRole=='Superadmin'" routerLink="/dashboard/editprofile" class="btn editicon" style="margin-left:40px;"><i  title="edit" class="material-icons">edit</i></a>&nbsp;
 
                             <a *ngIf="currentRole=='Superadmin'" class="btn passwordicon"><i title="change password" data-toggle="modal" data-target="#myModal" class="material-icons">remove_red_eye </i></a>
                         </h3>
@@ -82,11 +82,9 @@
             <div class="modal-body" style="padding:20px;">
 
                 <div class="card-header card-header-text">
-                    <<<<<<< HEAD <button type="button" #modalClose class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
-                        =======
-                        <button type="button" #myModalClose class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button> >>>>>>> 8f580ad7d7c1c61324c056cea8ef5f69b1dbae73
+                    <button type="button" #myModalClose class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
 
-                        <h4 class="card-title title"><b>Change Password</b></h4>
+                    <h4 class="card-title title"><b>Change Password</b></h4>
 
 
 
@@ -95,11 +93,11 @@
                     <div class="card-content">
 
                         <div class="form-group">
-                            <label for="newPassword">New Password</label>
+                            <label for="newPassword">New Password <b style="color: rgb(243, 11, 11);">*</b></label>
                             <input formControlName="newPassword" name="newPassword" type="password" class="form-control" placeholder="Enter new password">
                         </div>
                         <div class="form-group">
-                            <label for="confirmPassword">Confirm Password</label>
+                            <label for="confirmPassword">Confirm Password <b style="color: rgb(243, 11, 11);">*</b></label>
                             <input formControlName="confirmPassword" name="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm new Password">
 
                             <span *ngIf="passwordmatch" style="color: red;">password must be same</span>

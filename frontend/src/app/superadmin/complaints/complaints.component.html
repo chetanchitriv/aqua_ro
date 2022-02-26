@@ -51,12 +51,7 @@
                                         <td>{{data.mobileNo}}</td>
                                         <td>{{data.AltmobileNo}}</td>
                                         <td>{{data.assignTo}}</td>
-
-
-
-
                                         <td>{{data.complaintInfo}}</td>
-
                                         <td>{{data.complaintDate}}</td>
 
                                         <td class="text-right">
@@ -190,7 +185,7 @@
                         </div>
                     </div>
                     <div class="row" *ngIf="isTechnician">
-                        <label class="col-sm-2 label-on-left">Assign to</label>
+                        <label class="col-sm-2 label-on-left">Assign to <b style="color: rgb(243, 11, 11);">*</b></label>
                         <div class="col-sm-4">
 
 
@@ -325,7 +320,7 @@
                         <h4 class="card-title title1">Complaint</h4>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Complaint Details</label>
+                        <label class="col-sm-2 label-on-left">Complaint Details <b style="color: rgb(243, 11, 11);">*</b></label>
                         <div class="col-sm-10">
                             <div class="form-group label-floating is-empty col-md-12">
                                 <input type="text-area" formControlName="complaintInfo" class="form-control">
@@ -333,7 +328,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-2 label-on-left">Complaint Date</label>
+                        <label class="col-sm-2 label-on-left">Complaint Date <b style="color: rgb(243, 11, 11);">*</b></label>
                         <div class="col-sm-10">
                             <div class="form-group label-floating is-empty col-md-4">
                                 <input type="date" formControlName="complaintDate" class="form-control">
@@ -519,7 +514,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">User Details</h4>
+                <h4 class="modal-title title1" id="myModalLabel">User Details</h4>
             </div>
             <div class="modal-body">
 

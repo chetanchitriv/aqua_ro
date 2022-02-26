@@ -18,3 +18,13 @@
     /* background-color: #2196f3; */
     font-weight: bold;
 }
+
+.allottable-main {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.allottable {
+    border: 1px solid black;
+    text-align: center;
+}

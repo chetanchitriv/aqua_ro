@@ -107,17 +107,19 @@
                         <div class="form-group open" style="margin-left: 20px;">
                             <div class="select" aria-expanded="true">
                                 <select class="form-control" placeholder="Select an option" formControlName="serviceType">
-                                
+
                                     <!-- <option value="">Select your option --</option>
                                     <option value="AMC">AMC</option>   
                                     <option value="Service type">Service type</option>    -->
-                                    
+
                                     <option value=""> Select Role --</option>
-                                    <option [ngValue]="serviceType" *ngFor="let serviceType of types">{{serviceType}}</option>    
+                                    <option [ngValue]="serviceType" *ngFor="let serviceType of types">{{serviceType}}
+                                    </option>
                                 </select>
 
                             </div>
-                            <span class="material-input"></span></div>
+                            <span class="material-input"></span>
+                        </div>
                     </div>
 
                 </div>
@@ -128,7 +130,7 @@
                                 <p style="text-align: center; color:red" *ngIf="error">*Quantity should be less than or equals to available quantity</p>
                                 <!-- <button type="button" (click)="addItem()" class="btn btn-success" style="margin-left: 86%;">+Add item</button> -->
                                 <button type="button" (click)="addItem()" style="margin-left: 86%;" class="btn btn-success btn-round btn-fab btn-fab-mini">
-                                    <i class="material-icons" >control_point</i>
+                                    <i class="material-icons">control_point</i>
                                 </button>
 
                                 <!-- <a type="button" (click)="addItem()"><i style="margin-left: 96%; cursor: pointer; font-size:35px"class="material-icons " >add_circle_outline
@@ -144,26 +146,30 @@
 
                                                         <td *ngIf="isAdmin || isSuperAdmin">
                                                             <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare1($event,i)'>
-                                
-                                                        <option value="">Select item name --</option>
-                                                        
-                                                        <option *ngFor="let data of stockAll">{{data.spare_name}}</option>   
-                                                        
-                                                        
-                                                    </select>
+
+                                                                <option value="">Select item name --</option>
+
+                                                                <option *ngFor="let data of stockAll">
+                                                                    {{data.spare_name}}</option>
+
+
+                                                            </select>
                                                         </td>
                                                         <td *ngIf="isTechnician">
                                                             <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare($event,i)'>
-                                
-                                                        <option value="">Select item name --</option>
-                                                      
-                                                        <option   [ngValue]="data.spare_name"   *ngFor="let data of newStockallot">{{data.spare_name}}</option>   
-                                                        
-                                                        
-                                                    </select>
+
+                                                                <option value="">Select item name --</option>
+
+                                                                <option [ngValue]="data.spare_name"
+                                                                    *ngFor="let data of newStockallot">
+                                                                    {{data.spare_name}}</option>
+
+
+                                                            </select>
                                                         </td>
 
-                                                        <td *ngIf="qnty[i] != null">Available quantity : {{qnty[i]}} </td>
+                                                        <td *ngIf="qnty[i] != null">Available quantity : {{qnty[i]}}
+                                                        </td>
 
                                                         <!-- <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td> -->
 
@@ -179,12 +185,12 @@
 
 
 
-                                                        <td> <input type="number" placeholder="Rate" class="form-control" formControlName="rate"></td>
+                                                        <td> Per Unit Price: {{unitRate[i]}} </td>
 
                                                         <td><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
 
                                                         <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
-                                                        </i>
+                                                            </i>
                                                         </td>
                                                     </tr>
 
@@ -205,8 +211,10 @@
 
                 <div class="text-center" style="margin-left: 100px;">
 
-                    <button type="submit" class="btn mycolor">Generate invoice<i class="bi bi-briefcase-fill"></i></button>
-                    <button type="button" (click)="showSearchForm()" class="btn btn-danger">Cancel<i class="bi bi-briefcase-fill"></i></button>
+                    <button type="submit" class="btn mycolor">Generate invoice<i
+                            class="bi bi-briefcase-fill"></i></button>
+                    <button type="button" (click)="showSearchForm()" class="btn btn-danger">Cancel<i
+                            class="bi bi-briefcase-fill"></i></button>
                 </div>
             </div>
         </form>
@@ -266,8 +274,9 @@
 
 
                                         <td class="text-right">
-                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" d class="material-icons" (click)="viewinvoice(invoice)">picture_as_pdf
-                                            </i></a>
+                                            <a class="btn btn-simple btn-danger btn-icon edit"><i title="pdf" d
+                                                    class="material-icons" (click)="viewinvoice(invoice)">picture_as_pdf
+                                                </i></a>
 
                                         </td>
 
@@ -360,12 +369,14 @@
                                                             <div class="card" style="width: 121%;" style=" width:450px; height:208px; background-color: #ede4f5; padding: 0px 0px 0px 20px;">
                                                                 <b style="color: #833cbd"> <h3 >Billed To</h3></b>
                                                                 <p>
-                                                                    Name : <span class="font-size-20">{{invoicePdf.name}}</span> </p>
-                                                                <p>Email : <span class="font-size-20">{{invoicePdf.emailId}}</span> </p>
+                                                                    Name : <span class="font-size-20">{{invoicePdf.name}}</span>
+                                                                </p>
+                                                                <p>Email : <span class="font-size-20">{{invoicePdf.emailId}}</span>
+                                                                </p>
                                                                 <address>
-                              {{invoicePdf.address}}
-                             
-                              </address> <br>
+                                                                    {{invoicePdf.address}}
+
+                                                                </address> <br>
                                                                 <br>
                                                             </div>
                                                         </div>
@@ -379,7 +390,6 @@
                                                                     <th class="text-center">Item Name</th>
                                                                     <th class="text-center">Description</th>
                                                                     <th class="text-center">Quantity</th>
-                                                                    <th class="text-center">Rate</th>
                                                                     <th class="text-center">Amount</th>
                                                                 </tr>
                                                             </thead>
@@ -389,8 +399,8 @@
                                                                     <td class="text-center">{{item.itemName}}</td>
                                                                     <td class="text-center">{{item.description}}</td>
                                                                     <td class="text-center">{{item.qnt}}</td>
-                                                                    <td class="text-center">{{item.rate}}</td>
-                                                                    <td class="text-center">{{item.qnt * item.rate}}</td>
+                                                                    <td class="text-center">{{item.amt}}
+                                                                    </td>
                                                                 </tr>
 
                                                             </tbody>
@@ -420,9 +430,11 @@
                                                         <div class="col-md-4">
                                                             <div class="text-right clearfix">
                                                                 <div class="pull-right" style="margin-right: 15px;">
-                                                                    <p> Sub - Total amount: <strong><span>{{basePrice}}</span></strong> </p>
+                                                                    <p> Sub - Total amount:
+                                                                        <strong><span>{{total}}</span></strong> </p>
                                                                     <p> VAT: <strong><span>{{tax}}</span></strong> </p>
-                                                                    <p class="page-invoice-amount"> <strong>Grand Total: <span>{{grandTotal}}</span></strong> </p>
+                                                                    <p class="page-invoice-amount"> <strong>Grand Total:
+                                                                            <span>{{grandTotal}}</span></strong> </p>
                                                                     <br>
                                                                 </div>
                                                             </div>

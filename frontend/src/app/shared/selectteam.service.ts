@@ -37,8 +37,8 @@ export class SelectTeamService {
   getTeamsByMobile(mobile:number){
     return this.http.get(this.nodeUrl+`teams/`+`${mobile}`)
   }
+  
   getTeamsbyid(id : number){
-    
     return this.http.get<any>(this.nodeUrl+`teams/`+`${id}`)
     }
    

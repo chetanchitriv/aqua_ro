@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ComplaintService {
+  [x: string]: any;
 
   dbUrl=environment.apiUrl
   nodeUrl=environment.nodeapiUrl
