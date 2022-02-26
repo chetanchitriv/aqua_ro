@@ -47,12 +47,12 @@ export class LeadsComponent implements OnInit {
   currentTelecaller: any
   teams: any = []
   teamMember: any = []
+  teamMembr: any=[];
 
   constructor(private formbuilder: FormBuilder, private leadService: LeadService, private userService: UserService, private TeamService: SelectTeamService) { }
   dtOptions: DataTables.Settings = {}
 
   ngOnInit(): void {
-    this.getallTems()
     this.currentRole = localStorage.getItem('role')
     this.currentUser = localStorage.getItem('username')
 
@@ -111,6 +111,7 @@ export class LeadsComponent implements OnInit {
 
 
     this.initiatedtOption()
+    this.getallTems()
     this.getAllUser()
     this.getAllLeads();
     this.assignto()
@@ -296,9 +297,17 @@ view(data: any) {
       })
     } else if (this.currentRole == 'Admin') {
 
-      this.userService.getUsers().subscribe(res => {
-        this.assigntoList = res.filter((a: any) => {
-          return a.role != this.currentRole
+      // this.userService.getUsers().subscribe(res => {
+      //   this.assigntoList = res.filter((a: any) => {
+      //     return a.role != this.currentRole
+      //   })
+      // })
+      
+      this.TeamService.getTeams().subscribe((res: any) => {
+        res.forEach((a: any) => {
+          if (a.admin == this.currentUser) {          
+            this.assigntoList =  this.teams.concat(a.technician,a.telecaller)
+          }
         })
       })
     }
@@ -307,11 +316,12 @@ view(data: any) {
 getallTems() {
     this.TeamService.getTeams().subscribe((res: any) => {
       res.forEach((a: any) => {
-        if (a.admin == this.currentUser) {
+        if (a.admin == this.currentUser) {          
           this.teamMember =  this.teams.concat(a.technician,a.telecaller)
         }
       })
     })
+    console.log(this.teamMember,"team member");
   }
 
 }
