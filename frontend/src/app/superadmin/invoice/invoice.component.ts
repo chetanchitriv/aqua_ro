@@ -559,13 +559,14 @@ export class InvoiceComponent implements OnInit {
     // console.log(this.stockallotAll[0].itemList.concat(this.stockallotAll[1].itemList), "heyyyyy");
   
 
-    const sparedata = this.newStockallot.find((x: any) => (x.spare_name == sparename) );
+    var sparedata = this.newStockallot.find((x: any) => (x.spare_name == sparename) );
+    var sparedatatech = this.stockAll.find((x: any) => (x.spare_name == sparename));
 
 
     console.log(sparedata, "techn");
 
     this.techqnty[i] = sparedata.technicianAvilQnt
-    this.unitRate[i] = sparedata.unitprice
+    this.unitRate[i] = sparedatatech.unitprice
 
     return (this.techqnty[i], this.unitRate[i])
 
