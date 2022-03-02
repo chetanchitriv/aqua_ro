@@ -38,7 +38,7 @@ export class StockComponent implements OnInit {
     this.formStock = this.formbuilder.group({
       spare_name : ['',Validators.required],
       qnt  : ['',Validators.required],
-      availqnt:['',Validators.required],
+      availqnt:['Math.abs("the negative number")',Validators.required],
       unitprice  : ['',Validators.required],
       purchaseAmount  : ['',Validators.required],
       sellingPrice  : ['',Validators.required],

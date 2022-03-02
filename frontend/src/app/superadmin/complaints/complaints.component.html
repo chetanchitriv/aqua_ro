@@ -399,21 +399,79 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" *ngIf="isTechnician">
+                        <label class="col-sm-2 label-on-left">Assign to <b style="color: rgb(243, 11, 11);">*</b></label>
+                        <div class="col-sm-4">
+
+
+                            <div class="form-group open" style="margin-left: 20px;">
+                                <div class="select" aria-expanded="true">
+                                    <select class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                        <!-- <span *ngIf="isSuperAdmin || isAdmin || isTelecaller">
+                                            <option value="">Select your option --</option>
+                                           
+                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>
+                                        </span> -->
+                                     
+                                            <option  >{{currentUser}}</option>
+
+                                 
+    
+                                        </select>
+
+                                </div>
+                                <span class="material-input"></span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="row" *ngIf="isTelecaller">
                         <label class="col-sm-2 label-on-left">Assign to</label>
                         <div class="col-sm-4">
 
 
                             <div class="form-group open" style="margin-left: 20px;">
                                 <div class="select" aria-expanded="true">
-                                    <select placeholder="Select an option" formControlName="assignTo" class="form-control">
+                                    <select class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                        <!-- <span *ngIf="isSuperAdmin || isAdmin || isTelecaller">
+                                            <option value="">Select your option --</option>
+                                           
+                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>
+                                        </span> -->
                                         
-                                            <option  value=""><p>Select your option --</p></option>
-                                      
-                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>   
-                                    </select>
-                                </div>
+                                            <option  >{{currentTelecaller}}</option>
 
+                                            <option  *ngFor="let assign of assigntoList">{{assign.userName}}</option> 
+    
+                                        </select>
+
+                                </div>
+                                <span class="material-input"></span></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row" *ngIf="isSuperAdmin || isAdmin">
+                        <label class="col-sm-2 label-on-left">Assign to</label>
+                        <div class="col-sm-4">
+
+
+                            <div class="form-group open" style="margin-left: 20px;">
+                                <div class="select" aria-expanded="true">
+                                    <select *ngIf="isSuperAdmin" class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                      
+                                            <option  *ngIf="isSuperAdmin"  value="">Select your option --</option>
+                                           
+                                            <option [ngValue]="assign" *ngFor="let assign of assigntoList">{{assign}}</option>
+    
+                                        </select>
+                                    <select *ngIf=" isAdmin" class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                            <option >{{currentUser}}</option>
+                                            <option  *ngFor="let assign of assigntoList">{{assign}}</option>   
+                                            </select>
+
+                                </div>
                                 <span class="material-input"></span></div>
                         </div>
 

@@ -143,20 +143,34 @@
                                             <table class="table">
                                                 <thead>
                                                     <tr>
+                                                        <div *ngIf="isAdmin || isSuperAdmin">
+                                                            <td>
+                                                                <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare1($event,i)'>
+    
+                                                                    <option value="">Select item name --</option>
+    
+                                                                    <option *ngFor="let data of stockAll">
+                                                                        {{data.spare_name}}</option>
+    
+    
+                                                                </select>
+                                                            </td>
+                                                            <td>Available quantity : {{qnty[i]}}
+                                                            </td>
+                                                            <td class="col-sm-2"> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt" (input)="Checkqnt(i, $event)"></td>
 
-                                                        <td *ngIf="isAdmin || isSuperAdmin">
-                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare1($event,i)'>
-
-                                                                <option value="">Select item name --</option>
-
-                                                                <option *ngFor="let data of stockAll">
-                                                                    {{data.spare_name}}</option>
+                                                            <td class="col-sm-2"> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getbalanceQnty(i)" [readonly]="true"></td>
 
 
-                                                            </select>
-                                                        </td>
-                                                        <td *ngIf="isTechnician">
-                                                            <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare($event,i)'>
+                                                            <td> Per Unit Price: {{unitRate[i]}} </td>
+
+                                                            <td class="col-sm-2"><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
+
+
+                                                        </div>
+                                                        <div *ngIf="isTechnician">
+                                                            <td>
+                                                                <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare($event,i)'>
 
                                                                 <option value="">Select item name --</option>
 
@@ -166,32 +180,26 @@
 
 
                                                             </select>
-                                                        </td>
+                                                            </td>
+                                                            <td>Available quantity : {{techqnty[i]}}
+                                                            </td>
 
-                                                        <td *ngIf="qnty[i] != null">Available quantity : {{qnty[i]}}
-                                                        </td>
+                                                            <td class="col-sm-2"> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt" (input)="CheckTechqnt(i, $event)"></td>
 
-                                                        <!-- <td> <input type="text" placeholder="Description" class="form-control" formControlName="description"></td> -->
-
-
-
-                                                        <!-- <td>
-                                                            <select *ngFor="let data of stockallotAll">
-                                                            <option *ngFor="let item of data.itemList">{{item.qnt}} </option>
-                                                            </select>
-                                                        </td> -->
-
-                                                        <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt" (input)="Checkqnt(i, $event)"></td>
+                                                            <td class="col-sm-2"> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getTechbalanceQnty(i)" [readonly]="true"></td>
 
 
+                                                            <td> Per Unit Price: {{unitRate[i]}} </td>
 
-                                                        <td> Per Unit Price: {{unitRate[i]}} </td>
+                                                            <td class="col-sm-2"><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
 
-                                                        <td><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
+
+                                                        </div>
 
                                                         <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
-                                                            </i>
+                                                        </i>
                                                         </td>
+
                                                     </tr>
 
                                                 </thead>
@@ -211,7 +219,7 @@
 
                 <div class="text-center" style="margin-left: 100px;">
 
-                    <button type="submit" class="btn mycolor">Generate invoice<i
+                    <button type="submit" class="btn mycolor" [disabled]="!invoiceForm.valid">Generate invoice<i
                             class="bi bi-briefcase-fill"></i></button>
                     <button type="button" (click)="showSearchForm()" class="btn btn-danger">Cancel<i
                             class="bi bi-briefcase-fill"></i></button>
@@ -367,7 +375,7 @@
                                                         </div>
                                                         <div class="col-md-1 light"></div>
                                                         <div class="col-md-5 " style="height: 231px;">
-                                                            <div class="card" style="width: 121%;" style=" width:450px; height:208px; background-color: #ede4f5; padding: 0px 0px 0px 20px;">
+                                                            <div class="card" style="width: 121%;" style=" width:450px; height:232px; background-color: #ede4f5; padding: 0px 0px 0px 20px;">
                                                                 <b style="color: #833cbd"> <h3 >Billed To</h3></b>
                                                                 <p>
                                                                     Name : <span class="font-size-20">{{invoicePdf.name}}</span>
