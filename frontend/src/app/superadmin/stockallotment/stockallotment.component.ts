@@ -32,7 +32,8 @@ export class StockallotmentComponent implements OnInit {
   qnty: any=[];
   sparedata: any={};
   formStock: any=FormGroup;
- 
+  error:boolean=false;
+
  
 
   constructor(private formbuilder: FormBuilder, private api: StockService, private userservice:UserService, private stockallotservice:StockallotService, router:Router) { }
@@ -71,8 +72,8 @@ export class StockallotmentComponent implements OnInit {
     return this.formbuilder.group({
       spare_name: '',
       qntdiff:'',
-     qnt:'',
-   
+      qnt:'',
+      technicianAvilQnt:''
     });
 
   }
@@ -102,6 +103,11 @@ export class StockallotmentComponent implements OnInit {
   }
 
  postStockallotDetails(){
+if(this.error===false){
+var array=this.formStockAllot.controls.itemList.value
+for (let x in array) {
+  this.formStockAllot.controls['itemList'].value.at(x).technicianAvilQnt=this.formStockAllot.controls['itemList'].value.at(x).qnt
+}
   this.stockallotservice.postStockallot(this.formStockAllot.value).subscribe((res:any)=>{
     alert("Stock Added Successfully!");
     res.itemList.forEach((element:any) => {
@@ -120,7 +126,12 @@ export class StockallotmentComponent implements OnInit {
   this.getAllStockallot()
   this.showStockTable()
   })
+}else{
+  alert("Please enter a valid data");
+}
+  
  }
+
   findspare(sparename:any){
     return this.stockAll.find((x:any) => x.spare_name === sparename);
   }
@@ -276,6 +287,18 @@ export class StockallotmentComponent implements OnInit {
   return sum;
 }
 
+getSumavailqnt(itemlist:any=[]){ 
+  var sum=0;
+  var a:any=[]
+  itemlist.forEach((element:any) => {
+     a.push(element.technicianAvilQnt)
+  }); 
+  for(var i in a) { 
+      sum += a[i];
+  }
+  return sum;
+}
+
  selectSpare(e:any,i:any){
 var spare=e.target.value
 
@@ -294,6 +317,18 @@ const sparedata=this.stockAll.find((x:any) => x.spare_name == sparename);
   // return this.formStockAllot.controls['itemList'].value.at(i).totalqnt
 
 }
+
+Checkqnt(i:any, e:any){
+
+  var quantity = e.target.value
+if(quantity > this.qnty[i]){
+ this.error = true;
+}else {
+this.error=false
+}
+return this.error
+}
+
 
 }
 

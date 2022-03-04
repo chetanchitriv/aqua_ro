@@ -187,13 +187,15 @@
 
                                 <div class="form-group open" style="margin-left: 20px;">
                                     <div class="select" aria-expanded="true">
-                                        <select class="form-control" placeholder="Select an option" formControlName="assignTo">
-                                            <option *ngIf=" isAdmin" >{{currentUser}}</option>
+                                        <select *ngIf="isSuperAdmin || isTelecaller" class="form-control" placeholder="Select an option" formControlName="assignTo">
                                             <option *ngIf="isSuperAdmin " ><p>Select </p></option>
-                                                <option *ngIf="isTelecaller" >{{currentTelecaller}}</option>
-                                                <option  *ngFor="let assign of assigntoList">{{assign.userName}}</option>   
+                                            <option *ngIf="isTelecaller" >{{currentTelecaller}}</option>
+                                            <option  *ngFor="let assign of assigntoList">{{assign.userName}}</option>   
                                             </select>
-
+                                        <select *ngIf=" isAdmin" class="form-control" placeholder="Select an option" formControlName="assignTo">
+                                                <option >{{currentUser}}</option>
+                                                <option  *ngFor="let assign of assigntoList">{{assign}}</option>   
+                                                </select>
                                         <!-- <span class="text-info" *ngIf="formValue.touched && (!formValue.value.assignTo || formValue.value.assignTo.length == 0)" class="validation">*Assign feild is required</span> -->
                                     </div>
                                     <!-- <span class="material-input"></span> -->

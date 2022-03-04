@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComplaintService } from 'src/app/shared/complaint.service';
 import { LeadService } from 'src/app/shared/lead.service';
+import { SelectTeamService } from 'src/app/shared/selectteam.service';
 import { UserService } from 'src/app/shared/user.service';
 import { ComplaintsModel } from './complaints.model';
 
@@ -49,9 +50,11 @@ export class ComplaintsComponent implements OnInit {
   currentRole: any;
   currentUser: any;
   currentTelecaller: any;
+  teams: any = []
+  teamMember: any = []
 
 
-  constructor(private formbuilder:FormBuilder, private leadService:LeadService, private api:ComplaintService, private userService: UserService) { }
+  constructor(private formbuilder:FormBuilder, private leadService:LeadService, private api:ComplaintService, private userService: UserService, private TeamService: SelectTeamService) { }
   
 
   ngOnInit(): void {
@@ -291,7 +294,35 @@ assignto() {
         return a.role == 'Technician'
       })
     })
-  }
+  
+} else if (this.currentRole == 'Admin') {
+
+  // this.userService.getUsers().subscribe(res => {
+  //   this.assigntoList = res.filter((a: any) => {
+  //     return a.role != this.currentRole
+  //   })
+  // })
+  
+  this.TeamService.getTeams().subscribe((res: any) => {
+    res.forEach((a: any) => {
+      if (a.admin == this.currentUser) {          
+        this.assigntoList =  this.teams.concat(a.technician,a.telecaller)
+      }
+    })
+  })
+}
+}
+
+getallTems() {
+this.TeamService.getTeams().subscribe((res: any) => {
+  res.forEach((a: any) => {
+    if (a.admin == this.currentUser) {          
+      this.teamMember =  this.teams.concat(a.technician,a.telecaller)
+    }
+  })
+})
+console.log(this.teamMember,"team member");
+}
 
   // showFormupdate(){
   //   this.showComplaintForm=true
@@ -324,4 +355,4 @@ assignto() {
   //   }
   }
 
-}
+

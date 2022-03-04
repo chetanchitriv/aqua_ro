@@ -23,6 +23,7 @@
 
                                         <th>Total quantity</th>
 
+                                        <th>Available quantity</th>
 
                                         <th>Date</th>
                                         <th>Action</th>
@@ -37,7 +38,7 @@
 
                                         <td>{{getSum(data.itemList)}}</td>
 
-
+                                        <td>{{getSumavailqnt(data.itemList)}}</td>
 
                                         <td>{{data.date}}</td>
 
@@ -64,6 +65,7 @@
 
         </div>
     </div>
+
 
 
     <div *ngIf="showstockForm && !showstockTable" class="card" style="width: 80%; margin: 10px 0 0px 144px;">
@@ -108,7 +110,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-content">
-
+                                <p style="text-align: center; color:red" *ngIf="error">*Quantity should be less than or equals to available quantity</p>
                                 <button type="button" (click)="addItem()" style="margin-left: 86%;" class="btn btn-success btn-round btn-fab btn-fab-mini">
                                     <i class="material-icons">control_point</i>
                                     </button>
@@ -133,7 +135,7 @@
                                                                      </select>
                                                         </td>
                                                         <td>Available quantity : {{qnty[i]}} </td>
-                                                        <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt"></td>
+                                                        <td> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt" (input)="Checkqnt(i, $event)"></td>
                                                         <td> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getbalanceQnty(i)" [readonly]="true"></td>
 
                                                         <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
@@ -160,7 +162,7 @@
 
             </div> -->
             <div class="text-center">
-                <button *ngIf="showAddButton" type="button" (click)="postStockallotDetails()" class="btn mycolor">Submit <i
+                <button *ngIf="showAddButton" type="button" (click)="postStockallotDetails()" [disabled]="!formStockAllot.valid" class="btn mycolor">Submit <i
                         class="bi bi-briefcase-fill"></i></button>
                 <button *ngIf="showUpdateButton" type="button" (click)="updateStockallotDetails()" class="btn mycolor">Update <i
                         class="bi bi-briefcase-fill"></i></button>
