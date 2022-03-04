@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
       )
   }
   createNotification(){
-    var data
+    var data={}
     this.notificationser.creatNoti(data).subscribe((res:any) => {
      
     })  

@@ -44,7 +44,7 @@ this.createNotification()
 
     var Role= localStorage.getItem("role")
     if (Role=='Superadmin'){
-      this.createNotification()
+      // this.createNotification()
       this.getAllnotification()
       this.isSuperAdmin = true
       this.isAdmin =false
@@ -53,7 +53,7 @@ this.createNotification()
     
     }
     if (Role=='Admin'){
-      this.createNotification()
+      // this.createNotification()
       this.getAllnotification()
       this.isSuperAdmin = false
       this.isAdmin =true
@@ -68,7 +68,7 @@ this.createNotification()
       this.isTechnician = true
     }
     if (Role=='Telecaller'){
-      this.createNotification()
+      // this.createNotification()
       this.getAllnotification()
       this.isSuperAdmin = false
       this.isAdmin =false
@@ -152,7 +152,7 @@ getAllnotification(){
   
   }
   createNotification(){
-    var data
+    var data={}
     this.notificationser.creatNoti(data).subscribe((res:any) => {
      
     })  

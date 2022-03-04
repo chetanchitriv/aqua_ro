@@ -6,19 +6,17 @@ var todayDate = date.toISOString().slice(0, 10)
 const notification_create   = (req,res)=>{
 
   
-    Lead.find({ nextFollowupdate:todayDate}, (err, doc) => {
+    Lead.find({ nextFollowupdate:{ $eq:todayDate}}, (err, doc) => {
         doc.forEach((meme) => {
-            const objectExist =  Notification.findOne({
-                _id: meme._id,
-            });
-          if(!objectExist)  {
+            //   Notification.findOne({
+            //     _id:{ $eq: meme._id},
+            // });
+        //   if(!objectExist)  {
             Notification.insertMany([meme]) 
-          }
-         return
+        //   }
+        res.json(meme)
         });
-      });
-
-  
+      });  
 }
 const getAllNotification =async (req,res)=>{
     try{
