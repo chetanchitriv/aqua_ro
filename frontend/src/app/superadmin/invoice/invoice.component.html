@@ -16,7 +16,7 @@
                     <div class="col-sm-8">
                         <div class="form-group label-floating is-empty">
                             <label class="control-label">Enter mobile no. or alternate mobile no.</label>
-                            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="10" class="form-control" formControlName="mobile">
+                            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="mobile" maxlength="10" class="form-control" formControlName="mobile">
                             <span class="help-block">Enter Mobile No and search for a lead</span>
                         </div>
                     </div>
@@ -142,33 +142,38 @@
                                         <div [formGroupName]="i">
                                             <table class="table">
                                                 <thead>
-                                                    <tr>
-                                                        <div *ngIf="isAdmin || isSuperAdmin">
-                                                            <td>
-                                                                <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare1($event,i)'>
+                                                    <span *ngIf="isAdmin || isSuperAdmin">
+                                                        <tr >
+                                                            <!-- <div > -->
+                                                                <td>
+                                                                    <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare1($event,i)'>
+        
+                                                                        <option value="">Select item name --</option>
+        
+                                                                        <option *ngFor="let data of stockAll">
+                                                                            {{data.spare_name}}</option>
+        
+        
+                                                                    </select>
+                                                                </td>
+                                                                <td>Available quantity : {{qnty[i]}}
+                                                                </td>
+                                                                <td class="col-sm-2"> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt" (input)="Checkqnt(i, $event)"></td>
     
-                                                                    <option value="">Select item name --</option>
-    
-                                                                    <option *ngFor="let data of stockAll">
-                                                                        {{data.spare_name}}</option>
+                                                                <td class="col-sm-2"> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getbalanceQnty(i)" [readonly]="true"></td>
     
     
-                                                                </select>
-                                                            </td>
-                                                            <td>Available quantity : {{qnty[i]}}
-                                                            </td>
-                                                            <td class="col-sm-2"> <input type="number" placeholder="Quantity" class="form-control" formControlName="qnt" (input)="Checkqnt(i, $event)"></td>
-
-                                                            <td class="col-sm-2"> <input type="number" placeholder="Balance Quantity" class="form-control" formControlName="qntdiff" [value]="getbalanceQnty(i)" [readonly]="true"></td>
-
-
-                                                            <td> Per Unit Price: {{unitRate[i]}} </td>
-
-                                                            <td class="col-sm-2"><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
-
-
-                                                        </div>
-                                                        <div *ngIf="isTechnician">
+                                                                <td> Per Unit Price: {{unitRate[i]}} </td>
+    
+                                                                <td class="col-sm-2"><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
+    
+    
+                                                            <!-- </div> -->
+                                                        </tr>
+                                                    </span>
+                                                   <span *ngIf="isTechnician">
+                                                    <tr >
+                                                        <!-- <div > -->
                                                             <td>
                                                                 <select class="form-control" placeholder="Select an item name" formControlName="itemName" (change)='selectSpare($event,i)'>
 
@@ -194,13 +199,15 @@
                                                             <td class="col-sm-2"><input type="number" placeholder="Amount" class="form-control" formControlName="amt" [value]="getamount(i)"></td>
 
 
-                                                        </div>
+                                                        <!-- </div> -->
 
                                                         <td *ngIf="i > 0" (click)="removeItem(i)" class="text-right"> <i style="cursor: pointer;" class="material-icons">delete_forever
                                                         </i>
                                                         </td>
 
                                                     </tr>
+                                                   </span>
+                                                   
 
                                                 </thead>
 

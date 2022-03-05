@@ -268,6 +268,9 @@ export class InvoiceComponent implements OnInit {
     });
 
     if (leadExist) {
+      this.techqnty=[]
+      this.qnty=[]
+      this.unitRate=[]
       this.showinvoicesearchForm = false;
       this.showinvoiceForm = true
       this.showinvoiceTable = false
@@ -354,13 +357,14 @@ export class InvoiceComponent implements OnInit {
       // console.log(this.stockallotAll[0].itemList.concat(this.stockallotAll[1].itemList),"kapya");
       // for (let x in this.stockallotAll) {
         this.stockallotAll.forEach((element:any) => {
+          this.newStockallot=[]
           if(this.stockallotAll.length > 1){
             element.itemList.forEach((e:any) => {
               this.newStockallot.push(e)           
             })
           }
           else{
-            this.stockallotAll.itemList?.forEach((e:any) => {
+            element.itemList.forEach((e:any) => {
               this.newStockallot.push(e)           
             })
           }       
@@ -424,28 +428,26 @@ export class InvoiceComponent implements OnInit {
 
           })
         }
-          else{
+          if(this.currentRole == 'Technician'){
             var allotedstockobj = this.findTechnician(this.currentUser)
             // var test = this.findallotedspare(allotedstockobj,element.itemName)
             this.formStockAllot.patchValue(allotedstockobj)
             var array=this.formStockAllot.controls.itemList.value
             console.log(allotedstockobj,this.formStockAllot.value,array);
             
-            // for (let x in array) {
-            //   if(x. === element.itemName){
-            //     this.formStockAllot.controls['itemList'].value.at(x).technicianAvilQnt=element.qntdiff
-            //   }
-            // }
+            for (let x in array) {
+             
+                this.formStockAllot.controls['itemList'].value.at(x).technicianAvilQnt=element.qntdiff
+              
+            }
             // this.formStockAllot.patchValue({
             //   availqnt: element.qntdiff,
             // })
-            // this.stockinv.updateStock(this.formStock.value, test._id).subscribe((res: any) => {
+            this.stockallservice.updateStockallot(this.formStockAllot.value, allotedstockobj._id).subscribe((res: any) => {
   
-            // })
+            })
           }
-        });
-        console.log(this.newArray);
-        
+        });        
         // var array = res.data.itemList
         this.invoicePdf = res.data
         this.items = res.data.itemList

@@ -202,12 +202,14 @@
                             <tr>
                                 <th class="allottable">Spare Name</th>
                                 <th class="allottable">Quantity</th>
+                                <th class="allottable">Available Quantity</th>
                             </tr>
 
                             <tr *ngFor="let item of stockallotDetails?.itemList">
 
                                 <td class="allottable">{{item.spare_name}}</td>
                                 <td class="allottable">{{item.qnt}}</td>
+                                <td class="allottable">{{item.technicianAvilQnt}}</td>
 
                             </tr>
                             <tr class="allottable-main">
